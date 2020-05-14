@@ -23,12 +23,19 @@ If `config checkout` fails, simply backup or delete files listed that stop the p
 config config --local status.showUntrackedFiles no
 ```
 
-## To do
+## Under construction
 
-- [ ] move brew.sh
-- [ ] add vim plugins directory
-- [ ] delete backups and swaps from vim
-- [ ] find a way to easily install vim plugin repos
+Below are the 5 latest done tasks and all to dos that I have to finish, because why not!
+
+### To dos
+
+- [ ] move brew.sh from old-dotfiles
+
+### Done
+
+- [x] add vim plugins directory
+- [x] delete backups and swaps from vim
+- [x] find a way to easily install vim plugin repos
 
 ## Licence
 
@@ -37,3 +44,4 @@ The files and scripts in this repository are licensed under the MIT License, whi
 ## Acknowledgement
 
 The whole workflow was inspired by this great [YouTube video by DistroTube](https://www.youtube.com/watch?v=tBoLDpTWVOM).
+This is how I got into git submodules to handle vim plugins: [Using the Vim 8 Package Manager](https://dvonrohr.com/2016/12/11/vim-package-manager/)

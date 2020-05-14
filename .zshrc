@@ -23,8 +23,15 @@ fi
 
 chpwd() ls
 
+alias cfg='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias cfggc="cfg commit -v"
+alias cfggl="cfg submodule update --remote --merge"
+alias cfggp="cfg push"
+alias cfggss="cfg status -s"
+alias cfgrmd="v ~/README.md"
+alias cfgvrc="v ~/.vimrc"
+alias cfgzrc="v ~/.zshrc"
 alias cl="clear && ls"
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias ctags="`brew --prefix`/bin/ctags"
 alias jn="jupyter notebook"
 alias jnd="jupyter nbextension disable connector-jupyter --py --sys-prefix"
@@ -35,9 +42,22 @@ alias python="python3"
 alias reload='source ~/.zshrc'
 alias rf='rm -rf'
 alias v="vim"
-alias vcfg="v ~/.vimrc"
 alias vd="vim -d"
-alias zshcfg="v ~/.zshrc"
+
+cfgga() {
+    cfg add $1
+}
+
+cfggcl() {
+        folder=$(echo $1 | rev | cut -c5- | cut -d"/" -f1 | rev)
+        cfg submodule add --depth=1 $1 ~/.vim/pack/plugins/start/$folder
+}
+
+cfgrs() {
+        cfg submodule deinit .vim/pack/plugins/start/$1
+        cfg rm .vim/pack/plugins/start/$1
+        rf .vim/pack/plugins/start/$1
+}
 
 gamp() {
         gaa
@@ -53,21 +73,6 @@ put() {
 take() {
         mkdir $1
         cd $1
-}
-
-cfg-gc() {
-        folder=$(echo $1 | rev | cut -c5- | cut -d"/" -f1 | rev)
-        config submodule add --depth=1 $1 ~/.vim/pack/plugins/start/$folder
-}
-
-cfg-gl() {
-        config submodule update --remote --merge
-}
-
-cfg-rs() {
-        config submodule deinit .vim/pack/plugins/start/$1
-        config rm .vim/pack/plugins/start/$1
-        rf .vim/pack/plugins/start/$1
 }
 
 eval "$(starship init zsh)"

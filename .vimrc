@@ -4,8 +4,6 @@ filetype plugin indent on
 set hidden
 set nobackup
 set noswapfile
-set undofile
-set undodir=~/.vim/undo//
 set autoread
 
 " Searching

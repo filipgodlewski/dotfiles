@@ -1104,7 +1104,7 @@
 	<key>NSFontPanelAttributes</key>
 	<string>1, 4</string>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/Downloads/iterm-master</string>
+	<string>~/.iterm2</string>
 	<key>NSNavLastUserSetHideExtensionButtonState</key>
 	<false/>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
@@ -1161,7 +1161,7 @@
 	<key>NSWindow Frame NSNavPanelAutosaveName</key>
 	<string>560 564 799 448 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 1734 1064 0 0 1920 1200 </string>
+	<string>116 75 1734 1064 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>247 132 852 557 0 0 1920 1177 </string>
 	<key>NeverWarnAboutMeta</key>
@@ -1981,7 +1981,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>CB412994-CF03-4D3F-A1AF-18C738C9F95C</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>141</integer>
+	<integer>143</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -2761,7 +2761,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/tester/dotfiles/backups</string>
+	<string>/Users/tester/.iterm2</string>
 	<key>PreserveWindowSizeWhenTabBarVisibilityChanges</key>
 	<true/>
 	<key>PromptOnQuit</key>
@@ -2777,7 +2777,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-05-11T08:37:23Z</date>
+	<date>2020-05-14T08:37:24Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SeparateStatusBarsPerPane</key>

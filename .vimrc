@@ -2,11 +2,11 @@
 set nocompatible
 filetype plugin indent on
 set hidden
+set nobackup
+set noswapfile
 set undofile
-set autoread
-set directory=~/.vim/swap//
-set backupdir=~/.vim/backup//
 set undodir=~/.vim/undo//
+set autoread
 
 " Searching
 set ignorecase
@@ -18,6 +18,7 @@ set path+=**
 let g:far#enable_undo=1
 
 " UI
+set splitright splitbelow
 set lazyredraw
 set number
 set confirm
@@ -37,11 +38,7 @@ let g:netrw_browse_split=4
 let g:netrw_winsize=-50
 
 " Mappings
-nnoremap <silent> <leader>f :Farf<cr>
-vnoremap <silent> <leader>f :Farf<cr>
-nnoremap <silent> <leader>r :Farr<cr>
-vnoremap <silent> <leader>r :Farr<cr>
-nnoremap <silent> <leader>l :Lex<cr>
+nnoremap <leader>db <C-6>:bd#<CR>
 nnoremap <C-J> :norm o<CR>
 nnoremap <C-K> :norm O<CR>
 nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
@@ -80,8 +77,8 @@ au BufWinLeave * call clearmatches()
 
 " Linting
 let g:ale_set_highlights = 0
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_error_str = 'E!'
+let g:ale_echo_msg_warning_str = 'W!'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0

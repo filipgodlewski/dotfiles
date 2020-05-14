@@ -1,0 +1,39 @@
+[submodule "/Users/tester/.vim/pack/plugins/start/ale"]
+	path = /Users/tester/.vim/pack/plugins/start/ale
+	url = https://github.com/dense-analysis/ale.git
+[submodule "/Users/tester/.vim/pack/plugins/start/applescript.vim"]
+	path = /Users/tester/.vim/pack/plugins/start/applescript.vim
+	url = https://github.com/vim-scripts/applescript.vim.git
+[submodule "/Users/tester/.vim/pack/plugins/start/far.vim"]
+	path = /Users/tester/.vim/pack/plugins/start/far.vim
+	url = https://github.com/brooth/far.vim.git
+[submodule "/Users/tester/.vim/pack/plugins/start/lexima.vim"]
+	path = /Users/tester/.vim/pack/plugins/start/lexima.vim
+	url = https://github.com/cohama/lexima.vim.git
+[submodule "/Users/tester/.vim/pack/plugins/start/nord-vim"]
+	path = /Users/tester/.vim/pack/plugins/start/nord-vim
+	url = https://github.com/arcticicestudio/nord-vim.git
+[submodule "/Users/tester/.vim/pack/plugins/start/python-syntax"]
+	path = /Users/tester/.vim/pack/plugins/start/python-syntax
+	url = https://github.com/vim-python/python-syntax.git
+[submodule "/Users/tester/.vim/pack/plugins/start/ultisnips"]
+	path = /Users/tester/.vim/pack/plugins/start/ultisnips
+	url = https://github.com/SirVer/ultisnips.git
+[submodule "/Users/tester/.vim/pack/plugins/start/vim-gutentags"]
+	path = /Users/tester/.vim/pack/plugins/start/vim-gutentags
+	url = https://github.com/ludovicchabant/vim-gutentags.git
+[submodule "/Users/tester/.vim/pack/plugins/start/vim-multiple-cursors"]
+	path = /Users/tester/.vim/pack/plugins/start/vim-multiple-cursors
+	url = https://github.com/terryma/vim-multiple-cursors.git
+[submodule "/Users/tester/.vim/pack/plugins/start/vim-polyglot"]
+	path = /Users/tester/.vim/pack/plugins/start/vim-polyglot
+	url = https://github.com/sheerun/vim-polyglot.git
+[submodule "/Users/tester/.vim/pack/plugins/start/vim-python-pep8-indent"]
+	path = /Users/tester/.vim/pack/plugins/start/vim-python-pep8-indent
+	url = https://github.com/Vimjas/vim-python-pep8-indent.git
+[submodule "/Users/tester/.vim/pack/plugins/start/vim-snippets"]
+	path = /Users/tester/.vim/pack/plugins/start/vim-snippets
+	url = https://github.com/honza/vim-snippets.git
+[submodule "/Users/tester/.vim/pack/plugins/start/vim-surround"]
+	path = /Users/tester/.vim/pack/plugins/start/vim-surround
+	url = https://github.com/tpope/vim-surround.git

@@ -55,9 +55,19 @@ take() {
         cd $1
 }
 
-vgc() {
-    folder=$(echo $1 | rev | cut -c5- | cut -d"/" -f1 | rev)
-    git clone --depth=1 $1 ~/.vim/pack/plugins/start/$folder
+cfg-gc() {
+        folder=$(echo $1 | rev | cut -c5- | cut -d"/" -f1 | rev)
+        config submodule add --depth=1 $1 ~/.vim/pack/plugins/start/$folder
+}
+
+cfg-gl() {
+        config submodule update --remote --merge
+}
+
+cfg-rs() {
+        config submodule deinit .vim/pack/plugins/start/$1
+        config rm .vim/pack/plugins/start/$1
+        rf .vim/pack/plugins/start/$1
 }
 
 eval "$(starship init zsh)"

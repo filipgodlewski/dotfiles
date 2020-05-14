@@ -25,9 +25,9 @@ chpwd() ls
 
 alias cfg='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias cfggc="cfg commit -v"
-alias cfggl="cfg submodule update --remote --merge"
 alias cfggp="cfg push"
 alias cfggss="cfg status -s"
+alias cfggsu="cfg submodule foreach git pull origin master"
 alias cfgrmd="v ~/README.md"
 alias cfgvrc="v ~/.vimrc"
 alias cfgzrc="v ~/.zshrc"
@@ -49,8 +49,10 @@ cfgga() {
 }
 
 cfggcl() {
+        cd ~/.vim
         folder=$(echo $1 | rev | cut -c5- | cut -d"/" -f1 | rev)
-        cfg submodule add --depth=1 $1 ~/.vim/pack/plugins/start/$folder
+        cfg submodule add $1 pack/plugins/start/$folder
+        1
 }
 
 cfgrs() {

@@ -25,7 +25,10 @@ config config --local status.showUntrackedFiles no
 
 ## To do
 
-More yet to come...
+- [ ] move brew.sh
+- [ ] add vim plugins directory
+- [ ] delete backups and swaps from vim
+- [ ] find a way to easily install vim plugin repos
 
 ## Licence
 

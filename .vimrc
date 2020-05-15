@@ -11,9 +11,18 @@ set ignorecase
 set smartcase
 set hlsearch
 set incsearch
-set wildmenu
 set path+=**
 let g:far#enable_undo=1
+
+" wildmenu
+set wildmenu
+set wildmode=list:lastused
+set wildignorecase
+set wildignore=*.swp,*.bak
+set wildignore+=*.pyc,*.class,*.sln,*.Master,*.csproj,*.csproj.user,*.cache,*.dll,*.pdb,*.min.*
+set wildignore+=*/.git/**/*,*/.hg/**/*,*/.svn/**/*
+set wildignore+=tags
+set wildignore+=*.tar.*
 
 " UI
 set splitright splitbelow
@@ -36,6 +45,7 @@ let g:netrw_browse_split=4
 let g:netrw_winsize=-50
 
 " Mappings
+nmap <Leader>vv :edit ~/.vimrc
 nnoremap <leader>db <C-6>:bd#<CR>
 nnoremap <C-J> :norm o<CR>
 nnoremap <C-K> :norm O<CR>

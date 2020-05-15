@@ -23,11 +23,11 @@ fi
 
 chpwd() ls
 
-alias cfg='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias cfg="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias cfggc="cfg commit -v"
 alias cfggp="cfg push"
 alias cfggss="cfg status -s"
-alias cfggsu="cfg submodule foreach git pull origin master"
+alias cfggsu="cfg submodule update --remote --merge"
 alias cfgrmd="v ~/README.md"
 alias cfgvrc="v ~/.vimrc"
 alias cfgzrc="v ~/.zshrc"
@@ -39,8 +39,8 @@ alias jne="jupyter nbextension enable connector-jupyter --py --sys-prefix"
 alias jni="jupyter nbextension install connector-jupyter --py --sys-prefix"
 alias ls="ls -F"
 alias python="python3"
-alias reload='source ~/.zshrc'
-alias rf='rm -rf'
+alias reload="source ~/.zshrc && cfggsu"
+alias rf="rm -rf"
 alias v="vim"
 alias vd="vim -d"
 

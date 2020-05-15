@@ -35,8 +35,10 @@ Below are the 5 latest done tasks and all to dos that I have to finish, because 
 
 - [ ] rewrite brew.sh from old-dotfiles so that it works in this new environment
 - [ ] add instructions for oh-my-zsh (and/or add dotfiles if appropriate)
-- [ ] find a way to store vs code files (especially for extensions)
+- [ ] find a way to store vs code files (especially for extensions). Consider adding settings.json
 - [ ] add pip requirements
+- [ ] add macos preferences config file [inspired by this file](https://github.com/sobolevn/dotfiles/blob/master/macos)
+- [ ] add script to update & upgrade all submodules, brew, npm, yarn etc.
 
 ### Done
 
@@ -53,3 +55,5 @@ The files and scripts in this repository are licensed under the MIT License, whi
 The whole workflow was inspired by this great [YouTube video by DistroTube](https://www.youtube.com/watch?v=tBoLDpTWVOM).
 
 This is how I got into git submodules to handle vim plugins: [Using the Vim 8 Package Manager](https://dvonrohr.com/2016/12/11/vim-package-manager/)
+
+This dotfile repository has very interesting ideas. Definitely worth some reading! [webpro dotfiles](https://github.com/webpro/dotfiles)

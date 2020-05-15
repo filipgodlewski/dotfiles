@@ -33,12 +33,12 @@ Below are the 5 latest done tasks and all to dos that I have to finish, because 
 
 ### To dos
 
-- [ ] rewrite brew.sh from old-dotfiles so that it works in this new environment
-- [ ] add instructions for oh-my-zsh (and/or add dotfiles if appropriate)
+- [ ] add brew requirements
+- [ ] add instructions for oh-my-zsh (and/or add dotfiles & submodules if appropriate)
 - [ ] find a way to store vs code files (especially for extensions). Consider adding settings.json
 - [ ] add pip requirements
 - [ ] add macos preferences config file [inspired by this file](https://github.com/sobolevn/dotfiles/blob/master/macos)
-- [ ] add script to update & upgrade all submodules, brew, npm, yarn etc.
+- [ ] add script to update & upgrade all submodules, brew, npm, yarn etc. and clean the whole mac from trash
 
 ### Done
 

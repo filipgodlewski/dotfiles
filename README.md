@@ -8,6 +8,10 @@ First of all, instructions below are prepared for MacOS, as this is my daily wor
 
 ### Prerequisites
 
+
+
+### Installing
+
 The commands below are required to run before you clone this repository. It is required to understand what is going on here so you don't run into problems.
 
 ```sh
@@ -29,7 +33,10 @@ Below are the 5 latest done tasks and all to dos that I have to finish, because 
 
 ### To dos
 
-- [ ] move brew.sh from old-dotfiles
+- [ ] rewrite brew.sh from old-dotfiles so that it works in this new environment
+- [ ] add instructions for oh-my-zsh (and/or add dotfiles if appropriate)
+- [ ] find a way to store vs code files (especially for extensions)
+- [ ] add pip requirements
 
 ### Done
 

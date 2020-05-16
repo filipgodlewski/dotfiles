@@ -26,6 +26,14 @@ put() {
         v $1
     }
 
+rationalise-dot() {
+  if [[ $LBUFFER = *.. ]]; then
+    LBUFFER+=/..
+  else
+    LBUFFER+=.
+  fi
+}
+
 take() {
         mkdir $1
         cd $1

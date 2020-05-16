@@ -7,8 +7,11 @@ source ~/.zsh/.completions.zsh
 source ~/.zsh/.exports.zsh
 source ~/.zsh/.externals.zsh
 source ~/.zsh/.functions.zsh
-source ~/.zsh/.zsh_plugins.sh
+source ~/.zsh/.antibody.sh
 
+
+zle -N rationalise-dot
+bindkey . rationalise-dot
 bindkey "^[[A" up-line-or-search
 bindkey "^[[B" down-line-or-search
 
@@ -16,6 +19,7 @@ bindkey "^[[B" down-line-or-search
 setopt append_history
 setopt extended_history
 setopt hist_expire_dups_first
+setopt hist_ignore_all_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 setopt hist_reduce_blanks

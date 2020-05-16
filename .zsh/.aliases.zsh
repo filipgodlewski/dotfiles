@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 alias ...="../.."
 alias ....="../../.."
 alias .....="../../../.."
@@ -11,9 +13,9 @@ alias 6="cd -6"
 alias 7="cd -7"
 alias 8="cd -8"
 alias 9="cd -9"
-alias calias="v ~/.zsh/.aliases.sh"
+alias calias="v ~/.zsh/.aliases.zsh"
 alias cfg="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
-alias cfunction="v ~/.zsh/.functions.sh"
+alias cfunction="v ~/.zsh/.functions.zsh"
 alias cga="cfg add"
 alias cgc="cfg commit -v"
 alias cgp="cfg push"

@@ -8,7 +8,13 @@ First of all, instructions below are prepared for MacOS, as this is my daily wor
 
 ### Prerequisites
 
+This setup requires:
 
+- `curl`: to download some stuff, like homebrew
+- `git`: to clone the repo
+- `homebrew`: to install all the stuff that I use
+- `vim`: , my main editor, at least v.8
+- `zsh`: my main shell
 
 ### Installing
 
@@ -34,14 +40,16 @@ Below are the 5 latest done tasks and all to dos that I have to finish, because 
 ### To dos
 
 - [ ] add brew requirements
-- [x] remove oh-my-zsh and use antibody instead
-- [ ] find a way to store vs code files (especially for extensions). Consider adding settings.json
 - [ ] add pip requirements
 - [ ] add macos preferences config file [inspired by this file](https://github.com/sobolevn/dotfiles/blob/master/macos)
-- [ ] add script to update & upgrade all submodules, brew, npm, yarn etc. and clean the whole mac from trash
+- [ ] add autoload functions to zsh so that I can easily see them, then delete alias 'functions', [as seen here.](https://scriptingosx.com/2019/07/moving-to-zsh-part-4-aliases-and-functions/)
+- [ ] add vscode files (especially for extensions)
+- [ ] add fonts
 
 ### Done
 
+- [x] add script to update & upgrade all submodules, brew, npm, yarn etc. and clean the whole mac from trash
+- [x] remove oh-my-zsh and use antibody instead
 - [x] add vim plugins directory
 - [x] delete backups and swaps from vim
 - [x] find a way to easily install vim plugin repos

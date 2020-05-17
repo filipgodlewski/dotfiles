@@ -34,7 +34,7 @@ Below are the 5 latest done tasks and all to dos that I have to finish, because 
 ### To dos
 
 - [ ] add brew requirements
-- [ ] remove oh-my-zsh and use antibody instead
+- [x] remove oh-my-zsh and use antibody instead
 - [ ] find a way to store vs code files (especially for extensions). Consider adding settings.json
 - [ ] add pip requirements
 - [ ] add macos preferences config file [inspired by this file](https://github.com/sobolevn/dotfiles/blob/master/macos)

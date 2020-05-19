@@ -33,6 +33,16 @@ If `cfg checkout` fails, simply backup or delete files listed that stop the proc
 cfg config --local status.showUntrackedFiles no
 ```
 
+### Deleting submodules
+
+```sh
+cfg submodule deinit <path_to_submodule>
+cfg rm <path_to_submodule>
+cfg commit
+rf <path_to_submodule>
+# rf is an alias for rm -rf
+```
+
 ## Under construction
 
 Below are the 5 latest done tasks and all to dos that I have to finish, because why not!

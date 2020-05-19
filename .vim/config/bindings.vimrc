@@ -1,5 +1,5 @@
 nmap <Leader>vv :edit ~/.vimrc
-nnoremap <leader>bd <C-6>:bd#<CR>
+nnoremap <silent> <leader>bd <C-6>:bd#<CR>
 nnoremap <C-J> :norm o<CR>
 nnoremap <C-K> :norm O<CR>
 nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w

@@ -27,7 +27,10 @@ alias functions="declare -f | grep '^[a-z].* ()' | sed 's/{$//' | cut -d' ' -f1"
 
 alias ga="git add"
 alias gc="git commit -v"
+alias gd="git diff --word-diff"
+alias gl="git pull"
 alias gp="git push"
+alias gsb="git status -sb"
 alias gss="git status -s"
 alias gsu="git submodule update --remote --merge"
 
@@ -53,7 +56,6 @@ alias python="python3"
 alias rf="rm -rf"
 
 alias v="vim"
-alias vd="vim -d"
 
 alias zalias="v ~/.zsh/.aliases.zsh"
 alias zfunction="v ~/.zsh/.functions.zsh"

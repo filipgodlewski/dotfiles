@@ -8,6 +8,7 @@ source ~/.zsh/.exports.zsh
 source ~/.zsh/.externals.zsh
 source ~/.zsh/.functions.zsh
 source ~/.zsh/.antibody.sh
+source ~/.zsh/.fzf.zsh
 
 
 zle -N rationalise-dot
@@ -32,6 +33,7 @@ setopt always_to_end
 setopt auto_cd
 setopt auto_menu
 setopt auto_pushd
+setopt auto_remove_slash
 setopt complete_in_word
 setopt flow_control
 setopt menu_complete

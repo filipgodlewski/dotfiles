@@ -1,3 +1,4 @@
+syntax on
 set hidden
 set nobackup
 set noswapfile
@@ -7,15 +8,17 @@ set smartcase
 set hlsearch
 set incsearch
 set path+=**
+set laststatus=0
+set updatetime=50
 
 set wildmenu
 set wildmode=longest:full,full
 set wildignorecase
 set wildignore=*.swp,*.bak
-set wildignore+=*.pyc,*.class,*.sln,*.Master,*.csproj,*.csproj.user,*.cache,*.dll,*.pdb,*.min.*
+set wildignore+=__*__,*.pyc,*.class,*.sln,*.Master,*.csproj,*.csproj.user,*.cache,*.dll,*.pdb,*.min.*
 set wildignore+=*/.git/**/*,*/.hg/**/*,*/.svn/**/*
-set wildignore+=tags
-set wildignore+=*.tar.*
+set wildignore+=tags,tags.*
+set wildignore+=*.tar.*,*.zip*
 
 set splitright splitbelow
 set lazyredraw
@@ -29,7 +32,6 @@ set shortmess+=F
 set backspace=indent,eol,start
 colorscheme nord
 
-syntax on
 set tabstop=8
 set softtabstop=4
 set shiftwidth=4

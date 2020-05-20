@@ -1,5 +1,11 @@
-# Basic options
 --recurse=yes
 --tag-relative=yes
+--python-kinds=-i
+--exclude=__pycache__
 --exclude=.git
+--exclude=.pytest_cache
+--exclude=.vscode
 --exclude=log
+--exclude=renv
+--exclude=results
+--exclude=venv

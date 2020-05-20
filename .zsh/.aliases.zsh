@@ -52,6 +52,7 @@ alias lt="exa -DT --color=always --group-directories-first --level=3 --git-ignor
 alias lti="exa -DT --color=always --group-directories-first --level=3 --git"
 
 alias paths="echo $PATH | tr ':' '\n'"
+alias pip="pip3"
 alias python="python3"
 alias rf="rm -rf"
 

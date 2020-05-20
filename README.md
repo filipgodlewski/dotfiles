@@ -49,12 +49,14 @@ Below are the 5 latest done tasks and all to dos that I have to finish, because 
 
 ### To dos
 
+- [ ] refactor .ctags, make them way faster!
 - [ ] add brew requirements
 - [ ] add pip requirements
 - [ ] add macos preferences config file [inspired by this file](https://github.com/sobolevn/dotfiles/blob/master/macos)
 - [ ] add autoload functions to zsh so that I can easily see them, then delete alias 'functions', [as seen here.](https://scriptingosx.com/2019/07/moving-to-zsh-part-4-aliases-and-functions/)
 - [ ] add vscode files (especially for extensions)
 - [ ] add fonts
+- [ ] add debugger to vim
 
 ### Done
 

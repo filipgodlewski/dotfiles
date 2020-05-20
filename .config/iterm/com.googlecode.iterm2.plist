@@ -1844,7 +1844,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>FiraCodeNerdFontCompleteM-Retina 15</string>
+			<string>FiraCodeNerdFontCompleteM-Retina 13</string>
 			<key>Open Toolbelt</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -1980,7 +1980,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>CB412994-CF03-4D3F-A1AF-18C738C9F95C</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>158</integer>
+	<integer>159</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -2776,7 +2776,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-05-19T08:47:41Z</date>
+	<date>2020-05-20T08:47:41Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SeparateStatusBarsPerPane</key>

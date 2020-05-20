@@ -1,0 +1,14 @@
+[help]
+        autocorrect = 1
+[merge]
+        tool = vim_mergetool
+        conflictStyle = diff3
+[mergetool]
+        keepBackup = false
+        prompt = false
+[mergetool "vim_mergetool"]
+        cmd = vim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
+        trustExitCode = true
+[user]
+        # name =
+        # email =

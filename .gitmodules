@@ -55,3 +55,6 @@
 [submodule ".vim/pack/plugins/start/vim-signify"]
 	path = .vim/pack/plugins/start/vim-signify
 	url = https://github.com/mhinz/vim-signify.git
+[submodule ".vim/pack/plugins/start/vim-mergetool"]
+	path = .vim/pack/plugins/start/vim-mergetool
+	url = https://github.com/samoshkin/vim-mergetool.git

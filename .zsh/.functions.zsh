@@ -29,14 +29,14 @@ gdiffs() {
 put() {
         touch $1
         v $1
-    }
+}
 
 rationalise-dot() {
-  if [[ $LBUFFER = *.. ]]; then
-    LBUFFER+=/..
-  else
-    LBUFFER+=.
-  fi
+        if [[ $LBUFFER = *.. ]]; then
+          LBUFFER+=/..
+        else
+          LBUFFER+=.
+        fi
 }
 
 take() {

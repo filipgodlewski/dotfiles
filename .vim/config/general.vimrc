@@ -2,13 +2,15 @@ syntax on
 set hidden
 set nobackup
 set noswapfile
+set nowritebackup
 set autoread
 set ignorecase
 set smartcase
 set hlsearch
 set incsearch
 set path+=**
-set laststatus=0
+set laststatus=2
+set signcolumn=yes
 set updatetime=50
 
 set wildmenu

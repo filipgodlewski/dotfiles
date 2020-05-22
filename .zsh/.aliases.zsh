@@ -12,11 +12,13 @@ alias 9="cd -9"
 
 alias cbrew="brew update; brew upgrade; brew cleanup --prune=all"
 alias cfg="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
+
 alias cga="cfg add"
 alias cgc="cfg commit -v"
 alias cgp="cfg push"
 alias cgss="cfg status -s"
 alias cgsu="cfg submodule update --remote --merge"
+alias cguf="cfg reset --"
 alias crmd="v ~/README.md"
 
 alias ctags="`brew --prefix`/bin/ctags"
@@ -50,6 +52,7 @@ alias ll="exa -l --color=always --group-directories-first"
 alias ls="exa --color=always --group-directories-first --git-ignore"
 alias lt="exa -DT --color=always --group-directories-first --level=3 --git-ignore"
 alias lti="exa -DT --color=always --group-directories-first --level=3 --git"
+alias lvi="la ~/.vim/pack/plugins/start"
 
 alias paths="echo $PATH | tr ':' '\n'"
 alias pip="pip3"

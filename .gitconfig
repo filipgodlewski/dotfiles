@@ -1,5 +1,7 @@
 [help]
         autocorrect = 1
+[diff]
+        tool = vimdiff
 [merge]
         tool = vim_mergetool
         conflictStyle = diff3

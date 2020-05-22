@@ -10,7 +10,7 @@ cgcl() {
 }
 
 cgrs() {
-        cfg submodule deinit .vim/pack/plugins/start/$1
+        cfg submodule deinit -f .vim/pack/plugins/start/$1
         cfg rm .vim/pack/plugins/start/$1
         rf .vim/pack/plugins/start/$1
 }

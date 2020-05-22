@@ -1,0 +1,4 @@
+--max-columns-preview
+--glob=!.git/*
+--glob=!__pycache__
+--smart-case

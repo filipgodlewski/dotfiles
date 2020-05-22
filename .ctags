@@ -6,6 +6,4 @@
 --exclude=.pytest_cache
 --exclude=.vscode
 --exclude=log
---exclude=renv
 --exclude=results
---exclude=venv

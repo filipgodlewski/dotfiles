@@ -8,7 +8,6 @@ let g:netrw_browse_split=4
 let g:netrw_liststyle=3
 let g:netrw_winsize=-50
 let g:nord_uniform_diff_background=1
-let g:python_highlight_all=1
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"

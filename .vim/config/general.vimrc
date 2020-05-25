@@ -24,7 +24,7 @@ set wildignore+=*.tar.*,*.zip*
 
 set splitright splitbelow
 set lazyredraw
-set number
+set relativenumber number
 set confirm
 set complete+=kspell
 set completeopt=menuone,longest
@@ -44,16 +44,4 @@ set smartindent
 set copyindent
 set encoding=utf-8
 set fileformat=unix
-
-au BufWritePre * %s/\s\+$//e
-aug line_return
-        au!
-        au BufReadPost *
-                \ if line("'\"") > 0 && line("'\"") <= line("$") |
-                \	execute 'normal! g`"zvzz' |
-                \ endif
-aug END
-au BufRead,BufNewFile * let w:m3=matchadd('ErrorMsg', '/^\t\+/', -1)
-au BufRead,BufNewFile * let w:m4=matchadd('ErrorMsg', '/\s\+$/', -1)
-au BufWinLeave * call clearmatches()
 

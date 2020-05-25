@@ -4,8 +4,11 @@ set rtp+=/usr/local/opt/fzf
 
 source $HOME/.vim/config/plugins.vimrc
 source $HOME/.vim/config/general.vimrc
+source $HOME/.vim/config/functions.vimrc
 source $HOME/.vim/config/bindings.vimrc
 source $HOME/.vim/config/colors.vimrc
+source $HOME/.vim/config/autocommands.vimrc
 
 packloadall
 silent! helptags ALL
+

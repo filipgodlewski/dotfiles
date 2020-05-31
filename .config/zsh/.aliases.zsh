@@ -63,9 +63,9 @@ alias rf="rm -rf"
 
 alias v="nvim"
 
-alias zalias="v ~/.zsh/.aliases.zsh"
-alias zfunction="v ~/.zsh/.functions.zsh"
-alias zload="source ~/.zsh/.zshrc; antibody bundle < ~/.zsh/.antibody.txt > ~/.zsh/.antibody.sh"
+alias zalias="v ~/.config/zsh/.aliases.zsh"
+alias zfunction="v ~/.config/zsh/.functions.zsh"
+alias zload="source ~/.config/zsh/.zshrc; antibody bundle < ~/.config/zsh/.antibody.txt > ~/.config/zsh/.antibody.sh"
 alias zvi="v ~/.config/nvim/init.vim"
-alias zzsh="v ~/.zsh/.zshrc"
+alias zzsh="v ~/.config/zsh/.zshrc"
 

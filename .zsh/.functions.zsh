@@ -7,16 +7,16 @@ cheat() {
 chpwd() ls
 
 cgcl() {
-        cd ~/.vim
+        cd ~/.local
         folder=$(echo $1 | rev | cut -c5- | cut -d"/" -f1 | rev)
-        cfg submodule add $1 pack/plugins/start/$folder
+        cfg submodule add $1 share/nvim/site/pack/plugins/start/$folder
         1
 }
 
 cgrs() {
-        cfg submodule deinit -f .vim/pack/plugins/start/$1
-        cfg rm .vim/pack/plugins/start/$1
-        rf .vim/pack/plugins/start/$1
+        cfg submodule deinit -f .local/share/nvim/site/pack/plugins/start/$1
+        cfg rm .local/share/nvim/site/pack/plugins/start/$1
+        rf .local/share/nvim/site/pack/plugins/start/$1
 }
 
 gamp() {

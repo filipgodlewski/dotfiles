@@ -4,3 +4,4 @@ zsh
 config
 gitignore
 chromedriver
+nvim

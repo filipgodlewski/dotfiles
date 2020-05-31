@@ -24,11 +24,12 @@ set wildignore+=*.tar.*,*.zip*
 
 set splitright splitbelow
 set lazyredraw
-set  number
+set number
 set confirm
 set complete+=kspell
 set completeopt=menuone,longest
 set diffopt=filler,vertical
+set noruler
 set shortmess+=c
 set shortmess+=F
 set backspace=indent,eol,start

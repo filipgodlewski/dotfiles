@@ -10,4 +10,5 @@ nnoremap <silent> <leader><Enter> :Buffers<CR>
 nnoremap <silent> <leader>bd <C-6>:bd#<CR>
 nnoremap <silent> <leader>l :Lines<CR>
 nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
+tnoremap <Esc> <C-\><C-n>
 

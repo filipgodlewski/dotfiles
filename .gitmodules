@@ -1,43 +1,43 @@
-[submodule ".vim/pack/plugins/start/ale"]
-	path = .vim/pack/plugins/start/ale
+[submodule ".local/share/nvim/site/pack/plugins/start/ale"]
+	path = .local/share/nvim/site/pack/plugins/start/ale
 	url = https://github.com/dense-analysis/ale.git
-[submodule ".vim/pack/plugins/start/applescript.vim"]
-	path = .vim/pack/plugins/start/applescript.vim
+[submodule ".local/share/nvim/site/pack/plugins/start/applescript.vim"]
+	path = .local/share/nvim/site/pack/plugins/start/applescript.vim
 	url = https://github.com/vim-scripts/applescript.vim.git
-[submodule ".vim/pack/plugins/start/far.vim"]
-	path = .vim/pack/plugins/start/far.vim
+[submodule ".local/share/nvim/site/pack/plugins/start/far.vim"]
+	path = .local/share/nvim/site/pack/plugins/start/far.vim
 	url = https://github.com/brooth/far.vim.git
-[submodule ".vim/pack/plugins/start/fzf.vim"]
-	path = .vim/pack/plugins/start/fzf.vim
+[submodule ".local/share/nvim/site/pack/plugins/start/fzf.vim"]
+	path = .local/share/nvim/site/pack/plugins/start/fzf.vim
 	url = https://github.com/junegunn/fzf.vim.git
-[submodule ".vim/pack/plugins/start/lexima.vim"]
-	path = .vim/pack/plugins/start/lexima.vim
+[submodule ".local/share/nvim/site/pack/plugins/start/lexima.vim"]
+	path = .local/share/nvim/site/pack/plugins/start/lexima.vim
 	url = https://github.com/cohama/lexima.vim.git
-[submodule ".vim/pack/plugins/start/nord-vim"]
-	path = .vim/pack/plugins/start/nord-vim
+[submodule ".local/share/nvim/site/pack/plugins/start/nord-vim"]
+	path = .local/share/nvim/site/pack/plugins/start/nord-vim
 	url = https://github.com/arcticicestudio/nord-vim.git
-[submodule ".vim/pack/plugins/start/ultisnips"]
-	path = .vim/pack/plugins/start/ultisnips
+[submodule ".local/share/nvim/site/pack/plugins/start/ultisnips"]
+	path = .local/share/nvim/site/pack/plugins/start/ultisnips
 	url = https://github.com/SirVer/ultisnips.git
-[submodule ".vim/pack/plugins/start/vim-gutentags"]
-	path = .vim/pack/plugins/start/vim-gutentags
+[submodule ".local/share/nvim/site/pack/plugins/start/vim-gutentags"]
+	path = .local/share/nvim/site/pack/plugins/start/vim-gutentags
 	url = https://github.com/ludovicchabant/vim-gutentags.git
-[submodule ".vim/pack/plugins/start/vim-mergetool"]
-	path = .vim/pack/plugins/start/vim-mergetool
+[submodule ".local/share/nvim/site/pack/plugins/start/vim-mergetool"]
+	path = .local/share/nvim/site/pack/plugins/start/vim-mergetool
 	url = https://github.com/samoshkin/vim-mergetool.git
-[submodule ".vim/pack/plugins/start/vim-polyglot"]
-	path = .vim/pack/plugins/start/vim-polyglot
+[submodule ".local/share/nvim/site/pack/plugins/start/vim-polyglot"]
+	path = .local/share/nvim/site/pack/plugins/start/vim-polyglot
 	url = https://github.com/sheerun/vim-polyglot.git
-[submodule ".vim/pack/plugins/start/vim-signify"]
-	path = .vim/pack/plugins/start/vim-signify
+[submodule ".local/share/nvim/site/pack/plugins/start/vim-signify"]
+	path = .local/share/nvim/site/pack/plugins/start/vim-signify
 	url = https://github.com/mhinz/vim-signify.git
-[submodule ".vim/pack/plugins/start/vim-snippets"]
-	path = .vim/pack/plugins/start/vim-snippets
+[submodule ".local/share/nvim/site/pack/plugins/start/vim-snippets"]
+	path = .local/share/nvim/site/pack/plugins/start/vim-snippets
 	url = https://github.com/honza/vim-snippets.git
-[submodule ".vim/pack/plugins/start/vim-surround"]
-	path = .vim/pack/plugins/start/vim-surround
+[submodule ".local/share/nvim/site/pack/plugins/start/vim-surround"]
+	path = .local/share/nvim/site/pack/plugins/start/vim-surround
 	url = https://github.com/tpope/vim-surround.git
-[submodule ".vim/pack/plugins/start/jedi-vim"]
-	path = .vim/pack/plugins/start/jedi-vim
+[submodule ".local/share/nvim/site/pack/plugins/start/jedi-vim"]
+	path = .local/share/nvim/site/pack/plugins/start/jedi-vim
 	url = https://github.com/davidhalter/jedi-vim.git
 

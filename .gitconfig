@@ -1,3 +1,5 @@
+[core]
+        editor = "nvim"
 [help]
         autocorrect = 1
 [diff]
@@ -9,8 +11,9 @@
         keepBackup = false
         prompt = false
 [mergetool "vim_mergetool"]
-        cmd = vim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
+        cmd = nvim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
         trustExitCode = true
 [user]
         # name =
         # email =
+

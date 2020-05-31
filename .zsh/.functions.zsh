@@ -1,5 +1,9 @@
 #!/bin/zsh
 
+cheat() {
+        curl cheat.sh/$1
+}
+
 chpwd() ls
 
 cgcl() {
@@ -43,3 +47,4 @@ take() {
         mkdir $1
         cd $1
 }
+

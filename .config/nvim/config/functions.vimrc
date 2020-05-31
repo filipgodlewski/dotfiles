@@ -1,7 +1,9 @@
 function TrailingCharacters()
     let l:save=winsaveview()
     keeppatterns %s/\s\+$//e
-    keeppatterns $s/.\zs$/\r/e
+    if !exists('b:noInsertFinalNewline')
+        keeppatterns $s/.\zs$/\r/e
+    endif
     call winrestview(l:save)
 endfunction
 

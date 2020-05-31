@@ -24,7 +24,7 @@ set wildignore+=*.tar.*,*.zip*
 
 set splitright splitbelow
 set lazyredraw
-set relativenumber number
+set  number
 set confirm
 set complete+=kspell
 set completeopt=menuone,longest
@@ -32,6 +32,7 @@ set diffopt=filler,vertical
 set shortmess+=c
 set shortmess+=F
 set backspace=indent,eol,start
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 colorscheme nord
 
 set tabstop=8

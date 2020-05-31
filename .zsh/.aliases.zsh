@@ -25,6 +25,8 @@ alias ctags="`brew --prefix`/bin/ctags"
 
 alias emptytrash="sudo rm -rf /Volumes/*/.Trashes; sudo rm -rf ~/.Trash; sudo rm -rf /private/var/log/asl/*.asl; sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
 
+alias fff="fzf --preview 'bat --color=always {}'"
+alias fof="v -c Files!"
 alias functions="declare -f | grep '^[a-z].* ()' | sed 's/{$//' | cut -d' ' -f1"
 
 alias ga="git add"
@@ -59,10 +61,11 @@ alias pip="pip3"
 alias python="python3"
 alias rf="rm -rf"
 
-alias v="vim"
+alias v="nvim"
 
 alias zalias="v ~/.zsh/.aliases.zsh"
 alias zfunction="v ~/.zsh/.functions.zsh"
 alias zload="source ~/.zsh/.zshrc; antibody bundle < ~/.zsh/.antibody.txt > ~/.zsh/.antibody.sh"
-alias zvi="v ~/.vim/vimrc"
+alias zvi="v ~/.config/nvim/init.vim"
 alias zzsh="v ~/.zsh/.zshrc"
+

@@ -23,3 +23,4 @@ if [[ "${terminfo[kcbt]}" != "" ]]; then
 fi
 
 eval "$(starship init zsh)"
+

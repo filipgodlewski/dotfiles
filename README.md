@@ -33,6 +33,13 @@ If `cfg checkout` fails, simply backup or delete files listed that stop the proc
 cfg config --local status.showUntrackedFiles no
 ```
 
+`coc.nvim` will require additional step:
+```sh
+cd <path_to_submodule>/coc.nvim
+git clean -xfd
+yarn install --frozen-lockfile
+```
+
 ### Deleting submodules
 
 ```sh
@@ -49,7 +56,6 @@ Below are the 5 latest done tasks and all to dos that I have to finish, because 
 
 ### To dos
 
-- [ ] refactor .ctags, make them way faster!
 - [ ] add brew requirements
 - [ ] add pip requirements
 - [ ] add macos preferences config file [inspired by this file](https://github.com/sobolevn/dotfiles/blob/master/macos)
@@ -60,11 +66,11 @@ Below are the 5 latest done tasks and all to dos that I have to finish, because 
 
 ### Done
 
+- [x] delete ctags
 - [x] add script to update & upgrade all submodules, brew, npm, yarn etc. and clean the whole mac from trash
 - [x] remove oh-my-zsh and use antibody instead
 - [x] add vim plugins directory
 - [x] delete backups and swaps from vim
-- [x] find a way to easily install vim plugin repos
 
 ## Licence
 

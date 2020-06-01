@@ -1,27 +1,27 @@
-[submodule ".local/share/nvim/site/pack/plugins/start/far.vim"]
-	path = .local/share/nvim/site/pack/plugins/start/far.vim
-	url = https://github.com/brooth/far.vim.git
-[submodule ".local/share/nvim/site/pack/plugins/start/fzf.vim"]
-	path = .local/share/nvim/site/pack/plugins/start/fzf.vim
-	url = https://github.com/junegunn/fzf.vim.git
-[submodule ".local/share/nvim/site/pack/plugins/start/lexima.vim"]
-	path = .local/share/nvim/site/pack/plugins/start/lexima.vim
-	url = https://github.com/cohama/lexima.vim.git
-[submodule ".local/share/nvim/site/pack/plugins/start/nord-vim"]
-	path = .local/share/nvim/site/pack/plugins/start/nord-vim
-	url = https://github.com/arcticicestudio/nord-vim.git
-[submodule ".local/share/nvim/site/pack/plugins/start/vim-mergetool"]
-	path = .local/share/nvim/site/pack/plugins/start/vim-mergetool
-	url = https://github.com/samoshkin/vim-mergetool.git
-[submodule ".local/share/nvim/site/pack/plugins/start/vim-polyglot"]
-	path = .local/share/nvim/site/pack/plugins/start/vim-polyglot
-	url = https://github.com/sheerun/vim-polyglot.git
-[submodule ".local/share/nvim/site/pack/plugins/start/vim-signify"]
-	path = .local/share/nvim/site/pack/plugins/start/vim-signify
-	url = https://github.com/mhinz/vim-signify.git
 [submodule ".local/share/nvim/site/pack/plugins/start/vim-surround"]
 	path = .local/share/nvim/site/pack/plugins/start/vim-surround
 	url = https://github.com/tpope/vim-surround.git
+[submodule ".local/share/nvim/site/pack/plugins/start/vim-signify"]
+	path = .local/share/nvim/site/pack/plugins/start/vim-signify
+	url = https://github.com/mhinz/vim-signify.git
+[submodule ".local/share/nvim/site/pack/plugins/start/vim-polyglot"]
+	path = .local/share/nvim/site/pack/plugins/start/vim-polyglot
+	url = https://github.com/sheerun/vim-polyglot.git
+[submodule ".local/share/nvim/site/pack/plugins/start/vim-mergetool"]
+	path = .local/share/nvim/site/pack/plugins/start/vim-mergetool
+	url = https://github.com/samoshkin/vim-mergetool.git
+[submodule ".local/share/nvim/site/pack/plugins/start/nord-vim"]
+	path = .local/share/nvim/site/pack/plugins/start/nord-vim
+	url = https://github.com/arcticicestudio/nord-vim.git
+[submodule ".local/share/nvim/site/pack/plugins/start/lexima.vim"]
+	path = .local/share/nvim/site/pack/plugins/start/lexima.vim
+	url = https://github.com/cohama/lexima.vim.git
+[submodule ".local/share/nvim/site/pack/plugins/start/fzf.vim"]
+	path = .local/share/nvim/site/pack/plugins/start/fzf.vim
+	url = https://github.com/junegunn/fzf.vim.git
+[submodule ".local/share/nvim/site/pack/plugins/start/far.vim"]
+	path = .local/share/nvim/site/pack/plugins/start/far.vim
+	url = https://github.com/brooth/far.vim.git
 [submodule ".local/share/nvim/site/pack/plugins/start/coc.nvim"]
 	path = .local/share/nvim/site/pack/plugins/start/coc.nvim
 	url = https://github.com/neoclide/coc.nvim.git

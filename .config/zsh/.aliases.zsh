@@ -57,7 +57,6 @@ alias lti="exa -DT --color=always --group-directories-first --level=3 --git"
 alias lvi="la ~/.vim/pack/plugins/start"
 
 alias paths="echo $PATH | tr ':' '\n'"
-alias pip="pip3"
 alias python="python3"
 alias rf="rm -rf"
 

@@ -14,9 +14,12 @@ cgcl() {
 }
 
 cgrs() {
-        cfg submodule deinit -f .local/share/nvim/site/pack/plugins/start/$1
-        cfg rm .local/share/nvim/site/pack/plugins/start/$1
-        rf .local/share/nvim/site/pack/plugins/start/$1
+        cd ~
+        file=$(exa .local/share/nvim/site/pack/plugins/start | fzf)
+        cfg submodule deinit -f .local/share/nvim/site/pack/plugins/start/$file
+        cfg rm .local/share/nvim/site/pack/plugins/start/$file
+        rf .local/share/nvim/site/pack/plugins/start/$file
+        1
 }
 
 gamp() {

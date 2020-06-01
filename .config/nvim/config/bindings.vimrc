@@ -6,6 +6,7 @@ inoremap <expr> <C-L> pumvisible() ? "<C-Y>" : "<C-L>"
 inoremap <silent><expr> <c-space> coc#refresh()
 nnoremap <C-J> :norm o<CR>
 nnoremap <C-K> :norm O<CR>
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 nnoremap <silent> <C-]> <C-]>zz
 nnoremap <silent> <C-P> :FZF -m<CR>
 nnoremap <silent> <leader><Enter> :Buffers<CR>

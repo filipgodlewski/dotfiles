@@ -7,19 +7,20 @@ cheat() {
 chpwd() ls
 
 cgcl() {
-        cd ~/.local
         folder=$(echo $1 | rev | cut -c5- | cut -d"/" -f1 | rev)
-        cfg submodule add $1 share/nvim/site/pack/plugins/start/$folder
-        1
+        cfg submodule add $1 ~/.local/share/nvim/site/pack/plugins/start/$folder
 }
 
 cgrs() {
-        cd ~
-        file=$(exa .local/share/nvim/site/pack/plugins/start | fzf)
-        cfg submodule deinit -f .local/share/nvim/site/pack/plugins/start/$file
-        cfg rm .local/share/nvim/site/pack/plugins/start/$file
-        rf .local/share/nvim/site/pack/plugins/start/$file
-        1
+        file=$(exa ~/.local/share/nvim/site/pack/plugins/start | fzf)
+        if [ -z $file ]
+        then
+            echo "Did not select anything!"
+            return 1
+        fi
+        cfg submodule deinit -f ~/.local/share/nvim/site/pack/plugins/start/$file
+        cfg rm -r ~/.local/share/nvim/site/pack/plugins/start/$file
+        rf ~/.local/share/nvim/site/pack/plugins/start/$file
 }
 
 gamp() {

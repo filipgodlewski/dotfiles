@@ -36,7 +36,7 @@ cfg config --local status.showUntrackedFiles no
 `coc.nvim` will require additional step:
 ```sh
 cd <path_to_submodule>/coc.nvim
-git clean -xfd
+cfg clean -xfd
 yarn install --frozen-lockfile
 ```
 

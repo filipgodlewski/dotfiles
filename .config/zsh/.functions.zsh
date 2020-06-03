@@ -6,32 +6,54 @@ cheat() {
 
 chpwd() ls
 
-cgcl() {
-        folder=$(echo $1 | rev | cut -c5- | cut -d"/" -f1 | rev)
-        cfg submodule add $1 ~/.local/share/nvim/site/pack/plugins/start/$folder
-}
-
-cgrs() {
-        file=$(exa ~/.local/share/nvim/site/pack/plugins/start | fzf)
-        if [ -z $file ]
+cgaf() {
+        files=$(cgss | rg '^(\s|\S)(M|A|R|C|D|U|!|\?)' | fzf -m)
+        files_array=($(echo $files | cut -c4-))
+        if [ -z $files ]
         then
             echo "Did not select anything!"
             return 1
         fi
-        cfg submodule deinit -f ~/.local/share/nvim/site/pack/plugins/start/$file
-        cfg rm -r ~/.local/share/nvim/site/pack/plugins/start/$file
-        rf ~/.local/share/nvim/site/pack/plugins/start/$file
+        cfg add $files_array
 }
 
-gamp() {
-        gaa
-        gcmsg $1
-        gp
+cgcl() {
+        cd ~/.local
+        folder=$(echo $1 | rev | cut -c5- | cut -d"/" -f1 | rev)
+        cfg submodule add $1 share/nvim/site/pack/plugins/start/$folder
+        1
+}
+
+cgrs() {
+        cd ~/.local
+        file=$(exa share/nvim/site/pack/plugins/start | fzf)
+        if [ -z $file ]
+        then
+            echo "Did not select anything!"
+            1
+            return 1
+        fi
+        cfg submodule deinit -f share/nvim/site/pack/plugins/start/$file
+        cfg rm -r share/nvim/site/pack/plugins/start/$file
+        rf share/nvim/site/pack/plugins/start/$file
+        1
 }
 
 gdiffs() {
         preview="git diff $@ --color=always -- {-1}"
         git diff $@ --name-only | fzf -m --ansi --preview $preview
+}
+
+gaf() {
+        preview="git diff $@ --color=always -- {-1}"
+        files=$(gss | rg '^(\s|\S)(M|A|R|C|D|U|!|\?)' | fzf -m --ansi --preview $preview)
+        files_array=($(echo $files | cut -c4-))
+        if [ -z $files ]
+        then
+            echo "Did not select anything!"
+            return 1
+        fi
+        git add $files_array
 }
 
 put() {

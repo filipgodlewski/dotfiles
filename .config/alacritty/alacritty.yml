@@ -17,10 +17,10 @@ font:
     style: Medium
   italic:
     family: Victor Mono
-    style: SemiBold Italic
+    style: SemiBold Oblique
   bold_italic:
     family: Victor Mono
-    style: Bold Italic
+    style: Bold Oblique
   size: 14.0
   offset:
     x: 0

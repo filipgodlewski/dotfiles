@@ -1,7 +1,6 @@
 {
   "dependencies": {
     "coc-git": ">=1.7.13",
-    "coc-highlight": ">=1.2.5",
     "coc-json": ">=1.2.6",
     "coc-marketplace": ">=1.7.0",
     "coc-pairs": ">=1.2.21",

@@ -25,7 +25,6 @@ set laststatus=2
 set lazyredraw
 set nobackup
 set nohlsearch
-set noruler
 set noswapfile
 set nowritebackup
 set path+=**
@@ -37,7 +36,6 @@ set smartcase
 set smartindent
 set smarttab
 set softtabstop=4
-set splitright splitbelow
 set tabstop=8
 set updatetime=50
 set wildignore+=*.tar.*,*.zip*

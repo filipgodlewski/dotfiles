@@ -1,11 +1,11 @@
-source ~/.config/zsh/.aliases.zsh
-source ~/.config/zsh/.antibody.sh
-source ~/.config/zsh/.completions.zsh
-source ~/.config/zsh/.exports.zsh
-source ~/.config/zsh/.externals.zsh
-source ~/.config/zsh/.functions.zsh
-source ~/.config/zsh/.fzf.zsh
-source ~/.config/zsh/.history.zsh
+source ~/.config/zsh/aliases.zsh
+source ~/.config/zsh/antibody.sh
+source ~/.config/zsh/completions.zsh
+source ~/.config/zsh/exports.zsh
+source ~/.config/zsh/externals.zsh
+source ~/.config/zsh/functions.zsh
+source ~/.config/zsh/fzf.zsh
+source ~/.config/zsh/history.zsh
 
 zle -N rationalise-dot
 bindkey . rationalise-dot

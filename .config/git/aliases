@@ -1,0 +1,58 @@
+[alias]
+a = add
+aa = add --all
+ap = add --patch
+
+b = branch
+
+c = commit -v
+ca = commit --amend
+cam = commit --amend --message
+cane = commit --amend --no-edit
+co = checkout
+
+d = diff
+dc = diff --cached
+ds = diff --staged
+dw = diff --word-diff
+
+f = fetch
+
+g = grep
+
+l = log
+ll = log --oneline --abbrev-commit --all --graph --decorate --color
+lo = log --oneline
+ls = ls-files
+lsi = ls-files --others --i --exclude-standard
+
+m = merge
+
+p = pull
+publish = push -u origin
+
+rb = rebase
+rba = rebase --abort
+rbc = rebase --continue
+rbi = rebase --interactive @{upstream}
+rbs = rebase --skip
+
+# status
+s = status
+ss = status --short
+ssb = status --short --branch
+
+# submodule
+sm = submodule
+sma = submodule add
+smi = submodule init
+
+# stash
+sta = stash apply
+stb = stash branch
+stc = stash clear
+std = stash drop
+stl = stash list
+stp = stash pop
+sts = stash save
+

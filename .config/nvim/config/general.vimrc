@@ -28,7 +28,6 @@ set nohlsearch
 set noruler
 set noswapfile
 set nowritebackup
-"set number
 set path+=**
 set pumheight=10
 set shiftwidth=4

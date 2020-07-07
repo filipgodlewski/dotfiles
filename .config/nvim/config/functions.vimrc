@@ -16,14 +16,6 @@ function LineReturn()
     endif
 endfunction
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
 function InsertUS()
     execute 'r !echo $(git branch --show-current) | cut -d";" -f1'
     execute 'normal! ggdd'

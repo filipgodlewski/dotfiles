@@ -13,7 +13,6 @@ nnoremap <leader>rc :%s///gc<left><left><left><left>
 nnoremap <silent> <C-P> :Files<CR>
 nnoremap <silent> <C-]> <C-]>zz
 nnoremap <silent> <leader><Enter> :Buffers<CR>
-nnoremap <silent> <leader>l :Lines<CR>
 nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 tnoremap <Esc> <C-\><C-n>
 vmap <C-J> <Plug>(coc-snippets-select)

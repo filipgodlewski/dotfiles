@@ -16,7 +16,6 @@ let g:fzf_colors =
   \ 'header':  ['fg', 'Comment'] }
 let g:fzf_layout = {'up':'~90%', 'window':{'width':0.8, 'height':0.8,'yoffset':0.5,'xoffset':0.5, 'highlight':'Todo', 'border':'sharp'}}
 let g:fzf_preview_window = 'right:60%'
-let g:mergetool_layout = 'bmr'
 let g:nord_italic_comments = 1
 let g:nord_uniform_diff_background = 1
 let g:nord_uniform_status_lines = 1

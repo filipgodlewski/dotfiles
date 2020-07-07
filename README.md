@@ -56,21 +56,18 @@ Below are the 5 latest done tasks and all to dos that I have to finish, because 
 
 ### To dos
 
-- [ ] add brew requirements
-- [ ] add pip requirements
+- [ ] clean up brew_list, brew_cask_list, pip_list files from the unnecessary stuff.
 - [ ] add macos preferences config file [inspired by this file](https://github.com/sobolevn/dotfiles/blob/master/macos)
-- [ ] add autoload functions to zsh so that I can easily see them, then delete alias 'functions', [as seen here.](https://scriptingosx.com/2019/07/moving-to-zsh-part-4-aliases-and-functions/)
+- [ ] add autoload functions to zsh so that I can easily see them [as seen here.](https://scriptingosx.com/2019/07/moving-to-zsh-part-4-aliases-and-functions/)
 - [ ] add vscode files (especially for extensions)
-- [ ] add fonts
-- [ ] add debugger to vim
 
 ### Done
 
+- [x] add brew requirements
+- [x] add pip requirements
+- [x] add fonts
 - [x] delete ctags
 - [x] add script to update & upgrade all submodules, brew, npm, yarn etc. and clean the whole mac from trash
-- [x] remove oh-my-zsh and use antibody instead
-- [x] add vim plugins directory
-- [x] delete backups and swaps from vim
 
 ## Licence
 

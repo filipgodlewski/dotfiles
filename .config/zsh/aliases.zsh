@@ -41,7 +41,7 @@ alias python="python3"
 
 alias rf="rm -rf"
 
-alias up-brew="brew update; brew upgrade; brew cleanup --prune=all"
+alias up-brew="brew update; brew upgrade; brew cask upgrade; brew cleanup --prune=all"
 alias up-mac="up-sub; up-brew; emptytrash; zload"
 alias up-sub="cfg submodule foreach git pull"
 

@@ -1,12 +1,12 @@
 {
   "dependencies": {
-    "coc-git": ">=1.7.13",
+    "coc-git": ">=1.8.0",
     "coc-json": ">=1.2.6",
     "coc-marketplace": ">=1.7.0",
     "coc-pairs": ">=1.2.21",
     "coc-python": ">=1.2.12",
     "coc-sh": ">=0.5.1",
-    "coc-snippets": ">=2.1.26",
+    "coc-snippets": ">=2.1.28",
     "coc-syntax": ">=1.2.4",
     "coc-yank": ">=1.1.4"
   }

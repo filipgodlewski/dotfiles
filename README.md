@@ -4,50 +4,44 @@ These are Filip Godlewski's dotfiles that use the technique presented here: [bes
 
 ## Getting Started
 
-First of all, instructions below are prepared for MacOS, as this is my daily work machine. Follow the instructions.
+First of all, instructions below are prepared for MacOS, as this is my daily work machine. Follow the instructions if that fits your needs.
 
 ### Prerequisites
 
-This setup requires:
+This setup will use:
 
 - `curl`: to download some stuff, like homebrew
 - `git`: to clone the repo
 - `homebrew`: to install all the stuff that I use
-- `vim`: , my main editor, at least v.8
+- `neovim`: , my main editor
 - `zsh`: my main shell
 
 ### Installing
 
-The commands below are required to run before you clone this repository. It is required to understand what is going on here so you don't run into problems.
+#### Step 1/3
+
+Before running the scripts, install `homebrew` along with `git`, using the official method from [this website](https://brew.sh)
+
+#### Step 2/3
+
+Clone the repository using the command below.
 
 ```sh
 echo ".cfg" >> .gitignore
 git clone --bare https://github.com/filipgodlewski/dotfiles.git $HOME/.cfg
 alias cfg='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+rm .gitconfig
 cfg checkout
-```
-
-If `cfg checkout` fails, simply backup or delete files listed that stop the process, then repeat `cfg checkout` and proceed:
-
-```sh
 cfg config --local status.showUntrackedFiles no
 ```
 
-`coc.nvim` will require additional step:
-```sh
-cd <path_to_submodule>/coc.nvim
-cfg clean -xfd
-yarn install --frozen-lockfile
-```
+#### Step 3/3
 
-### Deleting submodules
+Now, run:
 
 ```sh
-cfg submodule deinit <path_to_submodule>
-cfg rm <path_to_submodule>
-cfg commit
-rf <path_to_submodule>
-# `rf` is an alias for `rm -rf`
+./.config/helpers/RUN_ME_FIRST.zsh
+# This script will install default brew, brew cask, fonts and pip3 programs. Then it will initialize submodules, and fully prepare coc.nvim
 ```
 
 ## Under construction
@@ -56,18 +50,17 @@ Below are the 5 latest done tasks and all to dos that I have to finish, because 
 
 ### To dos
 
-- [ ] clean up brew_list, brew_cask_list, pip_list files from the unnecessary stuff.
 - [ ] add macos preferences config file [inspired by this file](https://github.com/sobolevn/dotfiles/blob/master/macos)
 - [ ] add autoload functions to zsh so that I can easily see them [as seen here.](https://scriptingosx.com/2019/07/moving-to-zsh-part-4-aliases-and-functions/)
 - [ ] add vscode files (especially for extensions)
 
 ### Done
 
+- [x] clean up brew_list, brew_cask_list, pip_list files from the unnecessary stuff.
 - [x] add brew requirements
 - [x] add pip requirements
 - [x] add fonts
 - [x] delete ctags
-- [x] add script to update & upgrade all submodules, brew, npm, yarn etc. and clean the whole mac from trash
 
 ## Licence
 

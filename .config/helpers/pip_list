@@ -7,24 +7,3 @@ pydocstyle
 pyflakes
 pynvim
 
-appdirs
-astroid
-attrs
-click
-debugpy
-greenlet
-jedi
-lazy-object-proxy
-mccabe
-msgpack
-mypy-extensions
-parso
-pathspec
-regex
-six
-snowballstemmer
-toml
-typed-ast
-typing-extensions
-wrapt
-

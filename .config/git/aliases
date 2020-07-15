@@ -4,6 +4,7 @@ aa = add --all
 ap = add --patch
 
 b = branch
+bcurrent = branch --show-current
 
 c = commit -v
 ca = commit --amend
@@ -29,7 +30,7 @@ lsi = ls-files --others --i --exclude-standard
 m = merge
 
 p = pull
-publish = push -u origin
+publish = !"git push -u origin \"$(git bcurrent)\""
 
 rb = rebase
 rba = rebase --abort

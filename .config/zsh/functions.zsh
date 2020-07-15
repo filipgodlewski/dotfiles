@@ -75,6 +75,19 @@ gaf() {
     fi
     git add $files_array
 }
+macho() {
+
+
+    manual=$(apropos . | \
+        grep -v -E '^.+ \(0\)' | \
+        sed 's/(/ (/g' | \
+        awk '{print $1}' | \
+        sort -u | \
+        fzf --preview="echo {1} | sed -E \"s/^\((.+)\)/\1/\" | xargs -I{S} man -Pcat {S} {2} 2>/dev/null")
+
+    [ -z "$manual" ] && return 0
+    man $manual
+}
 
 put() {
     touch $1

@@ -53,7 +53,7 @@ Below are the 5 latest done tasks and all to dos that I have to finish, because 
 - [ ] add macos preferences config file [inspired by this file](https://github.com/sobolevn/dotfiles/blob/master/macos)
 - [ ] add fuzzy branch checkout for git
 - [ ] add autoload functions to zsh so that I can easily see them [as seen here.](https://scriptingosx.com/2019/07/moving-to-zsh-part-4-aliases-and-functions/)
-- [ ] add vscode files (especially for extensions)
+- [ ] provide more info and instructions into this readme file, for other people reading it
 
 ### Done
 

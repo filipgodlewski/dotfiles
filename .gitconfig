@@ -5,7 +5,7 @@
 [help]
         autocorrect = 1
 [include]
-        path = ".config/git/aliases"
+        path = ~/.config/git/aliases
 [merge]
         tool = vim_mergetool
         conflictStyle = diff3
@@ -15,10 +15,7 @@
 [mergetool "vim_mergetool"]
         cmd = nvim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
         trustExitCode = true
-[user]
-        # name =
-        # email =
-
 [pull]
-	ff = only
+        ff = only
+[user]
 

@@ -10,3 +10,6 @@
 [submodule ".local/share/nvim/site/pack/plugins/start/coc.nvim"]
 	path = .local/share/nvim/site/pack/plugins/start/coc.nvim
 	url = https://github.com/neoclide/coc.nvim.git
+[submodule ".local/share/nvim/site/pack/plugins/start/robotframework-vim"]
+	path = .local/share/nvim/site/pack/plugins/start/robotframework-vim
+	url = https://github.com/mfukar/robotframework-vim.git

@@ -37,6 +37,7 @@ set smartindent
 set smarttab
 set softtabstop=4
 set tabstop=8
+set termguicolors
 set updatetime=50
 set wildignore+=*.tar.*,*.zip*
 set wildignore+=*/.git/**/*,*/.hg/**/*,*/.svn/**/*

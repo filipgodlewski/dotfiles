@@ -76,8 +76,6 @@ gaf() {
     git add $files_array
 }
 macho() {
-
-
     manual=$(apropos . | \
         grep -v -E '^.+ \(0\)' | \
         sed 's/(/ (/g' | \
@@ -117,12 +115,7 @@ killjn() {
 }
 
 svba() {
-    if [ -n ${1} ]
-    then
-        venv="venv"
-    else
-        venv=${1}
-    fi
-    source ${venv}/bin/activate
+    if [ -z "$1" ]; then VENV="venv"; else VENV="$1"; fi
+    source $VENV/bin/activate
 }
 

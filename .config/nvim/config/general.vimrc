@@ -2,7 +2,7 @@ syntax on
 
 colorscheme nord
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-let g:python3_host_prog=expand("/usr/local/opt/python@3.8/bin/python3")
+let g:python3_host_prog=expand("~/.pyenv/shims/python")
 set autoindent
 set autoread
 set autowriteall

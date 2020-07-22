@@ -6,7 +6,7 @@ fi
 
 # Default options
 # ---------------
-export FZF_DEFAULT_OPTS='--height 30% --layout reverse --info inline'
+export FZF_DEFAULT_OPTS='--layout reverse --info inline'
 
 # Auto-completion
 # ---------------

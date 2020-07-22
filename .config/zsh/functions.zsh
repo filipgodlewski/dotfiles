@@ -1,5 +1,39 @@
 #!/bin/zsh
 
+ae() {
+    deactivate &> /dev/null
+    if [ -f ./bin/activate ]; then
+        echo "Already in venv directory. Activating."
+        source ./bin/activate
+        return 0
+    fi
+    if [ -z "$1" ]; then VENV="venv"; else VENV=$1; fi
+    if [ ! -f ./bin/activate ] && [ -d $VENV ]; then
+        echo "Found existing venv called: $VENV. Activating"
+        source $VENV/bin/activate
+        return 0
+    else
+        echo "Couldn't find '$VENV' directory."
+        printf "Do you want to create new venv called: $VENV? [yes/no]: "
+        read ANSWER
+        case $ANSWER in
+            [yY]es|[yY])
+                echo "Got it! Creating and activating new venv called: $VENV"
+                python -m venv $VENV
+                source $VENV/bin/activate
+                ;;
+            [nN]o|[nN])
+                echo "Got it! Aborting."
+                return 0
+                ;;
+            *)
+                echo "Wrong answer. Aborting."
+                return 1
+                ;;
+        esac
+    fi
+}
+
 bip() {
     local inst=$(brew search | eval "fzf ${FZF_DEFAULT_OPTS} -m --header='[brew:install]'")
 
@@ -112,10 +146,5 @@ killjn() {
         pid=$(lsof -n -i4TCP:$port | grep LISTEN | cut -d" " -f3)
         kill -9 $pid
     done
-}
-
-svba() {
-    if [ -z "$1" ]; then VENV="venv"; else VENV="$1"; fi
-    source $VENV/bin/activate
 }
 

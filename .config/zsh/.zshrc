@@ -2,7 +2,6 @@ source ~/.config/zsh/aliases.zsh
 source ~/.config/zsh/antibody.sh
 source ~/.config/zsh/completions.zsh
 source ~/.config/zsh/exports.zsh
-source ~/.config/zsh/externals.zsh
 source ~/.config/zsh/functions.zsh
 source ~/.config/zsh/fzf.zsh
 source ~/.config/zsh/history.zsh
@@ -23,4 +22,7 @@ if [[ "${terminfo[kcbt]}" != "" ]]; then
 fi
 
 eval "$(starship init zsh)"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
 

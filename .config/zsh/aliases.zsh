@@ -37,7 +37,6 @@ alias lti="exa -T --color=always --group-directories-first --level=3 --git"
 alias lvi="la ~/.local/share/nvim/site/pack/plugins/start"
 
 alias paths="echo $PATH | tr ':' '\n' | sort"
-alias python="python3"
 
 alias rf="rm -rf"
 

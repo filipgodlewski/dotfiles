@@ -19,11 +19,13 @@ pyenv install -l | rg -v Available\ versions: | fzf | xargs -I{} sh -c "pyenv in
 
 echo "\n>>> installing programs from pip <<<\n"
 pip install --upgrade pip
-pip install wheel
 pip install -r ~/.config/helpers/pip_list
 
-echo "\n>>> initialize git submodules <<<\n"
+echo "\n>>> reload and initialize antibody <<<\n"
 source ~/.config/zsh/.zshrc
+antibody bundle < ~/.config/zsh/antibody.txt > ~/.config/zsh/antibody.sh
+
+echo "\n>>> initialize git submodules <<<\n"
 cfg submodule update --init
 
 echo "\n>>> yarn install on coc.nvim <<<\n"

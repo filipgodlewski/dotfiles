@@ -13,7 +13,7 @@ This setup will use:
 - `curl`: to download some stuff, like homebrew
 - `git`: to clone the repo
 - `homebrew`: to install all the stuff that I use
-- `neovim`: , my main editor
+- `neovim`: my main editor
 - `zsh`: my main shell
 - `pyenv`: my main python version controller and installer
 

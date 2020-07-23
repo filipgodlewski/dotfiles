@@ -80,4 +80,3 @@ The whole workflow was inspired by this great [YouTube video by DistroTube](http
 This is how I got into git submodules to handle vim plugins: [Using the Vim 8 Package Manager](https://dvonrohr.com/2016/12/11/vim-package-manager/)
 
 This dotfile repository has very interesting ideas. Definitely worth some reading! [webpro dotfiles](https://github.com/webpro/dotfiles)
-

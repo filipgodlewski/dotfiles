@@ -1,7 +1,11 @@
 function TrailingCharacters()
     let l:save=winsaveview()
     keeppatterns %s/\s\+$//e
-    keeppatterns %s/\_s\(\n\)\+\_$//e
+    let lastLine = line('$')
+    let lastNonblankLine = prevnonblank(lastLine)
+    if lastLine > 0 && lastNonblankLine != lastLine
+        silent! execute lastNonblankLine + 1 . ',$delete _'
+    endif
     call winrestview(l:save)
 endfunction
 

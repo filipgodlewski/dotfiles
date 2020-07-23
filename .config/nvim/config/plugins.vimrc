@@ -22,4 +22,3 @@ let g:nord_uniform_status_lines = 1
 
 let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline --bind ctrl-a:select-all'
 let $FZF_DEFAULT_COMMAND = "rg --files --hidden"
-

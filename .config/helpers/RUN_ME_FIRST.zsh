@@ -39,4 +39,3 @@ nvim -c "CocInstall -sync $COC_EXTENSIONS | qa"
 
 echo "\n>>> DONE. Reexecuting zsh <<<\n"
 reload
-

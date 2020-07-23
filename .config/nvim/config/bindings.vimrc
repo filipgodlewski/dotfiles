@@ -22,4 +22,3 @@ vnoremap K :m '<-2<CR>gv=gv
 xnoremap <leader>f "ay/<C-R>a
 xnoremap <leader>rc :s///gc<left><left><left><left>
 xnoremap <leader>rr :s///g<left><left><left>
-

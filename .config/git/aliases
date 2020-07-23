@@ -57,4 +57,3 @@ std = stash drop
 stl = stash list
 stp = stash pop
 sts = stash save
-

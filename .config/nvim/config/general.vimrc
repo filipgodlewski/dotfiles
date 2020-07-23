@@ -47,4 +47,3 @@ set wildignore=*.swp,*.bak
 set wildignorecase
 set wildmenu
 set wildmode=longest:full,full
-

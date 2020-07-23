@@ -3,4 +3,3 @@ ignore = W292, W503
 max-line-length = 88
 max-complexity = 18
 select = B,C,E,F,W,T4
-

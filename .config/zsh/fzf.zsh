@@ -15,4 +15,3 @@ export FZF_DEFAULT_OPTS='--layout reverse --info inline'
 # Key bindings
 # ------------
 source "/usr/local/opt/fzf/shell/key-bindings.zsh"
-

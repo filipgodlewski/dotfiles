@@ -164,4 +164,3 @@ updateall() {
     echo "\n>>> reloading zsh <<<\n"
     exec zsh
 }
-

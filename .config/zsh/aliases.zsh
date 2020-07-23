@@ -54,4 +54,3 @@ alias vvi="v ~/.config/nvim/init.vim"
 alias vzsh="v ~/.config/zsh/.zshrc"
 
 alias reload="exec zsh"
-

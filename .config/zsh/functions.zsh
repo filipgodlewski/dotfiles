@@ -161,6 +161,9 @@ updateall() {
     up-brew
     echo "\n>>> updating antibody <<<\n"
     up-antibody
+    echo "\n>>> updating applications from App Store & MacOS itself <<<"
+    echo ">>> will require password <<<\n"
+    up-mac
     echo "\n>>> reloading zsh <<<\n"
     exec zsh
 }

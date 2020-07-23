@@ -45,6 +45,7 @@ alias up-brew="brew update; brew upgrade; brew cask upgrade; brew cleanup --prun
 alias up-coc="nvim -c 'CocUpdateSync | q'"
 alias up-pip="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d= -f1 | xargs -n1 pip install -U"
 alias up-sub="cfg submodule foreach git pull"
+alias up-mac="mas upgrade; sudo softwareupdate -i -a"
 
 alias v="nvim"
 alias vff="v -c Files!"

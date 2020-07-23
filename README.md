@@ -55,19 +55,16 @@ Below are the 5 latest done tasks and all to dos that I have to finish, because 
 ### To dos
 
 - [ ] move .yarnrc, .viminfo, .python_history, .lesshst, .gitmodules, .gitignore, .gitconfig, .ctags, pyproject.toml to respective folders in .config/
-- [ ] add macos preferences config file [inspired by this file](https://github.com/sobolevn/dotfiles/blob/master/macos)
-- [ ] add fuzzy branch delete for git
-- [ ] add theme switcher function for both alacritty and nvim
 - [ ] add autoload functions to zsh so that I can easily see them [as seen here.](https://scriptingosx.com/2019/07/moving-to-zsh-part-4-aliases-and-functions/)
 - [ ] provide more info and instructions into this readme file, for other people reading it
 
 ### Done
 
+- [x] add fuzzy branch delete for git
 - [x] add fuzzy branch checkout for git
 - [x] clean up brew_list, brew_cask_list, pip_list files from the unnecessary stuff.
 - [x] add brew requirements
 - [x] add pip requirements
-- [x] add fonts
 
 ## Licence
 

@@ -21,7 +21,10 @@ This setup will use:
 
 #### Step 1/3
 
-Before running the scripts, install `homebrew` along with `git`, using the official method from [this website](https://brew.sh)
+Before running the scripts, install `homebrew` along with `git`, using the official method from [this website](https://brew.sh), but first:
+```sh
+xcode-select --install
+```
 
 #### Step 2/3
 

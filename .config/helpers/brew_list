@@ -4,9 +4,9 @@ fzf
 getantibody/tap/antibody
 git
 neovim
-pyenv
 ripgrep
 selenium-server-standalone
 starship
 yarn
+pyenv
 

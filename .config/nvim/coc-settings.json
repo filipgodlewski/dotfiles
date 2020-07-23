@@ -17,17 +17,17 @@
   "git.removedSign.text": "▎",
   "git.topRemovedSign.hlGroup": "GitGutterDelete",
   "git.topRemovedSign.text": "◥",
-  "python.formatting.blackPath": "/usr/local/bin/black",
+  "python.formatting.blackPath": "~/.pyenv/shims/black",
   "python.formatting.provider": "black",
   "python.jediEnabled": false,
   "python.linting.flake8Enabled": true,
-  "python.linting.flake8Path": "/usr/local/bin/flake8",
+  "python.linting.flake8Path": "~/.pyenv/shims/flake8",
   "python.linting.pylintEnabled": false,
   "python.sortImports.args": [
     "--apply",
     "--settings-path=.config/isort.cfg"
   ],
-  "python.sortImports.path": "/usr/local/bin/isort",
+  "python.sortImports.path": "~/.pyenv/shims/isort",
   "suggest.enablePreview": true,
   "suggest.snippetIndicator": " ►"
 }

@@ -37,5 +37,6 @@ yarn install --frozen-lockfile
 echo "\n>>> install coc.nvim extensions <<<\n"
 nvim -c "CocInstall -sync $COC_EXTENSIONS | qa"
 
-echo "\n>>> DONE. Reexecuting zsh. <<<\n"
-exec zsh
+echo "\n>>> DONE. Reexecuting zsh <<<\n"
+reload
+

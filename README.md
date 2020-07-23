@@ -54,6 +54,7 @@ Below are the 5 latest done tasks and all to dos that I have to finish, because 
 
 ### To dos
 
+- [ ] move .yarnrc, .viminfo, .python_history, .lesshst, .gitmodules, .gitignore, .gitconfig, .ctags, pyproject.toml to respective folders in .config/
 - [ ] add macos preferences config file [inspired by this file](https://github.com/sobolevn/dotfiles/blob/master/macos)
 - [ ] add fuzzy branch delete for git
 - [ ] add theme switcher function for both alacritty and nvim

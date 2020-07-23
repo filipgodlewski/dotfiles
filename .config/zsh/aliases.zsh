@@ -40,8 +40,10 @@ alias paths="echo $PATH | tr ':' '\n' | sort"
 
 alias rf="rm -rf"
 
+alias up-antibody="antibody bundle < ~/.config/zsh/antibody.txt > ~/.config/zsh/antibody.sh"
 alias up-brew="brew update; brew upgrade; brew cask upgrade; brew cleanup --prune=all"
-alias up-mac="up-sub; up-brew; emptytrash; zload"
+alias up-coc="nvim -c 'CocUpdateSync | q'"
+alias up-pip="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d= -f1 | xargs -n1 pip install -U"
 alias up-sub="cfg submodule foreach git pull"
 
 alias v="nvim"
@@ -50,6 +52,4 @@ alias valias="v ~/.config/zsh/aliases.zsh"
 alias vfunction="v ~/.config/zsh/functions.zsh"
 alias vvi="v ~/.config/nvim/init.vim"
 alias vzsh="v ~/.config/zsh/.zshrc"
-
-alias zload="source ~/.config/zsh/.zshrc; antibody bundle < ~/.config/zsh/antibody.txt > ~/.config/zsh/antibody.sh"
 

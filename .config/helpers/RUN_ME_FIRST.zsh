@@ -17,13 +17,13 @@ for BREW_CASK in $BREW_CASKS; do brew cask install $BREW_CASK; done
 echo "\n>>> installing python version using pyenv <<<\n"
 pyenv install -l | rg -v Available\ versions: | fzf | xargs -I{} sh -c "pyenv install {}; pyenv global {}"
 
-echo "\n>>> installing programs from pip <<<\n"
-pip install --upgrade pip
-pip install -r ~/.config/helpers/pip_list
-
 echo "\n>>> reload and initialize antibody <<<\n"
 source ~/.config/zsh/.zshrc
-antibody bundle < ~/.config/zsh/antibody.txt > ~/.config/zsh/antibody.sh
+up-antibody
+
+echo "\n>>> installing programs from pip <<<\n"
+up-pip
+pip install -r ~/.config/helpers/pip_list
 
 echo "\n>>> initialize git submodules <<<\n"
 cfg submodule update --init
@@ -37,5 +37,5 @@ yarn install --frozen-lockfile
 echo "\n>>> install coc.nvim extensions <<<\n"
 nvim -c "CocInstall -sync $COC_EXTENSIONS | qa"
 
-echo "\n>>> DONE. <<<\n"
-
+echo "\n>>> DONE. Reexecuting zsh. <<<\n"
+exec zsh

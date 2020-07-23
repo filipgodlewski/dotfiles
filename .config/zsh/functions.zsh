@@ -109,6 +109,16 @@ gaf() {
     fi
     git add $files_array
 }
+
+killjn() {
+    ports=$(jn list | grep http | cut -d"/" -f3 | cut -d":" -f2)
+    for port in $ports
+    do
+        pid=$(lsof -n -i4TCP:$port | grep LISTEN | cut -d" " -f3)
+        kill -9 $pid
+    done
+}
+
 macho() {
     manual=$(apropos . | \
         grep -v -E '^.+ \(0\)' | \
@@ -127,11 +137,11 @@ put() {
 }
 
 rationalise-dot() {
-if [[ $LBUFFER = *.. ]]; then
-    LBUFFER+=/..
-else
-    LBUFFER+=.
-fi
+    if [[ $LBUFFER = *.. ]]; then
+        LBUFFER+=/..
+    else
+        LBUFFER+=.
+    fi
 }
 
 take() {
@@ -139,12 +149,19 @@ take() {
     cd $1
 }
 
-killjn() {
-    ports=$(jn list | grep http | cut -d"/" -f3 | cut -d":" -f2)
-    for port in $ports
-    do
-        pid=$(lsof -n -i4TCP:$port | grep LISTEN | cut -d" " -f3)
-        kill -9 $pid
-    done
+updateall() {
+    deactivate &> /dev/null && echo "\n>>> deactivated venv if any is active <<<\n"
+    echo "\n>>> updating coc-extensions <<<\n"
+    up-coc
+    echo "\n>>> updating pip packages <<<\n"
+    up-pip
+    echo "\n>>> updating git submodules <<<\n"
+    up-sub
+    echo "\n>>> updating brew & brew casks <<<\n"
+    up-brew
+    echo "\n>>> updating antibody <<<\n"
+    up-antibody
+    echo "\n>>> reloading zsh <<<\n"
+    exec zsh
 }
 

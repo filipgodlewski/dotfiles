@@ -1,9 +1,7 @@
 function TrailingCharacters()
     let l:save=winsaveview()
     keeppatterns %s/\s\+$//e
-    if !exists('b:noInsertFinalNewline')
-        keeppatterns $s/.\zs$/\r/e
-    endif
+    keeppatterns %s/\_s\(\n\)\+\_$//e
     call winrestview(l:save)
 endfunction
 
@@ -30,5 +28,3 @@ function! RipgrepFzf(query, fullscreen)
   let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
   call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
-
-

@@ -12,6 +12,7 @@ ca = commit --amend
 cam = commit --amend --message
 cane = commit --amend --no-edit
 co = checkout
+cob = checkout -b
 cof = !"git branch | rg -v \\–merged | fzf | xargs git checkout"
 
 d = diff
@@ -20,6 +21,7 @@ ds = diff --staged
 dw = diff --word-diff
 
 f = fetch
+fpa = fetch --prune --all
 
 g = grep
 

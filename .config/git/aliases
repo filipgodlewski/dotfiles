@@ -4,16 +4,23 @@ aa = add --all
 ap = add --patch
 
 b = branch
+ba = branch -a
 bc = branch --show-current
-bd = !"git branch | rg -v \\–merged | fzf -m | xargs git branch -D"
+bd = !sh -c 'git b | rg -v "–merged\\|\\\\*" | sort | fzf -m | xargs git b -D' --
+br = branch -r
 
 c = commit -v
 ca = commit --amend
 cam = commit --amend --message
 cane = commit --amend --no-edit
+
+cl = clean
+cleanup = !git reset --hard && git clean -f
+
 co = checkout
 cob = checkout -b
-cof = !"git branch | rg -v \\–merged | fzf | xargs git checkout"
+col = !sh -c 'git b | rg -v "–merged\\|\\\\*" | sort | fzf | xargs git checkout' --
+cor = !"git br | rg -v HEAD | sort | fzf | xargs git checkout -t"
 
 d = diff
 dc = diff --cached
@@ -28,13 +35,18 @@ g = grep
 l = log
 ll = log --oneline --abbrev-commit --all --graph --decorate --color
 lo = log --oneline
+
 ls = ls-files
 lsi = ls-files --others --i --exclude-standard
 
 m = merge
 
 p = pull
+
 publish = !"git push -u origin \"$(git bc)\""
+
+r = reset
+rh = reset --hard
 
 rb = rebase
 rba = rebase --abort
@@ -42,17 +54,14 @@ rbc = rebase --continue
 rbi = rebase --interactive @{upstream}
 rbs = rebase --skip
 
-# status
 s = status
 ss = status --short
 ssb = status --short --branch
 
-# submodule
 sm = submodule
 sma = submodule add
 smi = submodule init
 
-# stash
 sta = stash apply
 stb = stash branch
 stc = stash clear

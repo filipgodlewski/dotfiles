@@ -1,4 +1,4 @@
-" Nord color settings
+colorscheme nord
 highlight Comment cterm=italic gui=italic font='Victor Mono'
 highlight Todo cterm=italic gui=italic
 highlight WildMenu ctermfg=0 ctermbg=3

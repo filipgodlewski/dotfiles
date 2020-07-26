@@ -13,3 +13,12 @@
 [submodule ".local/share/nvim/site/pack/plugins/start/robotframework-vim"]
 	path = .local/share/nvim/site/pack/plugins/start/robotframework-vim
 	url = https://github.com/mfukar/robotframework-vim.git
+[submodule ".local/share/nvim/site/pack/plugins/start/nvim-colorizer.lua"]
+	path = .local/share/nvim/site/pack/plugins/start/nvim-colorizer.lua
+	url = https://github.com/norcalli/nvim-colorizer.lua.git
+[submodule ".local/share/nvim/site/pack/plugins/start/neoterm"]
+	path = .local/share/nvim/site/pack/plugins/start/neoterm
+	url = https://github.com/kassio/neoterm.git
+[submodule ".local/share/nvim/site/pack/plugins/start/neovim-remote"]
+	path = .local/share/nvim/site/pack/plugins/start/neovim-remote
+	url = https://github.com/mhinz/neovim-remote.git

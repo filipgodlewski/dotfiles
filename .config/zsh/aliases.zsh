@@ -13,6 +13,8 @@ alias 9="cd -9"
 alias cfg="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias ctags="`brew --prefix`/bin/ctags"
 
+alias e="$EDITOR"
+alias eff="e -c Files!"
 alias emptytrash="sudo rm -rf /Volumes/*/.Trashes; sudo rm -rf ~/.Trash; sudo rm -rf /private/var/log/asl/*.asl; sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
 
 alias fbrew="brew list | fzf -m --preview 'bat <(brew info {1})'"
@@ -38,7 +40,10 @@ alias lvi="la ~/.local/share/nvim/site/pack/plugins/start"
 
 alias paths="echo $PATH | tr ':' '\n' | sort"
 
+alias reload="exec zsh"
 alias rf="rm -rf"
+
+alias sp="nvr -cc split"
 
 alias up-antibody="antibody bundle < ~/.config/zsh/antibody.txt > ~/.config/zsh/antibody.sh"
 alias up-brew="brew update; brew upgrade; brew cask upgrade; brew cleanup --prune=all"
@@ -47,11 +52,4 @@ alias up-pip="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d= -f1
 alias up-sub="cfg submodule foreach git pull"
 alias up-mac="mas upgrade; sudo softwareupdate -i -a"
 
-alias v="nvim"
-alias vff="v -c Files!"
-alias valias="v ~/.config/zsh/aliases.zsh"
-alias vfunction="v ~/.config/zsh/functions.zsh"
-alias vvi="v ~/.config/nvim/init.vim"
-alias vzsh="v ~/.config/zsh/.zshrc"
-
-alias reload="exec zsh"
+alias vs="nvr -cc vsplit"

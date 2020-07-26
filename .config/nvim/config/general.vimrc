@@ -1,8 +1,3 @@
-syntax on
-
-colorscheme nord
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-let g:python3_host_prog=expand("~/.pyenv/shims/python")
 set autoindent
 set autoread
 set autowriteall
@@ -18,17 +13,20 @@ set fileformat=unix
 set grepformat=%f:%l:%c:%m
 set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 set hidden
+set hlsearch
 set ignorecase
 set inccommand=nosplit
 set incsearch
 set laststatus=2
 set lazyredraw
+set mouse=a
 set nobackup
-set nohlsearch
 set noswapfile
 set nowritebackup
 set path+=**
+set pumblend=20
 set pumheight=10
+set scrolloff=5
 set shiftwidth=4
 set shortmess+=cF
 set signcolumn=yes

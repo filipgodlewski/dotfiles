@@ -7,30 +7,57 @@ ae() {
         source ./bin/activate
         return 0
     fi
-    if [ -z "$1" ]; then VENV="venv"; else VENV=$1; fi
-    if [ ! -f ./bin/activate ] && [ -d $VENV ]; then
-        echo "Found existing venv called: $VENV. Activating"
+    NUMBER=$((/bin/ls */bin/activate) 2> /dev/null | wc -l)
+    ARG="$1"
+    case $ARG in
+        -l|--list) /bin/ls */bin/activate | cut -d/ -f1 | fzf -m; return 0;;
+        "") VENV="venv";;
+        *) VENV=$ARG;;
+    esac
+    if [ -d $VENV ]; then
+        echo "Found an existing venv called: $VENV"
+        echo "Activating."
         source $VENV/bin/activate
         return 0
     else
-        echo "Couldn't find '$VENV' directory."
-        printf "Do you want to create new venv called: $VENV? [yes/no]: "
-        read ANSWER
-        case $ANSWER in
-            [yY]es|[yY])
-                echo "Got it! Creating and activating new venv called: $VENV"
-                python -m venv $VENV
-                source $VENV/bin/activate
-                ;;
-            [nN]o|[nN])
-                echo "Got it! Aborting."
-                return 0
-                ;;
-            *)
-                echo "Wrong answer. Aborting."
-                return 1
-                ;;
-        esac
+        if [ $NUMBER -eq 0 ]; then
+            echo "Did not find any existing venv."
+            printf "Do you want to create new venv called: $VENV? [Y|n]: "
+            read ANSWER
+            case $ANSWER in
+                [yY]|"")
+                    echo "Creating and activating new venv called: $VENV"
+                    python -m venv $VENV
+                    source $VENV/bin/activate
+                    return 0
+                    ;;
+                [nN]) echo "Aborting."; return 0;;
+                *) echo "Wrong answer. Aborting."; return 1;;
+            esac
+        elif [ $NUMBER -gt 0 ]; then
+            echo "Did not find venv with the provided name: $VENV"
+            echo "Would you like to:"
+            echo "\t[C] create and activate it,"
+            echo "\t[l] list available ones (if one selected, activate it), or"
+            echo "\t[a] abort?"
+            printf "Your Answer: "
+            read ANSWER
+            case $ANSWER in
+                [cC]|"")
+                    echo "Creating and activating venv called: $VENV"
+                    python -m venv $VENV
+                    source $VENV/bin/activate
+                    return 0
+                    ;;
+                [lL])
+                    ANOTHER=$(/bin/ls */bin/activate | cut -d/ -f1 | fzf)
+                    if [ -z $ANOTHER ]; then echo "Didn't choose anything. Aborting."; return 1; fi
+                    source $ANOTHER/bin/activate
+                    return 0
+                    ;;
+                [aA]|*) echo "Aborting."; return 0;;
+            esac
+        fi
     fi
 }
 
@@ -166,4 +193,14 @@ updateall() {
     up-mac
     echo "\n>>> reloading zsh <<<\n"
     exec zsh
+}
+
+wttr() {
+    ARG="$1"
+    if [ -z $ARG ]; then
+        LOCATION=$(curl -s "ipinfo.io/city")
+    else
+        LOCATION=$ARG
+    fi
+    curl -s "http://wttr.in/$LOCATION?MF1ATq"
 }

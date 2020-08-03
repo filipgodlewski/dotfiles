@@ -1,8 +1,14 @@
 {
   "coc.preferences.formatOnSaveFiletypes": [
-    "json",
-    "python"
+    "json"
   ],
+  "coc.preferences.rootPatterns": [
+    ".git",
+    ".gitignore",
+    ".hg",
+    ".projections.json"
+  ],
+  "diagnostic.checkCurrentLine": true,
   "diagnostic.errorSign": "✖",
   "diagnostic.hintSign": "➤",
   "diagnostic.infoSign": "★",
@@ -17,17 +23,23 @@
   "git.removedSign.text": "▎",
   "git.topRemovedSign.hlGroup": "GitGutterDelete",
   "git.topRemovedSign.text": "◥",
-  "python.formatting.blackPath": "~/.pyenv/shims/black",
-  "python.formatting.provider": "black",
-  "python.jediEnabled": false,
+  "python.autoComplete.extraPaths": [
+    "/Users/filipgodlewski/.pyenv/versions/3.8.3/envs/base/lib/python3.8/site-packages",
+    "${workspaceFolder}"
+  ],
+  "python.jediEnabled": true,
   "python.linting.flake8Enabled": true,
   "python.linting.flake8Path": "~/.pyenv/shims/flake8",
-  "python.linting.pylintEnabled": false,
-  "python.sortImports.args": [
-    "--apply",
-    "--settings-path=.config/isort.cfg"
+  "python.linting.pylintEnabled": true,
+  "python.pythonPath": "~/.pyenv/versions/base/bin/python",
+  "python.venvFolders": [
+    ".pyenv",
+    "envs",
+    ".direnv",
+    "venv"
   ],
-  "python.sortImports.path": "~/.pyenv/shims/isort",
+  "python.venvPath": "~/.pyenv/versions/base/envs/",
   "suggest.enablePreview": true,
+  "suggest.removeDuplicateItems": true,
   "suggest.snippetIndicator": " ►"
 }

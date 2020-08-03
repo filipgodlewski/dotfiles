@@ -10,4 +10,6 @@ selenium-server-standalone
 starship
 yarn
 pyenv
+pyenv-virtualenv
+universal-ctags/universal-ctags/universal-ctags
 zsh

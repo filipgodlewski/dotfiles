@@ -14,12 +14,12 @@ alias cfg="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias ctags="`brew --prefix`/bin/ctags"
 
 alias e="$EDITOR"
-alias eff="e -c Files!"
 alias emptytrash="sudo rm -rf /Volumes/*/.Trashes; sudo rm -rf ~/.Trash; sudo rm -rf /private/var/log/asl/*.asl; sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
 
 alias fbrew="brew list | fzf -m --preview 'bat <(brew info {1})'"
 alias fbrewcask="brew cask list | fzf -m --preview 'bat <(brew cask info {1})'"
 alias fff="fzf --preview 'bat --color=always {}'"
+alias fixall="black . --exclude venv; isort --profile black ."
 
 alias grep="grep --color=always"
 
@@ -38,18 +38,18 @@ alias lt="exa -T --color=always --group-directories-first --level=3 --git-ignore
 alias lti="exa -T --color=always --group-directories-first --level=3 --git"
 alias lvi="la ~/.local/share/nvim/site/pack/plugins/start"
 
-alias paths="echo $PATH | tr ':' '\n' | sort"
+alias paths="echo $PATH | tr ':' '\n'"
 
 alias reload="exec zsh"
 alias rf="rm -rf"
 
-alias sp="nvr -cc split"
+alias sp="nvr -o"
 
 alias up-antibody="antibody bundle < ~/.config/zsh/antibody.txt > ~/.config/zsh/antibody.sh"
 alias up-brew="brew update; brew upgrade; brew cask upgrade; brew cleanup --prune=all"
 alias up-coc="nvim -c 'CocUpdateSync | q'"
-alias up-pip="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d= -f1 | xargs -n1 pip install -U"
+alias up-pip="pyenv activate base; pip list --outdated --format=freeze | grep -v '^\-e' | cut -d= -f1 | xargs -n1 pip install -U; pyenv deactivate"
 alias up-sub="cfg submodule foreach git pull"
 alias up-mac="mas upgrade; sudo softwareupdate -i -a"
 
-alias vs="nvr -cc vsplit"
+alias vs="nvr -O"

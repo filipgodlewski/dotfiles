@@ -1,15 +1,17 @@
-source ~/.config/zsh/aliases.zsh
 source ~/.config/zsh/antibody.sh
 source ~/.config/zsh/completions.zsh
 source ~/.config/zsh/exports.zsh
-source ~/.config/zsh/functions.zsh
 source ~/.config/zsh/fzf.zsh
 source ~/.config/zsh/history.zsh
+source ~/.config/zsh/aliases.zsh
+source ~/.config/zsh/functions.zsh
 
 zle -N rationalise-dot
 bindkey . rationalise-dot
 bindkey "^[[A" up-line-or-search
 bindkey "^[[B" down-line-or-search
+
+fpath+=~/.config/zsh/.zfunc
 
 autoload -Uz compinit
 for dump in ~/.config/zsh/.zcompdump(N.mh+24); do
@@ -23,3 +25,4 @@ fi
 
 eval "$(starship init zsh)"
 eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"

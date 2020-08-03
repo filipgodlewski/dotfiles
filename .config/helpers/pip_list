@@ -3,9 +3,4 @@ black
 flake8
 howdoi
 isort
-mypy
-neovim-remote
-pycodestyle
-pydocstyle
-pyflakes
 pynvim

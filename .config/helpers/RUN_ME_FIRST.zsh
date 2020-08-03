@@ -9,7 +9,6 @@ brew tap homebrew/cask-fonts
 
 echo "\n>>> installing core brews... <<<\n"
 for BREW in $BREWS; do brew install $BREW; done
-brew install --HEAD universal-ctags/universal-ctags/universal-ctags
 
 echo "\n>>> installing brew casks... <<<\n"
 for BREW_CASK in $BREW_CASKS; do brew cask install $BREW_CASK; done
@@ -17,11 +16,16 @@ for BREW_CASK in $BREW_CASKS; do brew cask install $BREW_CASK; done
 echo "\n>>> installing python version using pyenv <<<\n"
 pyenv install -l | rg -v Available\ versions: | fzf | xargs -I{} sh -c "pyenv install {}; pyenv global {}"
 
+echo "\n>>> installing poetry <<<\n"
+curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
+
 echo "\n>>> reload and initialize antibody <<<\n"
 source ~/.config/zsh/.zshrc
 up-antibody
 
 echo "\n>>> installing programs from pip <<<\n"
+pyenv virtualenv $(pyenv global) base
+pip install -U pip setuptools wheel
 up-pip
 pip install -r ~/.config/helpers/pip_list
 

@@ -1,79 +1,81 @@
 #!/bin/zsh
 
-ae() {
-    deactivate &> /dev/null
-    if [ -f ./bin/activate ]; then
-        echo "Already in venv directory. Activating."
-        source ./bin/activate
-        return 0
-    fi
-    NUMBER=$((/bin/ls */bin/activate) 2> /dev/null | wc -l)
-    ARG="$1"
-    case $ARG in
-        -l|--list) /bin/ls */bin/activate | cut -d/ -f1 | fzf -m; return 0;;
-        "") VENV="venv";;
-        *) VENV=$ARG;;
-    esac
-    if [ -d $VENV ]; then
-        echo "Found an existing venv called: $VENV"
-        echo "Activating."
-        source $VENV/bin/activate
-        return 0
-    else
-        if [ $NUMBER -eq 0 ]; then
-            echo "Did not find any existing venv."
-            printf "Do you want to create new venv called: $VENV? [Y|n]: "
-            read ANSWER
-            case $ANSWER in
-                [yY]|"")
-                    echo "Creating and activating new venv called: $VENV"
-                    python -m venv $VENV
-                    source $VENV/bin/activate
-                    return 0
-                    ;;
-                [nN]) echo "Aborting."; return 0;;
-                *) echo "Wrong answer. Aborting."; return 1;;
-            esac
-        elif [ $NUMBER -gt 0 ]; then
-            echo "Did not find venv with the provided name: $VENV"
-            echo "Would you like to:"
-            echo "\t[C] create and activate it,"
-            echo "\t[l] list available ones (if one selected, activate it), or"
-            echo "\t[a] abort?"
-            printf "Your Answer: "
-            read ANSWER
-            case $ANSWER in
-                [cC]|"")
-                    echo "Creating and activating venv called: $VENV"
-                    python -m venv $VENV
-                    source $VENV/bin/activate
-                    return 0
-                    ;;
-                [lL])
-                    ANOTHER=$(/bin/ls */bin/activate | cut -d/ -f1 | fzf)
-                    if [ -z $ANOTHER ]; then echo "Didn't choose anything. Aborting."; return 1; fi
-                    source $ANOTHER/bin/activate
-                    return 0
-                    ;;
-                [aA]|*) echo "Aborting."; return 0;;
-            esac
+de() {
+    pyenv deactivate
+    python ~/.config/helpers/change_venv.py $base_site_packages_path True
+    export PATH="$original_path"
+    CURRENT_VIRTUAL_ENV=""
+}
+
+dele() {
+    pyenv deactivate &> /dev/null
+    python ~/.config/helpers/change_venv.py $base_site_packages_path True
+    local venv=( $(pyenv virtualenvs --skip-aliases | cut -d" " -f3 | fzf -m) )
+    for item in $venv; do
+        if [ ! -z $item ]; then
+            pyenv virtualenv-delete -f $item
+            echo "Deleted venv: $item"
         fi
+    done
+    return 0
+}
+
+ae() {
+    original_path="$PATH"
+    base_site_packages_path=$(eval "echo $(pyenv prefix)/**/base/lib/**/site-packages")
+    case $1 in
+        "")
+            VENV=$(pyenv virtualenvs --skip-aliases | cut -d" " -f3 | fzf)
+            if [ ! -z $VENV ]; then pyenv activate $VENV; fi
+            export PATH="$VIRTUAL_ENV:$PATH"
+            virtual_site_packages_path=$(eval "echo $(pyenv prefix)/lib/**/site-packages")
+            python ~/.config/helpers/change_venv.py $virtual_site_packages_path False
+            return 0
+            ;;
+        *) VENV=$1;;
+    esac
+    VENV_ARRAY=($(pyenv virtualenvs --skip-aliases | cut -d" " -f3))
+    if [ $VENV_ARRAY ~= $VENV &> /dev/null ]; then
+        pyenv activate $VENV
+    else
+        echo "Did not find venv with the provided name: $VENV"
+        echo "Would you like to:"
+        echo "\t[C] create and activate it,"
+        echo "\t[l] list available ones (if one selected, activate it), or"
+        echo "\t[a] abort?"
+        printf "Your Answer: "
+        read ANSWER; echo
+        case $ANSWER in
+            [cC]|"")
+                echo "Creating and activating venv called: $VENV\n"
+                pyenv virtualenv $(pyenv global) $VENV &> /dev/null
+                pyenv activate $VENV
+                pip -q install --upgrade pip; pip -q install wheel
+                ;;
+            [lL])
+                ANOTHER=$(pyenv virtualenvs --skip-aliases | cut -d" " -f3 | fzf)
+                if [ -z $ANOTHER ]; then echo "Didn't choose anything. Aborting."; return 0; fi
+                pyenv activate $ANOTHER
+                return 0
+                ;;
+            *) echo "Aborting."; return 0;;
+        esac
     fi
+    export PATH="$VIRTUAL_ENV:$PATH"
+    return 0
 }
 
 bip() {
     local inst=$(brew search | eval "fzf ${FZF_DEFAULT_OPTS} -m --header='[brew:install]'")
-
     if [[ $inst ]]; then
-        for prog in $(echo $inst)
-        do brew install $prog
+        for prog in $(echo $inst); do
+            brew install $prog
         done
     fi
 }
 
 bup() {
     local uninst=$(brew leaves | eval "fzf ${FZF_DEFAULT_OPTS} -m --header='[brew:clean]'")
-
     if [[ $uninst ]]; then
         for prog in $(echo $uninst)
         do brew uninstall $prog
@@ -160,7 +162,7 @@ macho() {
 
 put() {
     touch $1
-    v $1
+    e $1
 }
 
 rationalise-dot() {

@@ -38,12 +38,8 @@ alias lt="exa -T --color=always --group-directories-first --level=3 --git-ignore
 alias lti="exa -T --color=always --group-directories-first --level=3 --git"
 alias lvi="la ~/.local/share/nvim/site/pack/plugins/start"
 
-alias paths="echo $PATH | tr ':' '\n'"
-
 alias reload="exec zsh"
 alias rf="rm -rf"
-
-alias sp="nvr -o"
 
 alias up-antibody="antibody bundle < ~/.config/zsh/antibody.txt > ~/.config/zsh/antibody.sh"
 alias up-brew="brew update; brew upgrade; brew cask upgrade; brew cleanup --prune=all"
@@ -51,5 +47,3 @@ alias up-coc="nvim -c 'CocUpdateSync | q'"
 alias up-pip="pyenv activate base; pip list --outdated --format=freeze | grep -v '^\-e' | cut -d= -f1 | xargs -n1 pip install -U; pyenv deactivate"
 alias up-sub="cfg submodule foreach git pull"
 alias up-mac="mas upgrade; sudo softwareupdate -i -a"
-
-alias vs="nvr -O"

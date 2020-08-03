@@ -1,25 +1,5 @@
 #!/bin/zsh
 
-de() {
-    pyenv deactivate
-    python ~/.config/helpers/change_venv.py $base_site_packages_path True
-    export PATH="$original_path"
-    CURRENT_VIRTUAL_ENV=""
-}
-
-dele() {
-    pyenv deactivate &> /dev/null
-    python ~/.config/helpers/change_venv.py $base_site_packages_path True
-    local venv=( $(pyenv virtualenvs --skip-aliases | cut -d" " -f3 | fzf -m) )
-    for item in $venv; do
-        if [ ! -z $item ]; then
-            pyenv virtualenv-delete -f $item
-            echo "Deleted venv: $item"
-        fi
-    done
-    return 0
-}
-
 ae() {
     original_path="$PATH"
     base_site_packages_path=$(eval "echo $(pyenv prefix)/**/base/lib/**/site-packages")
@@ -120,6 +100,26 @@ cgrs() {
     cfg rm -rf share/nvim/site/pack/plugins/start/$file
     rf share/nvim/site/pack/plugins/start/$file
     1
+}
+
+de() {
+    pyenv deactivate
+    python ~/.config/helpers/change_venv.py $base_site_packages_path True
+    export PATH="$original_path"
+    CURRENT_VIRTUAL_ENV=""
+}
+
+dele() {
+    pyenv deactivate &> /dev/null
+    python ~/.config/helpers/change_venv.py $base_site_packages_path True
+    local venv=( $(pyenv virtualenvs --skip-aliases | cut -d" " -f3 | fzf -m) )
+    for item in $venv; do
+        if [ ! -z $item ]; then
+            pyenv virtualenv-delete -f $item
+            echo "Deleted venv: $item"
+        fi
+    done
+    return 0
 }
 
 gdf() {

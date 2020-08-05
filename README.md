@@ -44,25 +44,9 @@ cfg config --local status.showUntrackedFiles no
 Now, run:
 
 ```sh
-./.config/helpers/RUN_ME_FIRST.zsh
+./.local/share/helpers/RUN_ME_FIRST.zsh
 # This script will install default brew, brew cask, fonts and pip3 programs. Then it will initialize submodules, and fully prepare coc.nvim
 ```
-
-## Under construction
-
-Below are the 5 latest done tasks and all to dos that I have to finish, because why not!
-
-### To dos
-
-- [ ] move .yarnrc, .viminfo, .python_history, .lesshst, .gitmodules, .gitconfig, .ctags to respective folders in XDG dirs
-
-### Done
-
-- [x] instead of using antibody, use git submodules
-- [x] add fuzzy branch delete for git
-- [x] add fuzzy branch checkout for git
-- [x] clean up brew_list, brew_cask_list, pip_list files from the unnecessary stuff.
-- [x] add brew requirements
 
 ## Licence
 

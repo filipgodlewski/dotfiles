@@ -9,7 +9,7 @@ ae() {
             if [ ! -z $VENV ]; then pyenv activate $VENV; fi
             export PATH="$VIRTUAL_ENV:$PATH"
             virtual_site_packages_path=$(eval "echo $(pyenv prefix)/lib/**/site-packages")
-            python ~/.config/helpers/change_venv.py $virtual_site_packages_path False
+            python ~/.local/share/helpers/change_venv.py $virtual_site_packages_path False
             return 0
             ;;
         *) VENV=$1;;
@@ -134,14 +134,14 @@ chpwd() ls
 
 de() {
     pyenv deactivate
-    python ~/.config/helpers/change_venv.py $base_site_packages_path True
+    python ~/.local/share/helpers/change_venv.py $base_site_packages_path True
     export PATH="$original_path"
     CURRENT_VIRTUAL_ENV=""
 }
 
 dele() {
     pyenv deactivate &> /dev/null
-    python ~/.config/helpers/change_venv.py $base_site_packages_path True
+    python ~/.local/share/helpers/change_venv.py $base_site_packages_path True
     local venv=( $(pyenv virtualenvs --skip-aliases | cut -d" " -f3 | fzf -m) )
     for item in $venv; do
         if [ ! -z $item ]; then

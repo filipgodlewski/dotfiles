@@ -1,8 +1,8 @@
 #!/bin/zsh
 
-BREWS=(${(f)"$(cat ~/.config/helpers/brew_list)"})
-BREW_CASKS=($(cat ~/.config/helpers/brew_cask_list))
-COC_EXTENSIONS=($(cat ~/.config/coc/extensions/package.json | grep "    " | cut -d'"' -f2))
+BREWS=(${(f)"$(cat $XDG_DATA_HOME/helpers/brew_list)"})
+BREW_CASKS=($(cat $XDG_DATA_HOME/helpers/brew_cask_list))
+COC_EXTENSIONS=($(cat $XDG_CONFIG_HOME/coc/extensions/package.json | grep "    " | cut -d'"' -f2))
 
 echo "\n>>> opening taps... <<<\n"
 brew tap homebrew/cask-fonts
@@ -24,7 +24,7 @@ pyenv virtualenv $(pyenv global) base
 pip install -U pip setuptools wheel
 up-pip
 pyenv activate base
-pip install -r ~/.config/helpers/pip_list
+pip install -r $XDG_DATA_HOME/helpers/pip_list
 pyenv deactivate
 
 echo "\n>>> initialize git submodules <<<\n"
@@ -32,7 +32,7 @@ cfg submodule update --init
 
 echo "\n>>> yarn install on coc.nvim <<<\n"
 local current_dir="$PWD"
-cd ~/.local/share/nvim/site/pack/plugins/start/coc.nvim
+cd $XDG_DATA_HOME/nvim/site/pack/plugins/start/coc.nvim
 git clean -xfd
 yarn install --frozen-lockfile
 cd $current_dir

@@ -2,20 +2,15 @@ autoload -Uz compinit; compinit
 
 source $ZDOTDIR/completions.zsh
 source $ZDOTDIR/history.zsh
-source $ZDOTDIR/exports.zsh
 source $ZDOTDIR/fzf.zsh
 source $ZDOTDIR/aliases.zsh
 source $ZDOTDIR/plugins.zsh
 source $ZDOTDIR/functions.zsh
+source $ZDOTDIR/bindings.zsh
 
-zle -N rationalise-dot
-bindkey . rationalise-dot
-bindkey "^[[A" up-line-or-search
-bindkey "^[[B" down-line-or-search
-
-if [[ "${terminfo[kcbt]}" != "" ]]; then
-  bindkey "${terminfo[kcbt]}" reverse-menu-complete
-fi
+export LC_ALL=en_US.UTF-8
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+export PATH="$PYENV_ROOT/bin:$PATH"
 
 eval "$(starship init zsh)"
 eval "$(pyenv init -)"

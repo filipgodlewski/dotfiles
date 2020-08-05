@@ -8,4 +8,3 @@ source $HOME/.config/nvim/config/plugins.vimrc
 
 packloadall
 silent! helptags ALL
-lua require'colorizer'.setup()

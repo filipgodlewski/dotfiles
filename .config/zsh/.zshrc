@@ -1,23 +1,17 @@
-source ~/.config/zsh/antibody.sh
-source ~/.config/zsh/completions.zsh
-source ~/.config/zsh/exports.zsh
-source ~/.config/zsh/fzf.zsh
-source ~/.config/zsh/history.zsh
-source ~/.config/zsh/aliases.zsh
-source ~/.config/zsh/functions.zsh
+autoload -Uz compinit; compinit
+
+source $ZDOTDIR/completions.zsh
+source $ZDOTDIR/history.zsh
+source $ZDOTDIR/exports.zsh
+source $ZDOTDIR/fzf.zsh
+source $ZDOTDIR/aliases.zsh
+source $ZDOTDIR/plugins.zsh
+source $ZDOTDIR/functions.zsh
 
 zle -N rationalise-dot
 bindkey . rationalise-dot
 bindkey "^[[A" up-line-or-search
 bindkey "^[[B" down-line-or-search
-
-fpath+=~/.config/zsh/.zfunc
-
-autoload -Uz compinit
-for dump in ~/.config/zsh/.zcompdump(N.mh+24); do
-  compinit
-done
-compinit -C
 
 if [[ "${terminfo[kcbt]}" != "" ]]; then
   bindkey "${terminfo[kcbt]}" reverse-menu-complete

@@ -27,7 +27,7 @@
     "/Users/filipgodlewski/.pyenv/versions/3.8.3/envs/base/lib/python3.8/site-packages",
     "${workspaceFolder}"
   ],
-  "python.jediEnabled": true,
+  "python.jediEnabled": false,
   "python.linting.flake8Enabled": true,
   "python.linting.flake8Path": "~/.pyenv/shims/flake8",
   "python.linting.pylintEnabled": true,

@@ -57,21 +57,15 @@ bip() {
 bup() {
     local uninst=$(brew leaves | eval "fzf ${FZF_DEFAULT_OPTS} -m --header='[brew:clean]'")
     if [[ $uninst ]]; then
-        for prog in $(echo $uninst)
-        do brew uninstall $prog
+        for prog in $(echo $uninst); do
+            brew uninstall $prog
         done
     fi
 }
 
-cheat() {
-    curl cheat.sh/$1
-}
-
-chpwd() ls
-
 cgaf() {
-    files=$(cfg status --short | rg '^(\s|\S)(M|A|R|C|D|U|!|\?)' | fzf -m)
-    files_array=($(echo $files | cut -c4-))
+    local files=$(cfg status --short | rg '^(\s|\S)(M|A|R|C|D|U|!|\?)' | fzf -m)
+    local files_array=($(echo $files | cut -c4-))
     if [ -z $files ]
     then
         echo "Did not select anything!"
@@ -81,26 +75,62 @@ cgaf() {
 }
 
 cgcl() {
+    local current_dir="$PWD"
+    local par="$1"; shift
+    case $par in
+        --zsh|--nvim)
+            local address="$1"
+            local folder=$(echo $address | rev | cut -c5- | cut -d"/" -f1 | rev)
+            ;;
+        -h|--help|*)
+            echo "Options:"
+            echo "cgcl --zsh <github address>"
+            echo "cgcl --nvim <github address>"
+            return 0
+            ;;
+    esac
     cd ~/.local
-    folder=$(echo $1 | rev | cut -c5- | cut -d"/" -f1 | rev)
-    cfg submodule add $1 share/nvim/site/pack/plugins/start/$folder
-    1
+    case $par in
+        --nvim) local submodule_base="share/nvim/site/pack/plugins/start";;
+        --zsh) local submodule_base="share/zsh/plugins";;
+    esac
+    cfg submodule add $address $submodule_base/$folder
+    cd $current_dir
+    return 0
 }
 
 cgrs() {
+    local current_dir="$PWD"
+    local par="$1"
     cd ~/.local
-    file=$(exa share/nvim/site/pack/plugins/start | fzf)
-    if [ -z $file ]
+    case $par in
+        --zsh) local dir_path="share/zsh/plugins";;
+        --nvim) local dir_path="share/nvim/site/pack/plugins/start";;
+        -h|--help|*)
+            echo "Options:"
+            echo "cgrs --zsh"
+            echo "cgrs --nvim"
+            return 0
+            ;;
+    esac
+    local submodule_name=$(exa $dir_path | fzf)
+    if [ -z $submodule_name ]
     then
         echo "Did not select anything!"
-        1
+        cd $current_dir
         return 1
     fi
-    cfg submodule deinit -f share/nvim/site/pack/plugins/start/$file
-    cfg rm -rf share/nvim/site/pack/plugins/start/$file
-    rf share/nvim/site/pack/plugins/start/$file
-    1
+    cfg submodule deinit -f $dir_path/$submodule_name
+    cfg rm -rf $dir_path/$submodule_name
+    rf $dir_path/$submodule_name
+    cd $current_dir
 }
+
+cheat() {
+    curl cheat.sh/$1
+}
+
+chpwd() ls
 
 de() {
     pyenv deactivate
@@ -122,11 +152,6 @@ dele() {
     return 0
 }
 
-gdf() {
-    preview="git diff $@ --color=always -- {-1}"
-    git status --short | fzf -m --ansi --preview $preview
-}
-
 gaf() {
     preview="git diff $@ --color=always -- {-1}"
     files=$(git status --short | rg '^(\s|\S)(M|A|R|C|D|U|!|\?)' | fzf -m --ansi --preview $preview)
@@ -139,6 +164,11 @@ gaf() {
     git add $files_array
 }
 
+gdf() {
+    preview="git diff $@ --color=always -- {-1}"
+    git status --short | fzf -m --ansi --preview $preview
+}
+
 killjn() {
     ports=$(jn list | grep http | cut -d"/" -f3 | cut -d":" -f2)
     for port in $ports
@@ -146,18 +176,6 @@ killjn() {
         pid=$(lsof -n -i4TCP:$port | grep LISTEN | cut -d" " -f3)
         kill -9 $pid
     done
-}
-
-macho() {
-    manual=$(apropos . | \
-        grep -v -E '^.+ \(0\)' | \
-        sed 's/(/ (/g' | \
-        awk '{print $1}' | \
-        sort -u | \
-        fzf --preview="echo {1} | sed -E \"s/^\((.+)\)/\1/\" | xargs -I{S} man -Pcat {S} {2} 2>/dev/null")
-
-    [ -z "$manual" ] && return 0
-    man $manual
 }
 
 put() {
@@ -180,19 +198,23 @@ take() {
 
 updateall() {
     deactivate &> /dev/null && echo "\n>>> deactivated venv if any is active <<<\n"
+
     echo "\n>>> updating coc-extensions <<<\n"
     up-coc
+
     echo "\n>>> updating pip packages <<<\n"
     up-pip
+
     echo "\n>>> updating git submodules <<<\n"
     up-sub
+
     echo "\n>>> updating brew & brew casks <<<\n"
     up-brew
-    echo "\n>>> updating antibody <<<\n"
-    up-antibody
+
     echo "\n>>> updating applications from App Store & MacOS itself <<<"
     echo ">>> will require password <<<\n"
     up-mac
+
     echo "\n>>> reloading zsh <<<\n"
     exec zsh
 }

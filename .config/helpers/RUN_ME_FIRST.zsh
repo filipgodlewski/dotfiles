@@ -19,24 +19,23 @@ pyenv install -l | rg -v Available\ versions: | fzf | xargs -I{} sh -c "pyenv in
 echo "\n>>> installing poetry <<<\n"
 curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
 
-echo "\n>>> reload and initialize antibody <<<\n"
-source ~/.config/zsh/.zshrc
-up-antibody
-
 echo "\n>>> installing programs from pip <<<\n"
 pyenv virtualenv $(pyenv global) base
 pip install -U pip setuptools wheel
 up-pip
+pyenv activate base
 pip install -r ~/.config/helpers/pip_list
+pyenv deactivate
 
 echo "\n>>> initialize git submodules <<<\n"
 cfg submodule update --init
 
 echo "\n>>> yarn install on coc.nvim <<<\n"
+local current_dir="$PWD"
 cd ~/.local/share/nvim/site/pack/plugins/start/coc.nvim
 git clean -xfd
 yarn install --frozen-lockfile
-1
+cd $current_dir
 
 echo "\n>>> install coc.nvim extensions <<<\n"
 nvim -c "CocInstall -sync $COC_EXTENSIONS | qa"

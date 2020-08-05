@@ -14,7 +14,6 @@ alias cfg="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias ctags="`brew --prefix`/bin/ctags"
 
 alias e="$EDITOR"
-alias emptytrash="sudo rm -rf /Volumes/*/.Trashes; sudo rm -rf ~/.Trash; sudo rm -rf /private/var/log/asl/*.asl; sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
 
 alias fbrew="brew list | fzf -m --preview 'bat <(brew info {1})'"
 alias fbrewcask="brew cask list | fzf -m --preview 'bat <(brew cask info {1})'"
@@ -36,12 +35,11 @@ alias ll="exa -l --color=always --group-directories-first"
 alias ls="exa --color=always --group-directories-first --git-ignore"
 alias lt="exa -T --color=always --group-directories-first --level=3 --git-ignore"
 alias lti="exa -T --color=always --group-directories-first --level=3 --git"
-alias lvi="la ~/.local/share/nvim/site/pack/plugins/start"
+alias lvi="la $XDG_DATA_HOME/nvim/site/pack/plugins/start"
 
 alias reload="exec zsh"
 alias rf="rm -rf"
 
-alias up-antibody="antibody bundle < ~/.config/zsh/antibody.txt > ~/.config/zsh/antibody.sh"
 alias up-brew="brew update; brew upgrade; brew cask upgrade; brew cleanup --prune=all"
 alias up-coc="nvim -c 'CocUpdateSync | q'"
 alias up-pip="pyenv activate base; pip list --outdated --format=freeze | grep -v '^\-e' | cut -d= -f1 | xargs -n1 pip install -U; pyenv deactivate"

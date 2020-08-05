@@ -1,21 +1,33 @@
-[submodule ".local/share/nvim/site/pack/plugins/start/vim-polyglot"]
-	path = .local/share/nvim/site/pack/plugins/start/vim-polyglot
-	url = https://github.com/sheerun/vim-polyglot.git
-[submodule ".local/share/nvim/site/pack/plugins/start/fzf.vim"]
-	path = .local/share/nvim/site/pack/plugins/start/fzf.vim
-	url = https://github.com/junegunn/fzf.vim.git
-[submodule ".local/share/nvim/site/pack/plugins/start/nord-vim"]
-	path = .local/share/nvim/site/pack/plugins/start/nord-vim
-	url = https://github.com/arcticicestudio/nord-vim.git
-[submodule ".local/share/nvim/site/pack/plugins/start/coc.nvim"]
-	path = .local/share/nvim/site/pack/plugins/start/coc.nvim
-	url = https://github.com/neoclide/coc.nvim.git
-[submodule ".local/share/nvim/site/pack/plugins/start/robotframework-vim"]
-	path = .local/share/nvim/site/pack/plugins/start/robotframework-vim
-	url = https://github.com/mfukar/robotframework-vim.git
 [submodule ".local/share/nvim/site/pack/plugins/start/nvim-colorizer.lua"]
 	path = .local/share/nvim/site/pack/plugins/start/nvim-colorizer.lua
 	url = https://github.com/norcalli/nvim-colorizer.lua.git
+[submodule ".local/share/nvim/site/pack/plugins/start/coc.nvim"]
+	path = .local/share/nvim/site/pack/plugins/start/coc.nvim
+	url = https://github.com/neoclide/coc.nvim.git
+[submodule ".local/share/nvim/site/pack/plugins/start/fzf.vim"]
+	path = .local/share/nvim/site/pack/plugins/start/fzf.vim
+	url = https://github.com/junegunn/fzf.vim.git
 [submodule ".local/share/nvim/site/pack/plugins/start/neoterm"]
 	path = .local/share/nvim/site/pack/plugins/start/neoterm
 	url = https://github.com/kassio/neoterm.git
+[submodule ".local/share/nvim/site/pack/plugins/start/nord-vim"]
+	path = .local/share/nvim/site/pack/plugins/start/nord-vim
+	url = https://github.com/arcticicestudio/nord-vim.git
+[submodule ".local/share/nvim/site/pack/plugins/start/robotframework-vim"]
+	path = .local/share/nvim/site/pack/plugins/start/robotframework-vim
+	url = https://github.com/mfukar/robotframework-vim.git
+[submodule ".local/share/nvim/site/pack/plugins/start/vim-polyglot"]
+	path = .local/share/nvim/site/pack/plugins/start/vim-polyglot
+	url = https://github.com/sheerun/vim-polyglot.git
+[submodule ".local/share/zsh/plugins/zsh-autosuggestions"]
+	path = .local/share/zsh/plugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions.git
+[submodule ".local/share/zsh/plugins/zsh-completions"]
+	path = .local/share/zsh/plugins/zsh-completions
+	url = https://github.com/zsh-users/zsh-completions.git
+[submodule ".local/share/zsh/plugins/zsh-history-substring-search"]
+	path = .local/share/zsh/plugins/zsh-history-substring-search
+	url = https://github.com/zsh-users/zsh-history-substring-search.git
+[submodule ".local/share/zsh/plugins/fast-syntax-highlighting"]
+	path = .local/share/zsh/plugins/fast-syntax-highlighting
+	url = https://github.com/zdharma/fast-syntax-highlighting.git

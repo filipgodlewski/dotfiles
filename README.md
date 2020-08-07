@@ -45,7 +45,8 @@ Now, run:
 
 ```sh
 ./.local/share/helpers/RUN_ME_FIRST.zsh
-# This script will install default brew, brew cask, fonts and pip3 programs. Then it will initialize submodules, and fully prepare coc.nvim
+# This script will install default brew, brew cask, fonts and pip3 programs.
+# Then it will initialize submodules, and fully prepare coc.nvim
 ```
 
 ## Licence

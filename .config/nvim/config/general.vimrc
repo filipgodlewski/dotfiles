@@ -1,4 +1,6 @@
+set autoread
 set autowriteall
+set background=dark
 set complete+=kspell
 set completeopt=menuone,longest
 set confirm
@@ -7,18 +9,15 @@ set diffopt=filler,vertical
 set expandtab
 set fileformat=unix
 set grepformat=%f:%l:%c:%m
-set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case\ --follow\ --word-regexp
 set hidden
 set ignorecase
 set inccommand=nosplit
 set lazyredraw
-set nobackup
-set noswapfile
-set nowritebackup
 set path+=**
 set pumblend=20
 set pumheight=10
-set scrolloff=5
+set scrolloff=8
 set shiftwidth=4
 set shortmess+=c
 set signcolumn=auto:3

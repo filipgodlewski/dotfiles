@@ -15,11 +15,6 @@ alias ctags="`brew --prefix`/bin/ctags"
 
 alias e="$EDITOR"
 
-alias fbrew="brew list | fzf -m --preview 'bat <(brew info {1})'"
-alias fbrewcask="brew cask list | fzf -m --preview 'bat <(brew cask info {1})'"
-alias fff="fzf --preview 'bat --color=always {}'"
-alias fixall="black . --exclude venv; isort --profile black ."
-
 alias grep="grep --color=always"
 
 alias jn="jupyter notebook"
@@ -43,5 +38,6 @@ alias rf="rm -rf"
 alias up-brew="brew update; brew upgrade; brew cask upgrade; brew cleanup --prune=all"
 alias up-coc="nvim -c 'CocUpdateSync | q'"
 alias up-pip="pyenv activate base; pip list --outdated --format=freeze | grep -v '^\-e' | cut -d= -f1 | xargs -n1 pip install -U; pyenv deactivate"
-alias up-sub="cfg submodule foreach git pull"
+alias up-sub="cfg submodule foreach --recursive 'git pull'"
 alias up-mac="mas upgrade; sudo softwareupdate -i -a"
+alias up-npm="npm update --global"

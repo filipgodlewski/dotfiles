@@ -15,7 +15,7 @@ font:
     style: Regular
   bold:
     family: FiraCode Nerd Font Mono
-    style: Medium
+    style: Bold
   italic:
     family: Victor Mono
     style: SemiBold Oblique
@@ -30,37 +30,28 @@ font:
 draw_bold_text_with_bright_colors: true
 
 colors:
-  # Nord
+  # Gruvbox dark - hard contrast
   primary:
-    background: '0x2E3440'
-    foreground: '0xD8DEE9'
-  cursor:
-    text: '0x2E3440'
-    cursor: '0xD8DEE9'
-  vi_mode_cursor:
-    text: '0x2E3440'
-    cursor: '0xD8DEE9'
-  selection:
-    text: '0x2E3440'
-    background: '0xEBCB8B'
+    background: '#1d2021'
+    foreground: '#ebdbb2'
   normal:
-    black: '0x3B4252'
-    red: '0xBF616A'
-    green: '0xA3BE8C'
-    yellow: '0xEBCB8B'
-    blue: '0x81A1C1'
-    magenta: '0xB48EAD'
-    cyan: '0x88C0D0'
-    white: '0xE5E9F0'
+    black:   '#282828'
+    red:     '#cc241d'
+    green:   '#98971a'
+    yellow:  '#d79921'
+    blue:    '#458588'
+    magenta: '#b16286'
+    cyan:    '#689d6a'
+    white:   '#a89984'
   bright:
-    black: '0x4C566A'
-    red: '0xBF616A'
-    green: '0xA3BE8C'
-    yellow: '0xEBCB8B'
-    blue: '0x81A1C1'
-    magenta: '0xB48EAD'
-    cyan: '0x8FBCBB'
-    white: '0xECEFF4'
+    black:   '#928374'
+    red:     '#fb4934'
+    green:   '#b8bb26'
+    yellow:  '#fabd2f'
+    blue:    '#83a598'
+    magenta: '#d3869b'
+    cyan:    '#8ec07c'
+    white:   '#ebdbb2'
 
 bell:
   duration: 0
@@ -68,50 +59,5 @@ bell:
 cursor:
   style: Beam
   vi_mode_style: Block
-
-key_bindings:
-  # Vi Mode
-  - { key: Space,  mods: Shift|Control, mode: Vi, action: ScrollToBottom          }
-  - { key: Space,  mods: Shift|Control,           action: ToggleViMode            }
-  - { key: Escape,                      mode: Vi, action: ClearSelection          }
-  - { key: I,                           mode: Vi, action: ScrollToBottom          }
-  - { key: I,                           mode: Vi, action: ToggleViMode            }
-  - { key: Y,      mods: Control,       mode: Vi, action: ScrollLineUp            }
-  - { key: E,      mods: Control,       mode: Vi, action: ScrollLineDown          }
-  - { key: G,                           mode: Vi, action: ScrollToTop             }
-  - { key: G,      mods: Shift,         mode: Vi, action: ScrollToBottom          }
-  - { key: B,      mods: Control,       mode: Vi, action: ScrollPageUp            }
-  - { key: F,      mods: Control,       mode: Vi, action: ScrollPageDown          }
-  - { key: U,      mods: Control,       mode: Vi, action: ScrollHalfPageUp        }
-  - { key: D,      mods: Control,       mode: Vi, action: ScrollHalfPageDown      }
-  - { key: Y,                           mode: Vi, action: Copy                    }
-  - { key: Y,                           mode: Vi, action: ClearSelection          }
-  - { key: Copy,                        mode: Vi, action: ClearSelection          }
-  - { key: V,                           mode: Vi, action: ToggleNormalSelection   }
-  - { key: V,      mods: Shift,         mode: Vi, action: ToggleLineSelection     }
-  - { key: V,      mods: Control,       mode: Vi, action: ToggleBlockSelection    }
-  - { key: V,      mods: Alt,           mode: Vi, action: ToggleSemanticSelection }
-  - { key: Return,                      mode: Vi, action: Open                    }
-  - { key: K,                           mode: Vi, action: Up                      }
-  - { key: J,                           mode: Vi, action: Down                    }
-  - { key: H,                           mode: Vi, action: Left                    }
-  - { key: L,                           mode: Vi, action: Right                   }
-  - { key: Key0,                        mode: Vi, action: First                   }
-  - { key: Key4,   mods: Shift,         mode: Vi, action: Last                    }
-  - { key: Key6,   mods: Shift,         mode: Vi, action: FirstOccupied           }
-  - { key: H,      mods: Shift,         mode: Vi, action: High                    }
-  - { key: M,      mods: Shift,         mode: Vi, action: Middle                  }
-  - { key: L,      mods: Shift,         mode: Vi, action: Low                     }
-  - { key: B,                           mode: Vi, action: SemanticLeft            }
-  - { key: W,                           mode: Vi, action: SemanticRight           }
-  - { key: E,                           mode: Vi, action: SemanticRightEnd        }
-  - { key: B,      mods: Shift,         mode: Vi, action: WordLeft                }
-  - { key: W,      mods: Shift,         mode: Vi, action: WordRight               }
-  - { key: E,      mods: Shift,         mode: Vi, action: WordRightEnd            }
-  - { key: Key5,   mods: Shift,         mode: Vi, action: Bracket                 }
-  - { key: Slash,                       mode: Vi, action: SearchForward           }
-  - { key: Slash,  mods: Shift,         mode: Vi, action: SearchBackward          }
-  - { key: N,                           mode: Vi, action: SearchNext              }
-  - { key: N,      mods: Shift,         mode: Vi, action: SearchPrevious          }
 
 live_config_reload: true

@@ -22,6 +22,8 @@ cob = checkout -b
 col = !sh -c 'git b | rg -v "–merged\\|\\\\*" | sort | fzf | xargs git checkout' --
 cor = !"git br | rg -v HEAD | sort | fzf | xargs git checkout -t"
 
+ctags = !.git/hooks/ctags
+
 d = diff
 dc = diff --cached
 ds = diff --staged
@@ -51,7 +53,7 @@ rh = reset --hard
 rb = rebase
 rba = rebase --abort
 rbc = rebase --continue
-rbi = rebase --interactive @{upstream}
+rbi = rebase --interactive
 rbs = rebase --skip
 
 s = status

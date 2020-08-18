@@ -19,8 +19,7 @@ function LineReturn()
 endfunction
 
 function InsertUS()
-    execute 'r !echo $(git branch --show-current) | cut -d";" -f1'
-    execute 'normal! ggdd'
+    execute '0r !echo $(git branch --show-current) | cut -d";" -f1'
     execute 'normal! A; CC'
     execute 'startinsert!'
 endfunction
@@ -31,11 +30,6 @@ function! RipgrepFzf(query, fullscreen)
     let reload_command = printf(command_fmt, '{q}')
     let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
     call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
-endfunction
-
-function FixerPython()
-    execute "silent! !/Users/tester/.pyenv/versions/3.8.3/bin/black %"
-    execute "silent! !/Users/tester/.pyenv/versions/3.8.3/bin/isort --profile black %"
 endfunction
 
 function! s:check_back_space() abort

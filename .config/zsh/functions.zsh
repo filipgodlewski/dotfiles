@@ -2,14 +2,11 @@
 
 ae() {
     original_path="$PATH"
-    base_site_packages_path=$(eval "echo $(pyenv prefix)/**/base/lib/**/site-packages")
     case $1 in
         "")
             VENV=$(pyenv virtualenvs --skip-aliases | cut -d" " -f3 | fzf)
             if [ ! -z $VENV ]; then pyenv activate $VENV; fi
             export PATH="$VIRTUAL_ENV:$PATH"
-            virtual_site_packages_path=$(eval "echo $(pyenv prefix)/lib/**/site-packages")
-            python ~/.local/share/helpers/change_venv.py $virtual_site_packages_path False
             return 0
             ;;
         *) VENV=$1;;
@@ -78,7 +75,7 @@ cgcl() {
     local current_dir="$PWD"
     local par="$1"; shift
     case $par in
-        --zsh|--nvim)
+        --zsh|--nvim|--misc)
             local address="$1"
             local folder=$(echo $address | rev | cut -c5- | cut -d"/" -f1 | rev)
             ;;
@@ -86,6 +83,7 @@ cgcl() {
             echo "Options:"
             echo "cgcl --zsh <github address>"
             echo "cgcl --nvim <github address>"
+            echo "cgcl --misc <github address>"
             return 0
             ;;
     esac
@@ -93,6 +91,7 @@ cgcl() {
     case $par in
         --nvim) local submodule_base="share/nvim/site/pack/plugins/start";;
         --zsh) local submodule_base="share/zsh/plugins";;
+        --misc) local submodule_base="share/misc";;
     esac
     cfg submodule add $address $submodule_base/$folder
     cd $current_dir
@@ -106,10 +105,13 @@ cgrs() {
     case $par in
         --zsh) local dir_path="share/zsh/plugins";;
         --nvim) local dir_path="share/nvim/site/pack/plugins/start";;
+        --misc) local dir_path="share/misc";;
         -h|--help|*)
             echo "Options:"
             echo "cgrs --zsh"
             echo "cgrs --nvim"
+            echo "cgrs --misc"
+            cd $current_dir
             return 0
             ;;
     esac
@@ -134,14 +136,12 @@ chpwd() ls
 
 de() {
     pyenv deactivate
-    python ~/.local/share/helpers/change_venv.py $base_site_packages_path True
     export PATH="$original_path"
     CURRENT_VIRTUAL_ENV=""
 }
 
 dele() {
     pyenv deactivate &> /dev/null
-    python ~/.local/share/helpers/change_venv.py $base_site_packages_path True
     local venv=( $(pyenv virtualenvs --skip-aliases | cut -d" " -f3 | fzf -m) )
     for item in $venv; do
         if [ ! -z $item ]; then
@@ -150,6 +150,11 @@ dele() {
         fi
     done
     return 0
+}
+
+fixall() {
+    ~/.pyenv/versions/3.8.3/envs/base/bin/black ${1:-$PWD} --exclude venv
+    ~/.pyenv/versions/3.8.3/envs/base/bin/isort ${1:-$PWD} --profile black
 }
 
 gaf() {
@@ -198,33 +203,22 @@ take() {
 
 updateall() {
     deactivate &> /dev/null && echo "\n>>> deactivated venv if any is active <<<\n"
-
-    echo "\n>>> updating coc-extensions <<<\n"
-    up-coc
-
     echo "\n>>> updating pip packages <<<\n"
     up-pip
-
+    echo "\n>>> updating npm packages <<<\n"
+    up-npm
     echo "\n>>> updating git submodules <<<\n"
     up-sub
-
     echo "\n>>> updating brew & brew casks <<<\n"
     up-brew
-
     echo "\n>>> updating applications from App Store & MacOS itself <<<"
     echo ">>> will require password <<<\n"
     up-mac
-
     echo "\n>>> reloading zsh <<<\n"
     exec zsh
 }
 
 wttr() {
-    ARG="$1"
-    if [ -z $ARG ]; then
-        LOCATION=$(curl -s "ipinfo.io/city")
-    else
-        LOCATION=$ARG
-    fi
-    curl -s "http://wttr.in/$LOCATION?MF1ATq"
+    par="$1"
+    curl -s "http://wttr.in/$par?MF1ATq"
 }

@@ -32,12 +32,12 @@ alias lt="exa -T --color=always --group-directories-first --level=3 --git-ignore
 alias lti="exa -T --color=always --group-directories-first --level=3 --git"
 alias lvi="la $XDG_DATA_HOME/nvim/site/pack/plugins/start"
 
-alias reload="exec zsh"
 alias rf="rm -rf"
 
 alias up-brew="brew update; brew upgrade; brew cask upgrade; brew cleanup --prune=all"
 alias up-coc="nvim -c 'CocUpdateSync | q'"
-alias up-pip="pyenv activate base; pip list --outdated --format=freeze | grep -v '^\-e' | cut -d= -f1 | xargs -n1 pip install -U; pyenv deactivate"
+alias uppip="pip list --outdated --format freeze | sed 's/==.*//' | xargs -n1 pip -q install -U"
+alias up-base="pyenv activate base; uppip; pyenv deactivate"
 alias up-sub="cfg submodule foreach --recursive 'git pull'"
 alias up-mac="mas upgrade; sudo softwareupdate -i -a"
 alias up-npm="npm update --global"

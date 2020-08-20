@@ -22,7 +22,7 @@ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poet
 echo "\n>>> installing programs from pip <<<\n"
 pyenv virtualenv $(pyenv global) base
 pip install -U pip setuptools wheel
-up-pip
+up-base
 pyenv activate base
 pip install -r $XDG_DATA_HOME/helpers/pip_list
 pyenv deactivate

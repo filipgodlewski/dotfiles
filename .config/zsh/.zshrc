@@ -5,7 +5,8 @@ source $ZDOTDIR/history.zsh
 source $ZDOTDIR/fzf.zsh
 source $ZDOTDIR/aliases.zsh
 source $ZDOTDIR/plugins.zsh
-source $ZDOTDIR/functions.zsh
+source $ZDOTDIR/functions/general.zsh
+source $ZDOTDIR/functions/pyenv.zsh
 source $ZDOTDIR/bindings.zsh
 
 export LC_ALL=en_US.UTF-8

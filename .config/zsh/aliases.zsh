@@ -40,4 +40,4 @@ alias uppip="pip list --outdated --format freeze | sed 's/==.*//' | xargs -n1 pi
 alias up-base="pyenv activate base; uppip; pyenv deactivate"
 alias up-sub="cfg submodule foreach --recursive 'git pull'"
 alias up-mac="mas upgrade; sudo softwareupdate -i -a"
-alias up-npm="npm update --global"
+alias up-npm="npm install -g npm; npm update --global"

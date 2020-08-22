@@ -1,6 +1,6 @@
 wheel
 black
 flake8
-howdoi
 isort
+jedi
 pynvim

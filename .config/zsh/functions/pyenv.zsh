@@ -1,5 +1,9 @@
 #!/bin/zsh
 
+addenv() {
+    cat .env 2>/dev/null | grep -qw "HAS_PYENV_VIRTUALENV=\'true\'" || echo "HAS_PYENV_VIRTUALENV='true'" >> .env
+}
+
 aenv() {
     original_path="$PATH"
     if [ -z "$1" ]; then
@@ -26,26 +30,30 @@ delenv() {
 }
 
 denv() {
-    pyenv deactivate
-    export PATH="$original_path"
+    pyenv deactivate 2> /dev/null && export PATH="$original_path"
 }
 
 mkenv() {
+    confirm="$1"
     has_venv="A virtual env for this project already exists. Aborting."
     on_venv="A virtual env is active, please deactivate it first. Aborting."
-    magenta=$(tput setaf 5)
-    normal=$(tput sgr0)
 
     virtualenvs=($(pyenv virtualenvs --bare --skip-aliases | cut -d"/" -f3))
     [ ${virtualenvs[(Ie)${PWD##*/}]} -ne 0 ] && echo $has_venv && return 1
     [ ! -z $(echo -n $VIRTUAL_ENV) ] && echo $on_venv && return 1
-    echo "You are currently in the directory:"
-    echo $PWD
-    echo -n "Proceed [Y/n]? "
-    read answer; echo
-    case $answer in
-        [yY]|"") ;;
-        *) echo "Aborting."; return 1;;
+    echo "Creating new virtual environment.\n"
+    case $confirm in
+        -y) ;;
+        *)
+            echo "You are currently in the directory:"
+            echo $PWD
+            echo -n "Proceed [Y/n]? "
+            read answer; echo
+            case $answer in
+                [yY]|"") ;;
+                *) echo "Aborting."; return 1;;
+            esac
+            ;;
     esac
     available_versions=($(pyenv versions --bare --skip-aliases | grep -v "/"))
     if [ $#available_versions -lt 1 ]; then
@@ -56,7 +64,7 @@ mkenv() {
     else
         echo "The list of available Python versions:"
         for version in ${available_versions}; do
-            printf "%s\t" "[${magenta}${available_versions[(i)$version]}${normal}]"
+            printf "%s\t" "[${COLOR_MAGENTA}${available_versions[(i)$version]}${COLOR_NORMAL}]"
             echo $version
         done
         echo -n "Which version would you like to choose [index]? "
@@ -71,14 +79,12 @@ mkenv() {
     aenv ${PWD##*/}
     echo "Upgrading pip and installing wheel"
     pip -q install --upgrade pip; pip -q install wheel
-    # create .envrc file with a hook for auto venv activation
+    addenv
 }
 
 upenv() {
     not_venv="You must first activate the target venv. Aborting."
     cannot_upgrade="Cannot upgrade. $current_version is the only Python version installed. Aborting."
-    magenta=$(tput setaf 5)
-    normal=$(tput sgr0)
 
     [ -z $(echo -n $VIRTUAL_ENV) ] && echo $not_venv && return 1
     current_venv=$(pyenv version-name)
@@ -100,7 +106,7 @@ upenv() {
     else
         echo "The list of available python versions:"
         for version in ${available_versions}; do
-            printf "%s\t" "[${magenta}${available_versions[(i)$version]}${normal}]"
+            printf "%s\t" "[${COLOR_MAGENTA}${available_versions[(i)$version]}${COLOR_NORMAL}]"
             echo $version
         done
         echo -n "Which version would you like to choose [index]? "

@@ -3,7 +3,8 @@ autoload -Uz compinit; compinit
 source $ZDOTDIR/completions.zsh
 source $ZDOTDIR/history.zsh
 source $ZDOTDIR/fzf.zsh
-source $ZDOTDIR/aliases.zsh
+source <(cat $ZDOTDIR/variables/*.zsh)
+source <(cat $ZDOTDIR/aliases/*.zsh)
 source $ZDOTDIR/plugins.zsh
 source <(cat $ZDOTDIR/functions/*.zsh)
 source $ZDOTDIR/bindings.zsh
@@ -15,4 +16,3 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(starship init zsh)"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
-eval "$(direnv hook zsh)"

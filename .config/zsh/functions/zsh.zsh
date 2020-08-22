@@ -1,6 +1,12 @@
 #!/bin/zsh
 
-chpwd() ls
+chpwd() {
+    ls
+    denv
+    cat .env 2>/dev/null | grep -qw "HAS_PYENV_VIRTUALENV=\'true\'" || return 0
+    find ~/.pyenv/versions -maxdepth 1 -type l | rev | cut -d"/" -f1 | rev | grep -qw "${PWD##*/}" && aenv ${PWD##*/}
+    return 0
+}
 
 put() {
     touch $1

@@ -55,3 +55,9 @@
 [submodule ".local/share/nvim/site/pack/plugins/start/vim-doge"]
 	path = .local/share/nvim/site/pack/plugins/start/vim-doge
 	url = https://github.com/kkoomen/vim-doge.git
+[submodule ".local/share/zsh/plugins/propane"]
+	path = .local/share/zsh/plugins/propane
+	url = https://github.com/filipgodlewski/propane.git
+[submodule ".local/share/zsh/plugins/pytomata"]
+	path = .local/share/zsh/plugins/pytomata
+	url = https://github.com/filipgodlewski/pytomata.git

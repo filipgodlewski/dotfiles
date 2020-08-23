@@ -36,7 +36,7 @@ killjn() {
     done
 }
 
-mkproject() {zsh ~/.local/share/zsh/plugins/mkproject/mkproject.zsh}
+propane() {zsh ~/.local/share/zsh/plugins/propane/propane.zsh}
 
 wttr() {
     par="$1"

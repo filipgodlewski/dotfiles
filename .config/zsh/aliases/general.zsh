@@ -21,7 +21,6 @@ alias rf="rm -rf"
 
 alias up-brew="brew update; brew upgrade; brew cask upgrade; brew cleanup --prune=all"
 alias up-coc="nvim -c 'CocUpdateSync | q'"
-alias uppip="pip list --outdated --format freeze | sed 's/==.*//' | xargs -n1 pip -q install --use-feature=2020-resolver -U"
 alias up-base="pyenv activate base; uppip; pyenv deactivate"
 alias up-sub="cfg submodule foreach --recursive 'git pull'"
 alias up-mac="mas upgrade; sudo softwareupdate -i -a"

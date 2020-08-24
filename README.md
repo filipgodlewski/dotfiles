@@ -6,17 +6,6 @@ These are Filip Godlewski's dotfiles that use the technique presented here: [bes
 
 First of all, instructions below are prepared for MacOS, as this is my daily work machine. Follow the instructions if that fits your needs.
 
-### Prerequisites
-
-This setup will use:
-
-- `curl`: to download some stuff, like homebrew
-- `git`: to clone the repo
-- `homebrew`: to install all the stuff that I use
-- `neovim`: my main editor
-- `zsh`: my main shell
-- `pyenv`: my main python version controller and installer
-
 ### Installing
 
 #### Step 1/3
@@ -34,7 +23,7 @@ Clone the repository using the command below.
 echo ".cfg" >> .gitignore
 git clone --bare https://github.com/filipgodlewski/dotfiles.git $HOME/.cfg
 alias cfg='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-rm .gitconfig
+rm .gitignore
 cfg checkout
 cfg config --local status.showUntrackedFiles no
 ```
@@ -48,6 +37,8 @@ Now, run:
 # This script will install default brew, brew cask, fonts and pip3 programs.
 # Then it will initialize submodules, and fully prepare coc.nvim
 ```
+
+And finally, enter nvim and run execute the command `:UpdateRemotePlugins`.
 
 ## Licence
 

@@ -34,8 +34,22 @@ cgcl() {
         --misc) submodule_base="share/misc";;
     esac
     cfg submodule add $address $submodule_base/$folder
+    cd $submodule_base/$folder
+    git submodule init
     cd $current_dir
     return 0
+}
+
+up-sub() {
+    cfg submodule init
+    cfg submodule update
+    cfg submodule foreach '\
+        git fetch origin; \
+        git checkout $(git rev-parse --abbrev-ref HEAD); \
+        git reset --hard origin/$(git rev-parse --abbrev-ref HEAD); \
+        git submodule update --recursive; \
+        git clean -dfx; \
+        git submodule init'
 }
 
 cgrs() {

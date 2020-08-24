@@ -20,8 +20,6 @@ alias lvi="la $XDG_DATA_HOME/nvim/site/pack/plugins/start"
 alias rf="rm -rf"
 
 alias up-brew="brew update; brew upgrade; brew cask upgrade; brew cleanup --prune=all"
-alias up-coc="nvim -c 'CocUpdateSync | q'"
 alias up-base="pyenv activate base; uppip; pyenv deactivate"
-alias up-sub="cfg submodule foreach --recursive 'git pull'"
 alias up-mac="mas upgrade; sudo softwareupdate -i -a"
 alias up-npm="npm install -g npm; npm update --global"

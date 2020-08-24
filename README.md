@@ -38,7 +38,9 @@ Now, run:
 # Then it will initialize submodules, and fully prepare coc.nvim
 ```
 
-And finally, enter nvim and run execute the command `:UpdateRemotePlugins`.
+And finally, enter nvim and execute the command `:UpdateRemotePlugins`.
+
+You should now be done!
 
 ## Licence
 

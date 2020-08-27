@@ -31,7 +31,7 @@ take() {
 }
 
 updateall() {
-    deactivate &> /dev/null && echo "\n>>> deactivated venv if any is active <<<\n"
+    denv
     echo "\n>>> updating base pip packages <<<\n"
     up-base
     echo "\n>>> updating npm packages <<<\n"
@@ -41,8 +41,7 @@ updateall() {
     echo "\n>>> updating brew & brew casks <<<\n"
     up-brew
     echo "\n>>> updating applications from App Store & MacOS itself <<<"
-    echo ">>> will require password <<<\n"
-    up-mac
+    mas upgrade
     echo "\n>>> reloading zsh <<<\n"
     exec zsh
 }

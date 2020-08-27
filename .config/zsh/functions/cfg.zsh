@@ -49,7 +49,8 @@ up-sub() {
         git reset --hard origin/$(git rev-parse --abbrev-ref HEAD); \
         git submodule update --recursive; \
         git clean -dfx; \
-        git submodule init'
+        git submodule init; \
+        git pull origin $(git rev-parse --abbrev-ref HEAD)'
 }
 
 cgrs() {

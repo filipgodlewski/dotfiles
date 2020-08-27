@@ -21,5 +21,4 @@ alias rf="rm -rf"
 
 alias up-brew="brew update; brew upgrade; brew cask upgrade; brew cleanup --prune=all"
 alias up-base="pyenv activate base; uppip; pyenv deactivate"
-alias up-mac="mas upgrade; sudo softwareupdate -i -a"
 alias up-npm="npm install -g npm; npm update --global"

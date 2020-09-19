@@ -1,17 +1,17 @@
 #!/bin/zsh
 
-BREWS=(${(f)"$(cat $XDG_DATA_HOME/helpers/brew_list)"})
-BREW_CASKS=($(cat $XDG_DATA_HOME/helpers/brew_cask_list))
-COC_EXTENSIONS=($(cat $XDG_CONFIG_HOME/coc/extensions/package.json | grep "    " | cut -d'"' -f2))
+brews=(${(f)"$(cat $XDG_DATA_HOME/helpers/brew_list)"})
+brew_casks=($(cat $XDG_DATA_HOME/helpers/brew_cask_list))
+npms=($(cat $XDG_DATA_HOME/helpers/npm_list))
 
 echo "\n>>> opening taps... <<<\n"
 brew tap homebrew/cask-fonts
 
 echo "\n>>> installing core brews... <<<\n"
-for BREW in $BREWS; do brew install $BREW; done
+for brew in $brews; do brew install $brew; done
 
 echo "\n>>> installing brew casks... <<<\n"
-for BREW_CASK in $BREW_CASKS; do brew cask install $BREW_CASK; done
+for brew_cask in $brew_casks; do brew install --cask $brew_cask; done
 
 echo "\n>>> installing python version using pyenv <<<\n"
 pyenv install -l | rg -v Available\ versions: | fzf | xargs -I{} sh -c "pyenv install {}; pyenv global {}"
@@ -26,6 +26,9 @@ pyenv activate base
 pip install -U pip setuptools wheel
 pip install -r $XDG_DATA_HOME/helpers/pip_list
 pyenv deactivate
+
+echo "\n>>> installing npm modules... <<<\n"
+for npm in $npms; do npm install -g $npm; done
 
 echo "\n>>> initialize git submodules\n"
 cfg submodule update --init --recursive

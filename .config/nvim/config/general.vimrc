@@ -1,6 +1,4 @@
-set autoread
 set autowriteall
-set background=dark
 set complete+=kspell
 set completeopt=menuone,longest
 set confirm
@@ -14,17 +12,18 @@ set hidden
 set ignorecase
 set inccommand=nosplit
 set lazyredraw
+set noswapfile
+set nrformats+=alpha
 set path+=**
 set pumblend=20
 set pumheight=10
 set scrolloff=8
 set shiftwidth=4
 set shortmess+=c
-set signcolumn=auto:3
+set signcolumn=yes:1
 set smartcase
 set smartindent
 set softtabstop=4
-set tabstop=8
 set termguicolors
 set updatetime=50
 set wildignore+=*.tar.*,*.zip*

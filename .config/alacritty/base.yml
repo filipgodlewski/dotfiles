@@ -1,0 +1,43 @@
+shell:
+  program: /usr/local/bin/zsh
+  args:
+    - -l
+
+draw_bold_text_with_bright_colors: true
+live_config_reload: true
+
+cursor:
+  style: Beam
+  vi_mode_style: Block
+
+window:
+  padding:
+    x: 2
+    y: 2
+  decorations: buttonless
+  startup_mode: SimpleFullscreen
+  dynamic_title: true
+
+scrolling:
+  history: 16000
+
+font:
+  normal:
+    family: FiraCode Nerd Font Mono
+    style: Regular
+  bold:
+    family: FiraCode Nerd Font Mono
+    style: Bold
+  italic:
+    family: Victor Mono
+    style: SemiBold Oblique
+  bold_italic:
+    family: Victor Mono
+    style: Bold Oblique
+  size: 12.0
+  offset:
+    x: 0
+    y: 4
+
+bell:
+  duration: 0

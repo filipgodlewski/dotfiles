@@ -9,16 +9,14 @@ alias grep="grep --color=always"
 
 alias md="mkdir -p"
 
-alias la="exa -al --color=always --group-directories-first --git"
-alias lg="exa -al --color=always --group-directories-first"
-alias ll="exa -l --color=always --group-directories-first"
-alias ls="exa --color=always --group-directories-first --git-ignore"
-alias lt="exa -T --color=always --group-directories-first --level=3 --git-ignore"
-alias lti="exa -T --color=always --group-directories-first --level=3 --git"
+exa_std="-I '__pycache__|.pytest_cache' --color=always --group-directories-first"
+alias la="exa -al $(eval 'echo $exa_std')"
+alias ls="exa $(eval 'echo $exa_std') --git-ignore"
+alias lt="exa -T $(eval 'echo $exa_std') --level=4 --git-ignore"
 alias lvi="la $XDG_DATA_HOME/nvim/site/pack/plugins/start"
 
 alias rf="rm -rf"
 
-alias up-brew="brew update; brew upgrade; brew cask upgrade; brew cleanup --prune=all"
-alias up-base="pyenv activate base; uppip; pyenv deactivate"
-alias up-npm="npm install -g npm; npm update --global"
+alias update_homebrew="brew update; brew upgrade; brew upgrade --cask; brew cleanup --prune=all"
+alias update_base_venv="pyenv activate base; uppip; pyenv deactivate"
+alias update_npm="npm install -g npm; npm update --global"

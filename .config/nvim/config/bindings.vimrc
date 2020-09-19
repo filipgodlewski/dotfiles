@@ -1,32 +1,50 @@
-cnoremap <C-H> <left>
-cnoremap <C-J> <down>
-cnoremap <C-K> <up>
-cnoremap <C-L> <right>
-inoremap <expr> <C-H> pumvisible() ? "<C-E>" : "<C-H>"
-inoremap <expr> <C-J> pumvisible() ? "<C-N>" : "<C-J>"
-inoremap <expr> <C-K> pumvisible() ? "<C-P>" : "<C-K>"
-inoremap <expr> <C-L> pumvisible() ? "<C-Y>" : "<C-L>"
+cnoremap <C-H> <Left>
+cnoremap <C-J> <Down>
+cnoremap <C-K> <Up>
+cnoremap <C-L> <Right>
 map Y y$
 nnoremap <C-J> :norm o<CR>
 nnoremap <C-K> :norm O<CR>
-nnoremap <leader>fg yiw:silent! grep! "<C-R><C-W>"
-nnoremap <leader>rg :cfdo %s/<C-R><C-W>//g \| update<S-Left><S-Left><Left><Left><Left>
-nnoremap <leader>rl yiw:%s/<C-R><C-W>//g<left><left>
-nnoremap <leader>rr :%s///g<left><left><left>
+nnoremap <Leader>fg yiw:silent! grep! "<C-R><C-W>"
+nnoremap <Leader>rg :cfdo %s/<C-R><C-W>//g \| update<S-Left><S-Left><Left><Left><Left>
+nnoremap <Leader>rl yiw:%s/<C-R><C-W>//g<Left><Left>
+nnoremap <Leader>rr :%s///g<Left><Left><Left>
 nnoremap <silent> <C-]> <C-]>zz
 nnoremap <silent> <Esc> :noh<CR>
-nnoremap <silent> <leader>TT <C-W>l:vert bo Ttoggle<cr><C-w>l
-nnoremap <silent> <leader>bd :bp\|bd#<CR>
-nnoremap <silent> <leader>fb :Buffers<CR>
-nnoremap <silent> <leader>fc :Colors<CR>
-nnoremap <silent> <leader>ff :Files<CR>
-nnoremap <silent> <leader>fh :Helptags<CR>
-nnoremap <silent> <leader>re :w<CR>:so $MYVIMRC<CR>:noh<CR>
-nnoremap <silent> S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
+nnoremap <silent> <Leader>bd :bp\|bd#<CR>
+nnoremap <silent> <Leader>fb :Buffers<CR>
+nnoremap <silent> <Leader>fc :Colors<CR>
+nnoremap <silent> <Leader>ff :Files<CR>
+nnoremap <silent> <Leader>fh :Helptags<CR>
+nnoremap <silent> <Leader>so :w<CR>:so $MYVIMRC<CR>:noh<CR>
+nnoremap <silent> <Leader>t0 :Pytest last<CR>
+nnoremap <silent> <Leader>t1 :Pytest first<CR>
+nnoremap <silent> <Leader>t? :Pytest projecttestwd<CR>
+nnoremap <silent> <Leader>tE :Pytest end<CR>
+nnoremap <silent> <Leader>tF :Pytest fails<CR>
+nnoremap <silent> <Leader>tN :Pytest next<CR>
+nnoremap <silent> <Leader>tP :Pytest previous<CR>
+nnoremap <silent> <Leader>tS :Pytest session<CR>
+nnoremap <silent> <Leader>tc :Pytest class<CR>
+nnoremap <silent> <Leader>tf :Pytest file<CR>
+nnoremap <silent> <Leader>tm :Pytest method<CR>
+nnoremap <silent> <Leader>tp :Pytest project<CR>
+nnoremap <silent> <leader>gd :SignifyHunkDiff<CR>
+nnoremap <silent> <leader>gu :SignifyHunkUndo<CR>
+nnoremap <silent> S i<CR><esc>^mwgk:silent! s/\v +$//<CR>:noh<CR>`w
 nnoremap gy "*y
-tnoremap <Esc> <C-\><C-n>
+tnoremap <C-W><C-H> <C-\><C-N><C-W><C-H>
+tnoremap <C-W><C-J> <C-\><C-N><C-W><C-J>
+tnoremap <C-W><C-K> <C-\><C-N><C-W><C-K>
+tnoremap <C-W><C-L> <C-\><C-N><C-W><C-L>
+tnoremap <C-W><C-W> <C-\><C-N><C-W><C-W>
+tnoremap <C-W>h <C-\><C-N><C-W><C-H>
+tnoremap <C-W>j <C-\><C-N><C-W><C-J>
+tnoremap <C-W>k <C-\><C-N><C-W><C-K>
+tnoremap <C-W>l <C-\><C-N><C-W><C-L>
+tnoremap <C-[> <C-\><C-N>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 vnoremap gy "*y
-xnoremap <leader>fl "ay/<C-R>a
-xnoremap <leader>rl :s///g<left><left><left>
+xnoremap <Leader>fl "ay/<C-R>a
+xnoremap <Leader>rl :s///g<Left><Left><Left>

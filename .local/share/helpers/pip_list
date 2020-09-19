@@ -1,6 +1,8 @@
-wheel
+bandit
 black
 flake8
 isort
 jedi
+pydocstyle
 pynvim
+wheel

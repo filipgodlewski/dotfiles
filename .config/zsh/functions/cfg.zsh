@@ -11,19 +11,20 @@ cgaf() {
     cfg add $files_array
 }
 
-cgcl() {
+add_submodule() {
     current_dir="$PWD"
     par="$1"; shift
     case $par in
-        --zsh|--nvim|--misc)
+        --zsh|--nvim|--misc|--tmux)
             address="$1"
             folder=$(echo $address | rev | cut -c5- | cut -d"/" -f1 | rev)
             ;;
         -h|--help|*)
             echo "Options:"
-            echo "cgcl --zsh <github address>"
-            echo "cgcl --nvim <github address>"
-            echo "cgcl --misc <github address>"
+            echo "add_submodule --zsh <github address>"
+            echo "add_submodule --nvim <github address>"
+            echo "add_submodule --misc <github address>"
+            echo "add_submodule --tmux <github address>"
             return 0
             ;;
     esac
@@ -32,6 +33,7 @@ cgcl() {
         --nvim) submodule_base="share/nvim/site/pack/plugins/start";;
         --zsh) submodule_base="share/zsh/plugins";;
         --misc) submodule_base="share/misc";;
+        --tmux) submodule_base="share/tmux";;
     esac
     cfg submodule add $address $submodule_base/$folder
     cd $submodule_base/$folder
@@ -40,7 +42,7 @@ cgcl() {
     return 0
 }
 
-up-sub() {
+update_submodule() {
     cfg submodule init
     cfg submodule update
     cfg submodule foreach '\
@@ -53,7 +55,7 @@ up-sub() {
         git pull origin $(git rev-parse --abbrev-ref HEAD)'
 }
 
-cgrs() {
+remove_submodule() {
     current_dir="$PWD"
     par="$1"
     cd ~/.local
@@ -61,11 +63,13 @@ cgrs() {
         --zsh) dir_path="share/zsh/plugins";;
         --nvim) dir_path="share/nvim/site/pack/plugins/start";;
         --misc) dir_path="share/misc";;
+        --tmux) dir_path="share/tmux";;
         -h|--help|*)
             echo "Options:"
-            echo "cgrs --zsh"
-            echo "cgrs --nvim"
-            echo "cgrs --misc"
+            echo "remove_submodule --zsh"
+            echo "remove_submodule --nvim"
+            echo "remove_submodule --misc"
+            echo "remove_submodule --tmux"
             cd $current_dir
             return 0
             ;;

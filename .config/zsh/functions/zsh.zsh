@@ -19,9 +19,19 @@ rationalise-dot() {
 }
 
 reload() {
-    on_venv="A virtual env is active, please deactivate it first. Aborting."
-
-    [ ! -z $(echo -n $VIRTUAL_ENV) ] && echo $on_venv && return 1
+    if [[ -n $TMUX ]]; then
+        echo "Tmux active. Do the following:"
+        echo "1. SAVE SESSION"
+        echo "2. Detach"
+        echo "3. Reload"
+        echo "4. Attach"
+        return 1
+    elif [[ -n $VIRTUAL_ENV ]]; then
+        echo "Virtual env active."
+        echo "Deactivate it first."
+        return 1
+    fi
+    tmux kill-server 2>/dev/null
     exec zsh
 }
 
@@ -30,18 +40,20 @@ take() {
     cd $1
 }
 
-updateall() {
+update_system() {
     denv
     echo "\n>>> updating base pip packages <<<\n"
-    up-base
+    update_base_venv
     echo "\n>>> updating npm packages <<<\n"
-    up-npm
+    update_npm
     echo "\n>>> updating git submodules <<<\n"
-    up-sub
+    update_submodule
     echo "\n>>> updating brew & brew casks <<<\n"
-    up-brew
+    update_homebrew
     echo "\n>>> updating applications from App Store & MacOS itself <<<"
     mas upgrade
+    echo "\n>>> updating alacritty colorscheme <<<\n"
+    cat $XDG_DATA_HOME/misc/nord-alacritty/src/nord.yml $XDG_CONFIG_HOME/alacritty/base.yml > $XDG_CONFIG_HOME/alacritty/alacritty.yml
     echo "\n>>> reloading zsh <<<\n"
     exec zsh
 }

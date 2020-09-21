@@ -44,6 +44,17 @@ update_system() {
     denv
     echo "\n>>> updating base pip packages <<<\n"
     update_base_venv
+    echo -n "Is there an error with jedi and parso? [Y|n]: "
+    read answer
+    case $answer in
+        Y|"")
+            pyenv activate base
+            pip -q install --use-feature=2020-resolver -U jedi
+            pyenv deactivate
+            echo "Reinstalled jedi."
+            ;;
+        *) ;;
+    esac
     echo "\n>>> updating npm packages <<<\n"
     update_npm
     echo "\n>>> updating git submodules <<<\n"

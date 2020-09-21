@@ -1,8 +1,10 @@
 au BufRead,BufNewFile *.snippets set filetype=snippets
+au BufRead,BufNewFile *.zsh set filetype=zsh
 au BufReadPost * call LineReturn()
 au BufWritePre * call TrailingCharacters()
 au FileType json syntax match Comment +\/\/.\+$+
 au FocusGained,BufEnter * :silent! !
+au VimLeave * call VimuxCloseRunner()
 
 augroup autosave
     autocmd!

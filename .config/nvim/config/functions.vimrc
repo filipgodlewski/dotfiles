@@ -6,6 +6,7 @@ function TrailingCharacters()
     if lastLine > 0 && lastNonblankLine != lastLine
         silent! execute lastNonblankLine + 1 . ',$delete _'
     endif
+    silent! execute 'set fileformat=unix'
     call winrestview(l:save)
 endfunction
 

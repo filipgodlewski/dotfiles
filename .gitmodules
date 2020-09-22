@@ -79,3 +79,6 @@
 [submodule ".local/share/nvim/site/pack/plugins/start/vimux"]
 	path = .local/share/nvim/site/pack/plugins/start/vimux
 	url = https://github.com/benmills/vimux.git
+[submodule ".local/share/nvim/site/pack/plugins/start/vimwiki"]
+	path = .local/share/nvim/site/pack/plugins/start/vimwiki
+	url = https://github.com/vimwiki/vimwiki.git

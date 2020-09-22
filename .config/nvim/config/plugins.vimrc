@@ -2,7 +2,7 @@
 let g:ale_echo_cursor=0
 let g:ale_echo_msg_format="%linter% - %severity%% (code)%: %s"
 let g:ale_fix_on_save=1
-let g:ale_fixers={"json": ["jq"], "python": ["black", "isort"]}
+let g:ale_fixers={"*": ["trim_whitespace", "remove_trailing_lines"], "json": ["jq"], "python": ["black", "isort"]}
 let g:ale_json_jq_options="-S"
 let g:ale_linters={"javascript": ["eslint"], "json": ["jsonlint"], "python": ["bandit", "flake8", "pyright"]} "add pydocstyle if ever want to lint docstrings
 let g:ale_python_black_executable=expand("~/.pyenv/versions/base/bin/black")
@@ -58,3 +58,6 @@ let g:signify_sign_add = "▎"
 let g:signify_sign_change = "▎"
 let g:signify_sign_delete = "▎"
 let g:signify_sign_delete_first_line = "◥"
+
+" VIMWIKI
+let g:vimwiki_list = [{'path': '~/Documents/vimwiki/', 'path_html': '~/Documents/vimwiki_html'}]

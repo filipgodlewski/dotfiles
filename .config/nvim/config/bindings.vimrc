@@ -13,6 +13,7 @@ nnoremap <silent> <Leader>ff :Files<CR>
 nnoremap <silent> <Leader>fh :Helptags<CR>
 
 " Misc
+nnoremap <silent> <Leader>bd :bp\|bd#<CR>
 nnoremap <silent> <Leader>so :w<CR>:so $MYVIMRC<CR>:noh<CR>
 
 " Movements
@@ -62,8 +63,8 @@ tnoremap <C-W>l <C-\><C-N><C-W><C-L>
 tnoremap <C-[> <C-\><C-N>
 
 " Vimux
-nnoremap <Leader>vp :VimuxPromptCommand<CR>
-nnoremap <Leader>vq :VimuxCloseRunner<CR>
-nnoremap <silent> <Leader>bd :bp\|bd#<CR>
 nnoremap <silent> <Leader>vf :w<CR>:VimuxRunCommand("clear; python ".bufname("%"))<CR>
 nnoremap <silent> <Leader>vl :VimuxRunLastCommand<CR>
+nnoremap <silent> <Leader>vo :call VimuxOpenRunner()<CR>
+nnoremap <silent> <Leader>vp :VimuxPromptCommand<CR>
+nnoremap <silent> <Leader>vq :VimuxCloseRunner<CR>

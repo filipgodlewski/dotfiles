@@ -22,9 +22,12 @@ cob = checkout -b
 col = !sh -c 'git b | rg -v "–merged\\|\\\\*" | sort | fzf | xargs git checkout' --
 cor = !"git br | rg -v HEAD | sort | fzf | xargs git checkout -t"
 
+cp = cherry-pick
+
 ctags = !.git/hooks/ctags
 
 d = diff
+dh = "!git diff HEAD~$1;"
 dc = diff --cached
 ds = diff --staged
 dw = diff --word-diff

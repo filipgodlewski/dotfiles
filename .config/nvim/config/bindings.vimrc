@@ -1,3 +1,7 @@
+" ALE
+nnoremap <silent> <Leader>an :ALENextWrap<CR>
+nnoremap <silent> <Leader>ap :ALEPreviousWrap<CR>
+
 " Find and Replace
 nnoremap <Leader>fg yiw:silent! grep! "<C-R><C-W>"
 nnoremap <Leader>rg :cfdo %s/<C-R><C-W>//g \| update<S-Left><S-Left><Left><Left><Left>

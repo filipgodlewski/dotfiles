@@ -29,9 +29,8 @@ fixall() {
 
 killjn() {
     ports=$(jn list | grep http | cut -d"/" -f3 | cut -d":" -f2)
-    for port in $ports
-    do
-        pid=$(lsof -n -i4TCP:$port | grep LISTEN | cut -d" " -f3)
+    for port in $ports; do
+        pid=$(lsof -n -i4TCP:$port | grep LISTEN | cut -d" " -f2)
         kill -9 $pid
     done
 }

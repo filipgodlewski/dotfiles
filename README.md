@@ -8,21 +8,19 @@ First of all, instructions below are prepared for MacOS, as this is my daily wor
 
 ### Installing
 
-#### Step 1/7
+Ten easy steps:
+
+#### Step 1/10
 
 Install `homebrew` using the official method from [this website](https://brew.sh).
 
-#### Step 2/7
-
-Install git, etc.
+#### Step 2/10
 
 ```sh
 xcode-select --install
 ```
 
-#### Step 3/7
-
-Clone the repository using the command below. Best if executed line by line.
+#### Step 3/10
 
 ```sh
 echo ".cfg" >> .gitignore
@@ -31,33 +29,51 @@ alias cfg='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 rm .gitignore
 cfg checkout
 cfg config --local status.showUntrackedFiles no
+# Best to run it line by line
 ```
 
-#### Step 4/7
-
-Restart terminal.
-
-#### Step 5/7
-
-Now, run:
+#### Step 4/10
 
 ```sh
 ./.local/share/helpers/RUN_ME_FIRST.zsh
 ```
 
-#### Step 6/7
+#### Step 5/10
 
-Now:
+Resolve problems with compinit.
+```sh
+sudo chown -R <USERNAME> /usr/local/share/zsh
+sudo chown -R <USERNAME> /usr/local/share/zsh/site-functions
+sudo chmod -R 755 /usr/local/share/zsh
+sudo chmod -R 755 /usr/local/share/zsh/site-functions
+```
+
+#### Step 6/10
+
+*RESTART TERMINAL.*
+
+#### Step 7/10
 
 ```sh
 ./.local/share/helpers/RUN_ME_SECOND.zsh
 ```
 
-#### Step 7/7
+#### Step 8/10
 
-Enter nvim and execute the command `:UpdateRemotePlugins`.
+```sh
+nvim -c "UpdateRemotePlugins | q"
+```
 
-You should now be done!
+#### Step 9/10
+
+```sh
+tmux new -s "base"
+```
+And save your session with <prefix><C-S>
+
+#### Step 10/10
+
+*RESTART TERMINAL.* Done!
 
 ## Licence
 

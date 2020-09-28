@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-echo "\n>>> installing programs from pip <<<\n"
+echo "\n>>> install base pip packages <<<\n"
 pyenv virtualenv $(pyenv global) base
 pip install -U pip setuptools wheel
 pyenv activate base
@@ -8,7 +8,7 @@ pip install -U pip setuptools wheel
 pip install -r $XDG_DATA_HOME/helpers/pip_list
 pyenv deactivate
 
-echo "\n>>> initialize git submodules\n"
+echo "\n>>> initialize git submodules <<<\n"
 cfg submodule update --init --recursive
 
 echo "\n>>> setup local git (cfg) config <<<\n"

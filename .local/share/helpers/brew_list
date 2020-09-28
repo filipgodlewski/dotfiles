@@ -1,13 +1,14 @@
 exa
 fzf
-jq
 git
+jq
 mas
 neovim
+pyenv
+pyenv-virtualenv
 ripgrep
 selenium-server-standalone
 starship
+tmux
 yarn
-pyenv
-pyenv-virtualenv
 zsh

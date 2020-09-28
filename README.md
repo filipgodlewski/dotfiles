@@ -8,19 +8,19 @@ First of all, instructions below are prepared for MacOS, as this is my daily wor
 
 ### Installing
 
-Ten easy steps:
+Six easy steps:
 
-#### Step 1/10
+#### Step 1/6
 
 Install `homebrew` using the official method from [this website](https://brew.sh).
 
-#### Step 2/10
+#### Step 2/6
 
 ```sh
 xcode-select --install
 ```
 
-#### Step 3/10
+#### Step 3/6
 
 ```sh
 echo ".cfg" >> .gitignore
@@ -32,48 +32,23 @@ cfg config --local status.showUntrackedFiles no
 # Best to run it line by line
 ```
 
-#### Step 4/10
+#### Step 4/6
 
 ```sh
 ./.local/share/helpers/RUN_ME_FIRST.zsh
 ```
+Terminal will exit when finished.
 
-#### Step 5/10
-
-Resolve problems with compinit.
-```sh
-sudo chown -R <USERNAME> /usr/local/share/zsh
-sudo chown -R <USERNAME> /usr/local/share/zsh/site-functions
-sudo chmod -R 755 /usr/local/share/zsh
-sudo chmod -R 755 /usr/local/share/zsh/site-functions
-```
-
-#### Step 6/10
-
-*RESTART TERMINAL.*
-
-#### Step 7/10
+#### Step 5/6
 
 ```sh
 ./.local/share/helpers/RUN_ME_SECOND.zsh
 ```
+Terminal will exit when finished.
 
-#### Step 8/10
+#### Step 6/6
 
-```sh
-nvim -c "UpdateRemotePlugins | q"
-```
-
-#### Step 9/10
-
-```sh
-tmux new -s "base"
-```
-And save your session with <prefix><C-S>
-
-#### Step 10/10
-
-*RESTART TERMINAL.* Done!
+Create new `base` tmux session and save it.
 
 ## Licence
 

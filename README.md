@@ -8,16 +8,21 @@ First of all, instructions below are prepared for MacOS, as this is my daily wor
 
 ### Installing
 
-#### Step 1/3
+#### Step 1/7
 
-Before running the scripts, install `homebrew` along with `git`, using the official method from [this website](https://brew.sh), but first:
+Install `homebrew` using the official method from [this website](https://brew.sh).
+
+#### Step 2/7
+
+Install git, etc.
+
 ```sh
 xcode-select --install
 ```
 
-#### Step 2/3
+#### Step 3/7
 
-Clone the repository using the command below.
+Clone the repository using the command below. Best if executed line by line.
 
 ```sh
 echo ".cfg" >> .gitignore
@@ -28,17 +33,29 @@ cfg checkout
 cfg config --local status.showUntrackedFiles no
 ```
 
-#### Step 3/3
+#### Step 4/7
+
+Restart terminal.
+
+#### Step 5/7
 
 Now, run:
 
 ```sh
 ./.local/share/helpers/RUN_ME_FIRST.zsh
-# This script will install default brew, brew cask, fonts and pip3 programs.
-# Then it will initialize submodules, and fully prepare coc.nvim
 ```
 
-And finally, enter nvim and execute the command `:UpdateRemotePlugins`.
+#### Step 6/7
+
+Now:
+
+```sh
+./.local/share/helpers/RUN_ME_SECOND.zsh
+```
+
+#### Step 7/7
+
+Enter nvim and execute the command `:UpdateRemotePlugins`.
 
 You should now be done!
 

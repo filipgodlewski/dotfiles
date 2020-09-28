@@ -1,7 +1,6 @@
 exa
 fzf
 jq
-getantibody/tap/antibody
 git
 mas
 neovim
@@ -11,5 +10,4 @@ starship
 yarn
 pyenv
 pyenv-virtualenv
-universal-ctags/universal-ctags/universal-ctags
 zsh

@@ -4,8 +4,8 @@ nnoremap <silent> <Leader>ap :ALEPreviousWrap<CR>
 
 " Find and Replace
 nnoremap <Leader>fg yiw:silent! grep! "<C-R><C-W>"
-nnoremap <Leader>rg :cfdo %s/<C-R><C-W>//g \| update<S-Left><S-Left><Left><Left><Left>
-nnoremap <Leader>rl yiw:%s/<C-R><C-W>//g<Left><Left>
+nnoremap <Leader>rg :cfdo %s/\(<C-R><C-W>\)//g \| update<S-Left><S-Left><Left><Left><Left>
+nnoremap <Leader>rl yiw:%s/\(<C-R><C-W>\)//g<Left><Left>
 nnoremap <Leader>rr :%s///g<Left><Left><Left>
 xnoremap <Leader>fl "ay/<C-R>a
 xnoremap <Leader>rl :s///g<Left><Left><Left>

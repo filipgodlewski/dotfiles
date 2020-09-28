@@ -40,6 +40,12 @@ take() {
     cd $1
 }
 
+update_base_venv() {
+    pyenv activate base
+    pip list --outdated --format freeze | sed 's/==.*//' | xargs -n1 pip -q install --use-feature=2020-resolver -U
+    pyenv deactivate
+}
+
 update_system() {
     denv
     echo "\n>>> updating base pip packages <<<\n"

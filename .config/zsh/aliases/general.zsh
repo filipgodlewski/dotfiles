@@ -18,5 +18,4 @@ alias lvi="la $XDG_DATA_HOME/nvim/site/pack/plugins/start"
 alias rf="rm -rf"
 
 alias update_homebrew="brew update; brew upgrade; brew upgrade --cask; brew cleanup --prune=all"
-alias update_base_venv="pyenv activate base; uppip; pyenv deactivate"
 alias update_npm="npm install -g npm; npm update --global"

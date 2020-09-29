@@ -16,3 +16,5 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(starship init zsh)"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+
+automata

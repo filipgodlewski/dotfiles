@@ -68,7 +68,7 @@ tnoremap <C-[> <C-\><C-N>
 
 " Vimux
 nnoremap <silent> <Leader>vf :w<CR>:VimuxRunCommand("clear; python ".bufname("%"))<CR>
-nnoremap <silent> <Leader>vl :VimuxRunLastCommand<CR>
+nnoremap <silent> <Leader>vl :w<CR>:VimuxRunLastCommand<CR>
 nnoremap <silent> <Leader>vo :call VimuxOpenRunner()<CR>
-nnoremap <silent> <Leader>vp :VimuxPromptCommand<CR>
+nnoremap <silent> <Leader>vp :w:<CR>:VimuxPromptCommand<CR>
 nnoremap <silent> <Leader>vq :VimuxCloseRunner<CR>

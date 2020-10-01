@@ -41,3 +41,14 @@ wttr() {
     par="$1"
     curl -s "http://wttr.in/$par?MF1ATq"
 }
+
+learn() {
+    cd ~/learning
+    echo -n "Provide project name: "
+    read answer
+    take ${answer}
+    git init
+    mkenv
+    tn
+    1
+}

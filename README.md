@@ -8,47 +8,27 @@ First of all, instructions below are prepared for MacOS, as this is my daily wor
 
 ### Installing
 
-Six easy steps:
+4 easy steps:
 
-#### Step 1/6
+#### Step 1/4
 
 Install `homebrew` using the official method from [this website](https://brew.sh).
 
-#### Step 2/6
+#### Step 2/4
 
 ```sh
 xcode-select --install
 ```
 
-#### Step 3/6
-
-```sh
-echo ".cfg" >> .gitignore
-git clone --bare https://github.com/filipgodlewski/dotfiles.git $HOME/.cfg
-alias cfg='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-rm .gitignore
-cfg checkout
-cfg config --local status.showUntrackedFiles no
-# Best to run it line by line
-```
-
-#### Step 4/6
+#### Step 3/4
 
 ```sh
 ./.local/share/helpers/RUN_ME_FIRST.zsh
 ```
-Terminal will exit when finished.
 
-#### Step 5/6
+#### Step 4/4
 
-```sh
-./.local/share/helpers/RUN_ME_SECOND.zsh
-```
-Terminal will exit when finished.
-
-#### Step 6/6
-
-Create new `base` tmux session and save it.
+Create new `base` tmux session, save it, restart terminal. Done!
 
 ## Licence
 

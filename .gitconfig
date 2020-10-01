@@ -7,7 +7,7 @@
 [include]
         path = ~/.config/git/aliases
 [init]
-    templatedir = ~/.config/git/template
+        templatedir = ~/.config/git/template
 [merge]
         tool = vim_mergetool
         conflictStyle = diff3

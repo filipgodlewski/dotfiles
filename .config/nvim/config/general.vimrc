@@ -3,6 +3,7 @@ set complete+=kspell
 set completeopt=menuone,longest
 set confirm
 set copyindent
+set cursorline
 set diffopt=filler,vertical
 set expandtab
 set fileformat=unix
@@ -27,6 +28,7 @@ set shortmess+=c
 set smartcase
 set smartindent
 set softtabstop=4
+set statusline=%<%f\ %h%m%r%=\ %{fugitive#head()}\ %-14.(%l,%c%V%)\ %P
 set termguicolors
 set updatetime=50
 set wildignore+=*.tar.*,*.zip*

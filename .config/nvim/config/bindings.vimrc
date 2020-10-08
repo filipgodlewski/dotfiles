@@ -16,6 +16,11 @@ nnoremap <silent> <Leader>fc :Colors<CR>
 nnoremap <silent> <Leader>ff :Files<CR>
 nnoremap <silent> <Leader>fh :Helptags<CR>
 
+" FUGITIVE
+nnoremap <silent> <Leader>gg :diffget //2<CR>:diffupdate<CR>
+nnoremap <silent> <Leader>hh :diffget //3<CR>:diffupdate<CR>
+nnoremap <silent> <Leader>uu u:diffupdate<CR>
+
 " Misc
 cnoreabbrev v vert
 nnoremap <silent> <Leader>bd :bp\|bd#<CR>

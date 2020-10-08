@@ -51,6 +51,7 @@ let $FZF_DEFAULT_OPTS = "--layout=reverse --info=inline --bind ctrl-a:select-all
 
 " NORD COLORSCHEME
 let g:nord_uniform_diff_background = 1
+let g:nord_cursor_line_number_background = 1
 
 " SEMSHI
 let g:semshi#error_sign = v:false

@@ -1,80 +1,115 @@
 #!/bin/zsh
 
-color_green=$(tput setaf 2)
-color_normal=$(tput sgr0)
+initialize_repo() {
+    echo ".cfg" >> .gitignore
+    git clone -q --bare https://github.com/filipgodlewski/dotfiles.git $HOME/.cfg || return 1
+    rm .gitignore || return 1
+    alias cfg="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
+    cfg checkout || return 1
+    cfg config --local status.showUntrackedFiles no || return 1
+}
 
-brews=(${(f)"$(cat ${XDG_DATA_HOME}/helpers/brew_list)"})
-brew_casks=($(cat ${XDG_DATA_HOME}/helpers/brew_cask_list))
-npms=($(cat ${XDG_DATA_HOME}/helpers/npm_list))
+config_repo() {
+    echo -n "INPUT: Git local user name: "
+    read cfg_username
+    [[ -z cfg_username ]] && return 1
+    echo -n "INPUT: Git local user email: "
+    read cfg_email
+    [[ -z cfg_email ]] && return 1
+    cfg config --local user.name "${cfg_username}"
+    cfg config --local user.email "${cfg_email}"
+}
 
+install_core() {
+    brew tap -q homebrew/cask-fonts || return 1
+    brews=(${(f)"$(cat ~/.local/helpers/brew_list)"})
+    for brew in ${brews}; do brew -q install ${brew} || return 1; done
+    brew install -q --HEAD universal-ctags/universal-ctags/universal-ctags || return 1
+}
 
-echo "\n${color_green}>>>>>> GIT INSTALLATION <<<<<<${color_normal}\n"
+install_cask() {
+    brew_casks=($(cat ~/.local/helpers/brew_cask_list))
+    for brew_cask in ${brew_casks}; do brew cask install ${brew_cask} || return 1; done
+}
 
-echo "\n${color_green}>>> initialize git bare repository <<<${color_normal}\n"
-echo ".cfg" >> .gitignore
-git clone --bare https://github.com/filipgodlewski/dotfiles.git $HOME/.cfg
-rm .gitignore
-alias cfg="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
-cfg checkout
-cfg config --local status.showUntrackedFiles no
+install_pyenv() {
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+    pyenv install -l | rg -v Available\ versions: | fzf | xargs -I{} sh -c "pyenv install {}; pyenv global {}" || return 1
+}
 
-echo "\n${color_green}>>> setup local git (cfg) config <<<${color_normal}\n"
-echo -n "Git local user name: "
-read cfg_username
-echo -n "Git local user email: "
-read cfg_email
-cfg config --local user.name "${cfg_username}"
-cfg config --local user.email "${cfg_email}"
+install_venvs() {
+    pyenv virtualenv $(pyenv global) base || return 1
+    pip install -U pip setuptools wheel || return 1
+    pyenv activate base || return 1
+    pip install -U pip setuptools wheel || return 1
+    pip install -r ~/.local/helpers/pip_list || return 1
+    pyenv deactivate || return 1
+}
 
-echo "\n${color_green}>>> initialize git submodules <<<${color_normal}\n"
-cfg submodule update --init --recursive
+install_npm() {
+    npms=($(cat ~/.local/helpers/npm_list))
+    for npm in ${npms}; do npm install -g ${npm} || return 1; done
+}
 
+resolve_conflicts() {
+    sudo chown -R $(whoami) /usr/local/share/zsh || return 1
+    sudo chmod -R 755 /usr/local/share/zsh || return 1
+    sudo chown -R $(whoami) /usr/local/share/zsh/site-functions || return 1
+    sudo chmod -R 755 /usr/local/share/zsh/site-functions || return 1
+}
 
-echo "\n${color_green}>>>>>> BREW INSTALLATION <<<<<<${color_normal}\n"
+compile_term() {
+    mkdir ~/.terminfo 2> /dev/null
+    for file in ~/.local/share/terminfo/*(.); do tic -o ~/.terminfo ${file} || return 1; done
+}
 
-echo "\n${color_green}>>> open brew taps <<<${color_normal}\n"
-brew tap homebrew/cask-fonts
+echo "\nTASK: GIT **********************************************************************\n"
+echo "[initialize repo] ..."
+initialize_repo || {echo "FAIL"; exit 1}
+echo "[initialize repo] ...OK"
+echo "[config] ..."
+config_repo || {echo "FAIL"; exit 1}
+echo "[config] ...OK"
+echo "[submodules] ..."
+cfg submodule -q update --init --recursive || {echo "FAIL"; exit 1}
+echo "[submodules] ...OK"
 
-echo "\n${color_green}>>> install core brew programs <<<${color_normal}\n"
-for brew in ${brews}; do brew install ${brew}; done
-brew install --HEAD universal-ctags/universal-ctags/universal-ctags
+echo "\nTASK: HOMEBREW *****************************************************************\n"
+echo "[core] ..."
+install_core || {echo "FAIL"; exit 1}
+echo "[core] ...OK"
+echo "[cask] ..."
+install_cask || {echo "FAIL"; exit 1}
+echo "[cask] ...OK"
 
-echo "\n${color_green}>>> install core brew cask programs <<<${color_normal}\n"
-for brew_cask in ${brew_casks}; do brew cask install ${brew_cask}; done
+echo "\nTASK: PYTHON *******************************************************************\n"
+echo "[pyenv] ..."
+install_pyenv || {echo "FAIL"; exit 1}
+echo "[pyenv] ...OK"
+echo "[pyenv virtualenvs] ..."
+install_venvs || {echo "FAIL"; exit 1}
+echo "[pyenv virtualenvs] ...OK"
 
-echo "\n${color_green}>>>>>> PYTHON INSTALLATION <<<<<<${color_normal}\n"
+echo "\nTASK: NPM **********************************************************************\n"
+echo "[npm] ..."
+install_npm || {echo "FAIL"; exit 1}
+echo "[npm] ...OK"
 
-echo "\n${color_green}>>> install python version using pyenv <<<${color_normal}\n"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-pyenv install -l | rg -v Available\ versions: | fzf | xargs -I{} sh -c "pyenv install {}; pyenv global {}"
+echo "\nTASK: ZSH **********************************************************************\n"
+echo "[default] ..."
+chsh -s /bin/zsh || {echo "FAIL"; exit 1}
+echo "[default] ...OK"
+echo "[zsh conflicts] ..."
+resolve_conflicts || {echo "FAIL"; exit 1}
+echo "[zsh conflicts] ...OK"
+echo "[terminfo] ..."
+compile_term || {echo "FAIL"; exit 1}
+echo "[terminfo] ...OK"
 
-echo "\n${color_green}>>> install base pip packages <<<${color_normal}\n"
-pyenv virtualenv $(pyenv global) base
-pip install -U pip setuptools wheel
-pyenv activate base
-pip install -U pip setuptools wheel
-pip install -r ${XDG_DATA_HOME}/helpers/pip_list
-pyenv deactivate
+echo "\nTASK: NVIM *********************************************************************\n"
+echo "[remote plugins] ..."
+nvim -c "UpdateRemotePlugins | q" || {echo "FAIL"; exit 1}
+echo "[remote plugins] ...OK"
 
-echo "\n${color_green}>>>>>> NPM INSTALLATION <<<<<<${color_normal}\n"
-
-echo "\n${color_green}>>> install npm modules <<<${color_normal}\n"
-for npm in ${npms}; do npm install -g ${npm}; done
-
-echo "\n${color_green}>>>>>> ZSH INSTALLATION <<<<<<${color_normal}\n"
-
-echo "\n${color_green}>>> make zsh the default shell <<<${color_normal}\n"
-chsh -s /bin/zsh
-
-echo "\n${color_green}>>> resolve compinit issues <<<${color_normal}\n"
-sudo chown -R $(whoami) /usr/local/share/zsh
-sudo chmod -R 755 /usr/local/share/zsh
-sudo chown -R $(whoami) /usr/local/share/zsh/site-functions
-sudo chmod -R 755 /usr/local/share/zsh/site-functions
-
-echo "\n${color_green}>>> update remote plugins <<<${color_normal}\n"
-nvim -c "UpdateRemotePlugins | q"
-
-echo "\n${color_green}>>>>>> DONE. <<<<<<${color_normal}\n"
 exit 0

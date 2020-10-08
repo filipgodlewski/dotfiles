@@ -17,6 +17,7 @@ nnoremap <silent> <Leader>ff :Files<CR>
 nnoremap <silent> <Leader>fh :Helptags<CR>
 
 " Misc
+cnoreabbrev v vert
 nnoremap <silent> <Leader>bd :bp\|bd#<CR>
 nnoremap <silent> <Leader>so :w<CR>:so $MYVIMRC<CR>:noh<CR>
 
@@ -49,10 +50,6 @@ nnoremap <silent> <Leader>tc :Pytest class<CR>
 nnoremap <silent> <Leader>tf :Pytest file<CR>
 nnoremap <silent> <Leader>tm :Pytest method<CR>
 nnoremap <silent> <Leader>tp :Pytest project<CR>
-
-" Signify
-nnoremap <silent> <Leader>gd :SignifyHunkDiff<CR>
-nnoremap <silent> <Leader>gu :SignifyHunkUndo<CR>
 
 " Terminal
 tnoremap <C-W><C-H> <C-\><C-N><C-W><C-H>

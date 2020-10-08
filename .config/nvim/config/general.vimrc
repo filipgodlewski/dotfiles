@@ -14,13 +14,16 @@ set inccommand=nosplit
 set lazyredraw
 set noswapfile
 set nrformats+=alpha
+set number
 set path+=**
 set pumblend=20
 set pumheight=10
+set relativenumber
 set scrolloff=8
+set shell=/usr/local/bin/zsh
+set shiftround
 set shiftwidth=4
 set shortmess+=c
-set signcolumn=yes:1
 set smartcase
 set smartindent
 set softtabstop=4

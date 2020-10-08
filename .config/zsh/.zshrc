@@ -12,6 +12,7 @@ source $ZDOTDIR/bindings.zsh
 export LC_ALL=en_US.UTF-8
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 export PATH="$PYENV_ROOT/bin:$PATH"
+export TERM=xterm-256color
 
 eval "$(starship init zsh)"
 eval "$(pyenv init -)"

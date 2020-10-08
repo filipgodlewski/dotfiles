@@ -71,6 +71,8 @@ update_system() {
     mas upgrade
     echo "\n>>> updating alacritty colorscheme <<<\n"
     cat $XDG_DATA_HOME/misc/nord-alacritty/src/nord.yml $XDG_CONFIG_HOME/alacritty/base.yml > $XDG_CONFIG_HOME/alacritty/alacritty.yml
+    echo "\n>>> updating nvim plugins <<<\n"
+    nvim -c "UpdateRemotePlugins | q"
     echo "\n>>> reloading zsh <<<\n"
     exec zsh
 }

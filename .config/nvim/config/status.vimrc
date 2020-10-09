@@ -19,34 +19,45 @@ function! FileSize()
 endfunction
 
 function! ReadOnly()
-  if &readonly || !&modifiable
-    return '[READ-ONLY] '
-  else
-    return ''
+  return &readonly || !&modifiable ? '[READ-ONLY] ' : ''
 endfunction
 
-function! GitInfo()
+function! GitInfo() abort
   let git = fugitive#head()
-  if git != ''
-    return '   '.fugitive#head().' '
-  else
-    return ''
+  return git == '' ? '' : '   '.git.' '
+endfunction
+
+function! ALEErrorCount() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+    let l:all_errors = l:counts.error + l:counts.style_error
+    return l:all_errors == 0 ? '' : '  Err  '.all_errors.' '
+endfunction
+
+function! ALEWarningCount() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+    let l:all_warnings = l:counts.total - (l:counts.error + l:counts.style_error)
+    return l:all_warnings == 0 ? '' : '  Warn '.all_warnings.' '
 endfunction
 
 set statusline=
-set statusline+=%1*%{GitInfo()}                           " Git Branch name
-set statusline+=%0*\ %<%f\                                " file
-set statusline+=%2*%{ReadOnly()}
-set statusline+=%0*%m\ %w\                                " File+path
-set statusline+=%#warningmsg#
-set statusline+=%0*
-set statusline+=%0*\ %=                                   " Space
-set statusline+=%0*\ %y\                                  " FileType
-set statusline+=%0*\ %{(&fenc!=''?&fenc:&enc)}\ \[%{&ff}]\  " Encoding & Fileformat
-set statusline+=%0*\ %6(%{FileSize()}%)                   " File size
-set statusline+=%0*\ D:\ %3p%%                            " Position (%)
-set statusline+=%0*\ L:\ %3l\/%L                          " Lines / Total Lines
-set statusline+=%0*\ C:\ %3c\                             " Columns
+set statusline+=%1*%{GitInfo()}                 " Git Branch name
+set statusline+=%3*%{ALEWarningCount()}         " ALE Warnings
+set statusline+=%4*%{ALEErrorCount()}           " ALE Errors
+set statusline+=%0*\ %<%f\                      " file relative
+set statusline+=%2*%{ReadOnly()}                " Read Only indicator
+set statusline+=%0*%m\ %w\                      " modifiable + preview flag
+set statusline+=%#warningmsg#                   " warning message
+set statusline+=%0*                             " Restore default color
+set statusline+=%0*\ %=                         " Space
+set statusline+=%0*\ %y\                        " FileType
+set statusline+=%0*\ %{(&fenc!=''?&fenc:&enc)}  " Encoding
+set statusline+=%0*\ \[%{&ff}]\                 " Fileformat
+set statusline+=%0*\ %6(%{FileSize()}%)         " File size
+set statusline+=%0*\ D:\ %3p%%                  " Position (%)
+set statusline+=%0*\ L:\ %3l\/%L                " Lines / Total Lines
+set statusline+=%0*\ C:\ %3c\                   " Columns
 
-hi User1 guifg=#EBCB8B guibg=#3B4252 gui=bold
+hi User1 guifg=#A3BE8C guibg=#3B4252 gui=bold
 hi User2 guifg=#BF616A guibg=#3B4252 gui=bold
+hi User3 guifg=#2E3440 guibg=#EBCB8B gui=bold
+hi User4 guifg=#2E3440 guibg=#BF616A gui=bold

@@ -28,7 +28,6 @@ set shortmess+=c
 set smartcase
 set smartindent
 set softtabstop=4
-set statusline=%<%f\ %h%m%r%=\ %{fugitive#head()}\ %-14.(%l,%c%V%)\ %P
 set termguicolors
 set updatetime=50
 set wildignore+=*.tar.*,*.zip*

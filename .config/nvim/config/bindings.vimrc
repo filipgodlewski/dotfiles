@@ -1,29 +1,34 @@
 " ALE
 nnoremap <silent> <Leader>an :ALENextWrap<CR>
 nnoremap <silent> <Leader>ap :ALEPreviousWrap<CR>
+nnoremap <silent> <Leader>ao :lope<CR>
+nnoremap <silent> <Leader>ac :lclo<CR>
 
 " Find and Replace
-nnoremap <Leader>fg yiw:silent! grep! "<C-R><C-W>"
-nnoremap <Leader>rg :cfdo %s/\(<C-R><C-W>\)//g \| update<S-Left><S-Left><Left><Left><Left>
-nnoremap <Leader>rl yiw:%s/\(<C-R><C-W>\)//g<Left><Left>
-nnoremap <Leader>rr :%s///g<Left><Left><Left>
-xnoremap <Leader>fl "ay/<C-R>a
+nnoremap <Leader>fg :silent! grep! ""<Left>
+nnoremap <Leader>rg :cfdo %s/\(\<\>\)//g \| update<S-Left><S-Left><Left><Left><Left><Left><Left><Left><Left><Left>
+nnoremap <Leader>rl :%s/\(\<\>\)//gc<Left><Left><Left><Left><Left><Left><Left><Left>
+nnoremap <Leader>fl "ayiw/\<<C-R>a\><Left><Left>
 xnoremap <Leader>rl :s///g<Left><Left><Left>
+
+" Open and Close
+nnoremap <silent> <Leader>co :cope<CR>:set modifiable<CR>
+nnoremap <silent> <Leader>cc :cclo<CR>
+nnoremap <silent> <Leader>cw :clo<CR>
+nnoremap <silent> <Leader>bd :bp\|bd#<CR>
 
 " FZF
 nnoremap <silent> <Leader>fb :Buffers<CR>
-nnoremap <silent> <Leader>fc :Colors<CR>
 nnoremap <silent> <Leader>ff :Files<CR>
 nnoremap <silent> <Leader>fh :Helptags<CR>
 
 " FUGITIVE
-nnoremap <silent> <Leader>gg :diffget //2<CR>:diffupdate<CR>
-nnoremap <silent> <Leader>hh :diffget //3<CR>:diffupdate<CR>
-nnoremap <silent> <Leader>uu u:diffupdate<CR>
+nnoremap <silent> <Leader>df :diffget //2<CR>:diffupdate<CR>
+nnoremap <silent> <Leader>dj :diffget //3<CR>:diffupdate<CR>
+nnoremap <silent> <Leader>du u:diffupdate<CR>
 
 " Misc
 cnoreabbrev v vert
-nnoremap <silent> <Leader>bd :bp\|bd#<CR>
 nnoremap <silent> <Leader>so :w<CR>:so $MYVIMRC<CR>:noh<CR>
 
 " Movements
@@ -38,6 +43,7 @@ nnoremap <silent> <Esc> :noh<CR>
 nnoremap <silent> S i<CR><esc>^mwgk:silent! s/\v +$//<CR>:noh<CR>`w
 nnoremap Y y$
 nnoremap gy "*y
+nnoremap gY "*Y
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 vnoremap gy "*y
@@ -71,7 +77,6 @@ tnoremap <C-[> <C-\><C-N>
 " Vimux
 nnoremap <silent> <Leader>vf :w<CR>:VimuxRunCommand("clear; python ".bufname("%"))<CR>
 nnoremap <silent> <Leader>vi :w<CR>:VimuxRunCommand("clear; python -i ".bufname("%"))<CR>
-nnoremap <silent> <Leader>vl :w<CR>:VimuxRunLastCommand<CR>
+nnoremap <silent> <Leader>vl :w<CR>:call VimuxSendKeys("Up")<CR>:call VimuxSendKeys("Enter")<CR>
 nnoremap <silent> <Leader>vo :call VimuxOpenRunner()<CR>
-nnoremap <silent> <Leader>vp :w:<CR>:VimuxPromptCommand<CR>
 nnoremap <silent> <Leader>vq :VimuxCloseRunner<CR>

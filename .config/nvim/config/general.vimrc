@@ -8,7 +8,7 @@ set diffopt=filler,vertical
 set expandtab
 set fileformat=unix
 set grepformat=%f:%l:%c:%m
-set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case\ --follow\ --word-regexp
+set grepprg=rg\ --vimgrep\ --no-heading\ --case-sensitive\ --follow\ --word-regexp
 set hidden
 set ignorecase
 set inccommand=nosplit
@@ -25,7 +25,6 @@ set shell=/usr/local/bin/zsh
 set shiftround
 set shiftwidth=4
 set shortmess+=c
-set smartcase
 set smartindent
 set softtabstop=4
 set termguicolors

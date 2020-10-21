@@ -5,6 +5,18 @@ chpwd() {
     automata
 }
 
+kill() {
+    case $1 in
+        -l)
+            integer i=0
+            print -c ${(e)signals//*/\$((i++))\) SIG\$signals[\$i]}
+            ;;
+        *)
+            command kill "$@"
+            ;;
+    esac
+}
+
 put() {
     touch $1
     e $1

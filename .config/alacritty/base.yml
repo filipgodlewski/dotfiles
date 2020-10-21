@@ -7,8 +7,7 @@ draw_bold_text_with_bright_colors: true
 live_config_reload: true
 
 cursor:
-  style: Beam
-  vi_mode_style: Block
+  style: Block
 
 window:
   padding:
@@ -19,7 +18,7 @@ window:
   dynamic_title: true
 
 scrolling:
-  history: 16000
+  history: 32000
 
 font:
   normal:

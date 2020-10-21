@@ -45,6 +45,8 @@ ls = ls-files
 lsi = ls-files --others --i --exclude-standard
 
 m = merge
+ma = merge --abort
+mc = merge --continue
 
 p = pull
 

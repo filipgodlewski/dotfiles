@@ -21,4 +21,6 @@ function SemshiColors()
 endfunction
 au FileType python call SemshiColors()
 au ColorScheme nord call NordColors()
-colorscheme nord
+if !exists('g:colors_name')
+    silent! colorscheme nord
+endif

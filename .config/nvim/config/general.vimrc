@@ -27,7 +27,9 @@ set shiftwidth=4
 set shortmess+=c
 set smartindent
 set softtabstop=4
-set termguicolors
+if !&termguicolors
+    set termguicolors
+endif
 set updatetime=50
 set wildignore+=*.tar.*,*.zip*
 set wildignore+=*/.git/**/*,*/.hg/**/*,*/.svn/**/*

@@ -50,11 +50,11 @@ endfunction
 function! ReplaceOnQuickFix(before)
     echo "Replace: ".a:before
     let after = UserInput('With: ')
-    let cfdo_command = 'cfdo s/'.a:before.'/'.after.'/g | update'
+    let quickfix_command = 'silent! cdo s/'.a:before.'/'.after.'/ | update'
     let choice = confirm("Is it ok?", "&Ok\n&Abort", 1)
     if choice == 1
         call ToggleCodeHelpers()
-        execute cfdo_command
+        execute quickfix_command
         call ToggleCodeHelpers()
     endif
 endfunction

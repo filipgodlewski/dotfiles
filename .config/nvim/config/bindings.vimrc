@@ -26,7 +26,6 @@ nnoremap <silent> <Leader>dj :diffget //3<CR>:diffupdate<CR>
 nnoremap <silent> <Leader>du u:diffupdate<CR>
 
 " Misc
-cnoreabbrev v vert
 nnoremap <silent> <Leader>so :w<CR>:so $MYVIMRC<CR>:noh<CR>
 
 " Movements

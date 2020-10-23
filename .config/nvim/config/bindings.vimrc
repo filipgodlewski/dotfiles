@@ -5,15 +5,13 @@ nnoremap <silent> <Leader>ao :lope<CR>
 nnoremap <silent> <Leader>ac :lclo<CR>
 
 " Find and Replace
-nnoremap <Leader>fg :silent! grep! ""<Left>
-nnoremap <Leader>rg :cfdo %s/\(\<\>\)//g \| update<S-Left><S-Left><Left><Left><Left><Left><Left><Left><Left><Left>
-nnoremap <Leader>rl :%s/\(\<\>\)//gc<Left><Left><Left><Left><Left><Left><Left><Left>
-nnoremap <Leader>fl "ayiw/\<<C-R>a\><Left><Left>
-xnoremap <Leader>rl :s///g<Left><Left><Left>
+nnoremap <Leader>fg :call SearchForQuickFix()<CR>
+nnoremap <Leader>rg :call ReplaceOnQuickFix(g:quickfix_search)<CR>
+nnoremap <Leader>rl :call ReplaceLocalList()<CR>
 
 " Open and Close
 nnoremap <silent> <Leader>co :cope<CR>:set modifiable<CR>
-nnoremap <silent> <Leader>cc :cclo<CR>
+nnoremap <silent> <Leader>cc :call SaveQuickFix()<CR>
 nnoremap <silent> <Leader>cw :clo<CR>
 nnoremap <silent> <Leader>bd :bp\|bd#<CR>
 

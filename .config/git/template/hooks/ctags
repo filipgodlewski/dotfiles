@@ -1,6 +1,13 @@
-#!/bin/sh
+#!/bin/zsh
 set -e
-PATH="/usr/local/bin:$PATH"
 trap 'rm -f "$$.tags"' EXIT
-git ls-files | ctags --tag-relative -L - -f"$$.tags" --languages=-javascript,sql
+current_venv="$(pyenv prefix)"
+if [[ "${$(pyenv prefix)##*/}" = "$(pyenv global)" ]]; then
+    site_packages="$(find ${PWD}**/*(.))"
+else
+    site_packages="$(find ${PWD}**/*(.))"
+    site_packages+="\n"
+    site_packages+="$(find ${current_venv}/**/site-packages/**/*.py)"
+fi
+echo $site_packages | ctags --tag-relative -L - -f "$$.tags" --languages=-javascript,sql
 mv "$$.tags" "tags"

@@ -16,3 +16,4 @@ endfunction
 setlocal includeexpr=PyInclude(v:fname)
 setlocal define=^\\s*\\<\\(def\\\|class\\)\\>
 setlocal foldmethod=indent
+setlocal nofoldenable

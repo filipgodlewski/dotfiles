@@ -1,6 +1,5 @@
 set autowriteall
 set complete+=kspell
-set completeopt=menuone,longest
 set confirm
 set copyindent
 set cursorline

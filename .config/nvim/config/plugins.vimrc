@@ -17,17 +17,15 @@ let g:ale_virtualtext_cursor = 1
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#jedi#extra_path = expand("~/.pyenv/versions/base/lib/**/site-packages")
 let g:deoplete#sources#jedi#ignore_private_members = 1
-let g:deoplete#sources#jedi#show_docstring = 1
+let g:deoplete#sources#jedi#show_docstring = 0
+let g:deoplete#sources#jedi#statement_length = 100
+au Filetype * call deoplete#custom#option('ignore_sources', {'_': ['buffer'], 'python': ['buffer', 'around']})
 let pyenv_venv_path = substitute(system("echo $VIRTUAL_ENV"), "\n", "", "")
 if pyenv_venv_path != ""
     let g:deoplete#sources#jedi#python_path = expand(pyenv_venv_path."/bin/python")
 else
     let g:deoplete#sources#jedi#python_path = expand("~/.pyenv/versions/base/bin/python")
 endif
-
-" ECHODOC
-let g:echodoc#enable_at_startup = 1
-let g:echodoc#type = 'floating'
 
 " FZF
 let g:fzf_colors =
@@ -48,6 +46,9 @@ let g:fzf_layout = {"up":"~90%", "window":{"width":0.8, "height":0.8,"yoffset":0
 let g:fzf_preview_window = "right:60%"
 let $FZF_DEFAULT_COMMAND = "rg --files --hidden"
 let $FZF_DEFAULT_OPTS = "--layout=reverse --info=inline --bind ctrl-a:select-all"
+
+" JEDI-VIM
+let g:jedi#completions_enabled = 0
 
 " NORD COLORSCHEME
 let g:nord_cursor_line_number_background = 1

@@ -1,5 +1,9 @@
+if !&termguicolors
+    set termguicolors
+endif
 set autowriteall
 set complete+=kspell
+set completeopt-=preview
 set confirm
 set copyindent
 set cursorline
@@ -9,9 +13,9 @@ set fileformat=unix
 set grepformat=%f:%l:%c:%m
 set grepprg=rg\ --vimgrep\ --no-heading\ --case-sensitive\ --follow\ --word-regexp
 set hidden
-set ignorecase
-set inccommand=nosplit
 set lazyredraw
+set mouse=i
+set noshowmode
 set noswapfile
 set nrformats+=alpha
 set number
@@ -19,16 +23,11 @@ set path+=**
 set pumblend=20
 set pumheight=10
 set relativenumber
-set scrolloff=8
 set shell=/usr/local/bin/zsh
 set shiftround
 set shiftwidth=4
-set shortmess+=c
-set smartindent
+set shortmess+=mrwcI
 set softtabstop=4
-if !&termguicolors
-    set termguicolors
-endif
 set updatetime=50
 set wildignore+=*.tar.*,*.zip*
 set wildignore+=*/.git/**/*,*/.hg/**/*,*/.svn/**/*

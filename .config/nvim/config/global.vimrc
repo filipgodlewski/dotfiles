@@ -4,6 +4,6 @@ let g:python3_host_prog=expand("~/.pyenv/versions/base/bin/python")
 let mapleader=" "
 set rtp+=/usr/local/opt/fzf
 if !exists('g:syntax_on')
-   syntax on
+   syntax enable
    let g:syntax_on = 1
 end

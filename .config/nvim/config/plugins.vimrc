@@ -15,11 +15,21 @@ let g:ale_virtualtext_cursor = 1
 
 " DEOPLETE
 let g:deoplete#enable_at_startup = 1
+au Filetype * call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
+au Filetype * call deoplete#custom#source('ale', 'rank', 110)
+au Filetype python call deoplete#custom#source('jedi', 'rank', 999)
 let g:deoplete#sources#jedi#extra_path = expand("~/.pyenv/versions/base/lib/**/site-packages")
 let g:deoplete#sources#jedi#ignore_private_members = 1
-let g:deoplete#sources#jedi#show_docstring = 0
+let g:deoplete#sources#jedi#show_docstring = 1
 let g:deoplete#sources#jedi#statement_length = 100
-au Filetype * call deoplete#custom#option('ignore_sources', {'_': ['buffer'], 'python': ['buffer', 'around']})
+au Filetype * call deoplete#custom#option({
+\     'ignore_sources': {
+\         '_': ['buffer'],
+\         'python': ['buffer', 'around']
+\     },
+\     'auto_complete_delay': 200
+\ })
+au InsertLeave * silent! pclose!
 let pyenv_venv_path = substitute(system("echo $VIRTUAL_ENV"), "\n", "", "")
 if pyenv_venv_path != ""
     let g:deoplete#sources#jedi#python_path = expand(pyenv_venv_path."/bin/python")
@@ -27,9 +37,18 @@ else
     let g:deoplete#sources#jedi#python_path = expand("~/.pyenv/versions/base/bin/python")
 endif
 
+" ECHODOC
+let g:echodoc#enable_at_startup = 1
+let g:echodoc#type = "virtual"
+
+" FLOAT-PREVIEW
+let g:float_preview#docked = 0
+let g:float_preview#winhl = 'Normal:User5,NormalNC:User5'
+let g:float_preview#max_width = 128
+
 " FZF
-let g:fzf_colors =
-\ { "fg":      ["fg", "Normal"],
+let g:fzf_colors = {
+\ "fg":      ["fg", "Normal"],
 \ "bg":      ["bg", "Normal"],
 \ "hl":      ["fg", "Comment"],
 \ "fg+":     ["fg", "CursorLine", "CursorColumn", "Normal"],
@@ -41,7 +60,8 @@ let g:fzf_colors =
 \ "pointer": ["fg", "Exception"],
 \ "marker":  ["fg", "Keyword"],
 \ "spinner": ["fg", "Label"],
-\ "header":  ["fg", "Comment"] }
+\ "header":  ["fg", "Comment"]
+\ }
 let g:fzf_layout = {"up":"~90%", "window":{"width":0.8, "height":0.8,"yoffset":0.5,"xoffset":0.5, "highlight":"Todo", "border":"sharp"}}
 let g:fzf_preview_window = "right:60%"
 let $FZF_DEFAULT_COMMAND = "rg --files --hidden"
@@ -56,6 +76,3 @@ let g:nord_cursor_line_number_background = 1
 " SEMSHI
 let g:semshi#error_sign = v:false
 let g:semshi#excluded_hl_groups=["unresolved"]
-
-" VIMWIKI
-let g:vimwiki_list = [{'path': '~/Documents/vimwiki/', 'path_html': '~/Documents/vimwiki_html'}]

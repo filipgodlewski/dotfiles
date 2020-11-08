@@ -22,21 +22,12 @@
 [submodule ".local/share/nvim/site/pack/plugins/start/deoplete-jedi"]
 	path = .local/share/nvim/site/pack/plugins/start/deoplete-jedi
 	url = https://github.com/deoplete-plugins/deoplete-jedi.git
-[submodule ".local/share/nvim/site/pack/plugins/start/ultisnips"]
-	path = .local/share/nvim/site/pack/plugins/start/ultisnips
-	url = https://github.com/SirVer/ultisnips.git
-[submodule ".local/share/nvim/site/pack/plugins/start/vim-doge"]
-	path = .local/share/nvim/site/pack/plugins/start/vim-doge
-	url = https://github.com/kkoomen/vim-doge.git
 [submodule ".local/share/zsh/plugins/propane"]
 	path = .local/share/zsh/plugins/propane
 	url = https://github.com/filipgodlewski/propane.git
 [submodule ".local/share/zsh/plugins/pytomata"]
 	path = .local/share/zsh/plugins/pytomata
 	url = https://github.com/filipgodlewski/pytomata.git
-[submodule ".local/share/nvim/site/pack/plugins/start/vim-commentary"]
-	path = .local/share/nvim/site/pack/plugins/start/vim-commentary
-	url = https://github.com/tpope/vim-commentary.git
 [submodule ".local/share/nvim/site/pack/plugins/start/nord-vim"]
 	path = .local/share/nvim/site/pack/plugins/start/nord-vim
 	url = https://github.com/arcticicestudio/nord-vim.git
@@ -55,21 +46,18 @@
 [submodule ".local/share/tmux/tmux-1password"]
 	path = .local/share/tmux/tmux-1password
 	url = https://github.com/yardnsm/tmux-1password.git
-[submodule ".local/share/nvim/site/pack/plugins/start/pytest.vim"]
-	path = .local/share/nvim/site/pack/plugins/start/pytest.vim
-	url = https://github.com/alfredodeza/pytest.vim.git
 [submodule ".local/share/nvim/site/pack/plugins/start/vimux"]
 	path = .local/share/nvim/site/pack/plugins/start/vimux
 	url = https://github.com/benmills/vimux.git
-[submodule ".local/share/nvim/site/pack/plugins/start/vimwiki"]
-	path = .local/share/nvim/site/pack/plugins/start/vimwiki
-	url = https://github.com/vimwiki/vimwiki.git
 [submodule ".local/share/nvim/site/pack/plugins/start/semshi"]
 	path = .local/share/nvim/site/pack/plugins/start/semshi
 	url = https://github.com/numirias/semshi.git
 [submodule ".local/share/zsh/plugins/fast-syntax-highlighting"]
 	path = .local/share/zsh/plugins/fast-syntax-highlighting
 	url = https://github.com/zdharma/fast-syntax-highlighting.git
-[submodule ".local/share/nvim/site/pack/plugins/start/jedi-vim"]
-	path = .local/share/nvim/site/pack/plugins/start/jedi-vim
-	url = https://github.com/davidhalter/jedi-vim.git
+[submodule ".local/share/nvim/site/pack/plugins/start/echodoc.vim"]
+	path = .local/share/nvim/site/pack/plugins/start/echodoc.vim
+	url = https://github.com/Shougo/echodoc.vim.git
+[submodule ".local/share/nvim/site/pack/plugins/start/float-preview.nvim"]
+	path = .local/share/nvim/site/pack/plugins/start/float-preview.nvim
+	url = https://github.com/ncm2/float-preview.nvim.git

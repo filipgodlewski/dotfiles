@@ -60,6 +60,7 @@ tnoremap <C-[> <C-\><C-N>
 " Vimux
 nnoremap <silent> <Leader>vf :wa<CR>:VimuxRunCommand("clear; python ".bufname("%"))<CR>
 nnoremap <silent> <Leader>vi :wa<CR>:VimuxRunCommand("clear; python -i ".bufname("%"))<CR>
-nnoremap <silent> <Leader>vl :wa<CR>:call VimuxSendKeys("Up")<CR>:call VimuxSendKeys("Enter")<CR>
+nnoremap <silent> <Leader>vl :wa<CR>:VimuxRunCommand("r")<CR>
 nnoremap <silent> <Leader>vo :call VimuxOpenRunner()<CR>
 nnoremap <silent> <Leader>vc :VimuxCloseRunner<CR>
+nnoremap <silent> <Leader>vz :VimuxZoomRunner<CR>

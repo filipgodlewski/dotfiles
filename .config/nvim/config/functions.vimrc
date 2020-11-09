@@ -102,14 +102,14 @@ function! Pytester(call)
 endfunction
 command! -nargs=1 Pytest call Pytester(<f-args>)
 
-function! BetterCIB()
-    if search("(","bn") == line(".")
-        sil exe "normal! f)ci("
-        sil exe "normal! l"
-        startinsert
-    else
-        sil exe "normal! f(ci("
-        sil exe "normal! l"
+function! BetterBrackets(action, count)
+    let l:dir = search("(.", "cn") == line(".") ? ")" : "("
+    for i in range(1,a:count)
+        execute "normal! f".l:dir."di("
+    endfor
+    if a:action == "c"
         startinsert
     endif
 endfunction
+nnoremap <silent> <Plug>DeleteInsideBrackets :<C-U>call BetterBrackets("d", v:count1) \| call repeat#set("\<Plug>DeleteInsideBrackets")<CR>
+nnoremap <silent> <Plug>ChangeInsideBrackets :call BetterBrackets("c", 1) \| call repeat#set("\<Plug>ChangeInsideBrackets")<CR>

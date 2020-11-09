@@ -26,7 +26,7 @@ nnoremap <silent> <Leader>dj :diffget //3<CR>:diffupdate<CR>
 nnoremap <silent> <Leader>du u:diffupdate<CR>
 
 " Misc
-nnoremap <silent> <Leader>so :w<CR>:so $MYVIMRC<CR>:noh<CR>
+nnoremap <silent> <Leader>so :wa<CR>:so $MYVIMRC<CR>:noh<CR>
 nnoremap <silent> cib :call BetterCIB()<CR>
 nnoremap <silent> ci( :call BetterCIB()<CR>
 
@@ -56,8 +56,8 @@ nnoremap <silent> <Leader>pp :Pytest all<CR>
 tnoremap <C-[> <C-\><C-N>
 
 " Vimux
-nnoremap <silent> <Leader>vf :w<CR>:VimuxRunCommand("clear; python ".bufname("%"))<CR>
-nnoremap <silent> <Leader>vi :w<CR>:VimuxRunCommand("clear; python -i ".bufname("%"))<CR>
-nnoremap <silent> <Leader>vl :w<CR>:call VimuxSendKeys("Up")<CR>:call VimuxSendKeys("Enter")<CR>
+nnoremap <silent> <Leader>vf :wa<CR>:VimuxRunCommand("clear; python ".bufname("%"))<CR>
+nnoremap <silent> <Leader>vi :wa<CR>:VimuxRunCommand("clear; python -i ".bufname("%"))<CR>
+nnoremap <silent> <Leader>vl :wa<CR>:call VimuxSendKeys("Up")<CR>:call VimuxSendKeys("Enter")<CR>
 nnoremap <silent> <Leader>vo :call VimuxOpenRunner()<CR>
 nnoremap <silent> <Leader>vc :VimuxCloseRunner<CR>

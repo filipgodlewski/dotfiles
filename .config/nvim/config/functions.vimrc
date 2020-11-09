@@ -87,7 +87,7 @@ endfunction
 
 function! PT(file_path, pt_keywords, markers, custom_args)
     let l:args = a:file_path.a:pt_keywords.a:markers.a:custom_args
-    execute "silent! w"
+    execute "silent! wa"
     execute "VimuxRunCommand('clear; pytest ".l:args."')"
 endfunction
 

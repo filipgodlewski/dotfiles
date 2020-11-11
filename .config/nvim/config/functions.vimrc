@@ -103,15 +103,16 @@ endfunction
 command! -nargs=1 Pytest call Pytester(<f-args>)
 
 function! BetterBrackets(action, count)
-    if a:count > 1
-        for i in range(1,a:count)
-            let l:dir = search("(.", "cn", line(".")) ? "f)" : "F("
-            execute "normal! ".l:dir."di("
-        endfor
-    else
-        call search(")", "cze", line("."))
-        execute "normal! di("
-    endif
+    for i in range(1,a:count)
+        if len(strcharpart(getline('.')[col('.') - 1:], 0, 2)) == 1
+            execute "normal! di("
+            break
+        elseif searchpair("(", ".\+", ")", "bcm") > 0
+            execute "normal! di("
+        else
+            execute "normal! f)di("
+        endif
+    endfor
     if a:action == "c"
         startinsert
     endif

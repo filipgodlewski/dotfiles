@@ -27,10 +27,6 @@ nnoremap <silent> <Leader>du u:diffupdate<CR>
 
 " Misc
 nnoremap <silent> <Leader>so :wa<CR>:so $MYVIMRC<CR>:noh<CR>
-nmap cib <Plug>ChangeInsideBrackets
-nmap ci( <Plug>ChangeInsideBrackets
-nmap dib <Plug>DeleteInsideBrackets
-nmap di( <Plug>DeleteInsideBrackets
 
 " Movements
 cnoremap <C-H> <Left>

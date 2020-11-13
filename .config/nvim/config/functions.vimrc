@@ -101,21 +101,3 @@ function! Pytester(call)
     endif
 endfunction
 command! -nargs=1 Pytest call Pytester(<f-args>)
-
-function! BetterBrackets(action, count)
-    for i in range(1,a:count)
-        if len(strcharpart(getline('.')[col('.') - 1:], 0, 2)) == 1
-            execute "normal! di("
-            break
-        elseif searchpair("(", ".\+", ")", "bcm") > 0
-            execute "normal! di("
-        else
-            execute "normal! f)di("
-        endif
-    endfor
-    if a:action == "c"
-        startinsert
-    endif
-endfunction
-nnoremap <silent> <Plug>DeleteInsideBrackets :<C-U>call BetterBrackets("d", v:count1) \| call repeat#set("\<Plug>DeleteInsideBrackets")<CR>
-nnoremap <silent> <Plug>ChangeInsideBrackets :call BetterBrackets("c", 1) \| call repeat#set("\<Plug>ChangeInsideBrackets")<CR>

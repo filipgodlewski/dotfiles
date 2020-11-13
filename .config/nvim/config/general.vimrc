@@ -4,6 +4,7 @@ endif
 set autowriteall
 set complete+=kspell
 set completeopt-=preview
+set matchpairs+=<:>
 set confirm
 set copyindent
 set cursorline

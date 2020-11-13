@@ -61,6 +61,9 @@
 [submodule ".local/share/nvim/site/pack/plugins/start/float-preview.nvim"]
 	path = .local/share/nvim/site/pack/plugins/start/float-preview.nvim
 	url = https://github.com/ncm2/float-preview.nvim.git
+[submodule ".local/share/nvim/site/pack/plugins/start/vim-bbrackets"]
+	path = .local/share/nvim/site/pack/plugins/start/vim-bbrackets
+	url = https://github.com/filipgodlewski/vim-bbrackets.git
 [submodule ".local/share/nvim/site/pack/plugins/start/vim-repeat"]
 	path = .local/share/nvim/site/pack/plugins/start/vim-repeat
 	url = https://github.com/tpope/vim-repeat.git

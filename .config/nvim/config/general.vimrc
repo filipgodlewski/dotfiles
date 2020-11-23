@@ -1,6 +1,4 @@
-if !&termguicolors
-    set termguicolors
-endif
+set termguicolors
 set autowriteall
 set complete+=kspell
 set completeopt-=preview

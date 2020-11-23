@@ -2,9 +2,19 @@
 let g:ale_echo_cursor = 0
 let g:ale_echo_msg_format = "%linter% - %severity%% (code)%: %s"
 let g:ale_fix_on_save = 1
-let g:ale_fixers = {"*": ["trim_whitespace", "remove_trailing_lines"], "json": ["jq"], "python": ["black", "isort"]}
+let g:ale_fixers = {
+\     "*": ["trim_whitespace", "remove_trailing_lines"],
+\     "java": [],
+\     "json": ["jq"],
+\     "python": ["black", "isort"]
+\ }
 let g:ale_json_jq_options = "-S"
-let g:ale_linters = {"javascript": ["eslint"], "json": ["jsonlint"], "python": ["bandit", "flake8", "pyright"]} "add pydocstyle if ever want to lint docstrings
+let g:ale_linters = {
+\     "java": ["javac"],
+\     "javascript": ["eslint"],
+\     "json": ["jsonlint"],
+\     "python": ["bandit", "flake8", "pyright", "pydocstyle"]
+\ }
 let g:ale_python_black_executable = expand("~/.pyenv/versions/base/bin/black")
 let g:ale_python_flake8_executable = expand("~/.pyenv/versions/base/bin/flake8")
 let g:ale_python_isort_executable = expand("~/.pyenv/versions/base/bin/isort")
@@ -72,7 +82,3 @@ let g:jedi#completions_enabled = 0
 
 " NORD COLORSCHEME
 let g:nord_cursor_line_number_background = 1
-
-" SEMSHI
-let g:semshi#error_sign = v:false
-let g:semshi#excluded_hl_groups=["unresolved"]

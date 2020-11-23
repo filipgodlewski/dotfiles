@@ -1,7 +1,6 @@
 #!/bin/zsh
 
 chpwd() {
-    ls
     automata
 }
 

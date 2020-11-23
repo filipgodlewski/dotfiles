@@ -9,19 +9,10 @@ command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
 function! UserInput(message, completion)
     call inputsave()
-    if a:completion != ''
-        let l:answer = input(a:message, '', a:completion)
-    else
-        let l:answer = input(a:message)
-    endif
+    let l:answer = a:completion != '' ? input(a:message, '', a:completion) : input(a:message)
     call inputrestore()
     return l:answer
 endfunction
-
-"function! ToggleCodeHelpers()
-"    execute 'Semshi toggle'
-"    call deoplete#toggle()
-"endfunction
 
 function! SearchForQuickFix()
     let g:quickfix_search = UserInput('Search globally for: ', '')
@@ -36,14 +27,16 @@ function! SearchForQuickFix()
     endif
 endfunction
 
-function! ReplaceLocalList()
-    if exists("g:before")
-        let g:before = UserInput('Search locally for [last: '.g:before.']: ', 'tag')
-    else
-        let g:before = UserInput('Search locally for: ', 'tag')
+function! ReplaceLocalList(placement)
+    if a:placement == "."
+        let l:text = "on line ".getcurpos()[1]
+    elseif a:placement == "%"
+        let l:text = "in this buffer"
     endif
+    let l:last = exists("g:before") && !empty(g:before) ? ' [last: '.g:before.']: ' : ': '
+    let g:before = UserInput('Search '.l:text.' for'.l:last, 'tag')
     let after = UserInput('Replace with: ', '')
-    execute '%s/'.g:before.'/'.after.'/gc'
+    execute a:placement.'s/'.g:before.'/'.after.'/gc'
 endfunction
 
 function! SaveQuickFix()
@@ -61,9 +54,7 @@ function! ReplaceOnQuickFix(before)
     let quickfix_command = 'silent! cdo s/'.a:before.'/'.after.'/ | update'
     let choice = confirm("Is it ok?", "&Ok\n&Abort", 1)
     if choice == 1
-        "call ToggleCodeHelpers()
         execute quickfix_command
-        "call ToggleCodeHelpers()
     endif
 endfunction
 
@@ -101,3 +92,37 @@ function! Pytester(call)
     endif
 endfunction
 command! -nargs=1 Pytest call Pytester(<f-args>)
+
+function! JavaCompile()
+    execute "wa"
+    let l:source = split(expand("%:r"), "/")[0]
+    let l:project = split(expand("$PWD"), "/")[-1]
+    execute '!cd '.l:source.'; javac **/*.java -d ../out/production/'.l:project
+endfunction
+command! Javac call JavaCompile()
+
+function! JavaRun(bang, args)
+    if a:bang == 0
+        let l:class = join(split(expand("%:r"), "/")[1:], ".")
+        let l:args = a:args == [] ? "" : join(a:args, " ")
+    else
+        if a:args == []
+            echom "Provide class name as the first argument!"
+            return 0
+        else
+            let l:class_name = a:args[0]
+            let l:class = join(split(expand("**/".l:class_name.".java")[:-6], "/")[1:], ".")
+            let l:args = a:args[1:] == [] ? "" : join(a:args[1:], " ")
+        endif
+    endif
+    let l:project = split(expand("$PWD"), "/")[-1]
+    call VimuxRunCommand("clear; java -cp out/production/".l:project." ".l:class." ".l:args)
+endfunction
+command! -nargs=* -bang Java call JavaRun(<bang>0, [<f-args>])
+
+function! GetHighlightGroupNames()
+    if !exists("*synstack")
+        return
+    endif
+    echo map(synstack(line('.'), col('.')), 'synIDattr(v:val,"name")')
+endfunc

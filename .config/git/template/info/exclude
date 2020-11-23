@@ -11,7 +11,8 @@
 [._]sw[a-p]
 
 # Session
-*.vim
+Session.vim
+Sessionx.vim
 
 # Temporary
 .netrwhist
@@ -20,6 +21,14 @@
 # Auto-generated tag files
 tags
 *.tags
+!tags/
 
 # Persistent undo
 [._]*.un~
+
+# IDE
+# -- IntelliJ
+.idea
+
+# MacOS
+.DS_Store

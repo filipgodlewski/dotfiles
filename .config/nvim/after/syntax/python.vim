@@ -75,7 +75,7 @@ syn keyword pythonBuiltin       __debug__ containedin=pythonFunction
 syn keyword pythonBuiltin       NotImplemented Ellipsis
 
 " Builtin Types
-syn match   pythonBuiltinType       '\v\.@<!<%(object|bool|int|float|tuple|str|list|dict|set|frozenset|bytearray|bytes)>'
+syn match   pythonBuiltin       '\v\.@<!<%(object|bool|int|float|tuple|str|list|dict|set|frozenset|bytearray|bytes)>'
 
 " Builtin Exceptions
 syn keyword pythonStatement     raise nextgroup=pythonExceptions skipwhite
@@ -126,27 +126,27 @@ syn match   pythonDecoratorName '\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)
 syn match   pythonDot           '\.' display containedin=pythonDecoratorName,pythonVariable,pythonFunction
 
 " Python 3 byte strings
-syn region pythonBytes    start=+[bB]'+ skip=+\\\\\|\\'\|\\$+ excludenl end=+'+ end=+$+ keepend contains=pythonBytesError,pythonBytesContent,@Spell
-syn region pythonBytes    start=+[bB]"+ skip=+\\\\\|\\"\|\\$+ excludenl end=+"+ end=+$+ keepend contains=pythonBytesError,pythonBytesContent,@Spell
-syn region pythonBytes    start=+[bB]'''+ skip=+\\'+ end=+'''+ keepend contains=pythonBytesError,pythonBytesContent,pythonDocTest,pythonSpaceError,@Spell
-syn region pythonBytes    start=+[bB]"""+ skip=+\\"+ end=+"""+ keepend contains=pythonBytesError,pythonBytesContent,pythonDocTest2,pythonSpaceError,@Spell
+syn region pythonBytes          start=+[bB]'+ skip=+\\\\\|\\'\|\\$+ excludenl end=+'+ end=+$+ keepend contains=pythonBytesError,pythonBytesContent,@Spell
+syn region pythonBytes          start=+[bB]"+ skip=+\\\\\|\\"\|\\$+ excludenl end=+"+ end=+$+ keepend contains=pythonBytesError,pythonBytesContent,@Spell
+syn region pythonBytes          start=+[bB]'''+ skip=+\\'+ end=+'''+ keepend contains=pythonBytesError,pythonBytesContent,pythonDocTest,pythonSpaceError,@Spell
+syn region pythonBytes          start=+[bB]"""+ skip=+\\"+ end=+"""+ keepend contains=pythonBytesError,pythonBytesContent,pythonDocTest2,pythonSpaceError,@Spell
 
-syn match pythonBytesError    '.\+' display contained
-syn match pythonBytesContent  '[\u0000-\u00ff]\+' display contained contains=pythonBytesEsc,pythonBytesEscError containedin=pythonBytes
+syn match pythonBytesError      '.\+' display contained
+syn match pythonBytesContent    '[\u0000-\u00ff]\+' display contained contains=pythonBytesEsc,pythonBytesEscError containedin=pythonBytes
 
-syn match pythonBytesEsc       +\\[abfnrtv'"\\]+ display contained
-syn match pythonBytesEsc       '\\\o\o\=\o\=' display contained
-syn match pythonBytesEscError  '\\\o\{,2}[89]' display contained
-syn match pythonBytesEsc       '\\x\x\{2}' display contained
-syn match pythonBytesEscError  '\\x\x\=\X' display contained
-syn match pythonBytesEsc       '\\$'
+syn match pythonBytesEsc        +\\[abfnrtv'"\\]+ display contained
+syn match pythonBytesEsc        '\\\o\o\=\o\=' display contained
+syn match pythonBytesEscError   '\\\o\{,2}[89]' display contained
+syn match pythonBytesEsc        '\\x\x\{2}' display contained
+syn match pythonBytesEscError   '\\x\x\=\X' display contained
+syn match pythonBytesEsc        '\\$'
 
-syn match pythonUniEsc         '\\u\x\{4}' display contained
-syn match pythonUniEscError    '\\u\x\{,3}\X' display contained
-syn match pythonUniEsc         '\\U\x\{8}' display contained
-syn match pythonUniEscError    '\\U\x\{,7}\X' display contained
-syn match pythonUniEsc         '\\N{[A-Z ]\+}' display contained
-syn match pythonUniEscError    '\\N{[^A-Z ]\+}' display contained
+syn match pythonUniEsc          '\\u\x\{4}' display contained
+syn match pythonUniEscError     '\\u\x\{,3}\X' display contained
+syn match pythonUniEsc          '\\U\x\{8}' display contained
+syn match pythonUniEscError     '\\U\x\{,7}\X' display contained
+syn match pythonUniEsc          '\\N{[A-Z ]\+}' display contained
+syn match pythonUniEscError     '\\N{[^A-Z ]\+}' display contained
 
 " Strings
 syn region pythonString         start=+'+ skip=+\\\\\|\\'\|\\$+ excludenl end=+'+ end=+$+ keepend contains=pythonBytesEsc,pythonBytesEscError,pythonUniEsc,pythonUniEscError,@Spell
@@ -197,7 +197,6 @@ hi          pythonClassVar      ctermfg=008 guifg=#4C566A cterm=italic gui=itali
 hi link     pythonShebang       Comment
 hi link     pythonCoding        Comment
 hi link     pythonBuiltin       Number
-hi link     pythonBuiltinType   Number
 hi link     pythonExceptions    pythonBuiltin
 hi          pythonWarnings      ctermfg=003 guifg=#EBCB8B
 hi          pythonErrors        ctermfg=001 guifg=#BF616A

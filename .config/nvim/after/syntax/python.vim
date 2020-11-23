@@ -220,3 +220,26 @@ hi link     pythonUniEsc        Comment
 hi link     pythonUniEscError   pythonErrors
 hi link     myword              WarningMsg
 hi          pythonVariable      ctermfg=002 guifg=#A3BE8C cterm=bold gui=bold
+
+" TODO
+" 1) nested attributes:
+" thing.other.attribute
+"       ^^^^^ ^^^^^^^^^ <- pythonVariable
+" NOT IN: imports
+"
+" 2) None type as builtin!
+" 3) Buoltin types cleared if:
+" def func(self, type):
+"                ^^^^ <- cleared
+" def func(self, type=str):
+"                     ^^^ <- colored
+" action = type
+"          ^^^^ <- cleared
+" action = bool(1)
+"          ^^^^ <- this is colored
+" 4) Additional builtin methods:
+"       a) String
+"       b) Dict
+"       c) Tuple
+"       d) Set
+"       e) File

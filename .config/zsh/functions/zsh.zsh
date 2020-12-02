@@ -53,7 +53,7 @@ take() {
 
 update_base_venv() {
     pyenv activate base
-    pip list --outdated --format freeze | sed 's/==.*//' | xargs -n1 pip -q install --use-feature=2020-resolver -U
+    pip list --outdated --format freeze | sed 's/==.*//' | xargs -n1 pip -q install -U
     pyenv deactivate
 }
 
@@ -66,7 +66,7 @@ update_system() {
     case $answer in
         Y|"")
             pyenv activate base
-            pip -q install --use-feature=2020-resolver -U jedi
+            pip -q install -U jedi
             pyenv deactivate
             echo "Reinstalled jedi."
             ;;

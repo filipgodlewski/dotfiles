@@ -64,3 +64,9 @@
 [submodule ".local/share/nvim/site/pack/plugins/start/vim-repeat"]
 	path = .local/share/nvim/site/pack/plugins/start/vim-repeat
 	url = https://github.com/tpope/vim-repeat.git
+[submodule ".local/share/nvim/site/pack/plugins/start/robotframework-vim"]
+	path = .local/share/nvim/site/pack/plugins/start/robotframework-vim
+	url = https://github.com/mfukar/robotframework-vim.git
+[submodule ".local/share/nvim/site/pack/plugins/start/vim-python-nord"]
+	path = .local/share/nvim/site/pack/plugins/start/vim-python-nord
+	url = https://github.com/filipgodlewski/vim-python-nord.git

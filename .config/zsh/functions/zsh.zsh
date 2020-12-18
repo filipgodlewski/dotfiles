@@ -75,7 +75,7 @@ update_system() {
     echo "\n>>> updating npm packages <<<\n"
     update_npm
     echo "\n>>> updating git submodules <<<\n"
-    update_submodule
+    cfg sub-up
     echo "\n>>> updating brew & brew casks <<<\n"
     update_homebrew
     echo "\n>>> updating applications from App Store & MacOS itself <<<"

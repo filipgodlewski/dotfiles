@@ -34,6 +34,7 @@ dw = diff --word-diff
 
 f = fetch
 fpa = fetch --prune --all
+fzf = fuzzy-add
 
 g = grep
 

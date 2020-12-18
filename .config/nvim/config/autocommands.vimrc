@@ -12,8 +12,3 @@ aug autosave
                 \ | silent write
                 \ | endif
 aug END
-
-aug bye
-    au!
-    au VimLeave * call VimuxCloseRunner()
-aug END

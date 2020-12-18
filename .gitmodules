@@ -46,9 +46,6 @@
 [submodule ".local/share/tmux/tmux-1password"]
 	path = .local/share/tmux/tmux-1password
 	url = https://github.com/yardnsm/tmux-1password.git
-[submodule ".local/share/nvim/site/pack/plugins/start/vimux"]
-	path = .local/share/nvim/site/pack/plugins/start/vimux
-	url = https://github.com/benmills/vimux.git
 [submodule ".local/share/zsh/plugins/fast-syntax-highlighting"]
 	path = .local/share/zsh/plugins/fast-syntax-highlighting
 	url = https://github.com/zdharma/fast-syntax-highlighting.git

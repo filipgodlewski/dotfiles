@@ -6,4 +6,6 @@ function NordColors()
     hi! WildMenu                ctermfg=000 guifg=#3B4252 ctermbg=003 guibg=#EBCB8B
 endfunction
 au ColorScheme nord call NordColors()
-colorscheme nord
+if !exists('g:colors_name')
+    colorscheme nord
+endif

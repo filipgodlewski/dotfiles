@@ -1,0 +1,16 @@
+#! /usr/bin/env python
+from subprocess import run
+
+
+def main():
+    def_name = "Filip Godlewski"
+    def_mail = "filip.godlewski@outlook.com"
+    name = input(f"local name [{def_name}]: ") or def_name
+    mail = input(f"local mail [{def_mail}]: ") or def_mail
+    run("git init", shell=True)
+    run(f"git config --local user.name '{name}'", shell=True)
+    run(f"git config --local user.email '{mail}'", shell=True)
+
+
+if __name__ == "__main__":
+    main()

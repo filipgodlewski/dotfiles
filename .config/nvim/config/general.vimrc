@@ -1,4 +1,6 @@
-set termguicolors
+if !&termguicolors
+    set termguicolors
+endif
 set autowriteall
 set complete+=kspell
 set completeopt-=preview
@@ -17,11 +19,9 @@ set mouse=i
 set noshowmode
 set noswapfile
 set nrformats+=alpha
-set number
 set path+=**
 set pumblend=20
 set pumheight=10
-set relativenumber
 set shell=/usr/local/bin/zsh
 set shiftround
 set shiftwidth=4

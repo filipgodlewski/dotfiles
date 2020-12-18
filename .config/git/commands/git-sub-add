@@ -1,0 +1,38 @@
+#! /usr/bin/env python
+import argparse
+import os
+import re
+from subprocess import run
+
+DIRS = {
+    "misc": "share/zsh/plugins",
+    "nvim": "share/nvim/site/pack/plugins/start",
+    "tmux": "share/tmux",
+    "zsh": "share/zsh/plugins",
+}
+
+
+def get_dirs_help():
+    dirs = ", ".join(DIRS.keys())
+    return f"Possible arguments: {dirs}"
+
+
+def main(args):
+    cfg = "/usr/bin/git --git-dir=$HOME/.cfg --work-tree=$HOME"
+    folder = DIRS.get(args.folder, None)
+    raw_out = re.search(r"[a-zA-Z-]+\.git", args.LINK)
+    out = raw_out.group()[:-4]
+    path = os.path.join(folder, out)
+    abs_local = os.path.expanduser("~/.local")
+    abs_path = os.path.join(abs_local, path)
+    if folder and out:
+        run(f"{cfg} submodule add {args.LINK} {path}", shell=True, cwd=abs_local)
+        run(f"{cfg} submodule init", shell=True, cwd=abs_path)
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("LINK", help="Link to the github repository")
+    parser.add_argument("--folder", "-f", help=get_dirs_help(), required=True)
+    args = parser.parse_args()
+    main(args)

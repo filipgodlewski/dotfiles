@@ -58,41 +58,6 @@ function! ReplaceOnQuickFix(before)
     endif
 endfunction
 
-" Pytest
-
-function! GetPTArg(arg)
-    if a:arg == "f"
-        let l:answer = UserInput("File path: ", "file")
-        return l:answer == "" ? "" : '"'.l:answer.'"'
-    elseif a:arg == "k"
-        let l:answer = UserInput("Keyword expression: ", "")
-        return l:answer == "" ? "" : ' -k "'.l:answer.'"'
-    elseif a:arg == "m"
-        let l:answer = UserInput("Mark expression: ", "")
-        return l:answer == "" ? "" : ' -m "'.l:answer.'"'
-    elseif a:arg == "c"
-        let l:answer = UserInput("Custom arguments: ", "")
-        return l:answer == "" ? "" : ' "'.l:answer.'"'
-    endif
-endfunction
-
-function! PT(file_path, pt_keywords, markers, custom_args)
-    let l:args = a:file_path.a:pt_keywords.a:markers.a:custom_args
-    execute "silent! wa"
-    execute "VimuxRunCommand('clear; pytest ".l:args."')"
-endfunction
-
-function! Pytester(call)
-    if a:call == "file"
-        call PT(expand('%'), '', '', '')
-    elseif a:call == "all"
-        call PT('', '', '', '')
-    elseif a:call == "ask"
-        call PT(GetPTArg('f'), GetPTArg('k'), GetPTArg('m'), GetPTArg('c'))
-    endif
-endfunction
-command! -nargs=1 Pytest call Pytester(<f-args>)
-
 function! JavaCompile()
     execute "wa"
     let l:source = split(expand("%:r"), "/")[0]

@@ -1,7 +1,7 @@
 " ALE
 let g:ale_echo_cursor = 0
 let g:ale_echo_msg_format = "%linter% - %severity%% (code)%: %s"
-let g:ale_fix_on_save = 1
+"let g:ale_fix_on_save = 1
 let g:ale_fixers = {
 \     "*": ["trim_whitespace", "remove_trailing_lines"],
 \     "java": [],
@@ -21,7 +21,7 @@ let g:ale_python_flake8_options = "--max-line-length=88"
 let g:ale_python_isort_executable = expand("~/.pyenv/versions/base/bin/isort")
 let g:ale_python_isort_options = "--profile black"
 let g:ale_python_pydocstyle_executable = expand("~/.pyenv/versions/base/bin/pydocstyle")
-let g:ale_python_pydocstyle_options = "--ignore=D100,D101,D102,D103,D104,D105,D106,D107"
+let g:ale_python_pydocstyle_options = "--ignore=D100,D101,D102,D103,D104,D105,D106,D107,D213"
 let g:ale_set_signs = 0
 let g:ale_virtualtext_cursor = 1
 

@@ -54,6 +54,7 @@ publish = !"git push -u origin \"$(git bc)\""
 
 r = reset
 rh = reset --hard
+rc = config --local --unset credential.helper
 
 rb = rebase
 rba = rebase --abort

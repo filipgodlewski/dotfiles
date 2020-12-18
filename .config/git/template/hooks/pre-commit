@@ -1,0 +1,17 @@
+#! /usr/bin/env python
+import subprocess
+import sys
+
+
+def main():
+    raw_branch = subprocess.run(
+        "git branch --show-current", shell=True, text=True, capture_output=True
+    )
+    branch = raw_branch.stdout.strip()
+    if branch in ["master", "main"]:
+        sys.stderr.write(f"You cannot commit directly into {branch} branch!\n")
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

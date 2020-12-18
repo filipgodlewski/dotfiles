@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 case "$1" in
-  rebase) exec .git/hooks/post-merge ;;
+  rebase) exec .git/hooks/post-merge;;
 esac

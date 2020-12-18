@@ -1,0 +1,24 @@
+#! /usr/bin/env python
+import os
+import tempfile
+from glob import glob
+from subprocess import run
+
+
+def concat_paths(current_venv):
+    files = glob(os.getcwd() + "/**/*.py", recursive=True)
+    if current_venv:
+        files += glob(current_venv + "/**/site-packages/**/*.py", recursive=True)
+    return "\n".join(files)
+
+
+def generate_ctags():
+    packages = concat_paths(os.environ.get("VIRTUAL_ENV", ""))
+    with tempfile.NamedTemporaryFile() as f:
+        f.write(packages.encode("utf-8"))
+        f.flush()
+        run(f"ctags -L {f.name}", shell=True)
+
+
+if __name__ == "__main__":
+    generate_ctags()

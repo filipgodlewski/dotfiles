@@ -7,3 +7,4 @@
 --exclude=.vscode
 --exclude=log
 --exclude=results
+--languages=-javascript,sql

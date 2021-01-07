@@ -1,12 +1,11 @@
 " ALE
 let g:ale_echo_cursor = 0
 let g:ale_echo_msg_format = "%linter% - %severity%% (code)%: %s"
-"let g:ale_fix_on_save = 1
 let g:ale_fixers = {
 \     "*": ["trim_whitespace", "remove_trailing_lines"],
 \     "java": [],
 \     "json": ["jq"],
-\     "python": ["black", "isort"]
+\     "python": ["yapf"],
 \ }
 let g:ale_json_jq_options = "-S"
 let g:ale_linters = {
@@ -15,13 +14,11 @@ let g:ale_linters = {
 \     "json": ["jsonlint"],
 \     "python": ["bandit", "flake8", "pyright", "pydocstyle"]
 \ }
-let g:ale_python_black_executable = expand("~/.pyenv/versions/base/bin/black")
-let g:ale_python_flake8_executable = expand("~/.pyenv/versions/base/bin/flake8")
-let g:ale_python_flake8_options = "--max-line-length=88"
-let g:ale_python_isort_executable = expand("~/.pyenv/versions/base/bin/isort")
-let g:ale_python_isort_options = "--profile black"
-let g:ale_python_pydocstyle_executable = expand("~/.pyenv/versions/base/bin/pydocstyle")
-let g:ale_python_pydocstyle_options = "--ignore=D100,D101,D102,D103,D104,D105,D106,D107,D213"
+let python_directory = "~/.local/share/venvs/nvim/"
+let g:ale_python_flake8_executable = expand(python_directory."bin/flake8")
+let g:ale_python_flake8_options = "--ignore=W503"
+let g:ale_python_pydocstyle_executable = expand(python_directory."bin/pydocstyle")
+let g:ale_python_pydocstyle_options = "--ignore=D100 --convention=pep257"
 let g:ale_set_signs = 0
 let g:ale_virtualtext_cursor = 1
 
@@ -30,7 +27,6 @@ let g:deoplete#enable_at_startup = 1
 au Filetype * call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
 au Filetype * call deoplete#custom#source('ale', 'rank', 110)
 au Filetype python call deoplete#custom#source('jedi', 'rank', 999)
-let g:deoplete#sources#jedi#extra_path = expand("~/.pyenv/versions/base/lib/**/site-packages")
 let g:deoplete#sources#jedi#ignore_private_members = 1
 let g:deoplete#sources#jedi#show_docstring = 1
 let g:deoplete#sources#jedi#statement_length = 100
@@ -42,12 +38,6 @@ au Filetype * call deoplete#custom#option({
 \     'auto_complete_delay': 200
 \ })
 au InsertLeave * silent! pclose!
-let pyenv_venv_path = substitute(system("echo $VIRTUAL_ENV"), "\n", "", "")
-if pyenv_venv_path != ""
-    let g:deoplete#sources#jedi#python_path = expand(pyenv_venv_path."/bin/python")
-else
-    let g:deoplete#sources#jedi#python_path = expand("~/.pyenv/versions/base/bin/python")
-endif
 
 " ECHODOC
 let g:echodoc#enable_at_startup = 1
@@ -84,3 +74,11 @@ let g:jedi#completions_enabled = 0
 
 " NORD COLORSCHEME
 let g:nord_cursor_line_number_background = 1
+
+" VIMWIKI
+let g:vimwiki_global_ext = 0
+let g:vimwiki_list = [{
+  \ 'path': '$HOME/vimwiki',
+  \ 'syntax': 'markdown',
+  \ 'ext':'.md',
+\}]

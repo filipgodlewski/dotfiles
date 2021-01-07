@@ -1,5 +1,8 @@
 #!/bin/zsh
 
+autoload -Uz compinit; compinit
+
+
 setopt ALWAYS_TO_END
 setopt AUTO_CD
 setopt AUTO_PUSHD

@@ -1,0 +1,29 @@
+echo "\n>>> updating base pip packages <<<\n"
+update_base_venv
+echo -n "Is there an error with jedi and parso? [Y|n]: "
+read answer
+case $answer in
+    Y|"")
+        pyenv activate base
+        pip -q install -U jedi
+        pyenv deactivate
+        echo "Reinstalled jedi."
+        ;;
+    *) ;;
+esac
+echo "\n>>> updating npm packages <<<\n"
+update_npm
+echo "\n>>> updating git submodules <<<\n"
+cfg sub-up
+echo "\n>>> updating brew & brew casks <<<\n"
+update_homebrew
+echo "\n>>> updating applications from App Store & MacOS itself <<<"
+mas upgrade
+echo "\n>>> updating alacritty colorscheme <<<\n"
+cat $XDG_DATA_HOME/misc/nord-alacritty/src/nord.yml $XDG_CONFIG_HOME/alacritty/base.yml > $XDG_CONFIG_HOME/alacritty/alacritty.yml
+echo "\n>>> updating nvim plugins <<<\n"
+nvim -c "UpdateRemotePlugins | q"
+echo "\n>>> reloading zsh <<<\n"
+exec zsh
+
+# vim:ft=zsh

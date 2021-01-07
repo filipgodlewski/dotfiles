@@ -8,11 +8,12 @@ export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
 
 export ZPLUGINSDIR="$XDG_DATA_HOME/zsh/plugins"
 
-export HISTFILE="$ZDOTDIR/.zsh_history"
+export HISTFILE="$XDG_CACHE_HOME/.zsh_history"
 export SAVEHIST=10000
 export HISTSIZE=10000
 
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
 
-export PYENV_ROOT="$HOME/.pyenv"
+export LC_ALL=en_US.UTF-8
+export TERM=xterm-256color

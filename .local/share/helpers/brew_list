@@ -4,11 +4,7 @@ git
 jq
 mas
 neovim
-pyenv
-pyenv-virtualenv
+node
 ripgrep
-selenium-server-standalone
-starship
 tmux
-yarn
 zsh

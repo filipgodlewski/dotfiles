@@ -16,7 +16,9 @@ set grepprg=rg\ --vimgrep\ --no-heading\ --case-sensitive\ --follow\ --word-rege
 set hidden
 set lazyredraw
 set mouse=i
+set nojoinspaces
 set noshowmode
+set nostartofline
 set noswapfile
 set nrformats+=alpha
 set path+=**

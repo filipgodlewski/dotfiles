@@ -1,12 +1,7 @@
-source $ZDOTDIR/completions.zsh
-source $ZDOTDIR/history.zsh
-source $ZDOTDIR/fzf.zsh
-source <(cat $ZDOTDIR/variables/*.zsh)
-source <(cat $ZDOTDIR/aliases/*.zsh)
-source $ZDOTDIR/bindings.zsh
-source $ZDOTDIR/plugins.zsh
-source $ZDOTDIR/prompt.zsh
+folders=("config" "variables" "aliases")
 
-for function in $ZDOTDIR/functions/*; do
-    autoload -Uz $function
+for folder in $folders; do
+    for file in $ZDOTDIR/$folder/*; do source $file; done
 done
+
+for file in $ZDOTDIR/functions/*; do autoload -Uz $file; done

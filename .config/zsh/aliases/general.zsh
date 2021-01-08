@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-alias cfg="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
+alias cfg="/ --prune-allusr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias ctags="`brew --prefix`/bin/ctags"
 
 alias e="$EDITOR"

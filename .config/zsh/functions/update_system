@@ -1,29 +1,22 @@
-echo "\n>>> updating base pip packages <<<\n"
-update_base_venv
-echo -n "Is there an error with jedi and parso? [Y|n]: "
-read answer
-case $answer in
-    Y|"")
-        pyenv activate base
-        pip -q install -U jedi
-        pyenv deactivate
-        echo "Reinstalled jedi."
-        ;;
-    *) ;;
-esac
-echo "\n>>> updating npm packages <<<\n"
-update_npm
-echo "\n>>> updating git submodules <<<\n"
-cfg sub-up
-echo "\n>>> updating brew & brew casks <<<\n"
-update_homebrew
-echo "\n>>> updating applications from App Store & MacOS itself <<<"
+echo "\n>>> pip\n"
+upvenv nvim
+echo "\n>>> npm\n"
+npm install -g npm
+npm update --global
+echo "\n>>> cfg\n"
+/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME sub-up
+echo "\n>>> brew\n"
+brew update
+brew upgrade
+brew upgrade --cask
+brew cleanup
+echo "\n>>> mas\n"
 mas upgrade
-echo "\n>>> updating alacritty colorscheme <<<\n"
+echo "\n>>> alacritty\n"
 cat $XDG_DATA_HOME/misc/nord-alacritty/src/nord.yml $XDG_CONFIG_HOME/alacritty/base.yml > $XDG_CONFIG_HOME/alacritty/alacritty.yml
-echo "\n>>> updating nvim plugins <<<\n"
+echo "\n>>> nvim\n"
 nvim -c "UpdateRemotePlugins | q"
-echo "\n>>> reloading zsh <<<\n"
+echo "\n>>> zsh\n"
 exec zsh
 
 # vim:ft=zsh

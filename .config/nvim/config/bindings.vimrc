@@ -30,7 +30,6 @@ nnoremap <silent> <Leader>jf :silent! Javac<CR> :Java<CR>
 
 " MISC
 nnoremap <silent> <Leader>so :wa<CR>:so $MYVIMRC<CR>:noh<CR>:echo '"'.expand("$MYVIMRC").'" [write & reload]'<CR>
-nmap <leader>hi :call GetHighlightGroupNames()<CR>
 
 " MOVEMENTS
 nnoremap <C-J> :norm o<CR>

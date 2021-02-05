@@ -1,7 +1,4 @@
-folders=("config" "variables" "aliases")
-
-for folder in $folders; do
-    for file in $ZDOTDIR/$folder/*; do source $file; done
-done
-
+for file in $ZDOTDIR/config/*; do source $file; done
+for file in $ZDOTDIR/variables/*; do source $file; done
+for file in $ZDOTDIR/aliases/*; do source $file; done
 for file in $ZDOTDIR/functions/*; do autoload -Uz $file; done

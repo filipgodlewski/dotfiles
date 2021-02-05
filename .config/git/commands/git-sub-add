@@ -5,7 +5,7 @@ import re
 from subprocess import run
 
 DIRS = {
-    "misc": "share/zsh/plugins",
+    "misc": "share/misc",
     "nvim": "share/nvim/site/pack/plugins/start",
     "tmux": "share/tmux",
     "zsh": "share/zsh/plugins",

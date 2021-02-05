@@ -70,6 +70,3 @@
 [submodule ".local/share/nvim/site/pack/plugins/start/vimwiki"]
 	path = .local/share/nvim/site/pack/plugins/start/vimwiki
 	url = https://github.com/vimwiki/vimwiki.git
-[submodule ".local/share/misc/macos"]
-	path = .local/share/misc/macos
-	url = https://gitlab.com/librewolf-community/browser/macos.git

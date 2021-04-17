@@ -7,7 +7,7 @@ from subprocess import DEVNULL, run
 from pyfzf.pyfzf import FzfPrompt
 
 DIRS = {
-    "misc": "share/misc",
+    "colorschemes": "share/colorschemes",
     "nvim": "share/nvim/site/pack/plugins/start",
     "tmux": "share/tmux",
     "zsh": "share/zsh/plugins",

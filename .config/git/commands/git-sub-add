@@ -5,7 +5,7 @@ import re
 from subprocess import run
 
 DIRS = {
-    "misc": "share/misc",
+    "colorschemes": "share/colorschemes",
     "nvim": "share/nvim/site/pack/plugins/start",
     "tmux": "share/tmux",
     "zsh": "share/zsh/plugins",
@@ -20,7 +20,7 @@ def get_dirs_help():
 def main(args):
     cfg = "/usr/bin/git --git-dir=$HOME/.cfg --work-tree=$HOME"
     folder = DIRS.get(args.folder, None)
-    raw_out = re.search(r"[a-zA-Z-]+\.git", args.LINK)
+    raw_out = re.search(r"[a-zA-Z-.]+\.git", args.LINK)
     out = raw_out.group()[:-4]
     path = os.path.join(folder, out)
     abs_local = os.path.expanduser("~/.local")

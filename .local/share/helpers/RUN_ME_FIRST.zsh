@@ -25,26 +25,13 @@ install_core() {
     brews=(${(f)"$(cat ~/.local/helpers/brew_list)"})
     for brew in ${brews}; do brew -q install ${brew} || return 1; done
     brew install -q --HEAD universal-ctags/universal-ctags/universal-ctags || return 1
+    brew install -q --HEAD luajit || return 1
+    brew install -q --HEAD neovim || return 1
 }
 
 install_cask() {
     brew_casks=($(cat ~/.local/helpers/brew_cask_list))
     for brew_cask in ${brew_casks}; do brew cask install ${brew_cask} || return 1; done
-}
-
-install_pyenv() {
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
-    pyenv install -l | rg -v Available\ versions: | fzf | xargs -I{} sh -c "pyenv install {}; pyenv global {}" || return 1
-}
-
-install_venvs() {
-    pyenv virtualenv $(pyenv global) base || return 1
-    pip install -U pip setuptools wheel || return 1
-    pyenv activate base || return 1
-    pip install -U pip setuptools wheel || return 1
-    pip install -r ~/.local/helpers/pip_list || return 1
-    pyenv deactivate || return 1
 }
 
 install_npm() {
@@ -61,7 +48,7 @@ resolve_conflicts() {
 
 compile_term() {
     mkdir ~/.terminfo 2> /dev/null
-    for file in ~/.local/share/terminfo/*(.); do tic -o ~/.terminfo ${file} || return 1; done
+    for file in ~/.local/share/terminfo/capabilities/*(.); do tic ${file} || return 1; done
 }
 
 echo "\nTASK: GIT **********************************************************************\n"
@@ -84,12 +71,11 @@ install_cask || {echo "FAIL"; exit 1}
 echo "[cask] ...OK"
 
 echo "\nTASK: PYTHON *******************************************************************\n"
-echo "[pyenv] ..."
-install_pyenv || {echo "FAIL"; exit 1}
-echo "[pyenv] ...OK"
-echo "[pyenv virtualenvs] ..."
-install_venvs || {echo "FAIL"; exit 1}
-echo "[pyenv virtualenvs] ...OK"
+python3 -m pip install -U pip setuptools || return 1
+python3 -m pip install -r $XDG_DATA_HOME/helpers/pip_base_list || return 1
+python3 -m venv $XDG_DATA_HOME/venvs/nvim || return 1
+$XDG_DATA_HOME/venvs/nvim/bin/python3 -m pip install -U pip setuptools || return 1
+$XDG_DATA_HOME/venvs/nvim/bin/python3 -m pip install -r $XDG_DATA_HOME/helpers/pip_nvim_list || return 1
 
 echo "\nTASK: NPM **********************************************************************\n"
 echo "[npm] ..."

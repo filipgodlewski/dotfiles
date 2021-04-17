@@ -1,3 +1,8 @@
-$XDG_DATA_HOME/venvs/$1/bin/python3 -m pip list --outdated --format freeze | sed 's/==.*//' | xargs -n1 $XDG_DATA_HOME/venvs/$1/bin/python3 -m pip -q install -U
+venv=$1
+if [ -z "$1" ]; then
+    /Library/Frameworks/Python.framework/Versions/Current/bin/python3 -m pip list --outdated --format freeze | sed 's/==.*//' | xargs -n1 /Library/Frameworks/Python.framework/Versions/Current/bin/python3 -m pip -q install -U
+else
+    $XDG_DATA_HOME/venvs/$1/bin/python3 -m pip list --outdated --format freeze | sed 's/==.*//' | xargs -n1 $XDG_DATA_HOME/venvs/$1/bin/python3 -m pip -q install -U
+fi
 
 # vim:ft=zsh

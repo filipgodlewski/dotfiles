@@ -10,10 +10,8 @@ brew update
 brew upgrade
 brew upgrade --cask
 brew cleanup
-echo "\n>>> mas\n"
-mas upgrade
 echo "\n>>> alacritty\n"
-cat $XDG_DATA_HOME/misc/nord-alacritty/src/nord.yml $XDG_CONFIG_HOME/alacritty/base.yml > $XDG_CONFIG_HOME/alacritty/alacritty.yml
+cat $XDG_DATA_HOME/colorschemes/nord-alacritty/src/nord.yml $XDG_CONFIG_HOME/alacritty/base.yml > $XDG_CONFIG_HOME/alacritty/alacritty.yml
 echo "\n>>> nvim\n"
 nvim -c "UpdateRemotePlugins | q"
 echo "\n>>> zsh\n"

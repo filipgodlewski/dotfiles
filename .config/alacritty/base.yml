@@ -14,7 +14,7 @@ window:
     x: 2
     y: 2
   decorations: buttonless
-  startup_mode: SimpleFullscreen
+  startup_mode: maximized
   dynamic_title: true
 
 scrolling:

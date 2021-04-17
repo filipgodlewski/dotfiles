@@ -28,18 +28,6 @@
 [submodule ".local/share/tmux/nord-tmux"]
 	path = .local/share/tmux/nord-tmux
 	url = https://github.com/arcticicestudio/nord-tmux.git
-[submodule ".local/share/misc/nord-alacritty"]
-	path = .local/share/misc/nord-alacritty
-	url = https://github.com/arcticicestudio/nord-alacritty.git
-[submodule ".local/share/tmux/tmux-resurrect"]
-	path = .local/share/tmux/tmux-resurrect
-	url = https://github.com/tmux-plugins/tmux-resurrect.git
-[submodule ".local/share/tmux/tmux-continuum"]
-	path = .local/share/tmux/tmux-continuum
-	url = https://github.com/tmux-plugins/tmux-continuum.git
-[submodule ".local/share/tmux/tmux-1password"]
-	path = .local/share/tmux/tmux-1password
-	url = https://github.com/yardnsm/tmux-1password.git
 [submodule ".local/share/zsh/plugins/fast-syntax-highlighting"]
 	path = .local/share/zsh/plugins/fast-syntax-highlighting
 	url = https://github.com/zdharma/fast-syntax-highlighting.git
@@ -55,18 +43,9 @@
 [submodule ".local/share/nvim/site/pack/plugins/start/vim-repeat"]
 	path = .local/share/nvim/site/pack/plugins/start/vim-repeat
 	url = https://github.com/tpope/vim-repeat.git
-[submodule ".local/share/nvim/site/pack/plugins/start/robotframework-vim"]
-	path = .local/share/nvim/site/pack/plugins/start/robotframework-vim
-	url = https://github.com/mfukar/robotframework-vim.git
 [submodule ".local/share/nvim/site/pack/plugins/start/vim-python-nord"]
 	path = .local/share/nvim/site/pack/plugins/start/vim-python-nord
 	url = https://github.com/filipgodlewski/vim-python-nord.git
 [submodule ".local/share/nvim/site/pack/plugins/start/vim-fugitive"]
 	path = .local/share/nvim/site/pack/plugins/start/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
-[submodule ".local/share/nvim/site/pack/plugins/start/vim"]
-	path = .local/share/nvim/site/pack/plugins/start/vim
-	url = https://github.com/metakirby5/codi.vim.git
-[submodule ".local/share/nvim/site/pack/plugins/start/vimwiki"]
-	path = .local/share/nvim/site/pack/plugins/start/vimwiki
-	url = https://github.com/vimwiki/vimwiki.git

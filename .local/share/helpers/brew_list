@@ -1,10 +1,13 @@
 exa
+fd
 fzf
 gh
 git
 jq
+neovim
 node
 ripgrep
+stow
 tmux
 yapf
 zsh

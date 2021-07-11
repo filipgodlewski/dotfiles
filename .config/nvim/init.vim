@@ -78,6 +78,7 @@ nnoremap <silent> <Leader>fp :RG<CR>
 
 " MISC
 nnoremap <silent> <Leader>so :wa<CR>:so $MYVIMRC<CR>:noh<CR>:echo '"'.expand("$MYVIMRC").'" [write & reload]'<CR>
+nnoremap <silent> <Leader>cp :let @+ = expand("%:p")<CR>
 
 " MOVEMENTS
 nnoremap <C-J> :norm o<CR>
@@ -89,9 +90,14 @@ nnoremap Y y$
 nnoremap gy "*y
 nnoremap gY "*Y
 vnoremap gy "*y
+vnoremap > >gv
+vnoremap < <gv
 
 " TERMINAL
 tnoremap <C-[> <C-\><C-N>
+
+" PYTHON
+nnoremap <silent> <Leader>py :w<CR>:!python3 %<CR>
 
 packloadall
 silent! helptags ALL

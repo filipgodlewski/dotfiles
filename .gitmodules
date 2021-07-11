@@ -1,6 +1,3 @@
-[submodule ".local/share/nvim/site/pack/plugins/start/fzf.vim"]
-	path = .local/share/nvim/site/pack/plugins/start/fzf.vim
-	url = https://github.com/junegunn/fzf.vim.git
 [submodule ".local/share/zsh/plugins/zsh-autosuggestions"]
 	path = .local/share/zsh/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions.git
@@ -10,15 +7,6 @@
 [submodule ".local/share/zsh/plugins/zsh-history-substring-search"]
 	path = .local/share/zsh/plugins/zsh-history-substring-search
 	url = https://github.com/zsh-users/zsh-history-substring-search.git
-[submodule ".local/share/nvim/site/pack/plugins/start/ale"]
-	path = .local/share/nvim/site/pack/plugins/start/ale
-	url = https://github.com/dense-analysis/ale.git
-[submodule ".local/share/nvim/site/pack/plugins/start/deoplete.nvim"]
-	path = .local/share/nvim/site/pack/plugins/start/deoplete.nvim
-	url = https://github.com/Shougo/deoplete.nvim.git
-[submodule ".local/share/nvim/site/pack/plugins/start/deoplete-jedi"]
-	path = .local/share/nvim/site/pack/plugins/start/deoplete-jedi
-	url = https://github.com/deoplete-plugins/deoplete-jedi.git
 [submodule ".local/share/zsh/plugins/propane"]
 	path = .local/share/zsh/plugins/propane
 	url = https://github.com/filipgodlewski/propane.git
@@ -31,12 +19,6 @@
 [submodule ".local/share/zsh/plugins/fast-syntax-highlighting"]
 	path = .local/share/zsh/plugins/fast-syntax-highlighting
 	url = https://github.com/zdharma/fast-syntax-highlighting.git
-[submodule ".local/share/nvim/site/pack/plugins/start/echodoc.vim"]
-	path = .local/share/nvim/site/pack/plugins/start/echodoc.vim
-	url = https://github.com/Shougo/echodoc.vim.git
-[submodule ".local/share/nvim/site/pack/plugins/start/float-preview.nvim"]
-	path = .local/share/nvim/site/pack/plugins/start/float-preview.nvim
-	url = https://github.com/ncm2/float-preview.nvim.git
 [submodule ".local/share/nvim/site/pack/plugins/start/vim-bbrackets"]
 	path = .local/share/nvim/site/pack/plugins/start/vim-bbrackets
 	url = https://github.com/filipgodlewski/vim-bbrackets.git
@@ -49,3 +31,27 @@
 [submodule ".local/share/nvim/site/pack/plugins/start/vim-fugitive"]
 	path = .local/share/nvim/site/pack/plugins/start/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
+[submodule ".local/share/nvim/site/pack/plugins/start/fzf.vim"]
+	path = .local/share/nvim/site/pack/plugins/start/fzf.vim
+	url = https://github.com/junegunn/fzf.vim.git
+[submodule ".local/share/nvim/site/pack/plugins/start/ale"]
+	path = .local/share/nvim/site/pack/plugins/start/ale
+	url = https://github.com/dense-analysis/ale.git
+[submodule ".local/share/nvim/site/pack/plugins/start/deoplete.nvim"]
+	path = .local/share/nvim/site/pack/plugins/start/deoplete.nvim
+	url = https://github.com/Shougo/deoplete.nvim.git
+[submodule ".local/share/nvim/site/pack/plugins/start/deoplete-jedi"]
+	path = .local/share/nvim/site/pack/plugins/start/deoplete-jedi
+	url = https://github.com/deoplete-plugins/deoplete-jedi.git
+[submodule ".local/share/nvim/site/pack/plugins/start/echodoc.vim"]
+	path = .local/share/nvim/site/pack/plugins/start/echodoc.vim
+	url = https://github.com/Shougo/echodoc.vim.git
+[submodule ".local/share/nvim/site/pack/plugins/start/float-preview.nvim"]
+	path = .local/share/nvim/site/pack/plugins/start/float-preview.nvim
+	url = https://github.com/ncm2/float-preview.nvim.git
+[submodule ".local/share/nvim/site/pack/plugins/start/vimwiki"]
+	path = .local/share/nvim/site/pack/plugins/start/vimwiki
+	url = https://github.com/vimwiki/vimwiki.git
+[submodule ".local/share/nvim/site/pack/plugins/start/taskwiki"]
+	path = .local/share/nvim/site/pack/plugins/start/taskwiki
+	url = https://github.com/tools-life/taskwiki.git

@@ -11,14 +11,13 @@ cursor:
 
 window:
   padding:
-    x: 2
-    y: 2
+    x: 8
+    y: 4
   decorations: buttonless
-  startup_mode: maximized
-  dynamic_title: true
+  startup_mode: simplefullscreen
 
 scrolling:
-  history: 32000
+  history: 100000
 
 font:
   normal:

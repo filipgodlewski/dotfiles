@@ -78,7 +78,11 @@ let g:nord_cursor_line_number_background = 1
 " VIMWIKI
 let g:vimwiki_global_ext = 0
 let g:vimwiki_list = [{
-  \ 'path': '$HOME/vimwiki',
+  \ 'path': '$HOME/Documents/vimwiki',
   \ 'syntax': 'markdown',
   \ 'ext':'.md',
 \}]
+
+" TASKWIKI
+let g:taskwiki_taskrc_location = "~/.config/taskwarrior/.taskrc"
+let g:taskwiki_data_location = "~/.local/share/taskwarrior/.task"

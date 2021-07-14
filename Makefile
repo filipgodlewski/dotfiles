@@ -7,36 +7,44 @@ DOTFILES_DIR = $(HOME)/dotfiles
 NVIM_VENV = $(XDG_DATA_HOME)/venvs/nvim/bin/python3
 PACKAGE = brew list --versions $(1) > /dev/null || brew install $(1)$(2)
 PIP_INSTALL = $(1) -m pip install -U pip setuptools; $(1) -m pip install -U -r _pip/$(2)_packages.list
+PYTHON = /Library/Frameworks/Python.framework/Versions/Current/bin/python3
 SHELLS = /etc/shells
 ZSH = /usr/local/bin/zsh
 
 OS := $(shell [[ "$$OSTYPE" =~ ^darwin ]] && echo macos)
 
-install: git_config $(OS) git_submodules update_nvim new_tmux update_alacritty
+.PHONY: alacritty git nvim tmux zsh
 
-macos: core-macos link zsh_conflicts
+install: git $(OS) submodules nvim tmux alacritty
 
-git_config: 
+uninstall: unnpm unzsh unalacritty unpip unlink unbrew
+
+macos: core-macos link zsh
+
+git: 
 	@echo "\ngit: Setting up username and email\n"
 	@git config --local user.name "Filip Godlewski"
 	@git config --local user.email "filip.godlewski@outlook.com"
 
-git_submodules:
+submodules:
 	@echo "\ngit: Initialize submodules recursively\n"
 	@git submodule update --init --recursive
 
-zsh_conflicts:
+zsh:
 	@echo "\nzsh: Set as default\n"
 	@if ! grep -q $(ZSH) $(SHELLS); then sudo $(ZSH) >> $(SHELLS) && chsh -s $(ZSH); fi
 	@echo "\nzsh: Resolving potential conflicts\n"
-	@sudo chown -R root /usr/local/share/zsh
-	@sudo chown -R root /usr/local/share/zsh/site-functions
+	@sudo chown -R $$(whoami) /usr/local/share/zsh
+	@sudo chown -R $$(whoami) /usr/local/share/zsh/site-functions
 	@sudo chmod g-w /usr/local/share/zsh
 	@sudo chmod g-w /usr/local/share/zsh/site-functions
 	@echo "\nzsh: Compile terminfo\n"
 	@for file in $(XDG_DATA_HOME)/terminfo/capabilities/*; do tic $$file; done
 
-update_nvim:
+unzsh:
+	@chsh -s /bin/zsh
+
+nvim:
 	@echo "\nnvim: Update neovim\n"
 	@nvim -c "UpdateRemotePlugins | q"
 
@@ -45,6 +53,10 @@ core-macos: taps packages casks npm pip clean
 brew: | $(BREW)
 	@echo "\nbrew: update brew\n"
 	brew update
+
+unbrew:
+	@brew remove --force --ignore-dependencies $(shell brew list)
+	@ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"
 
 $(BREW):
 	@ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -94,21 +106,35 @@ npm:
 	@npm audit fix
 	@rm package-lock.json package.json
 
+unnpm:
+	@npm ls -gp --depth=0 | awk -F/ '/node_modules/ && !/\/npm$$/ {print $$NF}' | xargs npm -g rm
+
 pip:
 	@echo "\npip: Update and install global requirements\n"
-	@$(call PIP_INSTALL,python3,global)
+	@$(call PIP_INSTALL,$(PYTHON),global)
 	@echo "\npip: Create nvim virtual environment\n"
 	@python3 -m venv $(XDG_DATA_HOME)/venvs/nvim
 	@echo "\npip: Install packages for nvim virtual environment\n"
 	$(call PIP_INSTALL,$(NVIM_VENV),nvim)
 
-new_tmux:
+unpip:
+	@echo "\npip: Delete global packages\n"
+	@$(PYTHON) -m pip list --format freeze | sed 's/==.*//' | sed -E '/^(pip|setuptools)/d'
+	@echo "\npip: Delete nvim virtual environment\n"
+	@deactivate &>/dev/null
+	@rm -rf $(XDG_DATA_HOME)/venvs/nvim
+
+tmux:
 	@echo "\ntmux: Create new base session\n"
 	@tmux new-session -d -s base
 
-update_alacritty:
+alacritty:
 	@echo "\nalacritty: Update colorscheme\n"
 	@cat $(XDG_DATA_HOME)/alacritty/nord-alacritty/src/nord.yml $(XDG_CONFIG_HOME)/alacritty/base.yml > $(XDG_CONFIG_HOME)/alacritty/alacritty.yml
+
+unalacritty:
+	@echo "\nalacritty: Delete colorscheme\n"
+	@rm $(XDG_CONFIG_HOME)/alacritty/alacritty.yml
 
 list:
 	@echo "\nTaps:\n"
@@ -132,9 +158,3 @@ unlink:
 clean:
 	@echo "\nbrew: clean packages\n"
 	@brew cleanup --prune=all
-
-uninstall_brew:
-	@ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"
-
-uninstall_packages:
-	@brew remove --force --ignore-dependencies $(shell brew list)

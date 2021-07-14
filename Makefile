@@ -14,11 +14,7 @@ OS := $(shell [[ "$$OSTYPE" =~ ^darwin ]] && echo macos)
 
 install: git_config $(OS) git_submodules update_nvim new_tmux update_alacritty
 
-macos: xcode_init core-macos link zsh_conflicts
-
-xcode_init:
-	@echo "\nxcode: Install basic programs\n"
-	xcode-select --install
+macos: core-macos link zsh_conflicts
 
 git_config: 
 	@echo "\ngit: Setting up username and email\n"

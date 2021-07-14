@@ -15,6 +15,7 @@ First of all, instructions below are prepared for MacOS, as this is my daily wor
 ### Install
 
 ```sh
+xcode-select --install
 git clone https://github.com/filipgodlewski/dotfiles.git
 cd dotfiles
 make install

@@ -153,13 +153,11 @@ list:
 
 link:
 	@echo "\nstow: link files\n"
-	@stow stow
 	@for directory in $$(fd --ignore-file stow/.stow-global-ignore -d 1 -c never); do stow -D $$directory; done
 	@for directory in $$(fd --ignore-file stow/.stow-global-ignore -d 1 -c never); do stow $$directory; done
 
 unlink:
 	@echo "\nstow: unlink files\n"
-	@stow -D stow
 	@for directory in $$(fd --ignore-file stow/.stow-global-ignore -d 1 -c never); do stow -D $$directory; done
 
 clean:

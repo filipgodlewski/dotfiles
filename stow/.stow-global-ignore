@@ -10,6 +10,7 @@ _*
 @*
 stow
 .stow-local-ignore
+.stow-global-ignore
 Makefile
 
 # Misc

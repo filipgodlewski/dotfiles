@@ -1,3 +1,3 @@
 if [[ -z $TMUX ]]; then
-    tmux attach -t base
+    tmux new-session -s base 2>/dev/null || tmux a -t base
 fi

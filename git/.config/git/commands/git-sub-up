@@ -1,9 +1,8 @@
 #! /bin/zsh
-alias cfg="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 
-cfg submodule init
-cfg submodule update
-cfg submodule foreach '\
+git submodule init
+git submodule update
+git submodule foreach '\
     git fetch origin; \
     git checkout $(git rev-parse --abbrev-ref HEAD); \
     git reset --hard origin/$(git rev-parse --abbrev-ref HEAD); \

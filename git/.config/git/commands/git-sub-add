@@ -38,7 +38,7 @@ def main(args):
     abs_local = os.path.expanduser(f"~/dotfiles/{args.folder}/.local")
     abs_path = os.path.join(abs_local, path)
     run(f"git submodule add {link} {path}", shell=True, cwd=abs_local)
-    run(f"git submodule init", shell=True, cwd=abs_path)
+    run("git submodule init", shell=True, cwd=abs_path)
 
 
 def parse_argv():

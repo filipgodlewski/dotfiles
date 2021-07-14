@@ -7,14 +7,11 @@ from subprocess import DEVNULL, run
 from pyfzf.pyfzf import FzfPrompt
 
 DIRS = {
-    "colorschemes": "share/colorschemes",
+    "alacritty": "share/alacritty",
     "nvim": "share/nvim/site/pack/plugins/start",
     "tmux": "share/tmux",
     "zsh": "share/zsh/plugins",
 }
-CFG = "/usr/bin/git --git-dir=$HOME/.cfg --work-tree=$HOME"
-LOCAL = os.path.expanduser("~/.local")
-SUB_ARGS = {"shell": True, "cwd": LOCAL, "capture_output": DEVNULL}
 
 
 def get_dirs_help():
@@ -23,8 +20,10 @@ def get_dirs_help():
 
 
 def main(args):
+    local = os.path.expanduser(f"~/dotfiles/{args.folder}/.local")
+    sub_args = {"shell": True, "cwd": local, "capture_output": DEVNULL}
     folder = DIRS.get(args.folder, None)
-    plugin_dirs = os.listdir(os.path.join(LOCAL, folder))
+    plugin_dirs = os.listdir(os.path.join(local, folder))
     fzf = FzfPrompt()
     try:
         names = fzf.prompt(plugin_dirs, "--multi --cycle")
@@ -33,9 +32,9 @@ def main(args):
         sys.exit(130)
     for name in names:
         path = os.path.join(folder, name)
-        run(f"{CFG} submodule deinit -f {path}", **SUB_ARGS)
-        run(f"{CFG} rm -rf {path}", **SUB_ARGS)
-        run(f"{CFG} rm -rf {path}", **SUB_ARGS)
+        run(f"git submodule deinit -f {path}", **sub_args)
+        run(f"git rm -rf {path}", **sub_args)
+        run(f"git rm -rf {path}", **sub_args)
 
 
 if __name__ == "__main__":

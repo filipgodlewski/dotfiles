@@ -6,9 +6,11 @@
 .gitignore
 
 # unstowable
-^_*
-^@*
+_*
+@*
+stow
 .stow-local-ignore
+Makefile
 
 # Misc
 COPYING

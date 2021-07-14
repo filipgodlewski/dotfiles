@@ -1,4 +1,4 @@
-export XDG_CONFIG_HOME = $(HOME)/.config
+fxport XDG_CONFIG_HOME = $(HOME)/.config
 export XDG_DATA_HOME = $(HOME)/.local/share
 
 BREW = /usr/local/bin/brew
@@ -29,12 +29,12 @@ zsh_conflicts:
 	@echo "\nzsh: Set as default\n"
 	@if ! grep -q $(ZSH) $(SHELLS); then sudo $(ZSH) >> $(SHELLS) && chsh -s $(ZSH); fi
 	@echo "\nzsh: Resolving potential conflicts\n"
-	@sudo chown -R $$(whoami) /usr/local/share/zsh || return 1
-	@sudo chmod -R 755 /usr/local/share/zsh || return 1
-	@sudo chown -R $$(whoami) /usr/local/share/zsh/site-functions || return 1
-	@sudo chmod -R 755 /usr/local/share/zsh/site-functions || return 1
+	@sudo chown -R root /usr/local/share/zsh
+	@sudo chown -R root /usr/local/share/zsh/site-functions
+	@sudo chmod g-w /usr/local/share/zsh
+	@sudo chmod g-w /usr/local/share/zsh/site-functions
 	@echo "\nzsh: Compile terminfo\n"
-	@for file in $${XDG_DATA_HOME}/terminfo/capabilities/*(.); do tic $${file}; done
+	@for file in $(XDG_DATA_HOME)/terminfo/capabilities/*; do tic $$file; done
 
 update_nvim:
 	@echo "\nnvim: Update neovim\n"
@@ -115,12 +115,13 @@ list:
 
 link:
 	@echo "\nstow: link files\n"
-	@stow -t $(HOME) stow
-	@for directory in $$(ls); do stow -t $(HOME) $$directory; done
+	@stow stow
+	@for directory in $$(fd --ignore-file stow/.stow-global-ignore -d 1 -c never); do stow $$directory; done
 
 unlink:
 	@echo "\nstow: unlink files\n"
-	@for directory in $$(ls); do stow --delete $$directory; done
+	@stow -D stow
+	@for directory in $$(fd --ignore-file stow/.stow-global-ignore -d 1 -c never); do stow -D $$directory; done
 
 clean:
 	@echo "\nbrew: clean packages\n"

@@ -71,8 +71,9 @@ packages: | brew
 	$(call PACKAGE,ripgrep)
 	$(call PACKAGE,stow)
 	$(call PACKAGE,tmux)
-	$(call PACKAGE,zsh)
 	$(call PACKAGE,universal-ctags/universal-ctags/universal-ctags, --HEAD)
+	$(call PACKAGE,vivid)
+	$(call PACKAGE,zsh)
 	@echo "\nbrew: Install python development packages\n"
 	$(call PACKAGE,yapf)
 	@echo "\nbrew: Install javascript development packages\n"

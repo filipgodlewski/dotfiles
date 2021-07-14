@@ -12,12 +12,19 @@ SHELLS = /etc/shells
 ZSH = /usr/local/bin/zsh
 
 OS := $(shell [[ "$$OSTYPE" =~ ^darwin ]] && echo macos)
+IN_TMUX := $(shell [[ -n $TMUX ]] && echo end || echo uninstall-proceed)
 
 .PHONY: alacritty git nvim tmux zsh
 
 install: git $(OS) submodules nvim tmux alacritty
 
-uninstall: unnpm unzsh unalacritty unpip unlink unbrew
+uninstall: $(IN_TMUX)
+
+uninstall-proceed: unnpm unzsh unalacritty unpip unlink unbrew
+
+end:
+	@echo "\nKill tmux and try again!\n"
+	@exit 1
 
 macos: core-macos link zsh
 
@@ -32,7 +39,7 @@ submodules:
 
 zsh:
 	@echo "\nzsh: Set as default\n"
-	@if ! grep -q $(ZSH) $(SHELLS); then sudo $(ZSH) >> $(SHELLS) && chsh -s $(ZSH); fi
+	@if ! grep -q $(ZSH) $(SHELLS); then sudo $(ZSH) >> $(SHELLS); chsh -s $(ZSH); fi
 	@echo "\nzsh: Resolving potential conflicts\n"
 	@sudo chown -R $$(whoami) /usr/local/share/zsh
 	@sudo chown -R $$(whoami) /usr/local/share/zsh/site-functions
@@ -56,10 +63,10 @@ brew: | $(BREW)
 
 unbrew:
 	@brew remove --force --ignore-dependencies $(shell brew list)
-	@ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"
+	@/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
 
 $(BREW):
-	@ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	@/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 taps: | brew
 	@echo "\nbrew: Open taps\n"
@@ -83,7 +90,7 @@ packages: | brew
 	$(call PACKAGE,ripgrep)
 	$(call PACKAGE,stow)
 	$(call PACKAGE,tmux)
-	$(call PACKAGE,universal-ctags/universal-ctags/universal-ctags, --HEAD)
+	-$(call PACKAGE,universal-ctags/universal-ctags/universal-ctags, --HEAD)
 	$(call PACKAGE,vivid)
 	$(call PACKAGE,zsh)
 	@echo "\nbrew: Install python development packages\n"
@@ -119,14 +126,14 @@ pip:
 
 unpip:
 	@echo "\npip: Delete global packages\n"
-	@$(PYTHON) -m pip list --format freeze | sed 's/==.*//' | sed -E '/^(pip|setuptools)/d'
+	@$(PYTHON) -m pip list --format freeze | sed 's/==.*//' | sed -E '/^(pip|setuptools)/d' | xargs -n1 $(PYTHON) -m pip -q uninstall -y
 	@echo "\npip: Delete nvim virtual environment\n"
-	@deactivate &>/dev/null
-	@rm -rf $(XDG_DATA_HOME)/venvs/nvim
+	@-deactivate &>/dev/null
+	@-rm -rf $(XDG_DATA_HOME)/venvs/nvim
 
 tmux:
 	@echo "\ntmux: Create new base session\n"
-	@tmux new-session -d -s base
+	@-tmux new-session -d -s base
 
 alacritty:
 	@echo "\nalacritty: Update colorscheme\n"
@@ -134,7 +141,7 @@ alacritty:
 
 unalacritty:
 	@echo "\nalacritty: Delete colorscheme\n"
-	@rm $(XDG_CONFIG_HOME)/alacritty/alacritty.yml
+	@-rm -rf $(XDG_CONFIG_HOME)/alacritty/alacritty.yml
 
 list:
 	@echo "\nTaps:\n"

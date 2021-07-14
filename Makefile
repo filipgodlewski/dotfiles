@@ -12,7 +12,7 @@ ZSH = /usr/local/bin/zsh
 
 OS := $(shell [[ "$$OSTYPE" =~ ^darwin ]] && echo macos)
 
-install: git_config $(OS) git_submodules update_nvim new_tmux
+install: git_config $(OS) git_submodules update_nvim new_tmux update_alacritty
 
 macos: xcode_init core-macos link zsh_conflicts
 
@@ -26,7 +26,7 @@ git_config:
 	@git config --local user.email "filip.godlewski@outlook.com"
 
 git_submodules:
-	@echo "\nsubmodules: Initialize submodules recursively\n"
+	@echo "\ngit: Initialize submodules recursively\n"
 	@git submodule update --init --recursive
 
 zsh_conflicts:
@@ -47,12 +47,14 @@ update_nvim:
 core-macos: taps packages casks npm pip clean
 
 brew: | $(BREW)
+	@echo "\nbrew: update brew\n"
 	brew update
 
 $(BREW):
 	@ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 taps: | brew
+	@echo "\nbrew: Open taps\n"
 	brew tap homebrew/cask
 	brew tap homebrew/cask-fonts
 	brew tap homebrew/cask-versions
@@ -81,9 +83,9 @@ packages: | brew
 	$(call PACKAGE,node)
 
 casks: | brew
-	@echo "\ncasks: Install basic applications packages\n"
+	@echo "\nbrew: Install basic casks\n"
 	$(call CASK,alacritty)
-	@echo "\ncasks: Install fonts\n"
+	@echo "\nbrew: Install fonts\n"
 	$(call CASK,font-fira-code-nerd-font)
 	$(call CASK,font-victor-mono)
 
@@ -100,8 +102,12 @@ pip:
 	$(call PIP_INSTALL,$(NVIM_VENV),nvim)
 
 new_tmux:
-	@echo "\nCreate new base session\n"
+	@echo "\ntmux: Create new base session\n"
 	@tmux new -t base
+
+update_alacritty:
+	@echo "\nalacritty: Update colorscheme\n"
+	@cat $(XDG_DATA_HOME)/colorschemes/nord-alacritty/src/nord.yml $(XDG_CONFIG_HOME)/alacritty/base.yml > $(XDG_CONFIG_HOME)/alacritty/alacritty.yml
 
 list:
 	@echo "\nTaps:\n"
@@ -112,13 +118,16 @@ list:
 	@brew list --cask -1
 
 link:
+	@echo "\nstow: link files\n"
 	@stow -t $(HOME) stow
-	@for directory in $$(ls); do stow -t $(HOME) $$directory --dotfiles; done
+	@for directory in $$(ls); do stow -t $(HOME) $$directory; done
 
 unlink:
-	@for directory in $$(ls); do stow --delete $$directory --dotfiles; done
+	@echo "\nstow: unlink files\n"
+	@for directory in $$(ls); do stow --delete $$directory; done
 
 clean:
+	@echo "\nbrew: clean packages\n"
 	@brew cleanup
 	@brew cask cleanup
 

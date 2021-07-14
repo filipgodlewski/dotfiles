@@ -1,8 +1,8 @@
-fxport XDG_CONFIG_HOME = $(HOME)/.config
+export XDG_CONFIG_HOME = $(HOME)/.config
 export XDG_DATA_HOME = $(HOME)/.local/share
 
 BREW = /usr/local/bin/brew
-CASK = brew cask list $(1) > /dev/null 2>&1 || brew cask install $(1)
+CASK = brew list --casks $(1) > /dev/null 2>&1 || brew install --cask $(1)
 DOTFILES_DIR = $(HOME)/dotfiles
 NVIM_VENV = $(XDG_DATA_HOME)/venvs/nvim/bin/python3
 PACKAGE = brew list --versions $(1) > /dev/null || brew install $(1)$(2)
@@ -87,23 +87,27 @@ casks: | brew
 
 npm:
 	@echo "\nnpm: Update and install global requirements\n"
-	@for file in _npm/global_packages.list; do npm install -g $${file}; done
+	@for file in $$(<$(DOTFILES_DIR)/_npm/global_packages.list); do npm install -g $$file; done
+	@echo {} > package.json
+	@npm install --package-lock-only
+	@npm audit fix
+	@rm package-lock.json package.json
 
 pip:
 	@echo "\npip: Update and install global requirements\n"
 	@$(call PIP_INSTALL,python3,global)
 	@echo "\npip: Create nvim virtual environment\n"
-	@python3 -m venv $${XDG_DATA_HOME}/venvs/nvim
+	@python3 -m venv $(XDG_DATA_HOME)/venvs/nvim
 	@echo "\npip: Install packages for nvim virtual environment\n"
 	$(call PIP_INSTALL,$(NVIM_VENV),nvim)
 
 new_tmux:
 	@echo "\ntmux: Create new base session\n"
-	@tmux new -t base
+	@tmux new-session -d -s base
 
 update_alacritty:
 	@echo "\nalacritty: Update colorscheme\n"
-	@cat $(XDG_DATA_HOME)/colorschemes/nord-alacritty/src/nord.yml $(XDG_CONFIG_HOME)/alacritty/base.yml > $(XDG_CONFIG_HOME)/alacritty/alacritty.yml
+	@cat $(XDG_DATA_HOME)/alacritty/nord-alacritty/src/nord.yml $(XDG_CONFIG_HOME)/alacritty/base.yml > $(XDG_CONFIG_HOME)/alacritty/alacritty.yml
 
 list:
 	@echo "\nTaps:\n"
@@ -111,7 +115,7 @@ list:
 	@echo "\nPackages:\n"
 	@brew leaves --installed-on-request
 	@echo "\nCasks:\n"
-	@brew list --cask -1
+	@brew list --casks -1
 
 link:
 	@echo "\nstow: link files\n"
@@ -125,8 +129,7 @@ unlink:
 
 clean:
 	@echo "\nbrew: clean packages\n"
-	@brew cleanup
-	@brew cask cleanup
+	@brew cleanup --prune=all
 
 uninstall_brew:
 	@ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"

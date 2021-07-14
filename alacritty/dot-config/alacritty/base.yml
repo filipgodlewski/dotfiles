@@ -1,3 +1,6 @@
+
+# Base config below
+
 shell:
   program: /usr/local/bin/zsh
   args:
@@ -10,11 +13,14 @@ cursor:
   style: Block
 
 window:
+  dimensions:
+    columns: 187
+    lines: 53
   padding:
-    x: 8
-    y: 4
+    x: 16
+    y: 16
+  dynamic_padding: true
   decorations: buttonless
-  startup_mode: simplefullscreen
 
 scrolling:
   history: 100000

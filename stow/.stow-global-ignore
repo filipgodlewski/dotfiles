@@ -1,0 +1,18 @@
+# MacOS specific
+.DS_Store
+
+# VCS
+.git
+.gitignore
+
+# unstowable
+^_*
+^@*
+.stow-local-ignore
+
+# Misc
+COPYING
+LICENSE.*
+README.*
+TODO.*
+tags

@@ -2,12 +2,13 @@
 from subprocess import run
 
 
+DEF_NAME = "Filip Godlewski"
+DEF_MAIL = "filip.godlewski@outlook.com"
+
+
 def main():
-    def_name = "Filip Godlewski"
-    def_mail = "filip.godlewski@outlook.com"
-    name = input(f"local name [{def_name}]: ") or def_name
-    mail = input(f"local mail [{def_mail}]: ") or def_mail
-    run("git init", shell=True)
+    name = input(f"local name [{DEF_NAME}]: ") or DEF_NAME
+    mail = input(f"local mail [{DEF_MAIL}]: ") or DEF_MAIL
     run(f"git config --local user.name '{name}'", shell=True)
     run(f"git config --local user.email '{mail}'", shell=True)
 

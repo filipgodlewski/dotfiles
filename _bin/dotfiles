@@ -1,0 +1,84 @@
+#!/usr/bin/env zsh
+
+BIN_NAME=$(basename "$0")
+COMMAND_NAME=$1
+SUB_COMMAND_NAME=$2
+
+sub_help() {
+  echo "Usage: $BIN_NAME <command>"
+  echo
+  echo "Commands:"
+  echo "   clean            Clean up caches (brew, nvm, pip)"
+  # echo "   dock             Apply macOS Dock settings"
+  echo "   edit             Open dotfiles in Neovim"
+  echo "   help             This help message"
+  echo "   macos            Apply macOS system defaults"
+  # echo "   test             Run tests"
+  echo "   update           Update packages and pkg managers (OS, brew, npm, pip)"
+  echo
+}
+
+sub_clean() {
+}
+
+sub_edit() {
+}
+
+sub_macos() {
+}
+
+sub_update() {
+  PROGRAM=$1
+  case $PROGRAM in
+    "all")
+      upvenv nvim
+      npm install -g npm
+      npm update --global
+      brew update
+      brew upgrade
+      brew upgrade --cask
+      brew cleanup
+      cat $XDG_DATA_HOME/colorschemes/nord-alacritty/src/nord.yml $XDG_CONFIG_HOME/alacritty/base.yml > $XDG_CONFIG_HOME/alacritty/alacritty.yml
+      nvim -c "UpdateRemotePlugins | q"
+      exec zsh
+      ;;
+    "brew")
+      brew update
+      brew upgrade
+      brew upgrade --cask
+      brew cleanup
+      ;;
+    "npm")
+      npm install -g npm
+      npm update --global
+      ;;
+    "pip")
+      upvenv nvim
+      ;;
+    "alacritty")
+     cat $XDG_DATA_HOME/colorschemes/nord-alacritty/src/nord.yml $XDG_CONFIG_HOME/alacritty/base.yml > $XDG_CONFIG_HOME/alacritty/alacritty.yml
+     ;;
+    "nvim")
+      nvim -c "UpdateRemotePlugins | q"
+      ;;
+    "zsh")
+      exec zsh
+      ;;
+  esac
+
+}
+
+case $COMMAND_NAME in
+  "" | "-h" | "--help")
+    sub_help
+    ;;
+  *)
+    shift
+    sub_${COMMAND_NAME} $@
+    if [ $? = 127 ]; then
+      echo "'$COMMAND_NAME' is not a known command or has errors." >&2
+      sub_help
+      exit 1
+    fi
+    ;;
+esac

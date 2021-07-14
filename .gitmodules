@@ -1,51 +1,51 @@
-[submodule ".local/share/zsh/plugins/zsh-autosuggestions"]
-	path = .local/share/zsh/plugins/zsh-autosuggestions
+[submodule "zsh/dot-local/share/zsh/plugins/zsh-autosuggestions"]
+	path = zsh/dotzsh/dot-local/share/zsh/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions.git
-[submodule ".local/share/zsh/plugins/zsh-completions"]
-	path = .local/share/zsh/plugins/zsh-completions
+[submodule "zsh/dot-local/share/zsh/plugins/zsh-completions"]
+	path = zsh/dotzsh/dot-local/share/zsh/plugins/zsh-completions
 	url = https://github.com/zsh-users/zsh-completions.git
-[submodule ".local/share/zsh/plugins/zsh-history-substring-search"]
-	path = .local/share/zsh/plugins/zsh-history-substring-search
+[submodule "zsh/dot-local/share/zsh/plugins/zsh-history-substring-search"]
+	path = zsh/dotzsh/dot-local/share/zsh/plugins/zsh-history-substring-search
 	url = https://github.com/zsh-users/zsh-history-substring-search.git
-[submodule ".local/share/zsh/plugins/propane"]
-	path = .local/share/zsh/plugins/propane
+[submodule "zsh/dot-local/share/zsh/plugins/propane"]
+	path = zsh/dotzsh/dot-local/share/zsh/plugins/propane
 	url = https://github.com/filipgodlewski/propane.git
-[submodule ".local/share/nvim/site/pack/plugins/start/nord-vim"]
-	path = .local/share/nvim/site/pack/plugins/start/nord-vim
+[submodule "nvim/dot-local/share/nvim/site/pack/plugins/start/nord-vim"]
+	path = nvim/dotnvim/dot-local/share/nvim/site/pack/plugins/start/nord-vim
 	url = https://github.com/arcticicestudio/nord-vim.git
-[submodule ".local/share/tmux/nord-tmux"]
-	path = .local/share/tmux/nord-tmux
+[submodule "tmux/dot-local/share/tmux/nord-tmux"]
+	path = tmux/dot-local/share/tmux/nord-tmux
 	url = https://github.com/arcticicestudio/nord-tmux.git
-[submodule ".local/share/zsh/plugins/fast-syntax-highlighting"]
-	path = .local/share/zsh/plugins/fast-syntax-highlighting
+[submodule "zsh/dot-local/share/zsh/plugins/fast-syntax-highlighting"]
+	path = zsh/dotzsh/dot-local/share/zsh/plugins/fast-syntax-highlighting
 	url = https://github.com/zdharma/fast-syntax-highlighting.git
-[submodule ".local/share/nvim/site/pack/plugins/start/vim-bbrackets"]
-	path = .local/share/nvim/site/pack/plugins/start/vim-bbrackets
+[submodule "nvim/dot-local/share/nvim/site/pack/plugins/start/vim-bbrackets"]
+	path = nvim/dotnvim/dot-local/share/nvim/site/pack/plugins/start/vim-bbrackets
 	url = https://github.com/filipgodlewski/vim-bbrackets.git
-[submodule ".local/share/nvim/site/pack/plugins/start/vim-repeat"]
-	path = .local/share/nvim/site/pack/plugins/start/vim-repeat
+[submodule "nvim/dot-local/share/nvim/site/pack/plugins/start/vim-repeat"]
+	path = nvim/dotnvim/dot-local/share/nvim/site/pack/plugins/start/vim-repeat
 	url = https://github.com/tpope/vim-repeat.git
-[submodule ".local/share/nvim/site/pack/plugins/start/vim-python-nord"]
-	path = .local/share/nvim/site/pack/plugins/start/vim-python-nord
+[submodule "nvim/dot-local/share/nvim/site/pack/plugins/start/vim-python-nord"]
+	path = nvim/dot-local/share/nvim/site/pack/plugins/start/vim-python-nord
 	url = https://github.com/filipgodlewski/vim-python-nord.git
-[submodule ".local/share/nvim/site/pack/plugins/start/vim-fugitive"]
-	path = .local/share/nvim/site/pack/plugins/start/vim-fugitive
+[submodule "nvim/dot-local/share/nvim/site/pack/plugins/start/vim-fugitive"]
+	path = nvim/dot-local/share/nvim/site/pack/plugins/start/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
-[submodule ".local/share/nvim/site/pack/plugins/start/fzf.vim"]
-	path = .local/share/nvim/site/pack/plugins/start/fzf.vim
+[submodule "nvim/dot-local/share/nvim/site/pack/plugins/start/fzf.vim"]
+	path = nvim/dot-local/share/nvim/site/pack/plugins/start/fzf.vim
 	url = https://github.com/junegunn/fzf.vim.git
-[submodule ".local/share/nvim/site/pack/plugins/start/ale"]
-	path = .local/share/nvim/site/pack/plugins/start/ale
+[submodule "nvim/dot-local/share/nvim/site/pack/plugins/start/ale"]
+	path = nvim/dot-local/share/nvim/site/pack/plugins/start/ale
 	url = https://github.com/dense-analysis/ale.git
-[submodule ".local/share/nvim/site/pack/plugins/start/deoplete.nvim"]
-	path = .local/share/nvim/site/pack/plugins/start/deoplete.nvim
+[submodule "nvim/dot-local/share/nvim/site/pack/plugins/start/deoplete.nvim"]
+	path = nvim/dot-local/share/nvim/site/pack/plugins/start/deoplete.nvim
 	url = https://github.com/Shougo/deoplete.nvim.git
-[submodule ".local/share/nvim/site/pack/plugins/start/deoplete-jedi"]
-	path = .local/share/nvim/site/pack/plugins/start/deoplete-jedi
+[submodule "nvim/dot-local/share/nvim/site/pack/plugins/start/deoplete-jedi"]
+	path = nvim/dot-local/share/nvim/site/pack/plugins/start/deoplete-jedi
 	url = https://github.com/deoplete-plugins/deoplete-jedi.git
-[submodule ".local/share/nvim/site/pack/plugins/start/echodoc.vim"]
-	path = .local/share/nvim/site/pack/plugins/start/echodoc.vim
+[submodule "nvim/dot-local/share/nvim/site/pack/plugins/start/echodoc.vim"]
+	path = nvim/dot-local/share/nvim/site/pack/plugins/start/echodoc.vim
 	url = https://github.com/Shougo/echodoc.vim.git
-[submodule ".local/share/nvim/site/pack/plugins/start/float-preview.nvim"]
-	path = .local/share/nvim/site/pack/plugins/start/float-preview.nvim
+[submodule "nvim/dot-local/share/nvim/site/pack/plugins/start/float-preview.nvim"]
+	path = nvim/dot-local/share/nvim/site/pack/plugins/start/float-preview.nvim
 	url = https://github.com/ncm2/float-preview.nvim.git

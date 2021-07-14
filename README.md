@@ -17,8 +17,16 @@ First of all, instructions below are prepared for MacOS, as this is my daily wor
 ```sh
 xcode-select --install
 git clone https://github.com/filipgodlewski/dotfiles.git
-cd dotfiles
+cd ~/dotfiles
 make install
+```
+
+### Uninstall
+
+```sh
+# Make sure you killed your tmux session first, otherwise it will fail
+cd ~/dotfiles
+make uninstall
 ```
 
 Finally, restart terminal. You should also gain access to `dotfiles` command. Type `dotfiles -h` to get more information.
@@ -29,15 +37,6 @@ Finally, restart terminal. You should also gain access to `dotfiles` command. Ty
 
 - `*lowercase*` - for packages that have to be installed with `stow`
 - leading `_` - for non-stow installation, to be installed with respective programs, e.g. `_pip` for python3 pip
-
-#### Dotfiles & Packages command-line applications
-
-The `dotfiles` application is used to easily manage all my configs and submodules, as well as packages.
-
-```sh
-# For more information
-dotfiles -h
-```
 
 ## License
 

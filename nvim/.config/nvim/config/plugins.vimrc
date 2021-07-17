@@ -89,24 +89,61 @@ let g:taskwiki_data_location = "~/.local/share/taskwarrior/.task"
 
 " WHICH-KEY
 lua << EOF
-  require("which-key").setup()
+require("which-key").setup {
+   operators = {
+      ["<leader>ij"] = "Insert",
+      ["<leader>ik"] = "Insert",
+   },
+   key_labels = {
+      ["<space>"] = "SPC",
+      ["<cr>"] = "RET",
+      ["<tab>"] = "TAB",
+   }
+}
 EOF
 
 " COLORIZER
 lua << EOF
-  require 'colorizer'.setup()
+require("colorizer").setup()
 EOF
 
 " GITSIGNS
 lua << EOF
-  require('gitsigns').setup()
+require("gitsigns").setup()
 EOF
 
 " TREESITTER
 lua << EOF
-  require'nvim-treesitter.configs'.setup {
-    highlight = {
-      enable = true
-    }
-  }
+require("nvim-treesitter.configs").setup {
+   highlight = {
+      enable = true,
+      custom_captures = {
+         ["type.builtin.error"] = "TSTypeBuiltinError",
+         ["type.builtin.warning"] = "TSTypeBuiltinWarning",
+         ["type.operator.not"] = "TSTypeOperatorNot",
+         ["text.ref"] = "TSRef",
+      },
+   },
+}
+EOF
+
+" TELESCOPE
+lua << EOF
+require("telescope").setup {
+   pickers = {
+      buffers = {
+         theme = "dropdown",
+         previewer = false,
+         mappings = {
+            i = {
+               ["<c-d>"] = require("telescope.actions").delete_buffer,
+            },
+            n = {
+               ["<c-d>"] = require("telescope.actions").delete_buffer,
+            },
+         },
+      },
+      
+   },
+}
 EOF

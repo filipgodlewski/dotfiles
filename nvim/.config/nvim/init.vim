@@ -1,3 +1,5 @@
+filetype plugin indent on
+
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let g:loaded_python_provider=0
 let g:python3_host_prog=expand("~/.local/share/venvs/nvim/bin/python3")
@@ -36,6 +38,7 @@ set pumheight=10
 set shell=/usr/local/bin/zsh
 set shiftround
 set shortmess+=mrwcI
+set signcolumn=yes
 set timeoutlen=250
 set updatetime=50
 set wildignore+=*.tar.*,*.zip*
@@ -54,48 +57,7 @@ aug END
 source $HOME/.config/nvim/config/plugins.vimrc
 source $HOME/.config/nvim/config/colors.vimrc
 source $HOME/.config/nvim/config/status.vimrc
-
-" BINDINGS
-" ALE
-nnoremap <silent> <Leader>af :ALEFix<CR>
-nnoremap <silent> <Leader>an :ALENextWrap<CR>
-nnoremap <silent> <Leader>ap :ALEPreviousWrap<CR>
-nnoremap <silent> <Leader>ao :lope<CR>
-nnoremap <silent> <Leader>ac :lclo<CR>
-
-" OPEN AND CLOSE
-nnoremap <silent> <Leader>bd :bp\|bd#<CR>
-nnoremap <silent> <Leader>co :cope<CR>:set modifiable<CR>
-nnoremap <silent> <Leader>wc :clo<CR>
-
-" FZF
-nnoremap <silent> <Leader>fb :Buffers<CR>
-nnoremap <silent> <Leader>ff :Files<CR>
-nnoremap <silent> <Leader>fh :Helptags<CR>
-nnoremap <silent> <Leader>fp :RG<CR>
-
-" MISC
-nnoremap <silent> <Leader>so :wa<CR>:so $MYVIMRC<CR>:noh<CR>:echo '"'.expand("$MYVIMRC").'" [write & reload]'<CR>
-nnoremap <silent> <Leader>cp :let @+ = expand("%:p")<CR>
-
-" MOVEMENTS
-nnoremap <C-J> :norm o<CR>
-nnoremap <C-K> :norm O<CR>
-nnoremap <silent> <C-]> <C-]>zz
-nnoremap <silent> <Esc> :noh<CR>
-nnoremap <silent> S i<CR><esc>^mwgk:silent! s/\v +$//<CR>:noh<CR>`w
-nnoremap Y y$
-nnoremap gy "*y
-nnoremap gY "*Y
-vnoremap gy "*y
-vnoremap > >gv
-vnoremap < <gv
-
-" TERMINAL
-tnoremap <C-[> <C-\><C-N>
-
-" PYTHON
-nnoremap <silent> <Leader>py :w<CR>:!python3 %<CR>
+source $HOME/.config/nvim/config/bindings.vimrc
 
 packloadall
 silent! helptags ALL

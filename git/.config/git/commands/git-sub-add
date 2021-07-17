@@ -37,16 +37,18 @@ def main(args):
     link = "https://github.com/" + args.REPO + ".git"
     abs_local = os.path.expanduser(f"~/dotfiles/{args.folder}/.local")
     abs_path = os.path.join(abs_local, path)
-    run(f"git submodule --force add {link} {path}", shell=True, cwd=abs_local)
+    opt = "--force" if args.force else ""
+    run(f"git submodule add {opt}{link} {path}", shell=True,
+        cwd=abs_local)
     run("git submodule init", shell=True, cwd=abs_path)
 
 
 def parse_argv():
     parser = argparse.ArgumentParser()
     parser.add_argument("--folder", "-f", help=get_dirs_help(), required=True)
+    parser.add_argument("--force", help="Force adding submodule")
     parser.add_argument(
-        "REPO", help="Repository name in the 'author/repository' format"
-    )
+        "REPO", help="Repository name in the 'author/repository' format")
     args = parser.parse_args()
     return args
 

@@ -25,9 +25,6 @@
 [submodule "nvim/.local/share/nvim/site/pack/plugins/start/vim-repeat"]
 	path = nvim/.local/share/nvim/site/pack/plugins/start/vim-repeat
 	url = https://github.com/tpope/vim-repeat.git
-[submodule "nvim/.local/share/nvim/site/pack/plugins/start/vim-python-nord"]
-	path = nvim/.local/share/nvim/site/pack/plugins/start/vim-python-nord
-	url = https://github.com/filipgodlewski/vim-python-nord.git
 [submodule "nvim/.local/share/nvim/site/pack/plugins/start/vim-fugitive"]
 	path = nvim/.local/share/nvim/site/pack/plugins/start/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
@@ -52,3 +49,27 @@
 [submodule "alacritty/.local/share/alacritty/nord-alacritty"]
 	path = alacritty/.local/share/alacritty/nord-alacritty
 	url = https://github.com/arcticicestudio/nord-alacritty.git
+[submodule "nvim/.local/share/nvim/site/pack/plugins/start/which-key.nvim"]
+	path = nvim/.local/share/nvim/site/pack/plugins/start/which-key.nvim
+	url = https://github.com/folke/which-key.nvim.git
+[submodule "nvim/.local/share/nvim/site/pack/plugins/start/nvim-colorizer.lua"]
+	path = nvim/.local/share/nvim/site/pack/plugins/start/nvim-colorizer.lua
+	url = https://github.com/norcalli/nvim-colorizer.lua.git
+[submodule "nvim/.local/share/nvim/site/pack/plugins/start/gitsigns.nvim"]
+	path = nvim/.local/share/nvim/site/pack/plugins/start/gitsigns.nvim
+	url = https://github.com/lewis6991/gitsigns.nvim.git
+[submodule "nvim/.local/share/nvim/site/pack/plugins/start/plenary.nvim"]
+	path = nvim/.local/share/nvim/site/pack/plugins/start/plenary.nvim
+	url = https://github.com/nvim-lua/plenary.nvim.git
+[submodule "nvim/.local/share/nvim/site/pack/plugins/start/popup.nvim"]
+	path = nvim/.local/share/nvim/site/pack/plugins/start/popup.nvim
+	url = https://github.com/nvim-lua/popup.nvim.git
+[submodule "nvim/.local/share/nvim/site/pack/plugins/start/nvim-treesitter"]
+	path = nvim/.local/share/nvim/site/pack/plugins/start/nvim-treesitter
+	url = https://github.com/nvim-treesitter/nvim-treesitter.git
+[submodule "nvim/.local/share/nvim/site/pack/plugins/start/playground"]
+	path = nvim/.local/share/nvim/site/pack/plugins/start/playground
+	url = https://github.com/nvim-treesitter/playground.git
+[submodule "nvim/.local/share/nvim/site/pack/plugins/start/telescope.nvim"]
+	path = nvim/.local/share/nvim/site/pack/plugins/start/telescope.nvim
+	url = https://github.com/nvim-telescope/telescope.nvim

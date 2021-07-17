@@ -1,5 +1,6 @@
 [alias]
-a = add
+a = add -u .
+af = fuzzy-add
 aa = add --all
 ap = add --patch
 
@@ -13,6 +14,8 @@ c = commit -v
 ca = commit --amend
 cam = commit --amend --message
 cane = commit --amend --no-edit
+
+c = commit ${1--v} "${}"
 
 cl = clean
 cleanup = !git reset --hard && git clean -f

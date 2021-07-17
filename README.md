@@ -21,6 +21,8 @@ cd ~/dotfiles
 make install
 ```
 
+Finally, restart terminal. You should also gain access to `dotfiles` command. Type `dotfiles -h` to get more information.
+
 ### Uninstall
 
 ```sh
@@ -28,8 +30,6 @@ make install
 cd ~/dotfiles
 make uninstall
 ```
-
-Finally, restart terminal. You should also gain access to `dotfiles` command. Type `dotfiles -h` to get more information.
 
 ### Explanation
 

@@ -19,7 +19,6 @@ set confirm
 set copyindent
 set cursorline
 set diffopt=filler,vertical
-set expandtab
 set fileformat=unix
 set grepformat=%f:%l:%c:%m
 set grepprg=rg\ --vimgrep\ --no-heading\ --case-sensitive\ --follow\ --word-regexp
@@ -36,9 +35,8 @@ set pumblend=20
 set pumheight=10
 set shell=/usr/local/bin/zsh
 set shiftround
-set shiftwidth=4
 set shortmess+=mrwcI
-set softtabstop=4
+set timeoutlen=250
 set updatetime=50
 set wildignore+=*.tar.*,*.zip*
 set wildignore+=*/.git/**/*,*/.hg/**/*,*/.svn/**/*

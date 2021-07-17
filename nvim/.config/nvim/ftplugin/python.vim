@@ -1,3 +1,6 @@
+setlocal expandtab
+setlocal shiftwidth=4
+setlocal softtabstop=4
 set include=^\\s*\\(from\\\|import\\)\\s*\\zs\\(\\S\\+\\s\\{-}\\)*\\ze\\($\\\|\ as\\)
 function! PyInclude(fname)
     let parts = split(a:fname, ' import ')

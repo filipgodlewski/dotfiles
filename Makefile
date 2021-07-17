@@ -4,8 +4,9 @@ export XDG_DATA_HOME = $(HOME)/.local/share
 BREW = /usr/local/bin/brew
 CASK = brew list --casks $(1) > /dev/null 2>&1 || brew install --cask $(1)
 DOTFILES_DIR = $(HOME)/dotfiles
+MAS = mas install $(1)
 NVIM_VENV = $(XDG_DATA_HOME)/venvs/nvim/bin/python3
-PACKAGE = brew list --versions $(1) > /dev/null || brew install $(1)$(2)
+PACKAGE = brew list --versions $(1) > /dev/null || brew install $(1) $(2)
 PIP_INSTALL = $(1) -m pip install -U pip setuptools; $(1) -m pip install -U -r _pip/$(2)_packages.list
 PYTHON = /Library/Frameworks/Python.framework/Versions/Current/bin/python3
 SHELLS = /etc/shells
@@ -14,19 +15,19 @@ ZSH = /usr/local/bin/zsh
 OS := $(shell [[ "$$OSTYPE" =~ ^darwin ]] && echo macos)
 IN_TMUX := $(shell [[ -n $TMUX ]] && echo end || echo uninstall-proceed)
 
-.PHONY: alacritty git nvim tmux zsh
+.PHONY: alacritty git nvim stow tmux zsh
 
-install: git $(OS) submodules nvim tmux alacritty
+install: git $(OS) submodules nvim tmux alacritty mas
 
 uninstall: $(IN_TMUX)
 
-uninstall-proceed: unnpm unzsh unalacritty unpip unlink unbrew
+uninstall-proceed: unnpm unzsh unalacritty unpip unstow unbrew
 
 end:
 	@echo "\nKill tmux and try again!\n"
 	@exit 1
 
-macos: core-macos link zsh
+macos: core-macos stow zsh
 
 git: 
 	@echo "\ngit: Setting up username and email\n"
@@ -80,17 +81,18 @@ taps: | brew
 
 packages: | brew
 	@echo "\nbrew: Install basic packages\n"
+	$(call PACKAGE,mas)
 	$(call PACKAGE,exa)
 	$(call PACKAGE,fd)
 	$(call PACKAGE,fzf)
 	$(call PACKAGE,git)
 	$(call PACKAGE,jq)
-	$(call PACKAGE,luajit, --HEAD)
-	$(call PACKAGE,neovim, --HEAD)
+	$(call PACKAGE,luajit,--HEAD)
+	$(call PACKAGE,neovim,--HEAD)
 	$(call PACKAGE,ripgrep)
 	$(call PACKAGE,stow)
 	$(call PACKAGE,tmux)
-	-$(call PACKAGE,universal-ctags/universal-ctags/universal-ctags, --HEAD)
+	-$(call PACKAGE,universal-ctags/universal-ctags/universal-ctags,--HEAD)
 	$(call PACKAGE,vivid)
 	$(call PACKAGE,zsh)
 	@echo "\nbrew: Install python development packages\n"
@@ -143,6 +145,22 @@ unalacritty:
 	@echo "\nalacritty: Delete colorscheme\n"
 	@-rm -rf $(XDG_CONFIG_HOME)/alacritty/alacritty.yml
 
+mas:
+	@$(call $(MAS),497799835)  # Xcode
+	@$(call $(MAS),497799835)  # Surfshark
+	@$(call $(MAS),409183694)  # Keynote
+	@$(call $(MAS),1474276998)  # HP Smart
+	@$(call $(MAS),408981434)  # iMovie
+	@$(call $(MAS),823766827)  # OneDrive
+	@$(call $(MAS),1438243180)  # Dark Reader for Safari
+	@$(call $(MAS),409201541)  # Pages
+	@$(call $(MAS),1436953057)  # Ghostery Lite
+	@$(call $(MAS),682658836)  # GarageBand
+	@$(call $(MAS),1482920575)  # DuckDuckGo Privacy Essentials
+	@$(call $(MAS),1147396723)  # WhatsApp
+	@$(call $(MAS),409203825)  # Numbers
+	@$(call $(MAS),1333542190)  # 1Password 7
+
 list:
 	@echo "\nTaps:\n"
 	@brew tap
@@ -151,12 +169,12 @@ list:
 	@echo "\nCasks:\n"
 	@brew list --casks -1
 
-link:
+stow:
 	@echo "\nstow: link files\n"
 	@for directory in $$(fd --ignore-file stow/.stow-global-ignore -d 1 -c never); do stow -D $$directory; done
 	@for directory in $$(fd --ignore-file stow/.stow-global-ignore -d 1 -c never); do stow $$directory; done
 
-unlink:
+unstow:
 	@echo "\nstow: unlink files\n"
 	@for directory in $$(fd --ignore-file stow/.stow-global-ignore -d 1 -c never); do stow -D $$directory; done
 

@@ -86,3 +86,27 @@ let g:vimwiki_list = [{
 " TASKWIKI
 let g:taskwiki_taskrc_location = "~/.config/taskwarrior/.taskrc"
 let g:taskwiki_data_location = "~/.local/share/taskwarrior/.task"
+
+" WHICH-KEY
+lua << EOF
+  require("which-key").setup()
+EOF
+
+" COLORIZER
+lua << EOF
+  require 'colorizer'.setup()
+EOF
+
+" GITSIGNS
+lua << EOF
+  require('gitsigns').setup()
+EOF
+
+" TREESITTER
+lua << EOF
+  require'nvim-treesitter.configs'.setup {
+    highlight = {
+      enable = true
+    }
+  }
+EOF

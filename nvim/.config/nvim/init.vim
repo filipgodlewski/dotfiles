@@ -1,7 +1,7 @@
 filetype plugin indent on
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-let g:loaded_python_provider=0
+"let g:loaded_python_provider=0
 let g:python3_host_prog=expand("~/.local/share/venvs/nvim/bin/python3")
 let mapleader=" "
 set rtp+=/usr/local/opt/fzf
@@ -15,12 +15,13 @@ if !&termguicolors
 endif
 set autowriteall
 set complete+=kspell
-set completeopt-=preview
+set completeopt=menuone,noinsert,noselect
 set matchpairs+=<:>
 set confirm
 set copyindent
 set cursorline
 set diffopt=filler,vertical
+set expandtab
 set fileformat=unix
 set grepformat=%f:%l:%c:%m
 set grepprg=rg\ --vimgrep\ --no-heading\ --case-sensitive\ --follow\ --word-regexp
@@ -37,9 +38,11 @@ set pumblend=20
 set pumheight=10
 set shell=/usr/local/bin/zsh
 set shiftround
+set shiftwidth=2
 set shortmess+=mrwcI
 set signcolumn=yes
-set timeoutlen=250
+set softtabstop=2
+set tabstop=2
 set updatetime=50
 set wildignore+=*.tar.*,*.zip*
 set wildignore+=*/.git/**/*,*/.hg/**/*,*/.svn/**/*

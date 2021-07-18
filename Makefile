@@ -27,7 +27,7 @@ end:
 	@echo "\nKill tmux and try again!\n"
 	@exit 1
 
-macos: core-macos stow zsh
+macos: core-macos stow pip zsh
 
 git: 
 	@echo "\ngit: Setting up username and email\n"
@@ -56,7 +56,7 @@ nvim:
 	@echo "\nnvim: Update neovim\n"
 	@nvim -c "UpdateRemotePlugins | q"
 
-core-macos: taps packages casks npm pip clean
+core-macos: taps packages casks npm clean
 
 brew: | $(BREW)
 	@echo "\nbrew: update brew\n"

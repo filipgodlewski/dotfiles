@@ -1,3 +1,5 @@
-wheel
-plumbum
 pyfzf
+python-lsp-server[all]
+pyls-flake8
+pyls-isort
+wheel

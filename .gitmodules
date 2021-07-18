@@ -64,3 +64,12 @@
 [submodule "nvim/.local/share/nvim/site/pack/plugins/start/completion-nvim"]
 	path = nvim/.local/share/nvim/site/pack/plugins/start/completion-nvim
 	url = https://github.com/nvim-lua/completion-nvim.git
+[submodule "nvim/.local/share/nvim/site/pack/plugins/start/vim-commentary"]
+	path = nvim/.local/share/nvim/site/pack/plugins/start/vim-commentary
+	url = https://github.com/tpope/vim-commentary.git
+[submodule "nvim/.local/share/nvim/site/pack/plugins/start/nvim-ts-context-commentstring"]
+	path = nvim/.local/share/nvim/site/pack/plugins/start/nvim-ts-context-commentstring
+	url = https://github.com/JoosepAlviste/nvim-ts-context-commentstring.git
+[submodule "other/.local/share/other/lua-language-server"]
+	path = other/.local/share/other/lua-language-server
+	url = https://github.com/sumneko/lua-language-server.git

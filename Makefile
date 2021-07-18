@@ -55,6 +55,11 @@ unzsh:
 nvim:
 	@echo "\nnvim: Update neovim\n"
 	@nvim -c "UpdateRemotePlugins | q"
+	@echo "\nnvim: Setup lua lsp\n"
+	@cd $(XDG_DATA_HOME)/other/lua-language-server/3rd/luamake
+	@compile/install.sh
+	@cd ../..
+	@./3rd/luamake/luamake rebuild
 
 core-macos: taps packages casks npm clean
 
@@ -86,7 +91,6 @@ packages: | brew
 	$(call PACKAGE,fd)
 	$(call PACKAGE,fzf)
 	$(call PACKAGE,git)
-	$(call PACKAGE,jq)
 	$(call PACKAGE,luajit,--HEAD)
 	$(call PACKAGE,neovim,--HEAD)
 	$(call PACKAGE,ripgrep)
@@ -95,10 +99,10 @@ packages: | brew
 	-$(call PACKAGE,universal-ctags/universal-ctags/universal-ctags,--HEAD)
 	$(call PACKAGE,vivid)
 	$(call PACKAGE,zsh)
-	@echo "\nbrew: Install python development packages\n"
-	$(call PACKAGE,yapf)
 	@echo "\nbrew: Install javascript development packages\n"
 	$(call PACKAGE,node)
+	@echo "\nbrew: Install lua development packages\n"
+	$(call PACKAGE,ninja)
 
 casks: | brew
 	@echo "\nbrew: Install basic casks\n"

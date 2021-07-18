@@ -128,4 +128,4 @@ wk.register({
    {mode = "v"}
 )
 
-vim.api.nvim_set_keymap("i", "<C-space>", "<Plug>(completion_trigger)", {expr = true, noremap = false, silent = true})
+vim.api.nvim_set_keymap("i", "<C-space>", "<Plug>(completion_trigger)", {})

@@ -1,6 +1,6 @@
-vim.cmd([[let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+vim.cmd([[
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let g:python3_host_prog=expand("~/.local/share/venvs/nvim/bin/python3")
-let mapleader=" "
 set rtp+=/usr/local/opt/fzf
 if !exists("g:syntax_on")
     syntax enable
@@ -10,49 +10,61 @@ endif
 if !&termguicolors
     set termguicolors
 endif
-set autowriteall
+]])
+
+local s = vim.opt
+local g = vim.g
+
+g.mapleader = " "
+
+s.autowriteall = true
+s.completeopt = {"menuone", "noinsert", "noselect"}
+s.confirm = true
+s.copyindent = true
+s.cursorline = true
+s.diffopt = {"filler", "vertical"}
+s.expandtab = true
+s.fileformat = "unix"
+s.grepformat = "%f:%l:%c:%m"
+s.grepprg = "rg --vimgrep --no-heading --case-sensitive --follow --word-regexp"
+s.hidden = true
+s.lazyredraw = true
+s.mouse = "i"
+s.joinspaces = false
+s.showmode = false
+s.startofline = false
+s.swapfile = false
+s.pumblend = 20
+s.pumheight = 10
+s.shell = "/usr/local/bin/zsh"
+s.shiftround = true
+s.shiftwidth = 2
+s.signcolumn = "yes"
+s.softtabstop = 2
+s.tabstop = 2
+s.updatetime = 50
+s.wildignorecase = true
+s.wildmode = "longest:full,full"
+
+
+vim.cmd([[
 set complete+=kspell
-set completeopt=menuone,noinsert,noselect
 set matchpairs+=<:>
-set confirm
-set copyindent
-set cursorline
-set diffopt=filler,vertical
-set expandtab
-set fileformat=unix
-set grepformat=%f:%l:%c:%m
-set grepprg=rg\ --vimgrep\ --no-heading\ --case-sensitive\ --follow\ --word-regexp
-set hidden
-set lazyredraw
-set mouse=i
-set nojoinspaces
-set noshowmode
-set nostartofline
-set noswapfile
 set nrformats+=alpha
 set path+=**
-set pumblend=20
-set pumheight=10
-set shell=/usr/local/bin/zsh
-set shiftround
-set shiftwidth=2
-set shortmess+=mrwcI
-set signcolumn=yes
-set softtabstop=2
-set tabstop=2
-set updatetime=50
 set wildignore+=*.tar.*,*.zip*
 set wildignore+=*/.git/**/*,*/.hg/**/*,*/.svn/**/*
 set wildignore+=__*__,*.pyc,*.class,*.sln,*.Master,*.csproj,*.csproj.user,*.cache,*.dll,*.pdb,*.min.*
 set wildignore+=tags,tags.*
 set wildignore=*.swp,*.bak
-set wildignorecase
-set wildmode=longest:full,full
+]])
 
+vim.cmd([[
 aug hello
     au!
     au FocusGained,BufEnter * :silent! !
 aug END
 
 packloadall
-silent! helptags ALL]])
+silent! helptags ALL
+]])

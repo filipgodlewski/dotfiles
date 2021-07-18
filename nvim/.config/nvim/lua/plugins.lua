@@ -1,5 +1,3 @@
-" LSPCONFIG
-lua << EOF
 require("lspconfig").jsonls.setup {
    commands = {
       Format = {
@@ -15,15 +13,11 @@ require'lspconfig'.pylsp.setup {
 }
 
 require'lspconfig'.denols.setup {}
-EOF
 
-" LSPSAGA
-lua << EOF
--- require("lspsaga").init_lsp_saga()
-EOF
+require'lspconfig'.sumneko_lua.setup {}
 
-" WHICH-KEY
-lua << EOF
+require("lspsaga").init_lsp_saga()
+
 require("which-key").setup {
    operators = {
       ["<leader>ij"] = "Insert",
@@ -35,20 +29,55 @@ require("which-key").setup {
       ["<tab>"] = "TAB",
    }
 }
-EOF
+local system_name
+if vim.fn.has("mac") == 1 then
+  system_name = "macOS"
+elseif vim.fn.has("unix") == 1 then
+  system_name = "Linux"
+elseif vim.fn.has('win32') == 1 then
+  system_name = "Windows"
+else
+  print("Unsupported system for sumneko")
+end
 
-" COLORIZER
-lua << EOF
+-- set the path to the sumneko installation; if you previously installed via the now deprecated :LspInstall, use
+local sumneko_root_path = vim.fn.stdpath('cache')..'/lspconfig/sumneko_lua/lua-language-server'
+local sumneko_binary = sumneko_root_path.."/bin/"..system_name.."/lua-language-server"
+
+local runtime_path = vim.split(package.path, ';')
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
+
+require'lspconfig'.sumneko_lua.setup {
+  cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+        -- Setup your lua path
+        path = runtime_path,
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {'vim'},
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
+}
+
 require("colorizer").setup()
-EOF
 
-" GITSIGNS
-lua << EOF
 require("gitsigns").setup()
-EOF
 
-" TREESITTER
-lua << EOF
 require("nvim-treesitter.configs").setup {
    highlight = {
       enable = true,
@@ -59,11 +88,14 @@ require("nvim-treesitter.configs").setup {
          ["text.ref"] = "TSRef",
       },
    },
+   context_commentstring = {
+      enable = true,
+      config = {
+         lua = "-- %s",
+      }
+   }
 }
-EOF
 
-" TELESCOPE
-lua << EOF
 require("telescope").setup {
    pickers = {
       live_grep = {
@@ -87,10 +119,7 @@ require("telescope").setup {
       
    },
 }
-EOF
 
-" AUTOPAIRS
-lua << EOF
 require("nvim-autopairs").setup()
 local remap = vim.api.nvim_set_keymap
 local npairs = require('nvim-autopairs')
@@ -116,4 +145,3 @@ MUtils.completion_confirm=function()
 end
 
 remap('i' , '<CR>','v:lua.MUtils.completion_confirm()', {expr = true , noremap = true})
-EOF

@@ -1,4 +1,4 @@
-function! ReadOnly()
+vim.cmd([[function! ReadOnly()
   return &readonly || !&modifiable ? 'RO ◢' : ''
 endfunction
 
@@ -19,4 +19,4 @@ set statusline+=%0*\ %<%f\                " file relative
 set statusline+=%2*%{ReadOnly()}          " Read Only indicator
 set statusline+=%0*%=                     " Space
 set statusline+=%0*%3l\/%L,               " Lines / Total Lines
-set statusline+=%0*%4c\                   " Columns
+set statusline+=%0*%4c\                   " Columns]])

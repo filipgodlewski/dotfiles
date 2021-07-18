@@ -1,0 +1,5 @@
+require("settings")
+require("maps")
+require("plugins")
+require("colors")
+require("statusline")

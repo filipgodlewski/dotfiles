@@ -1,4 +1,3 @@
-lua << EOF
 local wk = require("which-key")
 
 wk.register({
@@ -100,6 +99,7 @@ wk.register({
       },
       ["<space>"] = {":Telescope find_files<CR>", "Find file"},
       ["."] = {":Telescope find_files<CR>", "Find file"},
+      [","] = {":Telescope buffers<CR>", "Find buffers"},
    },
    {prefix = "<leader>"}
 )
@@ -127,6 +127,5 @@ wk.register({
    },
    {mode = "v"}
 )
-EOF
 
-imap <silent> <C-space> <Plug>(completion_trigger)
+vim.api.nvim_set_keymap("i", "<C-space>", "<Plug>(completion_trigger)", {expr = true, noremap = false, silent = true})

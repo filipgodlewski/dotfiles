@@ -1,7 +1,4 @@
-filetype plugin indent on
-
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-"let g:loaded_python_provider=0
+vim.cmd([[let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let g:python3_host_prog=expand("~/.local/share/venvs/nvim/bin/python3")
 let mapleader=" "
 set rtp+=/usr/local/opt/fzf
@@ -57,10 +54,5 @@ aug hello
     au FocusGained,BufEnter * :silent! !
 aug END
 
-source $HOME/.config/nvim/config/plugins.vimrc
-source $HOME/.config/nvim/config/colors.vimrc
-source $HOME/.config/nvim/config/status.vimrc
-source $HOME/.config/nvim/config/bindings.vimrc
-
 packloadall
-silent! helptags ALL
+silent! helptags ALL]])

@@ -1,4 +1,4 @@
-function NordColors()
+vim.cmd([[function NordColors()
     hi! AleError                ctermfg=015  guifg=#D8DEE9 ctermbg=001  guibg=#BF616A gui=NONE   cterm=NONE
     hi! PmenuSel                ctermfg=000  guifg=#3B4252 ctermbg=003  guibg=#EBCB8B
     hi! StatusLine              ctermfg=007  guifg=#E5E9F0 ctermbg=000  guibg=#3B4252
@@ -15,4 +15,4 @@ endfunction
 au ColorScheme nord call NordColors()
 if !exists('g:colors_name')
     colorscheme nord
-endif
+endif]])

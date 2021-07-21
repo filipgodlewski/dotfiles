@@ -55,7 +55,7 @@ unzsh:
 
 nvim:
 	@echo "\nnvim: Update neovim\n"
-	@nvim -c "UpdateRemotePlugins | q"
+	@nvim -c "UpdateRemotePlugins | call mkdp#util#install() | q"
 	@echo "\nnvim: Setup lua lsp\n"
 	@cd $(XDG_DATA_HOME)/other/lua-language-server/3rd/luamake
 	@compile/install.sh

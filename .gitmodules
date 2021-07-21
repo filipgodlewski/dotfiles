@@ -82,3 +82,6 @@
 [submodule "alacritty/.local/share/alacritty/alacritty-aurora"]
 	path = alacritty/.local/share/alacritty/alacritty-aurora
 	url = https://github.com/filipgodlewski/alacritty-aurora.git
+[submodule "nvim/.local/share/nvim/site/pack/plugins/start/markdown-preview.nvim"]
+	path = nvim/.local/share/nvim/site/pack/plugins/start/markdown-preview.nvim
+	url = https://github.com/iamcco/markdown-preview.nvim.git

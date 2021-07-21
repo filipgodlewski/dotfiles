@@ -9,6 +9,7 @@ NVIM_VENV = $(XDG_DATA_HOME)/venvs/nvim/bin/python3
 PACKAGE = brew list --versions $(1) > /dev/null || brew install $(1) $(2)
 PIP_INSTALL = $(1) -m pip install -U pip setuptools; $(1) -m pip install -U -r _pip/$(2)_packages.list
 PYTHON = /Library/Frameworks/Python.framework/Versions/Current/bin/python3
+SHELL = /bin/zsh
 SHELLS = /etc/shells
 ZSH = /usr/local/bin/zsh
 
@@ -47,7 +48,7 @@ zsh:
 	@sudo chmod g-w /usr/local/share/zsh
 	@sudo chmod g-w /usr/local/share/zsh/site-functions
 	@echo "\nzsh: Compile terminfo\n"
-	@for file in $(XDG_DATA_HOME)/terminfo/capabilities/*; do tic $$file; done
+	@for file in $(XDG_DATA_HOME)/terminfo/capabilities/*; do tic -xe $$file; done
 
 unzsh:
 	@chsh -s /bin/zsh
@@ -86,20 +87,22 @@ taps: | brew
 
 packages: | brew
 	@echo "\nbrew: Install basic packages\n"
-	$(call PACKAGE,mas)
 	$(call PACKAGE,exa)
 	$(call PACKAGE,fd)
 	$(call PACKAGE,fzf)
 	$(call PACKAGE,git)
-	$(call PACKAGE,luajit,--HEAD)
-	$(call PACKAGE,neovim,--HEAD)
+	$(call PACKAGE,mas)
+	$(call PACKAGE,neovim)
 	$(call PACKAGE,ripgrep)
+	$(call PACKAGE,sd)
 	$(call PACKAGE,stow)
 	$(call PACKAGE,tmux)
+	$(call PACKAGE,tokei)
 	-$(call PACKAGE,universal-ctags/universal-ctags/universal-ctags,--HEAD)
 	$(call PACKAGE,vivid)
 	$(call PACKAGE,zsh)
 	@echo "\nbrew: Install javascript development packages\n"
+	$(call PACKAGE,deno)
 	$(call PACKAGE,node)
 	@echo "\nbrew: Install lua development packages\n"
 	$(call PACKAGE,ninja)

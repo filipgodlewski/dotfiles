@@ -4,6 +4,7 @@ alias ctags="`brew --prefix`/bin/ctags"
 
 alias e="$EDITOR"
 
+alias g="git"
 alias grep="grep --color=always"
 
 alias md="mkdir -p"

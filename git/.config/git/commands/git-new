@@ -1,0 +1,62 @@
+#!/usr/local/bin/zsh
+set -e
+
+# Preconditions
+gh auth status
+
+# Prepare new repo on github
+gh repo create
+
+# Init
+echo "Initializing repository.\n"
+git init
+
+# Config
+gitdir="$(git rev-parse --git-dir)"
+hook="${gitdir}/hooks/pre-commit"
+username=$(rg 'user' ~/.config/gh/hosts.yml | sd -p '\s+user:\s' '')
+repo_name=${PWD##*/}
+current_branch=$(git branch --show-current)
+address="https://github.com/${username}/${repo_name}.git"
+hook_back="Activating pre-commit hook back.\n"
+
+echo -n "\nProvide displayed user name: "
+read realname
+echo -n "Provide email: "
+read email
+git config --local user.name "${realname}"
+git config --local user.email "${email}"
+
+# Hook off
+echo "\nTemporarily disabling pre-commit hook.\n"
+[ -x ${hook} ] && chmod 644 ${hook}
+trap 'echo ${hook_back}; chmod +x ${hook}' EXIT INT TERM
+
+# First commit
+echo "Creating initial commit.\n"
+echo "# ${repo_name}" > README.md
+git add README.md
+git commit -m "Initialize repository"
+
+# New remote
+echo -n "Adding new remote, under: "
+echo "${address}\n"
+git remote add origin "https://github.com/${username}/${repo_name}.git"
+
+# Push to origin
+echo "Pushing main branch to origin.\n"
+git push -u origin ${current_branch}
+echo "\nSuccess! \n"
+echo "Thank you for cooperation.\n"
+
+# State back
+echo ${hook_back}
+chmod 755 ${hook}
+
+unset gitdir
+unset hook
+unset username
+unset repo_name
+unset current_branch
+unset address
+unset hook_back

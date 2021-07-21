@@ -32,6 +32,8 @@ dc = diff --cached
 ds = diff --staged
 dw = diff --word-diff
 
+delete = !git bd
+
 f = fetch
 ff = fetch --prune --all
 

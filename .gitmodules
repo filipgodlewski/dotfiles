@@ -10,9 +10,6 @@
 [submodule "zsh/.local/share/zsh/plugins/propane"]
 	path = zsh/.local/share/zsh/plugins/propane
 	url = https://github.com/filipgodlewski/propane.git
-[submodule "nvim/.local/share/nvim/site/pack/plugins/start/nord-vim"]
-	path = nvim/.local/share/nvim/site/pack/plugins/start/nord-vim
-	url = https://github.com/arcticicestudio/nord-vim.git
 [submodule "tmux/.local/share/tmux/nord-tmux"]
 	path = tmux/.local/share/tmux/nord-tmux
 	url = https://github.com/arcticicestudio/nord-tmux.git
@@ -61,15 +58,27 @@
 [submodule "nvim/.local/share/nvim/site/pack/plugins/start/lspsaga.nvim"]
 	path = nvim/.local/share/nvim/site/pack/plugins/start/lspsaga.nvim
 	url = https://github.com/glepnir/lspsaga.nvim.git
-[submodule "nvim/.local/share/nvim/site/pack/plugins/start/completion-nvim"]
-	path = nvim/.local/share/nvim/site/pack/plugins/start/completion-nvim
-	url = https://github.com/nvim-lua/completion-nvim.git
 [submodule "nvim/.local/share/nvim/site/pack/plugins/start/vim-commentary"]
 	path = nvim/.local/share/nvim/site/pack/plugins/start/vim-commentary
 	url = https://github.com/tpope/vim-commentary.git
-[submodule "nvim/.local/share/nvim/site/pack/plugins/start/nvim-ts-context-commentstring"]
-	path = nvim/.local/share/nvim/site/pack/plugins/start/nvim-ts-context-commentstring
-	url = https://github.com/JoosepAlviste/nvim-ts-context-commentstring.git
 [submodule "other/.local/share/other/lua-language-server"]
 	path = other/.local/share/other/lua-language-server
 	url = https://github.com/sumneko/lua-language-server.git
+[submodule "nvim/.local/share/nvim/site/pack/plugins/start/nvim-compe"]
+	path = nvim/.local/share/nvim/site/pack/plugins/start/nvim-compe
+	url = https://github.com/hrsh7th/nvim-compe.git
+[submodule "nvim/.local/share/nvim/site/pack/plugins/start/lsp_signature.nvim"]
+	path = nvim/.local/share/nvim/site/pack/plugins/start/lsp_signature.nvim
+	url = https://github.com/ray-x/lsp_signature.nvim.git
+[submodule "nvim/.local/share/nvim/site/pack/plugins/start/navigator.lua"]
+	path = nvim/.local/share/nvim/site/pack/plugins/start/navigator.lua
+	url = https://github.com/ray-x/navigator.lua.git
+[submodule "nvim/.local/share/nvim/site/pack/plugins/start/guihua.lua"]
+	path = nvim/.local/share/nvim/site/pack/plugins/start/guihua.lua
+	url = https://github.com/ray-x/guihua.lua.git
+[submodule "nvim/.local/share/nvim/site/pack/plugins/start/aurora"]
+	path = nvim/.local/share/nvim/site/pack/plugins/start/aurora
+	url = https://github.com/ray-x/aurora.git
+[submodule "alacritty/.local/share/alacritty/alacritty-aurora"]
+	path = alacritty/.local/share/alacritty/alacritty-aurora
+	url = https://github.com/filipgodlewski/alacritty-aurora.git

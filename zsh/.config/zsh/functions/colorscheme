@@ -1,0 +1,9 @@
+colorscheme=$(echo ${XDG_DATA_HOME}/alacritty/alacritty-aurora/src/*.yml)
+config="${XDG_CONFIG_HOME}/alacritty"
+
+cat ${colorscheme} ${config}/base.yml > ${config}/alacritty.yml
+
+unset colorscheme
+unset config
+
+# vim:ft=zsh

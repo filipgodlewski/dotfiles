@@ -1,6 +1,9 @@
 
 # Base config below
 
+env:
+  TERM: xterm-256color
+
 shell:
   program: /usr/local/bin/zsh
   args:
@@ -14,8 +17,8 @@ cursor:
 
 window:
   dimensions:
-    columns: 187
-    lines: 53
+    columns: 161
+    lines: 37
   padding:
     x: 16
     y: 16

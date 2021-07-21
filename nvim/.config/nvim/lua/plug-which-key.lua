@@ -1,5 +1,18 @@
 local wk = require("which-key")
 
+wk.setup {
+   operators = {
+      ["<leader>ij"] = "Insert new line below current line",
+      ["<leader>ik"] = "Insert new line above current line",
+      ["<leader>d"] = "Delete motion without yanking",
+   },
+   key_labels = {
+      ["<space>"] = "SPC",
+      ["<cr>"] = "RET",
+      ["<tab>"] = "TAB",
+   }
+}
+
 wk.register({
       R = {
          name = "Run",
@@ -8,18 +21,21 @@ wk.register({
             f = {":w<CR>:!python3 %<CR>", "Run current file"},
          },
       },
+
       S = {
          name = "Set",
          l = {":set showbreak=↪<CR>:set listchars=tab:▷▷⋮,eol:↲,nbsp:␣,trail:⋅,extends:⟩,precedes:⟨,space:⋅<CR>:set list<CR>", "List chars on"},
          L = {":set list!<CR>", "List chars off"},
       },
+
       b = {
          name = "Buffer",
          d = {":bd<CR>", "Kill buffer & close split"},
-         k = {":bp:bd#<CR>", "Kill buffer without closing the split"},
+         k = {":bp<CR>:bd#<CR>", "Kill buffer without closing the split"},
          n = {":bn<CR>", "Go to next buffer"},
          p = {":bp<CR>", "Go to previous buffer"},
       },
+
       l = {
          name = "LSP",
          c = {":lclose<CR>", "Close the location list for the current window"},
@@ -32,6 +48,7 @@ wk.register({
          p = {":Lspsaga diagnostic_jump_prev<CR>", "Go to previous diagnostic"},
          s = {":Lspsaga signature_help<CR>", "Open signature help"},
       },
+
       f = {
          name = "File",
          d = {
@@ -45,6 +62,7 @@ wk.register({
          g = {":Telescope live_grep<CR>", "Find text occurrence"},
          r = {":Telescope oldfiles<CR>", "Open recent file"},
       },
+
       g = {
          name = "Git",
          b = {":Telescope git_branches<CR>", "Perform actions on git branches"},
@@ -52,9 +70,11 @@ wk.register({
          s = {":Telescope git_status<CR>", "List git status for current directory"},
          S = {":Telescope git_stash<CR>", "Apply stash"},
       },
+
       h = {
          name = "Hunks",
       },
+
       i = {
          name = "Insert",
          j = {":norm o<CR>", "Insert new line below current line"},
@@ -68,11 +88,13 @@ wk.register({
            },
          },
       },
+
       r = {
          name = "Refactor",
          f = {":lua vim.lsp.buf.formatting_sync(nil, 1000)<CR>", "Format code"},
          r = {":Lspsaga rename<CR>", "Rename with LSP"},
       },
+
       s = {
          name = "Search",
          H = {":Telescope highlights<CR>", "Search through highlights"},
@@ -83,10 +105,25 @@ wk.register({
          v = {":Telescope vim_options<CR>", "Search & edit vim options"},
          m = {":Telescope marks<CR>", "Find vim marks"},
       },
+
+      t = {
+         name = "Tab",
+         N = {":tabnew<CR>", "Create new tab"},
+         L = {":tabs<CR>", "List all tabs and windows they contain"},
+         c = {":tabclose<CR>", "Close current tab"},
+         f = {":tabfirst<CR>", "Go to first tab"},
+         l = {":tablast<CR>", "Go to last tab"},
+         n = {":tabnext<CR>", "Go to next tab"},
+         o = {":tabonly<CR>", "Cloose all other tabs"},
+         p = {":tabprevious<CR>", "Go to previous tab"},
+         s = {":tab split<CR>", "Move current buffer to new tab"},
+      },
+
       v = {
          name = "Vim",
          s = {":wa<CR>:so $MYVIMRC<CR>:noh<CR>:echo '[vim init write & reload]'<CR>", "Source vim configuration"},
       },
+
       w = {
          name = "Window",
          c = {":close<CR>", "Close current window, don't kill buffer"},
@@ -97,10 +134,13 @@ wk.register({
          s = {":sp<CR>", "Split window horizontally"},
          v = {":vs<CR>", "Split window vertically"},
       },
-      ["<space>"] = {":Telescope find_files<CR>", "Find file"},
+
+      ["d"] = {"\"_d", "Delete motion without yanking"},
       ["."] = {":Telescope find_files<CR>", "Find file"},
       [","] = {":Telescope buffers<CR>", "Find buffers"},
+      ["<space>"] = {":Telescope find_files<CR>", "Find file"},
    },
+
    {prefix = "<leader>"}
 )
 
@@ -128,4 +168,9 @@ wk.register({
    {mode = "v"}
 )
 
-vim.api.nvim_set_keymap("i", "<C-space>", "<Plug>(completion_trigger)", {})
+local opt = {expr = true, silent = true, noremap = true}
+vim.api.nvim_set_keymap("i", "<C-space>", "compe#complete()", opt)
+vim.api.nvim_set_keymap("i", "<CR>", [[compe#confirm(luaeval("require('nvim-autopairs').autopairs_cr()"))]], opt)
+vim.api.nvim_set_keymap("i", "<C-e>", "compe#close('<C-e>')", opt)
+-- vim.api.nvim_set_keymap("i", "<C-f>", "compe#scroll({'delta': +4})", opt)
+-- vim.api.nvim_set_keymap("i", "<C-d>", "compe#scroll({'delta': -4})", opt)

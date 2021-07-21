@@ -3,6 +3,8 @@ for file in $ZDOTDIR/variables/*; do source $file; done
 for file in $ZDOTDIR/aliases/*; do source $file; done
 for file in $ZDOTDIR/functions/*; do autoload -Uz $file; done
 
+eval "$(zoxide init zsh)"
+
 export LESSHISTFILE=/dev/null
 export LS_COLORS="$(vivid generate ${XDG_CONFIG_HOME}/vivid/nord.yml)"
 

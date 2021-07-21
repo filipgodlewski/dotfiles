@@ -2,3 +2,4 @@ eslint
 jsonlint
 neovim
 typescript
+vim-language-server

@@ -28,9 +28,6 @@
 [submodule "nvim/.local/share/nvim/site/pack/plugins/start/which-key.nvim"]
 	path = nvim/.local/share/nvim/site/pack/plugins/start/which-key.nvim
 	url = https://github.com/folke/which-key.nvim.git
-[submodule "nvim/.local/share/nvim/site/pack/plugins/start/nvim-colorizer.lua"]
-	path = nvim/.local/share/nvim/site/pack/plugins/start/nvim-colorizer.lua
-	url = https://github.com/norcalli/nvim-colorizer.lua.git
 [submodule "nvim/.local/share/nvim/site/pack/plugins/start/gitsigns.nvim"]
 	path = nvim/.local/share/nvim/site/pack/plugins/start/gitsigns.nvim
 	url = https://github.com/lewis6991/gitsigns.nvim.git
@@ -43,21 +40,12 @@
 [submodule "nvim/.local/share/nvim/site/pack/plugins/start/nvim-treesitter"]
 	path = nvim/.local/share/nvim/site/pack/plugins/start/nvim-treesitter
 	url = https://github.com/nvim-treesitter/nvim-treesitter.git
-[submodule "nvim/.local/share/nvim/site/pack/plugins/start/playground"]
-	path = nvim/.local/share/nvim/site/pack/plugins/start/playground
-	url = https://github.com/nvim-treesitter/playground.git
 [submodule "nvim/.local/share/nvim/site/pack/plugins/start/telescope.nvim"]
 	path = nvim/.local/share/nvim/site/pack/plugins/start/telescope.nvim
 	url = https://github.com/nvim-telescope/telescope.nvim
-[submodule "nvim/.local/share/nvim/site/pack/plugins/start/nvim-autopairs"]
-	path = nvim/.local/share/nvim/site/pack/plugins/start/nvim-autopairs
-	url = https://github.com/windwp/nvim-autopairs.git
 [submodule "nvim/.local/share/nvim/site/pack/plugins/start/nvim-lspconfig"]
 	path = nvim/.local/share/nvim/site/pack/plugins/start/nvim-lspconfig
 	url = https://github.com/neovim/nvim-lspconfig.git
-[submodule "nvim/.local/share/nvim/site/pack/plugins/start/lspsaga.nvim"]
-	path = nvim/.local/share/nvim/site/pack/plugins/start/lspsaga.nvim
-	url = https://github.com/glepnir/lspsaga.nvim.git
 [submodule "nvim/.local/share/nvim/site/pack/plugins/start/vim-commentary"]
 	path = nvim/.local/share/nvim/site/pack/plugins/start/vim-commentary
 	url = https://github.com/tpope/vim-commentary.git
@@ -67,15 +55,6 @@
 [submodule "nvim/.local/share/nvim/site/pack/plugins/start/nvim-compe"]
 	path = nvim/.local/share/nvim/site/pack/plugins/start/nvim-compe
 	url = https://github.com/hrsh7th/nvim-compe.git
-[submodule "nvim/.local/share/nvim/site/pack/plugins/start/lsp_signature.nvim"]
-	path = nvim/.local/share/nvim/site/pack/plugins/start/lsp_signature.nvim
-	url = https://github.com/ray-x/lsp_signature.nvim.git
-[submodule "nvim/.local/share/nvim/site/pack/plugins/start/navigator.lua"]
-	path = nvim/.local/share/nvim/site/pack/plugins/start/navigator.lua
-	url = https://github.com/ray-x/navigator.lua.git
-[submodule "nvim/.local/share/nvim/site/pack/plugins/start/guihua.lua"]
-	path = nvim/.local/share/nvim/site/pack/plugins/start/guihua.lua
-	url = https://github.com/ray-x/guihua.lua.git
 [submodule "nvim/.local/share/nvim/site/pack/plugins/start/aurora"]
 	path = nvim/.local/share/nvim/site/pack/plugins/start/aurora
 	url = https://github.com/ray-x/aurora.git
@@ -85,3 +64,30 @@
 [submodule "nvim/.local/share/nvim/site/pack/plugins/start/markdown-preview.nvim"]
 	path = nvim/.local/share/nvim/site/pack/plugins/start/markdown-preview.nvim
 	url = https://github.com/iamcco/markdown-preview.nvim.git
+[submodule "nvim/.local/share/nvim/site/pack/plugins/start/trouble.nvim"]
+	path = nvim/.local/share/nvim/site/pack/plugins/start/trouble.nvim
+	url = https://github.com/folke/trouble.nvim.git
+[submodule "nvim/.local/share/nvim/site/pack/plugins/start/nvim-web-devicons"]
+	path = nvim/.local/share/nvim/site/pack/plugins/start/nvim-web-devicons
+	url = https://github.com/kyazdani42/nvim-web-devicons.git
+[submodule "nvim/.local/share/nvim/site/pack/plugins/start/lspsaga.nvim"]
+	path = nvim/.local/share/nvim/site/pack/plugins/start/lspsaga.nvim
+	url = https://github.com/glepnir/lspsaga.nvim.git
+[submodule "nvim/.local/share/nvim/site/pack/plugins/start/ale"]
+	path = nvim/.local/share/nvim/site/pack/plugins/start/ale
+	url = https://github.com/dense-analysis/ale.git
+[submodule "nvim/.local/share/nvim/site/pack/plugins/start/orgmode.nvim"]
+	url = https://github.com/kristijanhusak/orgmode.nvim.git
+	path = nvim/.local/share/nvim/site/pack/plugins/start/orgmode.nvim
+[submodule "nvim/.local/share/nvim/site/pack/plugins/start/astronauta.nvim"]
+	url = https://github.com/tjdevries/astronauta.nvim.git
+	path = nvim/.local/share/nvim/site/pack/plugins/start/astronauta.nvim
+[submodule "nvim/.local/share/nvim/site/pack/plugins/start/nvim-autopairs"]
+	url = https://github.com/windwp/nvim-autopairs.git
+	path = nvim/.local/share/nvim/site/pack/plugins/start/nvim-autopairs
+[submodule "nvim/.local/share/nvim/site/pack/plugins/start/vim-surround"]
+	url = https://github.com/tpope/vim-surround.git
+	path = nvim/.local/share/nvim/site/pack/plugins/start/vim-surround
+[submodule "nvim/.local/share/nvim/site/pack/plugins/start/vim-python-pep8-indent"]
+	url = https://github.com/Vimjas/vim-python-pep8-indent.git
+	path = nvim/.local/share/nvim/site/pack/plugins/start/vim-python-pep8-indent

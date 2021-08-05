@@ -1,60 +1,64 @@
 #!/usr/bin/env python3
 
-import argparse
-import os
-import sys
-from subprocess import run
+from os.path import expanduser, join
+from typing import Dict, Tuple
 
-DIRS = {
+import click
+from git import Repo
+
+DOTFILES_PATH = join(expanduser("~"), "dotfiles")
+DIRS: Dict[str, str] = {
     "alacritty": "share/alacritty",
     "nvim": "share/nvim/site/pack/plugins/start",
     "tmux": "share/tmux",
     "zsh": "share/zsh/plugins",
     "other": "share/other",
 }
+GH_DOMAIN = "https://github.com/"
+GH_OBJECT = ".git"
 
 
-def get_dirs_help():
-    dirs = ", ".join(DIRS.keys())
-    return f"Possible arguments: {dirs}"
+def get_submodule_info(folder: str, target: str) -> Tuple[str, str, str]:
+    """Gets necessary Github information based on the repository name and end dir."""
+
+    cleaned_target: str = target[:-1] if target.endswith(GH_OBJECT + "/") else target
+    is_gh_domain: bool = cleaned_target.startswith(GH_DOMAIN)
+    is_gh_object: bool = cleaned_target.endswith(GH_OBJECT)
+    if is_gh_domain and is_gh_object:
+        url: str = cleaned_target
+    elif is_gh_domain and not is_gh_object:
+        url: str = cleaned_target + GH_OBJECT
+    elif is_gh_object:
+        url: str = GH_DOMAIN + cleaned_target
+    else:
+        url: str = GH_DOMAIN + cleaned_target + GH_OBJECT
+    name: str = cleaned_target.split("/")[-1]
+    name: str = name[:-4] if is_gh_object else name
+    relative_path: str = join(folder, ".local", join(DIRS[folder], name))
+    return url, name, relative_path
 
 
-def get_folder_path(args):
-    out = args.REPO.split("/")
-    folder = DIRS.get(args.folder, "")
-    path = os.path.join(folder, out[-1])
-    return path
+@click.command()
+@click.option("--folder", "-f", help="folder to add submodule to", required=True,
+              type=click.Choice([d for d in DIRS], case_sensitive=True))
+@click.argument("target")
+def main(folder: str, target: str):
+    """Add new submodule to the dotfiles.
 
+    TARGET: 'author/repository' format or address under Github domain"""
 
-def get_from_repo(args):
-    if args.repository.endswith(".git") or args.repository.startswith(
-            "https://github.com/"):
-        sys.exit(sys.stderr.write("Not a proper repository name!\n"))
-    return args.repository
-
-
-def main(args):
-    path = get_folder_path(args)
-    link = "https://github.com/" + args.REPO + ".git"
-    abs_local = os.path.expanduser(f"~/dotfiles/{args.folder}/.local")
-    abs_path = os.path.join(abs_local, path)
-    opt = "--force " if args.force else ""
-    run(f"git submodule add {opt}{link} {path}", shell=True,
-        cwd=abs_local)
-    run("git submodule init", shell=True, cwd=abs_path)
-    run("git submodule update --init --recursive", shell=True, cwd=abs_path)
-
-
-def parse_argv():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--folder", "-f", help=get_dirs_help(), required=True)
-    parser.add_argument(
-        "--force", help="Force adding submodule", action="store_true")
-    parser.add_argument(
-        "REPO", help="Repository name in the 'author/repository' format")
-    args = parser.parse_args()
-    return args
+    if folder not in DIRS:
+        raise KeyError(f"{folder} not in dirs. Use `--help` flag for more information")
+    url, name, relative_path = get_submodule_info(folder, target)
+    r = Repo(DOTFILES_PATH)
+    r.create_submodule(name=relative_path, path=relative_path, url=url)
+    click.secho("\nAdded new submodule.\n", fg="green")
+    click.secho(f"Name: {name}", fg="yellow")
+    click.echo(f"Path: {relative_path}")
+    click.echo(f"URL: {url}")
+    r.submodule_update(recursive=True, force_remove=True, init=True, force_reset=True)
+    click.secho("\nUpdated recursively all submodules.", fg="green")
 
 
 if __name__ == "__main__":
-    main(parse_argv())
+    main()

@@ -43,10 +43,3 @@ if !exists('g:colors_name')
   colorscheme aurora
 endif
 ]])
-
-require("colorizer").setup({
-   'css';
-   'javascript';
-   'html';
-   'yml';
-})

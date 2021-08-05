@@ -13,17 +13,5 @@ require("nvim-treesitter.configs").setup {
    },
    highlight = {
       enable = true,
-      custom_captures = {
-         ["type.builtin.error"] = "TSTypeBuiltinError",
-         ["type.builtin.warning"] = "TSTypeBuiltinWarning",
-         ["type.operator.not"] = "TSTypeOperatorNot",
-         ["text.ref"] = "TSRef",
-      },
    },
-   context_commentstring = {
-      enable = true,
-      config = {
-         lua = "-- %s",
-      }
-   }
 }

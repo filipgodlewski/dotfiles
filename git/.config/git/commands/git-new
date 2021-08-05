@@ -4,9 +4,6 @@ set -e
 # Preconditions
 gh auth status
 
-# Prepare new repo on github
-gh repo create
-
 # Init
 echo "Initializing repository.\n"
 git init
@@ -27,10 +24,13 @@ read email
 git config --local user.name "${realname}"
 git config --local user.email "${email}"
 
+# Prepare new repo on github
+gh repo create
+
 # Hook off
 echo "\nTemporarily disabling pre-commit hook.\n"
 [ -x ${hook} ] && chmod 644 ${hook}
-trap 'echo ${hook_back}; chmod +x ${hook}' EXIT INT TERM
+trap 'echo ${hook_back}; chmod 755 ${hook}' EXIT INT TERM
 
 # First commit
 echo "Creating initial commit.\n"
@@ -41,7 +41,11 @@ git commit -m "Initialize repository"
 # New remote
 echo -n "Adding new remote, under: "
 echo "${address}\n"
-git remote add origin "https://github.com/${username}/${repo_name}.git"
+if $(git remote get-url origin &> /dev/null); then
+  echo "Remote already added.\n"
+else
+  git remote add origin "https://github.com/${username}/${repo_name}.git"
+fi
 
 # Push to origin
 echo "Pushing main branch to origin.\n"

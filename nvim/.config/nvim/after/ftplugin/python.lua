@@ -1,3 +1,4 @@
+vim.cmd([[
 set include=^\\s*\\(from\\\|import\\)\\s*\\zs\\(\\S\\+\\s\\{-}\\)*\\ze\\($\\\|\ as\\)
 function! PyInclude(fname)
     let parts = split(a:fname, ' import ')
@@ -14,8 +15,12 @@ function! PyInclude(fname)
     return substitute(l, '\.', '/', 'g') . '.py'
 endfunction
 setlocal includeexpr=PyInclude(v:fname)
+
 setlocal define=^\\s*\\<\\(def\\\|class\\)\\>
+
 setlocal foldmethod=indent
 setlocal nofoldenable
-let g:pyindent_open_paren = 'shiftwidth()'
-let g:pyindent_disable_parentheses_indenting = 1
+
+setlocal softtabstop=4
+setlocal shiftwidth=4
+]])

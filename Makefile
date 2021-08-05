@@ -32,8 +32,12 @@ macos: core-macos stow pip zsh
 
 git: 
 	@echo "\ngit: Setting up username and email\n"
-	@git config --local user.name "Filip Godlewski"
-	@git config --local user.email "filip.godlewski@outlook.com"
+	@echo -n "Enter git user name: "; \
+		read name; \
+		git config --local user.name $$name
+	@echo -n "Enter git email: "; \
+		read mail; \
+		git config --local user.email $$mail
 
 submodules:
 	@echo "\ngit: Initialize submodules recursively\n"
@@ -103,7 +107,10 @@ packages: | brew
 	$(call PACKAGE,zoxide)
 	$(call PACKAGE,zsh)
 	-$(call PACKAGE,universal-ctags/universal-ctags/universal-ctags,--HEAD)
+	@echo "\nbrew: Install python development packages\n"
+	$(call PACKAGE,yapf)
 	@echo "\nbrew: Install javascript development packages\n"
+	$(call PACKAGE,jq)
 	$(call PACKAGE,deno)
 	$(call PACKAGE,node)
 	@echo "\nbrew: Install lua development packages\n"
@@ -141,6 +148,8 @@ unpip:
 	@echo "\npip: Delete nvim virtual environment\n"
 	@-deactivate &>/dev/null
 	@-rm -rf $(XDG_DATA_HOME)/venvs/nvim
+
+repip: unpip pip
 
 tmux:
 	@echo "\ntmux: Create new base session\n"

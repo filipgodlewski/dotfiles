@@ -18,6 +18,5 @@ require("telescope").setup {
             },
          },
       },
-      
    },
 }

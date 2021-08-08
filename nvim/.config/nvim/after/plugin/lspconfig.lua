@@ -49,7 +49,3 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
    update_in_insert = false,
  }
 )
-
-require("lspsaga").init_lsp_saga()
-require("trouble").setup {}
-require("nvim-web-devicons").setup {}

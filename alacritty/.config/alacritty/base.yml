@@ -17,11 +17,11 @@ cursor:
 
 window:
   dimensions:
-    columns: 161
-    lines: 37
+    columns: 169
+    lines: 39
   padding:
-    x: 16
-    y: 16
+    x: 8
+    y: 8
   dynamic_padding: true
   decorations: buttonless
 
@@ -45,6 +45,9 @@ font:
   offset:
     x: 0
     y: 4
+  glyph_offset:
+    x: 0
+    y: 2
 
 bell:
   duration: 0

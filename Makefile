@@ -30,7 +30,7 @@ end:
 
 macos: core-macos stow pip zsh
 
-git: 
+git:
 	@echo "\ngit: Setting up username and email\n"
 	@echo -n "Enter git user name: "; \
 		read name; \
@@ -157,7 +157,7 @@ tmux:
 
 alacritty:
 	@echo "\nalacritty: Update colorscheme\n"
-	@cat $(XDG_DATA_HOME)/alacritty/nord-alacritty/src/nord.yml $(XDG_CONFIG_HOME)/alacritty/base.yml > $(XDG_CONFIG_HOME)/alacritty/alacritty.yml
+	@cat $(XDG_DATA_HOME)/alacritty/alacritty-aurora/src/aurora.yml $(XDG_CONFIG_HOME)/alacritty/base.yml > $(XDG_CONFIG_HOME)/alacritty/alacritty.yml
 
 unalacritty:
 	@echo "\nalacritty: Delete colorscheme\n"

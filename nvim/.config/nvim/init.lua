@@ -23,7 +23,6 @@ vim.opt.nrformats = vim.opt.nrformats + "alpha"
 vim.opt.path = vim.opt.path + "**"
 vim.opt.pumblend = 30
 vim.opt.pumheight = 10
-vim.opt.shell = "/usr/local/bin/zsh"
 vim.opt.shiftround = true
 vim.opt.shiftwidth = 2
 vim.opt.showmode = false

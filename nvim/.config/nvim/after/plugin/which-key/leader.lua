@@ -13,6 +13,19 @@ require("which-key").register({
          L = {":set list!<CR>", "List chars off"},
       },
 
+      T = {
+         name = "Tab",
+         N = {":tabnew<CR>", "Create new tab"},
+         L = {":tabs<CR>", "List all tabs and windows they contain"},
+         c = {":tabclose<CR>", "Close current tab"},
+         f = {":tabfirst<CR>", "Go to first tab"},
+         l = {":tablast<CR>", "Go to last tab"},
+         n = {":tabnext<CR>", "Go to next tab"},
+         o = {":tabonly<CR>", "Close all other tabs"},
+         p = {":tabprevious<CR>", "Go to previous tab"},
+         s = {":tab split<CR>", "Move current buffer to new tab"},
+      },
+
       b = {
          name = "Buffer",
          b = {":Telescope buffers<CR>", "Find buffers"},
@@ -66,6 +79,7 @@ require("which-key").register({
       l = {
          name = "LSP",
          T = {":TroubleToggle lsp_workspace_diagnostics<CR>", "Toggle troubles for the current workspace"},
+         a = {":Lspsaga code_action<CR>", "Show available code actions"},
          d = {":lua vim.lsp.buf.definition()<CR>", "Show definition"},
          f = {":Lspsaga lsp_finder<CR>", "Find definition and references"},
          l = {":Lspsaga show_line_diagnostics<CR>", "Show line diagnostics"},
@@ -105,16 +119,11 @@ require("which-key").register({
       },
 
       t = {
-         name = "Tab",
-         N = {":tabnew<CR>", "Create new tab"},
-         L = {":tabs<CR>", "List all tabs and windows they contain"},
-         c = {":tabclose<CR>", "Close current tab"},
-         f = {":tabfirst<CR>", "Go to first tab"},
-         l = {":tablast<CR>", "Go to last tab"},
-         n = {":tabnext<CR>", "Go to next tab"},
-         o = {":tabonly<CR>", "Cloose all other tabs"},
-         p = {":tabprevious<CR>", "Go to previous tab"},
-         s = {":tab split<CR>", "Move current buffer to new tab"},
+         name = "Terminal",
+         c = {":ToggleTermCloseAll<CR>", "Close all terminals at once"},
+         o = {":ToggleTermOpenAll<CR>", "Open all terminals at once"},
+         r = {":lua Python_toggle()<CR>", "Open bPython REPL"},
+         t = {":lua RegularTerm_toggle()<CR>", "Open regular terminal"},
       },
 
       v = {
@@ -139,6 +148,7 @@ require("which-key").register({
       ["d"] = {"\"_d", "Delete motion without yanking"},
       ["."] = {":Telescope find_files<CR>", "Find file"},
       [","] = {":Telescope buffers<CR>", "Find buffers"},
+      ["/"] = {":ToggleTerm<CR>", "Toggle last terminal"},
       ["<space>"] = {":Telescope find_files<CR>", "Find file"},
    },
 

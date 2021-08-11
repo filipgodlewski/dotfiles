@@ -1,3 +1,6 @@
-pyfzf
+click
+GitPython
 isort
+jedi-language-server
+pyfzf
 wheel

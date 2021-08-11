@@ -1,23 +1,22 @@
 local M = {}
 
-M.colors = {active = '%#StatusLine#', inactive = '%#StatusLineNC#'}
-M.get_git_status = function(self)
-  local signs = vim.b.gitsigns_status_dict or {head = ''}
-  local is_head_empty = signs.head ~= ''
-  return is_head_empty and string.format('  %s ', signs.head) or '  -- '
+M.colors = {active = "%#StatusLine#", inactive = "%#StatusLineNC#"}
+M.get_git_status = function()
+  local signs = vim.b.gitsigns_status_dict or {head = ""}
+  local is_head_empty = signs.head ~= ""
+  return is_head_empty and string.format("  %s ", signs.head) or "  -- "
 end
 
 M.set_active = function(self)
-  local colors = self.colors
   local git = self:get_git_status()
   local filename = " %<%f "
   local line_col = " %l:%c "
 
-  return table.concat({colors.active, git, "%=", filename, "%=", line_col})
+  return table.concat({self.colors.active, git, "%=", filename, "%=", line_col})
 end
 
 M.set_inactive = function(self)
-  return self.colors.inactive .. '%= %F %='
+  return self.colors.inactive .. "%= %F %="
 end
 
 Statusline = setmetatable(M, {

@@ -1,7 +1,5 @@
 vim.cmd("runtime lua/aurora.lua")
 
-local ns = vim.api.nvim_create_namespace("aurora")
-
 local C = {
    blue1 = "#4CC7E4",
    br_blue = "#7AA6DA",

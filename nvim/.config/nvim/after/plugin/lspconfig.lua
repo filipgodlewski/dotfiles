@@ -32,20 +32,153 @@ local function on_attach(client, bufnr)
    }
 end
 
-local servers = {"pyright", "jsonls", "denols"}
+local servers = {"ccls", "jedi_language_server", "jsonls", "denols"}
 
 for _, lsp in ipairs(servers) do
    lspconfig[lsp].setup {
       on_attach = on_attach,
-      capabilities = capabilities
+      capabilities = capabilities,
 }
 end
+
+lspconfig.diagnosticls.setup({
+   on_attach = on_attach,
+   capabilities = capabilities,
+   filetypes = {"json", "python"},
+   init_options = {
+      formatters = {
+         hjson = {
+            command = "hjson",
+            args = {"-j"},
+         },
+         isort = {
+            command = "isort",
+            args = {"--quiet", "-"},
+            rootPatterns = {"pyproject.toml", ".isort.cfg"},
+         },
+         yapf = {
+            command = "yapf",
+            args = {"-q"},
+            rootPatterns = {".style.yapf", "setup.cfg", "pyproject.toml"},
+         }
+      },
+      formatFiletypes = {
+         json = "hjson",
+         python = {"yapf", "isort"},
+      },
+      filetypes = {
+         json = {"json"},
+         python = {"pyre", "flake8"},
+      },
+      linters = {
+         json = {
+            sourceName = "json",
+            command = "json",
+            args = {"--validate"},
+         },
+         pyre = {
+            sourceName = "pyre",
+            command = "pyre",
+            args = {"--strict"},
+            requiredFiles = {".pyre_configuration"},
+            rootPatterns = {".pyre_configuration"},
+            debounce = 100,
+            formatLines = 1,
+            formatPattern = {
+               [[^(.*\.py):(\d+):(\d+)\s(.*)\.$]],
+               {
+                  sourceName = 1,
+                  sourceNameFilter = true,
+                  line = 2,
+                  column = 3,
+                  message = 4,
+               },
+            },
+         },
+         flake8 = {
+            sourceName = 'flake8',
+            command = 'flake8',
+            requiredFiles = {'.flake8', 'setup.cfg', 'tox.ini'},
+            rootPatterns = {'.flake8', 'setup.cfg', 'tox.ini'},
+            debounce = 100,
+            formatLines = 1,
+            formatPattern = {
+               [[^(.*\.py):(\d+):(\d+):\s([a-zA-Z]+)\d+:?\s(.*)$]],
+               {
+                  sourceName = 1,
+                  sourceNameFilter = true,
+                  line = 2,
+                  column = 3,
+                  security = 4,
+                  message = 5,
+               },
+            },
+            securities = {
+               B = 'warning',
+               C = 'warning',
+               W = 'warning',
+               E = 'error',
+               F = 'error',
+               N = 'error',
+               Y = 'error',
+            },
+         },
+         -- pyright = {
+         --    command = "pyright",
+         --    sourceName = "pyright",
+         --    args = {"%file"},
+         --    requiredFiles = {'pyproject.toml'},
+         --    rootPatterns = {'pyproject.toml'},
+         --    debounce = 1000,
+         --    offsetLine = 0,
+         --    offsetColumn = 0,
+         --    formatLines = 1,
+         --    formatPattern = {
+         --       [[^\s*(\/.*\.py):(\d+):(\d+) - (\w+): (.*)$]],
+         --       {
+         --          sourceName = 1,
+         --          line = 2,
+         --          column = 3,
+         --          security = 4,
+         --          message = 5,
+         --       },
+         --    },
+         --    securities = {
+         --       error = "error",
+         --       warning = "warning",
+         --    },
+         -- },
+      },
+   },
+})
+
+lspconfig.jsonls.setup({
+   init_options = {
+      provideFormatter = false,
+   }
+})
+
+lspconfig.ccls.setup{
+   init_options = {
+      compilationDatabaseDirectory = "build",
+      index = {
+         threads = 0,
+      },
+      clang = {
+         extraArgs = {
+            "-isystem/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include",
+            "-isysroot/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include",
+         },
+         excludeArgs = {"-frounding-math"},
+      },
+   }
+}
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
  vim.lsp.diagnostic.on_publish_diagnostics, {
    virtual_text = {
       spacing = 4,
    },
-   update_in_insert = false,
+   update_in_insert = true,
  }
 )

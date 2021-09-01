@@ -73,9 +73,6 @@
 [submodule "nvim/.local/share/nvim/site/pack/plugins/start/lspsaga.nvim"]
 	path = nvim/.local/share/nvim/site/pack/plugins/start/lspsaga.nvim
 	url = https://github.com/glepnir/lspsaga.nvim.git
-[submodule "nvim/.local/share/nvim/site/pack/plugins/start/ale"]
-	path = nvim/.local/share/nvim/site/pack/plugins/start/ale
-	url = https://github.com/dense-analysis/ale.git
 [submodule "nvim/.local/share/nvim/site/pack/plugins/start/orgmode.nvim"]
 	url = https://github.com/kristijanhusak/orgmode.nvim.git
 	path = nvim/.local/share/nvim/site/pack/plugins/start/orgmode.nvim
@@ -94,3 +91,12 @@
 [submodule "nvim/.local/share/nvim/site/pack/plugins/start/nvim-toggleterm.lua"]
 	url = https://github.com/akinsho/nvim-toggleterm.lua.git
 	path = nvim/.local/share/nvim/site/pack/plugins/start/nvim-toggleterm.lua
+[submodule "tmux/.local/share/tmux/tmux-copycat"]
+	url = https://github.com/tmux-plugins/tmux-copycat.git
+	path = tmux/.local/share/tmux/tmux-copycat
+[submodule "tmux/.local/share/tmux/tmux-open"]
+	url = https://github.com/tmux-plugins/tmux-open.git
+	path = tmux/.local/share/tmux/tmux-open
+[submodule "nvim/.local/share/nvim/site/pack/plugins/start/playground"]
+	url = https://github.com/nvim-treesitter/playground.git
+	path = nvim/.local/share/nvim/site/pack/plugins/start/playground

@@ -11,6 +11,7 @@ DIRS = {
     "nvim": "share/nvim/site/pack/plugins/start",
     "tmux": "share/tmux",
     "zsh": "share/zsh/plugins",
+    "other": "share/other"
 }
 
 

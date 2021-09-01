@@ -1,6 +1,6 @@
 require('orgmode').setup({
   org_agenda_files = {'~/Documents/org/*'};
-  org_default_notes_file = '~/Documents/org/notes.org';
+  org_default_notes_file = '~/Documents/org/dump.org';
   org_hide_leading_stars = true;
   org_agenda_templates = {
      j = {

@@ -37,9 +37,11 @@ require("which-key").register({
 
       f = {
          name = "File",
-         f = {":Telescope find_files<CR>", "Find file"},
+         F = {":Telescope find_files<CR>", "Find file excluding hidden files"},
+         G = {":Telescope live_grep<CR>", "Find text occurrence excluding hidden files"},
+         f = {":Telescope find_files hidden=false<CR>", "Find file"},
+         g = {":Telescope live_grep hidden=false<CR>", "Find text occurrence"},
          n = {":enew<CR>", "Open new file"},
-         g = {":Telescope live_grep<CR>", "Find text occurrence"},
          r = {":Telescope oldfiles<CR>", "Open recent file"},
          s = {
             name = "Search",
@@ -48,6 +50,7 @@ require("which-key").register({
             o = {":lua require('telescope.builtin').find_files {search_dirs = {'~/Documents/org/'}}<CR>", "Orgmode files"},
             z = {":lua require('telescope.builtin').find_files {search_dirs = {'~/dotfiles/zsh/.config/zsh/'}}<CR>", "Zsh files"},
          },
+         w = {":lua Format_and_test()<CR>", "Format on save and run unit tests"},
       },
 
       g = {
@@ -104,7 +107,7 @@ require("which-key").register({
 
       r = {
          name = "Refactor",
-         f = {":ALEFix<CR>", "Format code"},
+         f = {":lua vim.lsp.buf.formatting()<CR>", "Format code"},
          r = {":Lspsaga rename<CR>", "Rename with LSP"},
       },
 
@@ -122,8 +125,9 @@ require("which-key").register({
          name = "Terminal",
          c = {":ToggleTermCloseAll<CR>", "Close all terminals at once"},
          o = {":ToggleTermOpenAll<CR>", "Open all terminals at once"},
-         r = {":lua Python_toggle()<CR>", "Open bPython REPL"},
-         t = {":lua RegularTerm_toggle()<CR>", "Open regular terminal"},
+         r = {":lua Repl()<CR>", "Open REPL"},
+         t = {":ToggleTerm<CR>", "Toggle last terminal"},
+         u = {":lua UnitTests()<CR>", "Run unit tests"},
       },
 
       v = {
@@ -146,10 +150,10 @@ require("which-key").register({
       ["K"] = {":m .-2<CR>==", "Move current line up"},
       ["Y"] = {"mzgg\"*yG`z", "Yank whole file to the system-wide register"},
       ["d"] = {"\"_d", "Delete motion without yanking"},
-      ["."] = {":Telescope find_files<CR>", "Find file"},
+      ["."] = {":Telescope find_files hidden=false<CR>", "Find file"},
       [","] = {":Telescope buffers<CR>", "Find buffers"},
       ["/"] = {":ToggleTerm<CR>", "Toggle last terminal"},
-      ["<space>"] = {":Telescope find_files<CR>", "Find file"},
+      ["<space>"] = {":Telescope find_files hidden=false<CR>", "Find file"},
    },
 
    {prefix = "<leader>"}

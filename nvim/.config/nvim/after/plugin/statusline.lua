@@ -2,9 +2,9 @@ local M = {}
 
 M.colors = {active = "%#StatusLine#", inactive = "%#StatusLineNC#"}
 M.get_git_status = function()
-  local signs = vim.b.gitsigns_status_dict or {head = ""}
-  local is_head_empty = signs.head ~= ""
-  return is_head_empty and string.format("  %s ", signs.head) or "  -- "
+  local git_dir = vim.fn.system("git branch --show-current")
+  local is_git_dir = vim.fn.matchstr(git_dir, "^fatal:.*") == ""
+  return is_git_dir and string.format("  %s ", vim.trim(git_dir)) or "  -- "
 end
 
 M.set_active = function(self)

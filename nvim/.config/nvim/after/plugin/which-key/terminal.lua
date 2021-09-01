@@ -1,1 +1,5 @@
 vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", {noremap = true})
+vim.api.nvim_set_keymap("t", "<C-W>h", "<C-\\><C-n><C-w>h", {noremap = true})
+vim.api.nvim_set_keymap("t", "<C-W>j", "<C-\\><C-n><C-w>j", {noremap = true})
+vim.api.nvim_set_keymap("t", "<C-W>k", "<C-\\><C-n><C-w>k", {noremap = true})
+vim.api.nvim_set_keymap("t", "<C-W>l", "<C-\\><C-n><C-w>l", {noremap = true})

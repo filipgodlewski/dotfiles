@@ -20,14 +20,14 @@ require("compe").setup {
       min_height = 1,
    };
    source = {
-      path = true;
-      buffer = true;
-      calc = true;
-      nvim_lsp = true;
-      nvim_lua = true;
-      vsnip = false;
-      ultisnips = false;
-      luasnip = false;
-      orgmode = true;
+      path = true,
+      buffer = true,
+      calc = true,
+      nvim_lsp = true,
+      nvim_lua = true,
+      vsnip = false,
+      ultisnips = false,
+      luasnip = false,
+      orgmode = true,
    };
 }

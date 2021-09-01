@@ -1,7 +1,8 @@
 [alias]
-a = add -u .
+a = add -u
 aa = add --all
 af = fuzzy-add
+fa = fuzzy-add
 ap = add --patch
 
 b = branch
@@ -64,9 +65,9 @@ rbc = rebase --continue
 rbi = rebase --interactive
 rbs = rebase --skip
 
-s = status
-ss = status --short
-ssb = status --short --branch
+s = status --short
+sb = status --short --branch
+ss = status
 
 sm = submodule
 sma = submodule add

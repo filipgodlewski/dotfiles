@@ -52,9 +52,6 @@
 [submodule "other/.local/share/other/lua-language-server"]
 	path = other/.local/share/other/lua-language-server
 	url = https://github.com/sumneko/lua-language-server.git
-[submodule "nvim/.local/share/nvim/site/pack/plugins/start/nvim-compe"]
-	path = nvim/.local/share/nvim/site/pack/plugins/start/nvim-compe
-	url = https://github.com/hrsh7th/nvim-compe.git
 [submodule "nvim/.local/share/nvim/site/pack/plugins/start/aurora"]
 	path = nvim/.local/share/nvim/site/pack/plugins/start/aurora
 	url = https://github.com/ray-x/aurora.git
@@ -100,3 +97,12 @@
 [submodule "nvim/.local/share/nvim/site/pack/plugins/start/playground"]
 	url = https://github.com/nvim-treesitter/playground.git
 	path = nvim/.local/share/nvim/site/pack/plugins/start/playground
+[submodule "nvim/.local/share/nvim/site/pack/plugins/start/cmp-nvim-lsp"]
+	url = https://github.com/hrsh7th/cmp-nvim-lsp.git
+	path = nvim/.local/share/nvim/site/pack/plugins/start/cmp-nvim-lsp
+[submodule "nvim/.local/share/nvim/site/pack/plugins/start/nvim-cmp"]
+	url = https://github.com/hrsh7th/nvim-cmp.git
+	path = nvim/.local/share/nvim/site/pack/plugins/start/nvim-cmp
+[submodule "nvim/.local/share/nvim/site/pack/plugins/start/lsp_signature.nvim"]
+	url = https://github.com/ray-x/lsp_signature.nvim.git
+	path = nvim/.local/share/nvim/site/pack/plugins/start/lsp_signature.nvim

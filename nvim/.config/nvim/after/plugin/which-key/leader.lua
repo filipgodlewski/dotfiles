@@ -126,6 +126,7 @@ require("which-key").register({
          c = {":ToggleTermCloseAll<CR>", "Close all terminals at once"},
          o = {":ToggleTermOpenAll<CR>", "Open all terminals at once"},
          r = {":lua Repl()<CR>", "Open REPL"},
+         R = {":lua Repl(nil, {'-i', vim.api.nvim_buf_get_name(0)})<CR>", "Open REPL with current file being loaded"},
          t = {":ToggleTerm<CR>", "Toggle last terminal"},
          u = {":lua UnitTests()<CR>", "Run unit tests"},
       },

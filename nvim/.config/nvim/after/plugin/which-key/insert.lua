@@ -1,7 +1,3 @@
-local opt = {expr = true, silent = true, noremap = true}
-vim.api.nvim_set_keymap("i", "<tab>", "compe#complete()", opt)
-vim.api.nvim_set_keymap("i", "<CR>", [[compe#confirm(luaeval("require('nvim-autopairs').autopairs_cr()"))]], opt)
-vim.api.nvim_set_keymap("i", "<C-e>", "compe#close('<C-e>')", opt)
 vim.api.nvim_set_keymap("i", ",", ",<C-g>u", {noremap = true})
 vim.api.nvim_set_keymap("i", ".", ".<C-g>u", {noremap = true})
 vim.api.nvim_set_keymap("i", "!", "!<C-g>u", {noremap = true})

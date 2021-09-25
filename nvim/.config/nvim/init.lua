@@ -4,7 +4,7 @@ vim.g.colors_name = "aurora_altered"
 
 vim.opt.autowriteall = true
 vim.opt.complete = vim.opt.complete + "kspell"
-vim.opt.completeopt = {"menuone", "noinsert", "noselect"}
+vim.opt.completeopt = {"menu", "menuone", "noselect"}
 vim.opt.confirm = true
 vim.opt.copyindent = true
 vim.opt.cursorline = true
@@ -18,7 +18,7 @@ vim.opt.ignorecase = true
 vim.opt.joinspaces = false
 vim.opt.lazyredraw = true
 vim.opt.matchpairs = vim.opt.matchpairs + "<:>"
-vim.opt.mouse = "i"
+vim.opt.mouse = "a"
 vim.opt.nrformats = vim.opt.nrformats + "alpha"
 vim.opt.path = vim.opt.path + "**"
 vim.opt.pumblend = 30

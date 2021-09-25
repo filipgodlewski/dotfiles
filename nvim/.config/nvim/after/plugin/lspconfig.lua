@@ -1,8 +1,9 @@
 local lspconfig = require("lspconfig")
 local protocol = require("vim.lsp.protocol")
 local capabilities = protocol.make_client_capabilities()
+local cmp_capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-local function on_attach(client, bufnr)
+local function on_attach()
    protocol.CompletionItemKind = {
      '', -- Text
      '', -- Method
@@ -32,14 +33,18 @@ local function on_attach(client, bufnr)
    }
 end
 
-local servers = {"ccls", "jedi_language_server", "jsonls", "denols"}
+local servers = {"ccls", "jedi_language_server", "jsonls", "denols", "pyright"}
 
 for _, lsp in ipairs(servers) do
    lspconfig[lsp].setup {
-      on_attach = on_attach,
-      capabilities = capabilities,
+      on_attach = on_attach(),
+      capabilities = cmp_capabilities,
 }
 end
+
+lspconfig.pyright.setup({
+   on_attach = function(client) client.server_capabilities.completionProvider = false end
+})
 
 lspconfig.diagnosticls.setup({
    on_attach = on_attach,
@@ -68,7 +73,7 @@ lspconfig.diagnosticls.setup({
       },
       filetypes = {
          json = {"json"},
-         python = {"pyre", "flake8"},
+         python = {"pyright", "flake8"},
       },
       linters = {
          json = {
@@ -76,25 +81,25 @@ lspconfig.diagnosticls.setup({
             command = "json",
             args = {"--validate"},
          },
-         pyre = {
-            sourceName = "pyre",
-            command = "pyre",
-            args = {"--strict"},
-            requiredFiles = {".pyre_configuration"},
-            rootPatterns = {".pyre_configuration"},
-            debounce = 100,
-            formatLines = 1,
-            formatPattern = {
-               [[^(.*\.py):(\d+):(\d+)\s(.*)\.$]],
-               {
-                  sourceName = 1,
-                  sourceNameFilter = true,
-                  line = 2,
-                  column = 3,
-                  message = 4,
-               },
-            },
-         },
+         -- pyre = {
+         --    sourceName = "pyre",
+         --    command = "pyre",
+         --    args = {"--strict"},
+         --    requiredFiles = {".pyre_configuration"},
+         --    rootPatterns = {".pyre_configuration"},
+         --    debounce = 100,
+         --    formatLines = 1,
+         --    formatPattern = {
+         --       [[^(.*\.py):(\d+):(\d+)\s(.*)\.$]],
+         --       {
+         --          sourceName = 1,
+         --          sourceNameFilter = true,
+         --          line = 2,
+         --          column = 3,
+         --          message = 4,
+         --       },
+         --    },
+         -- },
          flake8 = {
             sourceName = 'flake8',
             command = 'flake8',
@@ -123,31 +128,32 @@ lspconfig.diagnosticls.setup({
                Y = 'error',
             },
          },
-         -- pyright = {
-         --    command = "pyright",
-         --    sourceName = "pyright",
-         --    args = {"%file"},
-         --    requiredFiles = {'pyproject.toml'},
-         --    rootPatterns = {'pyproject.toml'},
-         --    debounce = 1000,
-         --    offsetLine = 0,
-         --    offsetColumn = 0,
-         --    formatLines = 1,
-         --    formatPattern = {
-         --       [[^\s*(\/.*\.py):(\d+):(\d+) - (\w+): (.*)$]],
-         --       {
-         --          sourceName = 1,
-         --          line = 2,
-         --          column = 3,
-         --          security = 4,
-         --          message = 5,
-         --       },
-         --    },
-         --    securities = {
-         --       error = "error",
-         --       warning = "warning",
-         --    },
-         -- },
+         pyright = {
+            command = "pyright",
+            sourceName = "pyright",
+            args = {"%file"},
+            -- requiredFiles = {'pyproject.toml'},
+            -- rootPatterns = {'pyproject.toml'},
+            debounce = 1000,
+            offsetLine = 0,
+            offsetColumn = 2,
+            formatLines = 1,
+            formatPattern = {
+               [[(\/.*\.py):(\d+):(\d+) - (\w+): (.*) \((\w+)\)$]],
+               {
+                  sourceName = 1,
+                  sourceNameFilter = true,
+                  line = 2,
+                  column = 3,
+                  security = 4,
+                  message = 5,
+               },
+            },
+            securities = {
+               error = "error",
+               warning = "warning",
+            },
+         },
       },
    },
 })

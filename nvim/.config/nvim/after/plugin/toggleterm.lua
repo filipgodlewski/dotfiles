@@ -17,18 +17,16 @@ local configs = {
          cmd = "which bpython && bpython",
          direction = "float",
          dir = "git_dir",
-         on_open = function(term)
-            vim.cmd("startinsert!")
-            vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", ":ToggleTerm<CR>", {noremap = true, silent = true})
-         end,
+         on_open = function(term) vim.cmd("startinsert!") end,
       },
    },
    ut = {
       python = {
-         count = 3,
+         count = 4,
          cmd = "which pytest && pytest --pdb",
          direction = "float",
          dir = "git_dir",
+         on_open = function(term) vim.cmd("startinsert!") end,
          close_on_exit = true,
       },
    },
@@ -38,10 +36,16 @@ local configs = {
 --- Get new terminal based on your lookup and filetype
 ---@param lookup string key to lookup in `configs` table
 ---@param ft string filetype to lookup in `configs` table
+---@param args array the array of strings that represent additional command line arguments
 ---@return Terminal[]
-local function get_terminal(lookup, ft)
+local function get_terminal(lookup, ft, args)
    local filetype = ft or vim.api.nvim_buf_get_option(0, "filetype")
    local config = configs[lookup][filetype]
+   if args ~= nil then
+      for _, arg in ipairs(args) do
+         config.cmd = config.cmd .. " " .. arg
+      end
+   end
    if config == nil then
       print("No " .. lookup .. " defined for the current filetype: " .. filetype)
       return
@@ -51,8 +55,9 @@ end
 
 --- Toggle REPL for the current buffer filetype
 ---@param ft string the filetype of the REPL
-function Repl(ft)
-   local term = get_terminal("repl", ft)
+---@param args array the array of strings that represent additional command line arguments
+function Repl(ft, args)
+   local term = get_terminal("repl", ft, args)
    if term ~= nil then
       term:toggle()
    end
@@ -60,8 +65,9 @@ end
 
 --- Run unit tests for the current project.
 ---@param ft string the filetype appropriate for your project unit tests (defaults to buffer)
-function UnitTests(ft)
-   local term = get_terminal("ut", ft)
+---@param args array the array of strings that represent additional command line arguments
+function UnitTests(ft, args)
+   local term = get_terminal("ut", ft, args)
    if term ~= nil then
       if term:is_open() then -- it means that the debugger is running, so we want to close it first
          term:send("") -- debugger does not close immediately, so we have to check if it is closed

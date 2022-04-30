@@ -3,7 +3,7 @@ require("which-key").register({
          name = "Run",
          p = {
             name = "Python",
-            f = {":w<CR>:!python3 %<CR>", "Run current file"},
+            f = {":!python3 %<CR>", "Run current file"},
          },
       },
 

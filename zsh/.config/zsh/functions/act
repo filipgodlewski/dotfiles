@@ -1,3 +1,0 @@
-source $XDG_DATA_HOME/venvs/$1/bin/activate
-
-# vim:ft=zsh

@@ -7,24 +7,12 @@
 [submodule "zsh/.local/share/zsh/plugins/zsh-history-substring-search"]
 	path = zsh/.local/share/zsh/plugins/zsh-history-substring-search
 	url = https://github.com/zsh-users/zsh-history-substring-search.git
-[submodule "zsh/.local/share/zsh/plugins/propane"]
-	path = zsh/.local/share/zsh/plugins/propane
-	url = https://github.com/filipgodlewski/propane.git
-[submodule "tmux/.local/share/tmux/nord-tmux"]
-	path = tmux/.local/share/tmux/nord-tmux
-	url = https://github.com/arcticicestudio/nord-tmux.git
 [submodule "zsh/.local/share/zsh/plugins/fast-syntax-highlighting"]
 	path = zsh/.local/share/zsh/plugins/fast-syntax-highlighting
 	url = https://github.com/zdharma/fast-syntax-highlighting.git
 [submodule "nvim/.local/share/nvim/site/pack/plugins/start/vim-bbrackets"]
 	path = nvim/.local/share/nvim/site/pack/plugins/start/vim-bbrackets
 	url = https://github.com/filipgodlewski/vim-bbrackets.git
-[submodule "nvim/.local/share/nvim/site/pack/plugins/start/vim-repeat"]
-	path = nvim/.local/share/nvim/site/pack/plugins/start/vim-repeat
-	url = https://github.com/tpope/vim-repeat.git
-[submodule "alacritty/.local/share/alacritty/nord-alacritty"]
-	path = alacritty/.local/share/alacritty/nord-alacritty
-	url = https://github.com/arcticicestudio/nord-alacritty.git
 [submodule "nvim/.local/share/nvim/site/pack/plugins/start/which-key.nvim"]
 	path = nvim/.local/share/nvim/site/pack/plugins/start/which-key.nvim
 	url = https://github.com/folke/which-key.nvim.git
@@ -52,51 +40,21 @@
 [submodule "other/.local/share/other/lua-language-server"]
 	path = other/.local/share/other/lua-language-server
 	url = https://github.com/sumneko/lua-language-server.git
-[submodule "nvim/.local/share/nvim/site/pack/plugins/start/aurora"]
-	path = nvim/.local/share/nvim/site/pack/plugins/start/aurora
-	url = https://github.com/ray-x/aurora.git
-[submodule "alacritty/.local/share/alacritty/alacritty-aurora"]
-	path = alacritty/.local/share/alacritty/alacritty-aurora
-	url = https://github.com/filipgodlewski/alacritty-aurora.git
-[submodule "nvim/.local/share/nvim/site/pack/plugins/start/markdown-preview.nvim"]
-	path = nvim/.local/share/nvim/site/pack/plugins/start/markdown-preview.nvim
-	url = https://github.com/iamcco/markdown-preview.nvim.git
 [submodule "nvim/.local/share/nvim/site/pack/plugins/start/trouble.nvim"]
 	path = nvim/.local/share/nvim/site/pack/plugins/start/trouble.nvim
 	url = https://github.com/folke/trouble.nvim.git
-[submodule "nvim/.local/share/nvim/site/pack/plugins/start/nvim-web-devicons"]
-	path = nvim/.local/share/nvim/site/pack/plugins/start/nvim-web-devicons
-	url = https://github.com/kyazdani42/nvim-web-devicons.git
 [submodule "nvim/.local/share/nvim/site/pack/plugins/start/lspsaga.nvim"]
 	path = nvim/.local/share/nvim/site/pack/plugins/start/lspsaga.nvim
 	url = https://github.com/glepnir/lspsaga.nvim.git
-[submodule "nvim/.local/share/nvim/site/pack/plugins/start/orgmode.nvim"]
-	url = https://github.com/kristijanhusak/orgmode.nvim.git
-	path = nvim/.local/share/nvim/site/pack/plugins/start/orgmode.nvim
-[submodule "nvim/.local/share/nvim/site/pack/plugins/start/astronauta.nvim"]
-	url = https://github.com/tjdevries/astronauta.nvim.git
-	path = nvim/.local/share/nvim/site/pack/plugins/start/astronauta.nvim
 [submodule "nvim/.local/share/nvim/site/pack/plugins/start/nvim-autopairs"]
 	url = https://github.com/windwp/nvim-autopairs.git
 	path = nvim/.local/share/nvim/site/pack/plugins/start/nvim-autopairs
-[submodule "nvim/.local/share/nvim/site/pack/plugins/start/vim-surround"]
-	url = https://github.com/tpope/vim-surround.git
-	path = nvim/.local/share/nvim/site/pack/plugins/start/vim-surround
 [submodule "nvim/.local/share/nvim/site/pack/plugins/start/vim-python-pep8-indent"]
 	url = https://github.com/Vimjas/vim-python-pep8-indent.git
 	path = nvim/.local/share/nvim/site/pack/plugins/start/vim-python-pep8-indent
 [submodule "nvim/.local/share/nvim/site/pack/plugins/start/nvim-toggleterm.lua"]
 	url = https://github.com/akinsho/nvim-toggleterm.lua.git
 	path = nvim/.local/share/nvim/site/pack/plugins/start/nvim-toggleterm.lua
-[submodule "tmux/.local/share/tmux/tmux-copycat"]
-	url = https://github.com/tmux-plugins/tmux-copycat.git
-	path = tmux/.local/share/tmux/tmux-copycat
-[submodule "tmux/.local/share/tmux/tmux-open"]
-	url = https://github.com/tmux-plugins/tmux-open.git
-	path = tmux/.local/share/tmux/tmux-open
-[submodule "nvim/.local/share/nvim/site/pack/plugins/start/playground"]
-	url = https://github.com/nvim-treesitter/playground.git
-	path = nvim/.local/share/nvim/site/pack/plugins/start/playground
 [submodule "nvim/.local/share/nvim/site/pack/plugins/start/cmp-nvim-lsp"]
 	url = https://github.com/hrsh7th/cmp-nvim-lsp.git
 	path = nvim/.local/share/nvim/site/pack/plugins/start/cmp-nvim-lsp
@@ -106,3 +64,6 @@
 [submodule "nvim/.local/share/nvim/site/pack/plugins/start/lsp_signature.nvim"]
 	url = https://github.com/ray-x/lsp_signature.nvim.git
 	path = nvim/.local/share/nvim/site/pack/plugins/start/lsp_signature.nvim
+[submodule "nvim/.local/share/nvim/site/pack/plugins/start/evernight.nvim"]
+	url = https://github.com/jasonzie/evernight.nvim.git
+	path = nvim/.local/share/nvim/site/pack/plugins/start/evernight.nvim

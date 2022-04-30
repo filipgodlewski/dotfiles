@@ -1,6 +1,6 @@
 vim.g.mapleader = " "
 vim.g.python3_host_prog = vim.fn.expand("~/.local/share/venvs/nvim/bin/python3")
-vim.g.colors_name = "aurora_altered"
+vim.cmd("colorscheme evernight")
 
 vim.opt.autowriteall = true
 vim.opt.complete = vim.opt.complete + "kspell"

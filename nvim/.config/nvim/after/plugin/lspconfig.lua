@@ -33,7 +33,7 @@ local function on_attach()
    }
 end
 
-local servers = {"ccls", "jedi_language_server", "jsonls", "denols", "pyright"}
+local servers = {"ccls", "jedi_language_server", "jsonls", "denols", "pyright", "sqlls"}
 
 for _, lsp in ipairs(servers) do
    lspconfig[lsp].setup {
@@ -46,41 +46,64 @@ lspconfig.pyright.setup({
    on_attach = function(client) client.server_capabilities.completionProvider = false end
 })
 
+lspconfig.sqlls.setup({
+   cmd = {"/usr/local/bin/sql-language-server", "up", "--method", "stdio"}
+})
+
+local function isort_cfg()
+   local result = vim.fn.system("isort --show-config | jq '.sources | length'")
+   local result = tonumber(result)
+   if result == 1 then
+      return "--settings=$XDG_CONFIG_HOME/isort/isort.cfg" 
+   else 
+      return "" 
+   end
+end
+
 lspconfig.diagnosticls.setup({
    on_attach = on_attach,
    capabilities = capabilities,
    filetypes = {"json", "python"},
+
    init_options = {
+
       formatters = {
+
          hjson = {
             command = "hjson",
             args = {"-j"},
          },
+
          isort = {
             command = "isort",
-            args = {"--quiet", "-"},
-            rootPatterns = {"pyproject.toml", ".isort.cfg"},
+            args = {isort_cfg(), "--quiet", "-"},
          },
+
          yapf = {
             command = "yapf",
             args = {"-q"},
-            rootPatterns = {".style.yapf", "setup.cfg", "pyproject.toml"},
          }
+
       },
+
       formatFiletypes = {
          json = "hjson",
          python = {"yapf", "isort"},
       },
+
       filetypes = {
          json = {"json"},
          python = {"pyright", "flake8"},
       },
+
       linters = {
+
          json = {
             sourceName = "json",
             command = "json",
             args = {"--validate"},
          },
+
          -- pyre = {
          --    sourceName = "pyre",
          --    command = "pyre",
@@ -100,11 +123,12 @@ lspconfig.diagnosticls.setup({
          --       },
          --    },
          -- },
+
          flake8 = {
             sourceName = 'flake8',
             command = 'flake8',
-            requiredFiles = {'.flake8', 'setup.cfg', 'tox.ini'},
-            rootPatterns = {'.flake8', 'setup.cfg', 'tox.ini'},
+            -- requiredFiles = {'.flake8', 'setup.cfg', 'tox.ini'},
+            -- rootPatterns = {'.flake8', 'setup.cfg', 'tox.ini'},
             debounce = 100,
             formatLines = 1,
             formatPattern = {
@@ -128,12 +152,11 @@ lspconfig.diagnosticls.setup({
                Y = 'error',
             },
          },
+
          pyright = {
             command = "pyright",
             sourceName = "pyright",
             args = {"%file"},
-            -- requiredFiles = {'pyproject.toml'},
-            -- rootPatterns = {'pyproject.toml'},
             debounce = 1000,
             offsetLine = 0,
             offsetColumn = 2,
@@ -152,6 +175,7 @@ lspconfig.diagnosticls.setup({
             securities = {
                error = "error",
                warning = "warning",
+               information = "info",
             },
          },
       },
@@ -181,7 +205,7 @@ lspconfig.ccls.setup{
 }
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
- vim.lsp.diagnostic.on_publish_diagnostics, {
+ vim.diagnostic.on_publish_diagnostics, {
    virtual_text = {
       spacing = 4,
    },

@@ -8,7 +8,6 @@ from git import Repo
 
 DOTFILES_PATH = join(expanduser("~"), "dotfiles")
 DIRS: Dict[str, str] = {
-    "alacritty": "share/alacritty",
     "nvim": "share/nvim/site/pack/plugins/start",
     "tmux": "share/tmux",
     "zsh": "share/zsh/plugins",

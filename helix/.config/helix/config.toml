@@ -1,0 +1,11 @@
+theme = "everforest_dark"
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[keys.normal]
+"A-." = "no_op"
+
+"C-." = "repeat_last_motion"

@@ -1,0 +1,12 @@
+echo "venv-list -- List all available virtual environments.
+
+Usage:
+  venv list [options]
+
+Options:
+  -h, --help                  Show this help message.
+  --unreachable               Show only those venvs that are associated with unreachable (non-existent) projects.
+  -v, --verbose               Show detailed information containing project paths.
+"
+
+# vim:ft=zsh

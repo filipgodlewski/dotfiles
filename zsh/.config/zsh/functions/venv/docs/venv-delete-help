@@ -1,0 +1,18 @@
+echo "venv-delete -- Delete given virtual environment.
+
+Usage:
+  venv delete [VENV...] [options]
+
+Description:
+  By default, requires venv directory names.
+  If fzf is installed, venv directory names become optional.
+
+Options:
+  --clean-up                  Delete all unreachable (non-existent) projects from the internal list. (not implemented)
+  -f, --force                 Force deleting venv even if it is associated with multiple projects. (not implemented)
+  -h, --help                  Show this help message.
+  -q, --quiet                 Supress messages.
+  -y, --yes                   Automatically confirm every deletion.
+"
+
+# vim:ft=zsh

@@ -1,0 +1,17 @@
+echo "venv-new -- Create new virtual environment.
+
+Description:
+  By default creates new venv with the following options:
+    --system-site-packages
+    --upgrade-deps
+
+Usage:
+  venv new [options]
+
+Options:
+  -h, --help                  Show this help message.
+  -n, --name <NAME>           Custom venv name to be used for creating the new one. (not implemented)
+  -q, --quiet                 Supress messages.
+"
+
+# vim:ft=zsh

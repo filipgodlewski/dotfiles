@@ -19,3 +19,6 @@ COLOR_BLUE_BRIGHT=$(tput setaf 12)
 COLOR_MAGENTA_BRIGHT=$(tput setaf 13)
 COLOR_CYAN_BRIGHT=$(tput setaf 14)
 COLOR_WHITE_BRIGHT=$(tput setaf 15)
+
+TEXT_BOLD=$(tput bold)
+TEXT_ITALIC=$(tput sitm)

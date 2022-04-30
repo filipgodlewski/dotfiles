@@ -1,17 +1,12 @@
-echo "\n>>> pip\n"
-upvenv nvim
 echo "\n>>> npm\n"
 npm install -g npm
 npm update --global
-echo "\n>>> cfg\n"
-/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME sub-up
+npm audit fix
 echo "\n>>> brew\n"
 brew update
 brew upgrade
 brew upgrade --cask
 brew cleanup
-echo "\n>>> alacritty\n"
-cat $XDG_DATA_HOME/colorschemes/nord-alacritty/src/nord.yml $XDG_CONFIG_HOME/alacritty/base.yml > $XDG_CONFIG_HOME/alacritty/alacritty.yml
 echo "\n>>> nvim\n"
 nvim -c "UpdateRemotePlugins | q"
 echo "\n>>> zsh\n"

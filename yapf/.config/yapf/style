@@ -1,6 +1,0 @@
-[style]
-column_limit=79
-split_before_named_assigns = false
-split_before_arithmetic_operator = true
-split_before_dot = true
-split_complex_comprehension = true

@@ -5,102 +5,100 @@ BREW = /usr/local/bin/brew
 CASK = brew list --casks $(1) > /dev/null 2>&1 || brew install --cask $(1)
 DOTFILES_DIR = $(HOME)/dotfiles
 NVIM_VENV = $(XDG_DATA_HOME)/venvs/nvim/bin/python3
-PACKAGE = brew list --versions $(1) > /dev/null || brew install $(1)$(2)
+PACKAGE = brew list --versions $(1) > /dev/null || brew install $(1) $(2)
 PIP_INSTALL = $(1) -m pip install -U pip setuptools; $(1) -m pip install -U -r _pip/$(2)_packages.list
 PYTHON = /Library/Frameworks/Python.framework/Versions/Current/bin/python3
+SHELL = /bin/zsh
 SHELLS = /etc/shells
 ZSH = /usr/local/bin/zsh
+NUSHELL = /usr/local/bin/nu
 
 OS := $(shell [[ "$$OSTYPE" =~ ^darwin ]] && echo macos)
-IN_TMUX := $(shell [[ -n $TMUX ]] && echo end || echo uninstall-proceed)
+IN_TMUX := $(shell [[ -n $TMUX ]] && echo _end || echo _uninstall-proceed)
 
-.PHONY: alacritty git nvim tmux zsh
+.PHONY: git nvim stow tmux zsh
 
-install: git $(OS) submodules nvim tmux alacritty
+# Installing
 
-uninstall: $(IN_TMUX)
+install: git $(OS) submodules nvim tmux
 
-uninstall-proceed: unnpm unzsh unalacritty unpip unlink unbrew
-
-end:
-	@echo "\nKill tmux and try again!\n"
-	@exit 1
-
-macos: core-macos link zsh
-
-git: 
+git:
 	@echo "\ngit: Setting up username and email\n"
-	@git config --local user.name "Filip Godlewski"
-	@git config --local user.email "filip.godlewski@outlook.com"
+	@echo -n "Enter git user name: "; \
+		read name; \
+		git config --local user.name $$name
+	@echo -n "Enter git email: "; \
+		read mail; \
+		git config --local user.email $$mail
 
 submodules:
 	@echo "\ngit: Initialize submodules recursively\n"
 	@git submodule update --init --recursive
 
-zsh:
-	@echo "\nzsh: Set as default\n"
-	@if ! grep -q $(ZSH) $(SHELLS); then sudo $(ZSH) >> $(SHELLS); chsh -s $(ZSH); fi
-	@echo "\nzsh: Resolving potential conflicts\n"
-	@sudo chown -R $$(whoami) /usr/local/share/zsh
-	@sudo chown -R $$(whoami) /usr/local/share/zsh/site-functions
-	@sudo chmod g-w /usr/local/share/zsh
-	@sudo chmod g-w /usr/local/share/zsh/site-functions
-	@echo "\nzsh: Compile terminfo\n"
-	@for file in $(XDG_DATA_HOME)/terminfo/capabilities/*; do tic $$file; done
-
-unzsh:
-	@chsh -s /bin/zsh
-
 nvim:
 	@echo "\nnvim: Update neovim\n"
-	@nvim -c "UpdateRemotePlugins | q"
+	@nvim -c "UpdateRemotePlugins | call mkdp#util#install() | q"
+	@echo "\nnvim: Setup lua lsp\n"
+	@cd $(XDG_DATA_HOME)/other/lua-language-server/3rd/luamake
+	@compile/install.sh
+	@cd ../..
+	@./3rd/luamake/luamake rebuild
 
-core-macos: taps packages casks npm pip clean
+tmux:
+	@echo "\ntmux: Create new base session\n"
+	@-tmux new-session -d -s base
+
+macos: core-macos stow pip zsh
+
+core-macos: brew_taps brew_packages brew_casks npm brew_clean
+
+$(BREW):
+	@/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 brew: | $(BREW)
 	@echo "\nbrew: update brew\n"
 	brew update
 
-unbrew:
-	@brew remove --force --ignore-dependencies $(shell brew list)
-	@/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
-
-$(BREW):
-	@/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-taps: | brew
+brew_taps: | brew
 	@echo "\nbrew: Open taps\n"
 	brew tap homebrew/cask
 	brew tap homebrew/cask-fonts
 	brew tap homebrew/cask-versions
 	brew tap homebrew/core
 	brew tap homebrew/services
-	brew tap koekeishiya/formulae
-	brew tap universal-ctags/universal-ctags
 
-packages: | brew
+brew_packages: | brew
 	@echo "\nbrew: Install basic packages\n"
 	$(call PACKAGE,exa)
 	$(call PACKAGE,fd)
 	$(call PACKAGE,fzf)
+	$(call PACKAGE,gh)
 	$(call PACKAGE,git)
-	$(call PACKAGE,jq)
-	$(call PACKAGE,luajit, --HEAD)
-	$(call PACKAGE,neovim, --HEAD)
+	$(call PACKAGE,git-delta)
+	$(call PACKAGE,grex)
+	$(call PACKAGE,neovim)
+	$(call PACKAGE,nushell)
 	$(call PACKAGE,ripgrep)
+	$(call PACKAGE,sd)
 	$(call PACKAGE,stow)
 	$(call PACKAGE,tmux)
-	-$(call PACKAGE,universal-ctags/universal-ctags/universal-ctags, --HEAD)
+	$(call PACKAGE,tokei)
+	$(call PACKAGE,tree-sitter)
 	$(call PACKAGE,vivid)
 	$(call PACKAGE,zsh)
 	@echo "\nbrew: Install python development packages\n"
 	$(call PACKAGE,yapf)
 	@echo "\nbrew: Install javascript development packages\n"
+	$(call PACKAGE,jq)
+	$(call PACKAGE,deno)
 	$(call PACKAGE,node)
+	@echo "\nbrew: Install lua development packages\n"
+	$(call PACKAGE,ninja)
 
-casks: | brew
+brew_casks: | brew
 	@echo "\nbrew: Install basic casks\n"
 	$(call CASK,alacritty)
+	$(call CASK,hammerspoon)
 	@echo "\nbrew: Install fonts\n"
 	$(call CASK,font-fira-code-nerd-font)
 	$(call CASK,font-victor-mono)
@@ -113,16 +111,45 @@ npm:
 	@npm audit fix
 	@rm package-lock.json package.json
 
-unnpm:
-	@npm ls -gp --depth=0 | awk -F/ '/node_modules/ && !/\/npm$$/ {print $$NF}' | xargs npm -g rm
+brew_clean:
+	@echo "\nbrew: clean packages\n"
+	@brew cleanup --prune=all
+
+stow:
+	@echo "\nstow: link files\n"
+	@for directory in $$(fd --ignore-file stow/.stow-global-ignore -d 1 -c never); do stow -D $$directory; done
+	@for directory in $$(fd --ignore-file stow/.stow-global-ignore -d 1 -c never); do stow $$directory; done
 
 pip:
-	@echo "\npip: Update and install global requirements\n"
+	@echo "\npip: Update and install global python requirements\n"
 	@$(call PIP_INSTALL,$(PYTHON),global)
 	@echo "\npip: Create nvim virtual environment\n"
 	@python3 -m venv $(XDG_DATA_HOME)/venvs/nvim
 	@echo "\npip: Install packages for nvim virtual environment\n"
 	$(call PIP_INSTALL,$(NVIM_VENV),nvim)
+
+zsh:
+	@echo "\nzsh: Set as default\n"
+	@if ! grep -q $(ZSH) $(SHELLS); then sudo $(ZSH) >> $(SHELLS); chsh -s $(ZSH); fi
+	@echo "\nzsh: Resolving potential conflicts\n"
+	@sudo chown -R $$(whoami) /usr/local/share/zsh
+	@sudo chown -R $$(whoami) /usr/local/share/zsh/site-functions
+	@sudo chmod g-w /usr/local/share/zsh
+	@sudo chmod g-w /usr/local/share/zsh/site-functions
+	@echo "\nzsh: Compile terminfo\n"
+	@for file in $(XDG_DATA_HOME)/terminfo/capabilities/*; do tic -xe $$file; done
+
+# Uninstalling
+
+uninstall: $(IN_TMUX)
+
+_uninstall-proceed: unnpm unzsh unpip unstow unbrew
+
+unnpm:
+	@npm ls -gp --depth=0 | awk -F/ '/node_modules/ && !/\/npm$$/ {print $$NF}' | xargs npm -g rm
+
+unzsh:
+	@chsh -s /bin/zsh
 
 unpip:
 	@echo "\npip: Delete global packages\n"
@@ -131,17 +158,17 @@ unpip:
 	@-deactivate &>/dev/null
 	@-rm -rf $(XDG_DATA_HOME)/venvs/nvim
 
-tmux:
-	@echo "\ntmux: Create new base session\n"
-	@-tmux new-session -d -s base
+unstow:
+	@echo "\nstow: unlink files\n"
+	@for directory in $$(fd --ignore-file stow/.stow-global-ignore -d 1 -c never); do stow -D $$directory; done
 
-alacritty:
-	@echo "\nalacritty: Update colorscheme\n"
-	@cat $(XDG_DATA_HOME)/alacritty/nord-alacritty/src/nord.yml $(XDG_CONFIG_HOME)/alacritty/base.yml > $(XDG_CONFIG_HOME)/alacritty/alacritty.yml
+unbrew:
+	@brew remove --force --ignore-dependencies $(shell brew list)
+	@/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
 
-unalacritty:
-	@echo "\nalacritty: Delete colorscheme\n"
-	@-rm -rf $(XDG_CONFIG_HOME)/alacritty/alacritty.yml
+# Other commands
+
+repip: unpip pip
 
 list:
 	@echo "\nTaps:\n"
@@ -151,15 +178,7 @@ list:
 	@echo "\nCasks:\n"
 	@brew list --casks -1
 
-link:
-	@echo "\nstow: link files\n"
-	@for directory in $$(fd --ignore-file stow/.stow-global-ignore -d 1 -c never); do stow -D $$directory; done
-	@for directory in $$(fd --ignore-file stow/.stow-global-ignore -d 1 -c never); do stow $$directory; done
+_end:
+	@echo "\nKill tmux and try again!\n"
+	@exit 1
 
-unlink:
-	@echo "\nstow: unlink files\n"
-	@for directory in $$(fd --ignore-file stow/.stow-global-ignore -d 1 -c never); do stow -D $$directory; done
-
-clean:
-	@echo "\nbrew: clean packages\n"
-	@brew cleanup --prune=all

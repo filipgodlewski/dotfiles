@@ -1,12 +1,3 @@
-[submodule "zsh/.local/share/zsh/plugins/zsh-autosuggestions"]
-	path = zsh/.local/share/zsh/plugins/zsh-autosuggestions
-	url = https://github.com/zsh-users/zsh-autosuggestions.git
-[submodule "zsh/.local/share/zsh/plugins/zsh-completions"]
-	path = zsh/.local/share/zsh/plugins/zsh-completions
-	url = https://github.com/zsh-users/zsh-completions.git
-[submodule "zsh/.local/share/zsh/plugins/zsh-history-substring-search"]
-	path = zsh/.local/share/zsh/plugins/zsh-history-substring-search
-	url = https://github.com/zsh-users/zsh-history-substring-search.git
 [submodule "nvim/.local/share/nvim/site/pack/plugins/start/vim-bbrackets"]
 	path = nvim/.local/share/nvim/site/pack/plugins/start/vim-bbrackets
 	url = https://github.com/filipgodlewski/vim-bbrackets.git
@@ -145,3 +136,12 @@
 [submodule "zsh/.local/share/zsh/plugins/filipgodlewski/dot"]
 	path = zsh/.local/share/zsh/plugins/filipgodlewski/dot
 	url = https://github.com/filipgodlewski/dot.git
+[submodule "zsh/.local/share/zsh/plugins/zsh-users/zsh-autosuggestions"]
+	path = zsh/.local/share/zsh/plugins/zsh-users/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions.git
+[submodule "zsh/.local/share/zsh/plugins/zsh-users/zsh-completions"]
+	path = zsh/.local/share/zsh/plugins/zsh-users/zsh-completions
+	url = https://github.com/zsh-users/zsh-completions.git
+[submodule "zsh/.local/share/zsh/plugins/zsh-users/zsh-history-substring-search"]
+	path = zsh/.local/share/zsh/plugins/zsh-users/zsh-history-substring-search
+	url = https://github.com/zsh-users/zsh-history-substring-search.git

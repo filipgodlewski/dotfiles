@@ -142,3 +142,6 @@
 [submodule "zsh/.local/share/zsh/plugins/zdharma-continuum/fast-syntax-highlighting"]
 	path = zsh/.local/share/zsh/plugins/zdharma-continuum/fast-syntax-highlighting
 	url = https://github.com/zdharma-continuum/fast-syntax-highlighting.git
+[submodule "zsh/.local/share/zsh/plugins/filipgodlewski/dot"]
+	path = zsh/.local/share/zsh/plugins/filipgodlewski/dot
+	url = https://github.com/filipgodlewski/dot.git

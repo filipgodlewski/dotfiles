@@ -1,82 +1,20 @@
 [alias]
-a = add -u
-aa = add --all
-af = fuzzy-add
-fa = fuzzy-add
-ap = add --patch
-
 b = branch
-ba = branch -a
-bc = branch --show-current
-bd = !sh -c 'git b | rg -v "–merged\\|\\\\*" | sort | fzf -m | xargs git b -D' --
-br = branch -r
-
 c = commit -v
-ca = commit --amend
-cane = commit --amend --no-edit
-
-cl = clean
-cleanup = !git reset --hard && git clean -f
-
 co = checkout
-cob = checkout -b
-col = !sh -c 'git b | rg -v "–merged\\|\\\\*" | sort | fzf | xargs git checkout' --
-cor = !"git br | rg -v HEAD | sort | fzf | xargs git checkout -t"
-
-cp = cherry-pick
-
 d = diff
-dh = "!git diff HEAD~$1;"
-dc = diff --cached
-ds = diff --staged
-dw = diff --word-diff
-
-delete = !git bd
-
-f = fetch
-ff = fetch --prune --all
-
-g = grep
-
-l = log
-ll = log --oneline --abbrev-commit --all --graph --decorate --color
-lo = log --oneline
-
+f = fetch --prune --all
 ls = ls-files
-lsi = ls-files --others --i --exclude-standard
-
+lsi = ls-files --others --ignored --exclude-standard
 m = merge
-ma = merge --abort
-mc = merge --continue
-
-p = pull
-
-publish = !"git push -u origin \"$(git bc)\""
-
-r = reset
-rh = reset --hard
-rc = config --local --unset credential.helper
-
-rb = rebase
-rba = rebase --abort
-rbc = rebase --continue
-rbi = rebase --interactive
-rbs = rebase --skip
-
-root = rev-parse --show-toplevel
-
+p = pull --prune --all
+P = push
 s = status --short
-sb = status --short --branch
-ss = status
-
 sm = submodule
-sma = submodule add
-smi = submodule init
+st = stash
 
-sta = stash apply
-stb = stash branch
-stc = stash clear
-std = stash drop
-stl = stash list
-stp = stash pop
-sts = stash save
+conflicts = diff --name-only --diff-filter=U
+optimize = gc --prune=now --aggressive
+rc = config --local --unset credential.helper
+root = rev-parse --show-toplevel
+tear = !git reset --hard && git clean -f

@@ -1,0 +1,83 @@
+[delta "basic"]
+  hyperlinks = true
+  inspect-raw-lines = true
+  keep-plus-minus-markers = false
+  line-fill-method = ansi
+  line-numbers = true
+  navigate = true
+  navigate-regex = ^(commit|added:|removed:|renamed:|Δ|•)
+  side-by-side = false
+  true-color = always
+
+[delta "everforest"]
+  dark = true
+  syntax-theme = Everforest
+
+  bg1 = "#445055"
+  bgr = "#4e3e43"
+  gray0 = "#7a8478"
+  gray1 = "#859289"
+  gray2 = "#9da9a0"
+
+  blue = "#83a6c0"
+  cyan = "#7fbbb3"
+  green = "#a7c080"
+  magenta = "#d699b6"
+  purple = "#9b99d6"
+  red = "#e67e80"
+  teal = "#83c092"
+  yellow = "#dbbc7f"
+
+  dimblue = "#17242E"
+  dimcyan = "#172C2A"
+  dimgreen = "#263831"
+  dimmagenta = "#381627"
+  dimred = "#382626"
+  dimyellow = "#3A2C10"
+
+  blame-palette = everforest.gray0 everforest.gray1 everforest.gray2
+  commit-decoration-style = box
+  file-style = omit
+
+  grep-file-style = everforest.magenta
+  grep-line-number-style = everforest.yellow bold
+
+  hunk-header-decoration-style = everforest.teal box ul
+  hunk-header-file-style = everforest.magenta
+  hunk-header-line-number-style = everforest.yellow box bold
+  hunk-header-style = file line-number syntax bold italic
+
+  line-numbers-minus-style = everforest.red bold
+  line-numbers-plus-style = everforest.green bold
+  line-numbers-left-style = everforest.bg1
+  line-numbers-right-style = everforest.bg1
+  line-numbers-zero-style = everforest.bg1
+
+  dimpurple = "#181638"
+  minus-emph-style = everforest.dimred bold everforest.red
+  minus-empty-line-marker-style = syntax everforest.red
+  minus-non-emph-style = syntax everforest.dimred
+  minus-style = syntax everforest.dimred
+
+  plus-emph-style = everforest.dimgreen bold everforest.green
+  plus-empty-line-marker-style = syntax everforest.green
+  plus-non-emph-style = syntax everforest.dimgreen
+  plus-style = syntax everforest.dimgreen
+
+  map-styles = \
+    bold purple => syntax everforest.dimmagenta, \
+    bold blue => syntax everforest.dimblue, \
+    bold cyan => syntax everforest.dimcyan, \
+    bold yellow => syntax everforest.dimyellow, \
+
+  whitespace-error-style = everforest.bgr
+  zero-style = syntax
+
+[delta "decorations"]
+  file-added-label = [+]
+  file-copied-label = [==]
+  file-modified-label = [*]
+  file-removed-label = [-]
+  file-renamed-label = [->]
+  line-numbers-left-format = "{nm:>1}|"
+  line-numbers-right-format = "{np:>1}|"

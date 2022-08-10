@@ -37,12 +37,13 @@ submodules:
 
 nvim:
 	@echo "\nnvim: Update neovim\n"
-	@nvim -c "UpdateRemotePlugins | call mkdp#util#install() | q"
-	@echo "\nnvim: Setup lua lsp\n"
-	@cd $(XDG_DATA_HOME)/other/lua-language-server/3rd/luamake
-	@compile/install.sh
-	@cd ../..
-	@./3rd/luamake/luamake rebuild
+	@nvim -c "UpdateRemotePlugins | q"
+	# @echo "\nnvim: Setup lua lsp\n"
+	# @cd $(XDG_DATA_HOME)/other/lua-language-server/3rd/luamake; ./compile/install.sh
+	# @cd ${XDG_DATA_HOME}/other/lua-language-server; ./3rd/luamake/luamake rebuild
+	@echo "\nnvim: Build telescope-fzf-native\n"
+	@cd $(XDG_DATA_HOME)/nvim/site/pack/plugins/start/telescope-fzf-native.nvim; make
+
 
 tmux:
 	@echo "\ntmux: Create new base session\n"
@@ -69,6 +70,8 @@ brew_taps: | brew
 
 brew_packages: | brew
 	@echo "\nbrew: Install basic packages\n"
+	$(call PACKAGE,bat)
+	$(call PACKAGE,cmake)
 	$(call PACKAGE,exa)
 	$(call PACKAGE,fd)
 	$(call PACKAGE,fzf)
@@ -76,8 +79,9 @@ brew_packages: | brew
 	$(call PACKAGE,git)
 	$(call PACKAGE,git-delta)
 	$(call PACKAGE,grex)
+	$(call PACKAGE,less)
+	$(call PACKAGE,mas)
 	$(call PACKAGE,neovim)
-	$(call PACKAGE,nushell)
 	$(call PACKAGE,ripgrep)
 	$(call PACKAGE,sd)
 	$(call PACKAGE,stow)
@@ -90,15 +94,16 @@ brew_packages: | brew
 	$(call PACKAGE,yapf)
 	@echo "\nbrew: Install javascript development packages\n"
 	$(call PACKAGE,jq)
-	$(call PACKAGE,deno)
 	$(call PACKAGE,node)
 	@echo "\nbrew: Install lua development packages\n"
 	$(call PACKAGE,ninja)
+	$(call PACKAGE,lua-language-server)
 
 brew_casks: | brew
 	@echo "\nbrew: Install basic casks\n"
 	$(call CASK,alacritty)
 	$(call CASK,hammerspoon)
+	$(call CASK,librewolf)
 	@echo "\nbrew: Install fonts\n"
 	$(call CASK,font-fira-code-nerd-font)
 	$(call CASK,font-victor-mono)
@@ -136,8 +141,6 @@ zsh:
 	@sudo chown -R $$(whoami) /usr/local/share/zsh/site-functions
 	@sudo chmod g-w /usr/local/share/zsh
 	@sudo chmod g-w /usr/local/share/zsh/site-functions
-	@echo "\nzsh: Compile terminfo\n"
-	@for file in $(XDG_DATA_HOME)/terminfo/capabilities/*; do tic -xe $$file; done
 
 # Uninstalling
 

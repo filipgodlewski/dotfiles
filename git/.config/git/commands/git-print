@@ -1,4 +1,0 @@
-#!/bin/zsh
-
-preview="git diff $@ --color=always -- {-1}"
-git status --short | fzf -m --ansi --preview $preview

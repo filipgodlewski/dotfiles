@@ -11,3 +11,5 @@ export TASKRC="$XDG_CONFIG_HOME/taskwarrior/.taskrc"
 function chpwd() {
   venv auto
 }
+
+alias luamake=/Users/filipgodlewski/.local/share/other/lua-language-server/3rd/luamake/luamake

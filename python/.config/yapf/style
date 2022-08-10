@@ -1,5 +1,5 @@
 [style]
-column_limit = 96
+column_limit = 120
 split_before_named_assigns = false
 split_before_arithmetic_operator = true
 split_before_dot = true

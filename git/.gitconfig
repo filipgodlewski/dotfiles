@@ -1,16 +1,16 @@
 [core]
-  editor = "nvim"
+  editor = nvim
   pager = delta
-[diff]
-  tool = vimdiff
-  colorMoved = default
-[delta]
-  navigate = true
-  side-by-side = true
-[help]
-  autocorrect = 1
 [include]
   path = ~/.config/git/aliases
+  path = ~/.config/delta/themes.gitconfig
+
+[diff]
+  colorMoved = default
+[delta]
+  features = basic everforest decorations
+[help]
+  autocorrect = 1
 [init]
   templatedir = ~/.config/git/template
   defaultBranch = main

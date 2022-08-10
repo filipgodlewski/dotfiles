@@ -1,0 +1,7 @@
+{
+  "submodules": {
+    "tmux": "tmux",
+    "nvim": "nvim/site/pack/plugins/start",
+    "zsh": "zsh/plugins"
+  }
+}

@@ -77,14 +77,3 @@ function UnitTests(ft, args)
    end
 end
 
-function Format_and_test(ft)
-   vim.lsp.buf.formatting_sync()
-   UnitTests(ft)
-end
-
-vim.cmd([[
-augroup FormatAndTest
-  autocmd!
-  autocmd BufWrite * lua Format_and_test()
-augroup END
-]])

@@ -1,145 +1,101 @@
 local lspconfig = require("lspconfig")
-local protocol = require("vim.lsp.protocol")
-local capabilities = protocol.make_client_capabilities()
-local cmp_capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()) --nvim-cmp
 
 local function on_attach()
-   protocol.CompletionItemKind = {
-     '', -- Text
-     '', -- Method
-     '', -- Function
-     '', -- Constructor
-     '', -- Field
-     '', -- Variable
-     '', -- Class
-     'ﰮ', -- Interface
-     '', -- Module
-     '', -- Property
-     '', -- Unit
-     '', -- Value
-     '', -- Enum
-     '', -- Keyword
-     '﬌', -- Snippet
-     '', -- Color
-     '', -- File
-     '', -- Reference
-     '', -- Folder
-     '', -- EnumMember
-     '', -- Constant
-     '', -- Struct
-     '', -- Event
-     'ﬦ', -- Operator
-     '', -- TypeParameter
+   vim.lsp.protocol.CompletionItemKind = {
+      "", -- Text
+      "", -- Method
+      "", -- Function
+      "", -- Constructor
+      "", -- Field
+      "", -- Variable
+      "", -- Class
+      "ﰮ", -- Interface
+      "", -- Module
+      "", -- Property
+      "", -- Unit
+      "", -- Value
+      "", -- Enum
+      "", -- Keyword
+      "﬌", -- Snippet
+      "", -- Color
+      "", -- File
+      "", -- Reference
+      "", -- Folder
+      "", -- EnumMember
+      "", -- Constant
+      "", -- Struct
+      "", -- Event
+      "ﬦ", -- Operator
+      "", -- TypeParameter
    }
-end
 
-local servers = {"ccls", "jedi_language_server", "jsonls", "denols", "pyright", "sqlls"}
-
-for _, lsp in ipairs(servers) do
-   lspconfig[lsp].setup {
-      on_attach = on_attach(),
-      capabilities = cmp_capabilities,
-}
+   vim.api.nvim_create_augroup("lsp_code_action", {})
+   vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+      group = "lsp_code_action",
+      callback = function()
+         require("nvim-lightbulb").update_lightbulb()
+      end,
+      desc = "LSP code action lightbulb",
+   })
 end
 
 lspconfig.pyright.setup({
-   on_attach = function(client) client.server_capabilities.completionProvider = false end
+   on_attach = on_attach(),
+   capabilities = capabilities,
+   settings = { python = { telemetry = { telemetryLevel = "off" } } },
 })
 
-lspconfig.sqlls.setup({
-   cmd = {"/usr/local/bin/sql-language-server", "up", "--method", "stdio"}
+lspconfig.jsonls.setup({
+   on_attach = on_attach(),
+   capabilities = capabilities,
+   init_options = { provideFormatter = false },
+})
+
+lspconfig.dockerls.setup({
+   on_attach = on_attach,
+   capabilities = capabilities,
 })
 
 local function isort_cfg()
    local result = vim.fn.system("isort --show-config | jq '.sources | length'")
-   local result = tonumber(result)
-   if result == 1 then
-      return "--settings=$XDG_CONFIG_HOME/isort/isort.cfg" 
-   else 
-      return "" 
-   end
+   if tonumber(result) == 1 then return "--settings=$XDG_CONFIG_HOME/isort/isort.cfg" end
+   return ""
 end
 
 lspconfig.diagnosticls.setup({
-   on_attach = on_attach,
-   capabilities = capabilities,
-   filetypes = {"json", "python"},
-
+   filetypes = { "json", "python" },
    init_options = {
-
       formatters = {
-
-         hjson = {
-            command = "hjson",
-            args = {"-j"},
-         },
-
-         isort = {
-            command = "isort",
-            args = {isort_cfg(), "--quiet", "-"},
-         },
-
-         yapf = {
-            command = "yapf",
-            args = {"-q"},
-         }
-
+         hjson = { command = "hjson", args = { "-j" } },
+         isort = { command = "isort", args = { isort_cfg(), "--quiet", "-" } },
+         black = { command = "black", args = { "-" } },
       },
-
       formatFiletypes = {
          json = "hjson",
-         python = {"yapf", "isort"},
+         python = { "black", "isort" }
       },
-
       filetypes = {
-         json = {"json"},
-         python = {"pyright", "flake8"},
+         json = "json",
+         python = "flake8",
       },
-
       linters = {
-
-         json = {
-            sourceName = "json",
-            command = "json",
-            args = {"--validate"},
-         },
-
-         -- pyre = {
-         --    sourceName = "pyre",
-         --    command = "pyre",
-         --    args = {"--strict"},
-         --    requiredFiles = {".pyre_configuration"},
-         --    rootPatterns = {".pyre_configuration"},
-         --    debounce = 100,
-         --    formatLines = 1,
-         --    formatPattern = {
-         --       [[^(.*\.py):(\d+):(\d+)\s(.*)\.$]],
-         --       {
-         --          sourceName = 1,
-         --          sourceNameFilter = true,
-         --          line = 2,
-         --          column = 3,
-         --          message = 4,
-         --       },
-         --    },
-         -- },
-
+         json = { sourceName = "json", command = "json", args = { "--validate" }, },
          flake8 = {
-            sourceName = 'flake8',
-            command = 'flake8',
-            -- requiredFiles = {'.flake8', 'setup.cfg', 'tox.ini'},
-            -- rootPatterns = {'.flake8', 'setup.cfg', 'tox.ini'},
+            sourceName = "flake8",
+            command = "flake8",
+            -- args = { "lint", "--format", "default" },
             debounce = 100,
             formatLines = 1,
             formatPattern = {
-               [[^(.*\.py):(\d+):(\d+):\s([a-zA-Z]+)\d+:?\s(.*)$]],
+               [[^(.*\.py):(\d+):(\d+):\s([A-Z]+)\d+:?\s(.*)$]],
                {
                   sourceName = 1,
                   sourceNameFilter = true,
                   line = 2,
                   column = 3,
                   security = 4,
-                  message = 5,
+                  message = { "[flake8] ", 5 },
                },
             },
             securities = {
@@ -152,63 +108,14 @@ lspconfig.diagnosticls.setup({
                Y = 'error',
             },
          },
-
-         pyright = {
-            command = "pyright",
-            sourceName = "pyright",
-            args = {"%file"},
-            debounce = 1000,
-            offsetLine = 0,
-            offsetColumn = 2,
-            formatLines = 1,
-            formatPattern = {
-               [[(\/.*\.py):(\d+):(\d+) - (\w+): (.*) \((\w+)\)$]],
-               {
-                  sourceName = 1,
-                  sourceNameFilter = true,
-                  line = 2,
-                  column = 3,
-                  security = 4,
-                  message = 5,
-               },
-            },
-            securities = {
-               error = "error",
-               warning = "warning",
-               information = "info",
-            },
-         },
       },
    },
 })
 
-lspconfig.jsonls.setup({
-   init_options = {
-      provideFormatter = false,
-   }
-})
-
-lspconfig.ccls.setup{
-   init_options = {
-      compilationDatabaseDirectory = "build",
-      index = {
-         threads = 0,
-      },
-      clang = {
-         extraArgs = {
-            "-isystem/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include",
-            "-isysroot/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include",
-         },
-         excludeArgs = {"-frounding-math"},
-      },
-   }
-}
-
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
- vim.diagnostic.on_publish_diagnostics, {
-   virtual_text = {
-      spacing = 4,
-   },
+vim.diagnostic.config({
+   virtual_text = true,
+   signs = true,
+   underline = true,
    update_in_insert = true,
- }
-)
+   severity_sort = false,
+})

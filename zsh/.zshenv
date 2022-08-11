@@ -2,9 +2,6 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 
-export DOTFILES="$HOME/dotfiles"
-export DOTFILES_CONFIG="$HOME/dotfiles/config.json"
-
 export DOOMDIR="$XDG_CONFIG_HOME/doom"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export ZPLUGINSDIR="$XDG_DATA_HOME/zsh/plugins"

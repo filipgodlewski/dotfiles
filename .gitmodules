@@ -106,9 +106,6 @@
 [submodule "nvim/.local/share/nvim/site/pack/add/start/nvim-telescope.telescope-ui-select.nvim"]
 	path = nvim/.local/share/nvim/site/pack/add/start/nvim-telescope.telescope-ui-select.nvim
 	url = https://github.com/nvim-telescope/telescope-ui-select.nvim.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/nvim-telescope.telescope."]
-	path = nvim/.local/share/nvim/site/pack/add/start/nvim-telescope.telescope.
-	url = https://github.com/nvim-telescope/telescope.nvim
 [submodule "nvim/.local/share/nvim/site/pack/add/start/nvim-treesitter.nvim-treesitter"]
 	path = nvim/.local/share/nvim/site/pack/add/start/nvim-treesitter.nvim-treesitter
 	url = https://github.com/nvim-treesitter/nvim-treesitter.git
@@ -139,3 +136,6 @@
 [submodule "zsh/.local/share/zsh/plugins/zsh-users.zsh-history-substring-search"]
 	path = zsh/.local/share/zsh/plugins/zsh-users.zsh-history-substring-search
 	url = https://github.com/zsh-users/zsh-history-substring-search.git
+[submodule "nvim/.local/share/nvim/site/pack/add/start/nvim-telescope.telescope.nvim"]
+	path = nvim/.local/share/nvim/site/pack/add/start/nvim-telescope.telescope.nvim
+	url = https://github.com/nvim-telescope/telescope.nvim.git

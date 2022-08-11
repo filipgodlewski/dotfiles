@@ -104,6 +104,7 @@ brew_casks: | brew
 	$(call CASK,alacritty)
 	$(call CASK,hammerspoon)
 	$(call CASK,librewolf)
+	$(call CASK,rocket)
 	@echo "\nbrew: Install fonts\n"
 	$(call CASK,font-fira-code-nerd-font)
 	$(call CASK,font-victor-mono)

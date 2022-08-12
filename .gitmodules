@@ -139,3 +139,6 @@
 [submodule "nvim/.local/share/nvim/site/pack/add/start/nvim-telescope.telescope.nvim"]
 	path = nvim/.local/share/nvim/site/pack/add/start/nvim-telescope.telescope.nvim
 	url = https://github.com/nvim-telescope/telescope.nvim.git
+[submodule "zsh/.local/share/zsh/plugins/filipgodlewski.dot"]
+	path = zsh/.local/share/zsh/plugins/filipgodlewski.dot
+	url = https://github.com/filipgodlewski/dot.git

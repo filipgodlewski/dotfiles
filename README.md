@@ -21,7 +21,10 @@ cd ~/dotfiles
 make install
 ```
 
-Finally, restart terminal. You should also gain access to `dotfiles` command. Type `dotfiles -h` to get more information.
+Finally, **restart terminal**. You should also gain access to `dot` command. 
+
+`dot` is my personal dotfiles manager.
+Type `dot` to get more help on how to use it. Visit [dot's repository](https://github.com/filipgodlewski/dot) to find out more about it.
 
 ### Uninstall
 

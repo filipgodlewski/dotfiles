@@ -18,7 +18,7 @@ First of all, instructions below are prepared for MacOS, as this is my daily wor
 xcode-select --install
 git clone https://github.com/filipgodlewski/dotfiles.git
 cd ~/dotfiles
-make -s install
+make -s install  # `-s` will suppress all commands from being echoed
 ```
 
 Finally, **restart terminal**. You should also gain access to `dot` command. 
@@ -33,13 +33,6 @@ Type `dot` to get more help on how to use it. Visit [dot's repository](https://g
 cd ~/dotfiles
 make -s uninstall
 ```
-
-### Explanation
-
-#### Sub-directory naming convention
-
-- `*lowercase*` - for packages that have to be installed with `stow`
-- leading `_` - for non-stow installation, to be installed with respective programs, e.g. `_pip` for python3 pip
 
 ## License
 

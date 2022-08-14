@@ -2,7 +2,10 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 
-export DOOMDIR="$XDG_CONFIG_HOME/doom"
+export HOMEBREW_NO_ANALYTICS=1
+export HOMEBREW_BAT=1
+export HOMEBREW_AUTOREMOVE=1
+
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export ZPLUGINSDIR="$XDG_DATA_HOME/zsh/plugins"
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/.ripgreprc"

@@ -18,7 +18,7 @@ First of all, instructions below are prepared for MacOS, as this is my daily wor
 xcode-select --install
 git clone https://github.com/filipgodlewski/dotfiles.git
 cd ~/dotfiles
-make install
+make -s install
 ```
 
 Finally, **restart terminal**. You should also gain access to `dot` command. 
@@ -31,7 +31,7 @@ Type `dot` to get more help on how to use it. Visit [dot's repository](https://g
 ```sh
 # Make sure you killed your tmux session first, otherwise it will fail
 cd ~/dotfiles
-make uninstall
+make -s uninstall
 ```
 
 ### Explanation

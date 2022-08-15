@@ -64,6 +64,14 @@ font:
     x: 0
     y: 2
 
+hints:
+  enabled:
+    - regex: ((~?[/.\-\w]+)(:[\d]+){0,2})
+      action: Copy
+      mouse:
+        enabled: true
+        mods: Command|Shift
+
 bell:
   duration: 0
 

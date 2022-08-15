@@ -23,7 +23,7 @@ tmux:
 
 nvim:
 	cd $(XDG_DATA_HOME)/nvim/site/pack/add/start/nvim-telescope.telescope-fzf-native.nvim; make
-	nvim -c "UpdateRemotePlugins | q"
+	nvim --headless +"UpdateRemotePlugins | q" &> /dev/null
 
 ## MacOS specific
 macos: brew npm stow pip zsh

@@ -5,7 +5,7 @@ LOCAL_ZSH = /usr/local/bin/zsh
 
 OS := $(shell [[ "$$OSTYPE" =~ ^darwin ]] && echo macos)
 STOW_DIRS := $(shell echo */ | sd '/' '')
-IN_TMUX := $(shell [[ -n $TMUX ]] && echo _end)
+IN_TMUX := $(shell [[ -z "$TMUX" ]] || echo _end)
 
 .PHONY: git nvim stow tmux zsh brew
 

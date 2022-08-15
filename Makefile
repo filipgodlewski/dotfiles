@@ -3,15 +3,14 @@ export XDG_DATA_HOME = $(HOME)/.local/share
 NVIM_VENV = $(XDG_DATA_HOME)/venvs/nvim
 LOCAL_ZSH = /usr/local/bin/zsh
 
-OS := $(shell [[ "$$OSTYPE" =~ ^darwin ]] && echo macos)
+OS := $(shell if [[ "$$OSTYPE" =~ ^darwin ]]; then echo macos; fi)
 STOW_DIRS := $(shell echo */ | sd '/' '')
-IN_TMUX := $(shell [[ -z "$TMUX" ]] || echo _end)
 
 .PHONY: git nvim stow tmux zsh brew
 
 # Installing
 install: git $(OS) tmux nvim
-uninstall: $(IN_TMUX) un$(OS)
+uninstall: check_is_in_tmux un$(OS)
 
 git:
 	echo -n "Enter git user name: "; read name; git config --local user.name $$name
@@ -64,7 +63,10 @@ unpip:
 	-rm -rf $(XDG_DATA_HOME)/venvs/nvim
 
 zsh:
-	[[ ! grep -q $(LOCAL_ZSH) /etc/shells ]] && {sudo $(LOCAL_ZSH) >> /etc/shells; chsh -s $(LOCAL_ZSH);}
+	if [[ ! grep -q $(LOCAL_ZSH) /etc/shells ]]; then \
+		sudo $(LOCAL_ZSH) >> /etc/shells; \
+		chsh -s $(LOCAL_ZSH); \
+	fi
 	sudo chown -R $$(whoami) /usr/local/share/zsh
 	sudo chown -R $$(whoami) /usr/local/share/zsh/site-functions
 	sudo chmod g-w /usr/local/share/zsh
@@ -74,7 +76,8 @@ unzsh:
 	chsh -s /bin/zsh
 
 # Other commands
-_end:
-	echo "\nKill tmux and try again!\n"
-	exit 1
-
+check_is_in_tmux:
+	if [[ "$$TMUX" ]]; then \
+		echo "\nKill tmux and try again!\n"; \
+		exit 1; \
+	fi

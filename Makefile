@@ -1,57 +1,56 @@
 export XDG_DATA_HOME = $(HOME)/.local/share
 
-NVIM_VENV = $(XDG_DATA_HOME)/venvs/nvim
-LOCAL_ZSH = /usr/local/bin/zsh
+OS := $(shell if [[ "$$(uname -s)" == "Darwin" ]]; then echo macos; fi)
+export HOMEBREW_PREFIX := $(shell if [[ "$$(uname -m)" == "arm64" ]]; then echo /opt/homebrew; else echo /usr/local; fi)/bin
+export PATH := $(HOMEBREW_PREFIX):$(PATH)
 
-OS := $(shell if [[ "$$OSTYPE" =~ ^darwin ]]; then echo macos; fi)
-STOW_DIRS := $(shell echo */ | sd '/' '')
+ZSH = $(HOMEBREW_PREFIX)/zsh
+BREWFILE = $(HOME)/dotfiles/brew/.Brewfile
+NVIM_VENV = $(XDG_DATA_HOME)/venvs/nvim
 
 .PHONY: git nvim stow tmux zsh brew
 
 # Installing
-install: git $(OS) tmux nvim
+install: git $(OS) nvim
 uninstall: check_is_in_tmux un$(OS)
 
 git:
-	echo -n "Enter git user name: "; read name; git config --local user.name $$name
-	echo -n "Enter git email: "; read mail; git config --local user.email $$mail
+	echo "Enter git user name:"; read name; git config --local user.name $$name
+	echo "Enter git email:"; read mail; git config --local user.email $$mail
 	git submodule update --init --recursive
-
-tmux:
-	-tmux new-session -d -s base
 
 nvim:
 	cd $(XDG_DATA_HOME)/nvim/site/pack/add/start/nvim-telescope.telescope-fzf-native.nvim; make
-	nvim --headless +"UpdateRemotePlugins | q" &> /dev/null
+	$(HOMEBREW_PREFIX)/nvim --headless +"UpdateRemotePlugins | q" &> /dev/null
 
 ## MacOS specific
 macos: brew npm stow pip zsh
-unmacos: unnpm unpip unzsh unstow unbrew
+unmacos: unnpm unpip unstow unbrew
 
 brew:
-	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	brew bundle --file=~/dotfiles/brew/.Brewfile
+	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	-brew bundle --file=$(BREWFILE)  # will fail on mas, mas does not sign in by itself
+	cat $(BREWFILE) | grep -E '^mas' | grep -o -E '\d+$' | xargs mas install
 
 unbrew:
+	# mas does not uninstall, so this step has to be done manually.
 	brew remove --force --ignore-dependencies $(shell brew list)
 	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
+	sudo rm -rf $(HOMEBREW_PREFIX)
+	chsh -s /bin/zsh
+	cat /etc/shells | grep -v $(HOMEBREW_PREFIX) | sudo tee /etc/shells
 
 npm:
-	npm install -g $$(<$(HOME)/dotfiles/_npm/global_packages.list)
 	npm install -g diagnostic-languageserver dockerfile-language-server-nodejs git-cz hjson neovim vim-language-server
-	# echo "{}" > package.json
-	# npm install --package-lock-only
-	# npm audit fix
-	# rm package-lock.json package.json
 
 unnpm:
 	npm ls -gp --depth=0 | awk -F/ '/node_modules/ && !/\/npm$$/ {print $$NF}' | xargs npm -g rm
 
 stow:
-	stow -R $(STOW_DIRS)
+	stow -R $$(echo */ | sd '/' '')
 
 unstow:
-	stow -D $(STOW_DIRS)
+	stow -D $$(echo */ | sd '/' '')
 
 pip:
 	python3 -m venv $(NVIM_VENV)
@@ -63,17 +62,12 @@ unpip:
 	-rm -rf $(XDG_DATA_HOME)/venvs/nvim
 
 zsh:
-	if [[ ! grep -q $(LOCAL_ZSH) /etc/shells ]]; then \
-		sudo $(LOCAL_ZSH) >> /etc/shells; \
-		chsh -s $(LOCAL_ZSH); \
+	if [[ ! grep -q $(ZSH) /etc/shells ]]; then \
+		sudo $(ZSH) >> /etc/shells; \
+		chsh -s $(ZSH); \
 	fi
-	sudo chown -R $$(whoami) /usr/local/share/zsh
-	sudo chown -R $$(whoami) /usr/local/share/zsh/site-functions
-	sudo chmod g-w /usr/local/share/zsh
-	sudo chmod g-w /usr/local/share/zsh/site-functions
-
-unzsh:
-	chsh -s /bin/zsh
+	# sudo chown -R $$(whoami) $(ZSH) $(ZSH)/site-functions
+	# sudo chmod g-w $(ZSH) $(ZSH)/site-functions
 
 # Other commands
 check_is_in_tmux:

@@ -1,21 +1,14 @@
 [core]
   editor = nvim
-  pager = delta
 [include]
   path = ~/.config/git/aliases
-  path = ~/.config/delta/themes.gitconfig
-
 [diff]
   colorMoved = default
-[delta]
-  features = basic everforest decorations
 [help]
   autocorrect = 1
 [init]
   templatedir = ~/.config/git/template
   defaultBranch = main
-[interactive]
-  diffFilter = delta --color-only
 [merge]
   tool = vim_mergetool
   conflictStyle = diff3

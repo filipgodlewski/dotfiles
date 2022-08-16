@@ -11,7 +11,7 @@ NVIM_VENV = $(XDG_DATA_HOME)/venvs/nvim
 .PHONY: git nvim stow tmux zsh brew
 
 # Installing
-install: git $(OS) nvim
+install: git $(OS)
 uninstall: check_is_in_tmux un$(OS)
 
 git:
@@ -24,17 +24,24 @@ nvim:
 	$(HOMEBREW_PREFIX)/nvim --headless +"UpdateRemotePlugins | q" &> /dev/null
 
 ## MacOS specific
-macos: brew npm stow pip zsh
-unmacos: unnpm unpip unstow unbrew
+macos: sudo brew npm stow pip zsh nvim
+unmacos: sudo unnpm unpip unstow unbrew
+
+sudo:
+ifndef GITHUB_ACTION
+	sudo -v
+	while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+endif
 
 brew:
 	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	-brew bundle --file=$(BREWFILE) --no-quarantine  # will fail on mas, mas does not sign in by itself
-	cat $(BREWFILE) | grep -E '^mas' | grep -o -E '\d+$' | xargs mas install
+	# The following will fail on mas, mas does not sign in by itself
+	-export HOMEBREW_CASK_OPTS="--no-quarantine"; brew bundle --file=$(BREWFILE)
+	cat $(BREWFILE) | grep -E '^mas' | grep -o -E '\d+$$' | xargs mas install
 
 unbrew:
 	# mas does not uninstall, so this step has to be done manually.
-	brew remove --force --ignore-dependencies $(shell brew list)
+	-brew remove --force --ignore-dependencies $(shell brew list)
 	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
 	sudo rm -rf $(HOMEBREW_PREFIX)
 	chsh -s /bin/zsh
@@ -62,8 +69,8 @@ unpip:
 	-rm -rf $(XDG_DATA_HOME)/venvs/nvim
 
 zsh:
-	if [[ ! grep -q $(ZSH) /etc/shells ]]; then \
-		sudo $(ZSH) >> /etc/shells; \
+	if [[ ! $$(grep -q $(ZSH) /etc/shells) ]]; then \
+		echo $(ZSH) | sudo tee -a /etc/shells \
 		chsh -s $(ZSH); \
 	fi
 	# sudo chown -R $$(whoami) $(ZSH) $(ZSH)/site-functions

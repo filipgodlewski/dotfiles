@@ -29,7 +29,7 @@ unmacos: unnpm unpip unstow unbrew
 
 brew:
 	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	-brew bundle --file=$(BREWFILE)  # will fail on mas, mas does not sign in by itself
+	-brew bundle --file=$(BREWFILE) --no-quarantine  # will fail on mas, mas does not sign in by itself
 	cat $(BREWFILE) | grep -E '^mas' | grep -o -E '\d+$' | xargs mas install
 
 unbrew:

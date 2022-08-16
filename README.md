@@ -14,6 +14,10 @@ First of all, instructions below are prepared for MacOS, as this is my daily wor
 
 ### Install
 
+**!!IMPORTANT!!**
+
+Before the script, sign in to *Mac App Store*!
+
 ```sh
 xcode-select --install
 git clone https://github.com/filipgodlewski/dotfiles.git

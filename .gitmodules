@@ -142,3 +142,6 @@
 [submodule "zsh/.local/share/zsh/plugins/filipgodlewski.dot"]
 	path = zsh/.local/share/zsh/plugins/filipgodlewski.dot
 	url = https://github.com/filipgodlewski/dot.git
+[submodule "nvim/.local/share/nvim/site/pack/add/start/rmagatti.auto-session"]
+	path = nvim/.local/share/nvim/site/pack/add/start/rmagatti.auto-session
+	url = https://github.com/rmagatti/auto-session.git

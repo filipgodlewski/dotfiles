@@ -1,5 +1,4 @@
 export PATH="${PATH}:${HOME}/Documents/personal_projects/venv/src"  # TODO: just add as plugin
-export PATH="${PATH}:/usr/local/opt/fzf/bin"
 export PATH="${PATH}:${XDG_CONFIG_HOME}/git/commands"
 export PATH="${PATH}:${HOME}/.cargo/bin"
 

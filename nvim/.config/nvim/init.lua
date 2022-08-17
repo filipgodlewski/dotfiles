@@ -1,6 +1,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
-vim.g.python3_host_prog = vim.fn.expand("~/.local/share/venvs/nvim/bin/python3")
+vim.g.python3_host_prog = os.getenv("XDG_DATA_HOME") .. "/venvs/nvim/bin/python3"
 
 vim.opt.autowriteall = true
 vim.opt.complete = vim.opt.complete + "kspell"
@@ -27,6 +27,7 @@ vim.opt.nrformats = vim.opt.nrformats + "alpha"
 vim.opt.number = true
 vim.opt.path = vim.opt.path + "**"
 vim.opt.pumheight = 15
+vim.opt.shell = os.getenv("HOMEBREW_PREFIX") .. "/bin/zsh"
 vim.opt.shiftround = true
 vim.opt.shiftwidth = 2
 vim.opt.showmode = false
@@ -53,4 +54,12 @@ vim.opt.wildignore = vim.opt.wildignore + {
 vim.opt.wildignorecase = true
 vim.opt.wildmode = { "longest:full", "full" }
 vim.opt.wrap = false
-vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
+vim.opt.sessionoptions = { "blank", "buffers", "curdir", "folds", "help", "tabpages", "winsize", "winpos", "terminal" }
+
+-- terminal settings
+vim.api.nvim_create_augroup("OnTermOpen", { clear = true })
+vim.api.nvim_create_autocmd("TermOpen", {
+   group = "OnTermOpen",
+   pattern = "*",
+   command = "setlocal nonumber norelativenumber",
+})

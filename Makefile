@@ -73,8 +73,6 @@ zsh:
 		echo $(ZSH) | sudo tee -a /etc/shells \
 		chsh -s $(ZSH); \
 	fi
-	# sudo chown -R $$(whoami) $(ZSH) $(ZSH)/site-functions
-	# sudo chmod g-w $(ZSH) $(ZSH)/site-functions
 
 # Other commands
 check_is_in_tmux:

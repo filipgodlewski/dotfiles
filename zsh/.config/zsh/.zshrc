@@ -8,6 +8,3 @@ export LS_COLORS="$(vivid generate ${XDG_CONFIG_HOME}/vivid/everforest_dark_hard
 function chpwd() {
   venv auto
 }
-
-# TODO: Do I really need it?
-alias luamake=/Users/filipgodlewski/.local/share/other/lua-language-server/3rd/luamake/luamake

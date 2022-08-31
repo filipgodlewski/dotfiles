@@ -1,3 +1,0 @@
-tmux resize-pane -y ${1:-10}
-
-# vim:ft=zsh

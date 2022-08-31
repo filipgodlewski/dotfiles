@@ -1,9 +1,9 @@
-export PATH="${PATH}:${HOME}/Documents/personal_projects/venv/src"  # TODO: just add as plugin
-export PATH="${PATH}:${XDG_CONFIG_HOME}/git/commands"
-export PATH="${PATH}:${HOME}/.cargo/bin"
+export PATH=$HOME/Documents/personal_projects/venv/src:$PATH
+export PATH=$XDG_CONFIG_HOME/git/commands:$PATH
+export PATH=$HOME/.cargo/bin:$PATH
+export PATH=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH
 
-[[ "$(uname -m)" == "arm64" ]] && tmp_path=/opt/homebrew || tmp_path=/usr/local
-eval "$($tmp_path/bin/brew shellenv)"
-unset tmp_path
+export MANPATH=$HOMEBREW_PREFIX/share/man:$MANPATH
+export INFOPATH=$HOMEBREW_PREFIX/share/info:$INFOPATH
 
 export BAT_PAGER="less --mouse"

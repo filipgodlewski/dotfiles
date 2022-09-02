@@ -24,14 +24,8 @@ nvim:
 	$(HOMEBREW_PREFIX)/nvim --headless +"UpdateRemotePlugins | q" &> /dev/null
 
 ## MacOS specific
-macos: sudo brew npm stow pip zsh nvim
-unmacos: sudo unnpm unpip unstow unbrew
-
-sudo:
-ifndef GITHUB_ACTION
-	sudo -v
-	while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
-endif
+macos: brew npm stow pip zsh nvim tmux
+unmacos: unnpm unpip unstow unbrew
 
 brew:
 	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -73,6 +67,9 @@ zsh:
 		echo $(ZSH) | sudo tee -a /etc/shells \
 		chsh -s $(ZSH); \
 	fi
+
+tmux:
+	tic -x $(HOME)/dotfiles/tmux/.config/tmux-256color
 
 # Other commands
 check_is_in_tmux:

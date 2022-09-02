@@ -63,3 +63,4 @@ vim.api.nvim_create_autocmd("TermOpen", {
    pattern = "*",
    command = "setlocal nonumber norelativenumber",
 })
+vim.cmd[[colorscheme nightfox]]

@@ -151,3 +151,6 @@
 [submodule "nvim/.local/share/nvim/site/pack/add/start/nvim-treesitter.playground"]
 	path = nvim/.local/share/nvim/site/pack/add/start/nvim-treesitter.playground
 	url = https://github.com/nvim-treesitter/playground.git
+[submodule "nvim/.local/share/nvim/site/pack/add/start/EdenEast.nightfox.nvim"]
+	path = nvim/.local/share/nvim/site/pack/add/start/EdenEast.nightfox.nvim
+	url = https://github.com/EdenEast/nightfox.nvim.git

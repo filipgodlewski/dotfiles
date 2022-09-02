@@ -25,6 +25,7 @@ vim.opt.matchpairs = vim.opt.matchpairs + "<:>"
 vim.opt.mouse = "a"
 vim.opt.nrformats = vim.opt.nrformats + "alpha"
 vim.opt.number = true
+vim.opt.relativenumber = true
 vim.opt.path = vim.opt.path + "**"
 vim.opt.pumheight = 15
 vim.opt.shell = os.getenv("HOMEBREW_PREFIX") .. "/bin/zsh"

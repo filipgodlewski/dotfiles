@@ -1,3 +1,0 @@
-[[ $LBUFFER = *.. ]] && LBUFFER+=/.. || LBUFFER+=.
-
-# vim:ft=zsh

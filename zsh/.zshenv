@@ -22,3 +22,4 @@ export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
 export EDITOR="nvim"
 
 export LC_ALL=en_US.UTF-8
+. "$HOME/.cargo/env"

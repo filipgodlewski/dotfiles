@@ -69,7 +69,7 @@ zsh:
 	fi
 
 tmux:
-	tic -x $(HOME)/dotfiles/tmux/.config/tmux-256color
+	tic -x $(HOME)/dotfiles/tmux/.config/tmux/tmux-256color
 
 # Other commands
 check_is_in_tmux:

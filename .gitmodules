@@ -154,3 +154,9 @@
 [submodule "nvim/.local/share/nvim/site/pack/add/start/EdenEast.nightfox.nvim"]
 	path = nvim/.local/share/nvim/site/pack/add/start/EdenEast.nightfox.nvim
 	url = https://github.com/EdenEast/nightfox.nvim.git
+[submodule "zsh/.local/share/zsh/plugins/filipgodlewski.zsh-wrappers"]
+	path = zsh/.local/share/zsh/plugins/filipgodlewski.zsh-wrappers
+	url = https://github.com/filipgodlewski/zsh-wrappers.git
+[submodule "zsh/.local/share/zsh/plugins/filipgodlewski.venv"]
+	path = zsh/.local/share/zsh/plugins/filipgodlewski.venv
+	url = https://github.com/filipgodlewski/venv.git

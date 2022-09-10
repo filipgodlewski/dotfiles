@@ -25,7 +25,6 @@ brew "neovim"
 brew "ninja"
 brew "node"
 brew "openssh"
-brew "organize-tool"
 brew "pyright"
 brew "ripgrep"
 brew "rust-analyzer"
@@ -47,8 +46,10 @@ cask "google-chrome"
 cask "hammerspoon"
 cask "launchbar"
 cask "microsoft-teams"
-cask "monitorcontrol"
+cask "onyx"
+cask "orion"
 cask "pine"
+cask "shottr"
 cask "zoom"
 cask "zsa-wally"
 mas "1Password for Safari", id: 1569813296
@@ -64,6 +65,7 @@ mas "MacFamilyTree 10", id: 1567970985
 mas "Magnet", id: 441258766
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
+mas "QuickShade", id: 931571202
 mas "Surfshark", id: 1437809329
 mas "The Unarchiver", id: 425424353
 mas "Things", id: 904280696

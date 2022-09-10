@@ -1,4 +1,0 @@
-npm install --global npm
-npm update --global
-
-# vim:ft=zsh

@@ -2,7 +2,7 @@ set -e
 
 gh auth status
 gh repo create
-cd "$(exa --color=never -1rs new | head -n1)"
+cd "$(command ls -dt */ | head -n1)"
 git post-init
 
 # vim:ft=zsh

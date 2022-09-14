@@ -157,6 +157,8 @@ require("which-key").register({
       S = { "<CMD>ISwap<CR>", "Select elements and swap them" },
    },
 
+   p = { "\"_dP", "Safe paste last copy" },
+
    t = {
       name = "Terminal",
       c = { "<CMD>ToggleTermCloseAll<CR>", "Close all terminals at once" },
@@ -173,7 +175,6 @@ require("which-key").register({
 
    u = {
       name = "Unit Tests",
-
    },
 
    w = {

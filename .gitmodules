@@ -160,3 +160,6 @@
 [submodule "zsh/.local/share/zsh/plugins/filipgodlewski.venv"]
 	path = zsh/.local/share/zsh/plugins/filipgodlewski.venv
 	url = https://github.com/filipgodlewski/venv.git
+[submodule "sys/.local/share/sys/StevenBlack.hosts"]
+	path = sys/.local/share/sys/StevenBlack.hosts
+	url = https://github.com/StevenBlack/hosts.git

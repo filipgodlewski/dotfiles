@@ -76,11 +76,6 @@ function M.get_lsp_diagnostic(self)
    return result
 end
 
-function M.get_lightbulb()
-   local lightbulb = require('nvim-lightbulb').get_status_text()
-   return lightbulb ~= "" and lightbulb .. " Aha!" or ""
-end
-
 function M.get_directory(self)
    local gps = require("nvim-gps")
    local breadcrumbs = ""
@@ -107,7 +102,6 @@ function M.set_active_statusline(self)
       self:pad(self:get_git_status()),
       self:pad(self:get_directory(), self.colors.directory),
       self:pad(self:get_lsp_diagnostic()),
-      self:pad(self:get_lightbulb(), self.colors.diagnostic_hint),
    })
 end
 

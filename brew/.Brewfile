@@ -33,6 +33,7 @@ brew "stow"
 brew "tmux"
 brew "typescript"
 brew "vivid"
+brew "zoxide"
 brew "zsh"
 cask "1password"
 cask "airpass"
@@ -71,3 +72,4 @@ mas "QuickShade", id: 931571202
 mas "Surfshark", id: 1437809329
 mas "The Unarchiver", id: 425424353
 mas "Things", id: 904280696
+mas "Xcode", id: 497799835

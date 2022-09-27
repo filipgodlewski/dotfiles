@@ -18,6 +18,7 @@ export ZPLUGINSDIR="$XDG_DATA_HOME/zsh/plugins"
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/config"
 export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
+export GRAVEYARD="$HOME/.Trash"
 
 export EDITOR="nvim"
 

@@ -22,9 +22,6 @@
 [submodule "nvim/.local/share/nvim/site/pack/add/start/filipgodlewski.vim-bbrackets"]
 	path = nvim/.local/share/nvim/site/pack/add/start/filipgodlewski.vim-bbrackets
 	url = https://github.com/filipgodlewski/vim-bbrackets.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/folke.todo-comments.nvim"]
-	path = nvim/.local/share/nvim/site/pack/add/start/folke.todo-comments.nvim
-	url = https://github.com/folke/todo-comments.nvim.git
 [submodule "nvim/.local/share/nvim/site/pack/add/start/folke.trouble.nvim"]
 	path = nvim/.local/share/nvim/site/pack/add/start/folke.trouble.nvim
 	url = https://github.com/folke/trouble.nvim.git

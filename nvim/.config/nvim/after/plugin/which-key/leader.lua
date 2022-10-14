@@ -2,7 +2,7 @@ require("which-key").register({
    H = { "<CMD>lua require('telescope.builtin').help_tags()<CR>", "Find help tags" },
    R = { "<CMD>lua vim.lsp.buf.rename()<CR>", "Rename with LSP" },
 
-   b = { "<CMD>lua require('gitsigns').blame_line(full=true)<CR>", "Show blame for current line" },
+   b = { "<CMD>lua require('gitsigns').blame_line()<CR>", "Show blame for current line" },
 
    c = {
       name = "Compare",
@@ -15,7 +15,13 @@ require("which-key").register({
       f = { "<CMD>DiffviewFocusFiles<CR>", "Focus on Files pane" },
    },
 
-   d = { "<CMD>lua require('telescope.builtin').lsp_definitions({ jump_type='never' })<CR>", "Show definition" },
+   d = {
+      name = "Def",
+      d = { "<CMD>lua require('telescope.builtin').lsp_definitions()<CR>", "Go to definition" },
+      s = { "<CMD>lua vim.lsp.buf.hover()<CR>", "Show signature" },
+      t = { "<CMD>lua require('telescope.builtin').lsp_type_definitions()<CR>", "Go to type definition" },
+      u = { "<CMD>lua require('telescope.builtin').lsp_references()<CR>", "Find Usages" },
+   },
 
    e = {
       name = "Errors",
@@ -25,7 +31,7 @@ require("which-key").register({
       w = { "<CMD>TroubleToggle workspace_diagnostics<CR>", "Workspace diagnostics" },
    },
 
-   f = { "<CMD>lua vim.lsp.buf.formatting_sync()<CR><CMD>w<CR>", "Format code" },
+   f = { "<CMD>lua vim.lsp.buf.format()<CR>", "Format code" },
 
    g = {
       name = "Git",
@@ -38,25 +44,30 @@ require("which-key").register({
 
    h = {
       name = "Hunks",
+      D = { "<CMD>lua require('gitsigns').diffthis()<CR>", "Diff this buffer" },
       R = { "<CMD>lua require('gitsigns').reset_buffer()<CR>", "Reset buffer" },
+      S = { "<CMD>lua require('gitsigns').stage_buffer()<CR>", "Stage buffer" },
       d = { "<CMD>lua require('gitsigns').toggle_deleted()<CR>", "Show deleted lines" },
-      p = { "<CMD>lua require('gitsigns').preview_hunk()<CR>", "Preview hunk" },
+      h = { "<CMD>lua require('gitsigns').preview_hunk()<CR>", "Preview hunk" },
+      l = { "<CMD>lua require('gitsigns').toggle_linehl()<CR>", "Show hunks as line highlights" },
+      n = { "<CMD>lua require('gitsigns').next_hunk()<CR>", "Next hunk" },
+      p = { "<CMD>lua require('gitsigns').prev_hunk()<CR>", "Previous hunk" },
       r = { "<CMD>lua require('gitsigns').reset_hunk()<CR>", "Reset hunk" },
       s = { "<CMD>lua require('gitsigns').stage_hunk()<CR>", "Stage hunk" },
       u = { "<CMD>lua require('gitsigns').undo_stage_hunk()<CR>", "Undo staging hunk" },
    },
 
-   k = { "<CMD>lua vim.lsp.buf.hover()<CR>", "Show documentation" },
    n = { "<CMD>bn<CR>", "Go to next buffer" },
    p = { "<CMD>bp<CR>", "Go to previous buffer" },
    q = { "<CMD>lua require('close_buffers').delete({ type='this' })<CR>", "Delete this buffer" },
-   r = { "<CMD>lua require('telescope.builtin').oldfiles()<CR>", "Find recent file" },
-   s = { "<CMD>lua vim.lsp.buf.signature_help()<CR>", "Open signature help" },
+   r = { "<CMD>lua require('telescope.builtin').oldfiles()<CR>", "Open recent file" },
    t = { "<CMD>lua require('telescope.builtin').live_grep({ hidden=true })<CR>", "Find text occurrence" },
-   u = { "<CMD>lua require('telescope.builtin').lsp_references()<CR>", "Find Usages" },
-   w = { "<CMD>wa<CR>", "Save all" },
+   u = { "<CMD>silent LuaSnipUnlinkCurrent<CR>", "Unlink current snippet"},
+   w = { "<CMD>w<CR>", "Save current buffer" },
    x = { "<CMD>xa<CR>", "Save and close all" },
+   z = { "<CMD>Telescope file_browser<CR>", "Browse files" },
    [","] = { "<CMD>lua require('telescope.builtin').buffers()<CR>", "Find buffers" },
+   ["."] = { "<CMD>lua require('telescope.builtin').resume()<CR>", "Resume last search" },
    ["/"] = { "<CMD>ToggleTerm<CR>", "Toggle last terminal" },
    ["<space>"] = { "<CMD>lua require('telescope.builtin').find_files({ hidden=true })<CR>", "Find file" },
 },

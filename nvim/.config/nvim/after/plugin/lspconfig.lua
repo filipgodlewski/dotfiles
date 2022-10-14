@@ -2,45 +2,30 @@ local lspconfig = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()) --nvim-cmp
 
 local function on_attach()
-   vim.lsp.protocol.CompletionItemKind = {
-      "", -- Text
-      "", -- Method
-      "", -- Function
-      "", -- Constructor
-      "", -- Field
-      "", -- Variable
-      "", -- Class
-      "ﰮ", -- Interface
-      "", -- Module
-      "", -- Property
-      "", -- Unit
-      "", -- Value
-      "", -- Enum
-      "", -- Keyword
-      "﬌", -- Snippet
-      "", -- Color
-      "", -- File
-      "", -- Reference
-      "", -- Folder
-      "", -- EnumMember
-      "", -- Constant
-      "", -- Struct
-      "", -- Event
-      "ﬦ", -- Operator
-      "", -- TypeParameter
-   }
-
    vim.api.nvim_create_augroup("lsp_code_action", {})
 end
 
 lspconfig.pyright.setup({
-   on_attach = on_attach(),
+   on_attach = on_attach,
    capabilities = capabilities,
-   settings = { python = { telemetry = { telemetryLevel = "off" } } },
+   settings = {
+      python = {
+         telemetry = {
+            telemetryLevel = "off"
+         },
+         analysis = {
+            autoSearchPaths = true,
+            diagnosticMode = "workspace",
+            useLibraryCodeForTypes = true,
+            typeCheckingMode = "strict",
+            disableOrganizeImports = true,
+         }
+      }
+   },
 })
 
 lspconfig.jsonls.setup({
-   on_attach = on_attach(),
+   on_attach = on_attach,
    capabilities = capabilities,
    init_options = { provideFormatter = false },
 })
@@ -50,34 +35,15 @@ lspconfig.dockerls.setup({
    capabilities = capabilities,
 })
 
-local function isort_cfg()
-   local result = vim.fn.system("isort --show-config | jq '.sources | length'")
-   if tonumber(result) == 1 then return "--settings=$XDG_CONFIG_HOME/isort/isort.cfg" end
-   return ""
-end
-
 lspconfig.diagnosticls.setup({
    filetypes = { "json", "python" },
    init_options = {
-      formatters = {
-         hjson = { command = "hjson", args = { "-j" } },
-         isort = { command = "isort", args = { isort_cfg(), "--quiet", "-" } },
-         black = { command = "black", args = { "-" } },
-      },
-      formatFiletypes = {
-         json = "hjson",
-         python = { "black", "isort" }
-      },
-      filetypes = {
-         json = "json",
-         python = "flake8",
-      },
+      formatters = { hjson = { command = "hjson", args = { "-j" } } },
       linters = {
          json = { sourceName = "json", command = "json", args = { "--validate" }, },
          flake8 = {
             sourceName = "flake8",
             command = "flake8",
-            -- args = { "lint", "--format", "default" },
             debounce = 100,
             formatLines = 1,
             formatPattern = {
@@ -101,6 +67,13 @@ lspconfig.diagnosticls.setup({
                Y = 'error',
             },
          },
+      },
+      formatFiletypes = {
+         json = "hjson",
+      },
+      filetypes = {
+         json = "json",
+         python = "flake8",
       },
    },
 })

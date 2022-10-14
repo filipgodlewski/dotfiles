@@ -4,6 +4,9 @@ require("which-key").register({
          y = {"\"*y", "Yank motion to system-wide register"},
          Y = {"\"*Y", "Yank to EOL to system-wide register"},
       },
+      z = {
+         ["="] = {"<CMD>lua require('telescope.builtin').spell_suggest()<CR>", "Spelling suggestions "}
+      },
       ["<C-]>"] = {":lua vim.lsp.buf.definition()<CR>zz", "Go to tag"},
       ["<ESC>"] = {":noh<CR>", "Escape"},
       ["J"] = {"mzJ`z", "Join lines, cursor stays where it was"},

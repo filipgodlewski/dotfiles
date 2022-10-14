@@ -24,3 +24,5 @@ export EDITOR="nvim"
 
 export LC_ALL=en_US.UTF-8
 . "$HOME/.cargo/env"
+
+export PYFLYBY_PATH="$XDG_CONFIG_HOME/pyflyby:/etc/pyflyby:$HOME/.pyflyby:.../.pyflyby"

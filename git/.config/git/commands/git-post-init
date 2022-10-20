@@ -3,7 +3,7 @@ from subprocess import run
 
 
 DEF_NAME = "Filip Godlewski"
-DEF_MAIL = "filip.godlewski@outlook.com"
+DEF_MAIL = "54432731+filipgodlewski@users.noreply.github.com"
 
 
 def main():

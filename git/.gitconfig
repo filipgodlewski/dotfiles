@@ -28,3 +28,6 @@
   trustExitCode = true
 [pull]
   ff = only
+[user]
+  name = Filip Godlewski
+  email = 54432731+filipgodlewski@users.noreply.github.com

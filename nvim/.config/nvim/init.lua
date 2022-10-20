@@ -1,4 +1,5 @@
 require "impatient"
+require "luasnip-ts-snippets".setup {}
 
 vim.g.mapleader = " "
 vim.g.python3_host_prog = os.getenv("XDG_DATA_HOME") .. "/venvs/nvim/bin/python3"

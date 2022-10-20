@@ -121,3 +121,6 @@
 [submodule "nvim/.local/share/nvim/site/pack/add/start/kazhala.close-buffers.nvim"]
 	path = nvim/.local/share/nvim/site/pack/add/start/kazhala.close-buffers.nvim
 	url = https://github.com/kazhala/close-buffers.nvim.git
+[submodule "nvim/.local/share/nvim/site/pack/add/start/filipgodlewski.luasnip-ts-snippets.nvim"]
+	path = nvim/.local/share/nvim/site/pack/add/start/filipgodlewski.luasnip-ts-snippets.nvim
+	url = https://github.com/filipgodlewski/luasnip-ts-snippets.nvim.git

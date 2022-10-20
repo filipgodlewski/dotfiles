@@ -1,5 +1,4 @@
 require "impatient"
-require "luasnip-ts-snippets".setup {}
 
 vim.g.mapleader = " "
 vim.g.python3_host_prog = os.getenv("XDG_DATA_HOME") .. "/venvs/nvim/bin/python3"
@@ -66,7 +65,7 @@ local groups = {
       CmpItemAbbrMatchFuzzy = { fg = "palette.yellow", style = "bold" },
       VertSplit = { fg = "palette.bg4" },
       LuaSnipChoiceAvailable = { fg = "palette.red", style = "bold" },
-      LuaSnipActiveChoice = { fg = "palette.green", style = "bold" },
+      LuaSnipChoiceActive = { fg = "palette.green", style = "bold" },
    }
 }
 

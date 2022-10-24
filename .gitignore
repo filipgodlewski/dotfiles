@@ -2,6 +2,7 @@
 .zsh_sessions
 .zcompdump
 terminfo
-nvim/.local/share/nvim/*
-!nvim/.local/share/nvim/site
+
+nvim/.local
+nvim/.config/nvim/plugin/packer_compiled.lua
 rplugin.vim

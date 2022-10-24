@@ -1,7 +1,7 @@
 require "impatient"
 
 vim.g.mapleader = " "
-vim.g.python3_host_prog = os.getenv("XDG_DATA_HOME") .. "/venvs/nvim/bin/python3"
+vim.g.python3_host_prog = os.getenv "XDG_DATA_HOME" .. "/venvs/nvim/bin/python3"
 
 vim.opt.autowriteall = true
 vim.opt.complete = vim.opt.complete + "kspell"
@@ -24,7 +24,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.path = vim.opt.path + "**"
 vim.opt.pumheight = 15
-vim.opt.shell = os.getenv("HOMEBREW_PREFIX") .. "/bin/zsh"
+vim.opt.shell = os.getenv "HOMEBREW_PREFIX" .. "/bin/zsh"
 vim.opt.shiftround = true
 vim.opt.shiftwidth = 2
 vim.opt.showmode = false
@@ -50,46 +50,3 @@ vim.api.nvim_create_autocmd("TermOpen", {
    pattern = "*",
    command = "setlocal nonumber norelativenumber",
 })
-
--- Colorscheme settings
-local nightfox = require("nightfox")
-local C = require("nightfox.lib.color")
-local spec = require("nightfox.spec").load("nightfox")
-local pal = spec.palette
-
-local groups = {
-   all = {
-      CmpItemAbbr = { fg = "palette.comment" },
-      CmpItemAbbrDeprecated = { fg = "palette.red", style = "italic" },
-      CmpItemAbbrMatch = { fg = "palette.yellow", style = "bold" },
-      CmpItemAbbrMatchFuzzy = { fg = "palette.yellow", style = "bold" },
-      VertSplit = { fg = "palette.bg4" },
-      LuaSnipChoiceAvailable = { fg = "palette.red", style = "bold" },
-      LuaSnipChoiceActive = { fg = "palette.green", style = "bold" },
-   }
-}
-
-local options = {
-   styles = {
-      comments = "italic",
-      keywords = "bold",
-      types = "italic,bold",
-   }
-}
-
-
-local specs = {
-   all = {
-      diff = {
-         change = C(pal.bg1):blend(C(pal.yellow.dim), 0.15):to_css(),
-      }
-   }
-}
-
-nightfox.setup({
-   groups = groups,
-   options = options,
-   specs = specs,
-})
-
-vim.cmd("colorscheme nightfox")

@@ -12,7 +12,7 @@ MK3 - the current one. Including gnu stow, after watching [ThePrimeagen's stow t
 
 First of all, instructions below are prepared for MacOS, as this is my daily work machine. Follow the instructions if that fits your needs.
 
-### Install
+### install
 
 **!!IMPORTANT!!**
 

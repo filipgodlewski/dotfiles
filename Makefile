@@ -8,7 +8,7 @@ ZSH = $(HOMEBREW_PREFIX)/zsh
 BREWFILE = $(HOME)/dotfiles/brew/.Brewfile
 NVIM_VENV = $(XDG_DATA_HOME)/venvs/nvim
 
-.PHONY: git nvim stow tmux zsh brew
+.PHONY: all clean test git nvim stow tmux zsh brew
 
 # Installing
 install: git $(OS)

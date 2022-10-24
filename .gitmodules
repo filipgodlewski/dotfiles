@@ -1,75 +1,3 @@
-[submodule "nvim/.local/share/nvim/site/pack/add/start/JoosepAlviste.nvim-ts-context-commentstring"]
-	path = nvim/.local/share/nvim/site/pack/add/start/JoosepAlviste.nvim-ts-context-commentstring
-	url = https://github.com/JoosepAlviste/nvim-ts-context-commentstring.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/L3MON4D3.LuaSnip"]
-	path = nvim/.local/share/nvim/site/pack/add/start/L3MON4D3.LuaSnip
-	url = https://github.com/L3MON4D3/LuaSnip.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/akinsho.nvim-toggleterm.lua"]
-	path = nvim/.local/share/nvim/site/pack/add/start/akinsho.nvim-toggleterm.lua
-	url = https://github.com/akinsho/nvim-toggleterm.lua.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/benfowler.telescope-luasnip.nvim"]
-	path = nvim/.local/share/nvim/site/pack/add/start/benfowler.telescope-luasnip.nvim
-	url = https://github.com/benfowler/telescope-luasnip.nvim.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/folke.trouble.nvim"]
-	path = nvim/.local/share/nvim/site/pack/add/start/folke.trouble.nvim
-	url = https://github.com/folke/trouble.nvim.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/folke.which-key.nvim"]
-	path = nvim/.local/share/nvim/site/pack/add/start/folke.which-key.nvim
-	url = https://github.com/folke/which-key.nvim.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/hrsh7th.cmp-buffer"]
-	path = nvim/.local/share/nvim/site/pack/add/start/hrsh7th.cmp-buffer
-	url = https://github.com/hrsh7th/cmp-buffer.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/hrsh7th.cmp-cmdline"]
-	path = nvim/.local/share/nvim/site/pack/add/start/hrsh7th.cmp-cmdline
-	url = https://github.com/hrsh7th/cmp-cmdline.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/hrsh7th.cmp-nvim-lsp"]
-	path = nvim/.local/share/nvim/site/pack/add/start/hrsh7th.cmp-nvim-lsp
-	url = https://github.com/hrsh7th/cmp-nvim-lsp.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/hrsh7th.cmp-nvim-lsp-signature-help"]
-	path = nvim/.local/share/nvim/site/pack/add/start/hrsh7th.cmp-nvim-lsp-signature-help
-	url = https://github.com/hrsh7th/cmp-nvim-lsp-signature-help.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/hrsh7th.cmp-nvim-lua"]
-	path = nvim/.local/share/nvim/site/pack/add/start/hrsh7th.cmp-nvim-lua
-	url = https://github.com/hrsh7th/cmp-nvim-lua.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/hrsh7th.cmp-path"]
-	path = nvim/.local/share/nvim/site/pack/add/start/hrsh7th.cmp-path
-	url = https://github.com/hrsh7th/cmp-path.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/hrsh7th.nvim-cmp"]
-	path = nvim/.local/share/nvim/site/pack/add/start/hrsh7th.nvim-cmp
-	url = https://github.com/hrsh7th/nvim-cmp.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/lewis6991.gitsigns.nvim"]
-	path = nvim/.local/share/nvim/site/pack/add/start/lewis6991.gitsigns.nvim
-	url = https://github.com/lewis6991/gitsigns.nvim.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/neovim.nvim-lspconfig"]
-	path = nvim/.local/share/nvim/site/pack/add/start/neovim.nvim-lspconfig
-	url = https://github.com/neovim/nvim-lspconfig.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/numToStr.Comment.nvim"]
-	path = nvim/.local/share/nvim/site/pack/add/start/numToStr.Comment.nvim
-	url = https://github.com/numToStr/Comment.nvim.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/nvim-lua.plenary.nvim"]
-	path = nvim/.local/share/nvim/site/pack/add/start/nvim-lua.plenary.nvim
-	url = https://github.com/nvim-lua/plenary.nvim.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/nvim-lua.popup.nvim"]
-	path = nvim/.local/share/nvim/site/pack/add/start/nvim-lua.popup.nvim
-	url = https://github.com/nvim-lua/popup.nvim.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/nvim-telescope.telescope-fzf-native.nvim"]
-	path = nvim/.local/share/nvim/site/pack/add/start/nvim-telescope.telescope-fzf-native.nvim
-	url = https://github.com/nvim-telescope/telescope-fzf-native.nvim.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/nvim-telescope.telescope-ui-select.nvim"]
-	path = nvim/.local/share/nvim/site/pack/add/start/nvim-telescope.telescope-ui-select.nvim
-	url = https://github.com/nvim-telescope/telescope-ui-select.nvim.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/nvim-treesitter.nvim-treesitter"]
-	path = nvim/.local/share/nvim/site/pack/add/start/nvim-treesitter.nvim-treesitter
-	url = https://github.com/nvim-treesitter/nvim-treesitter.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/saadparwaiz1.cmp_luasnip"]
-	path = nvim/.local/share/nvim/site/pack/add/start/saadparwaiz1.cmp_luasnip
-	url = https://github.com/saadparwaiz1/cmp_luasnip.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/simrat39.rust-tools.nvim"]
-	path = nvim/.local/share/nvim/site/pack/add/start/simrat39.rust-tools.nvim
-	url = https://github.com/simrat39/rust-tools.nvim.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/sindrets.diffview.nvim"]
-	path = nvim/.local/share/nvim/site/pack/add/start/sindrets.diffview.nvim
-	url = https://github.com/sindrets/diffview.nvim.git
 [submodule "zsh/.local/share/zsh/plugins/zdharma-continuum.fast-syntax-highlighting"]
 	path = zsh/.local/share/zsh/plugins/zdharma-continuum.fast-syntax-highlighting
 	url = https://github.com/zdharma-continuum/fast-syntax-highlighting.git
@@ -82,24 +10,9 @@
 [submodule "zsh/.local/share/zsh/plugins/zsh-users.zsh-history-substring-search"]
 	path = zsh/.local/share/zsh/plugins/zsh-users.zsh-history-substring-search
 	url = https://github.com/zsh-users/zsh-history-substring-search.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/nvim-telescope.telescope.nvim"]
-	path = nvim/.local/share/nvim/site/pack/add/start/nvim-telescope.telescope.nvim
-	url = https://github.com/nvim-telescope/telescope.nvim.git
 [submodule "zsh/.local/share/zsh/plugins/filipgodlewski.dot"]
 	path = zsh/.local/share/zsh/plugins/filipgodlewski.dot
 	url = https://github.com/filipgodlewski/dot.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/rmagatti.auto-session"]
-	path = nvim/.local/share/nvim/site/pack/add/start/rmagatti.auto-session
-	url = https://github.com/rmagatti/auto-session.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/nvim-treesitter.nvim-treesitter-context"]
-	path = nvim/.local/share/nvim/site/pack/add/start/nvim-treesitter.nvim-treesitter-context
-	url = https://github.com/nvim-treesitter/nvim-treesitter-context.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/nvim-treesitter.playground"]
-	path = nvim/.local/share/nvim/site/pack/add/start/nvim-treesitter.playground
-	url = https://github.com/nvim-treesitter/playground.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/EdenEast.nightfox.nvim"]
-	path = nvim/.local/share/nvim/site/pack/add/start/EdenEast.nightfox.nvim
-	url = https://github.com/EdenEast/nightfox.nvim.git
 [submodule "zsh/.local/share/zsh/plugins/filipgodlewski.zsh-wrappers"]
 	path = zsh/.local/share/zsh/plugins/filipgodlewski.zsh-wrappers
 	url = https://github.com/filipgodlewski/zsh-wrappers.git
@@ -112,15 +25,3 @@
 [submodule "zsh/.local/share/zsh/plugins/filipgodlewski.you"]
 	path = zsh/.local/share/zsh/plugins/filipgodlewski.you
 	url = https://github.com/filipgodlewski/you.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/nvim-telescope.telescope-file-browser.nvim"]
-	path = nvim/.local/share/nvim/site/pack/add/start/nvim-telescope.telescope-file-browser.nvim
-	url = https://github.com/nvim-telescope/telescope-file-browser.nvim.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/lewis6991.impatient.nvim"]
-	path = nvim/.local/share/nvim/site/pack/add/start/lewis6991.impatient.nvim
-	url = https://github.com/lewis6991/impatient.nvim.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/kazhala.close-buffers.nvim"]
-	path = nvim/.local/share/nvim/site/pack/add/start/kazhala.close-buffers.nvim
-	url = https://github.com/kazhala/close-buffers.nvim.git
-[submodule "nvim/.local/share/nvim/site/pack/add/start/filipgodlewski.luasnip-ts-snippets.nvim"]
-	path = nvim/.local/share/nvim/site/pack/add/start/filipgodlewski.luasnip-ts-snippets.nvim
-	url = https://github.com/filipgodlewski/luasnip-ts-snippets.nvim.git

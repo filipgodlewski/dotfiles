@@ -1,7 +1,11 @@
-local fb_actions = require "telescope".extensions.file_browser.actions
+local fb_actions = require("telescope").extensions.file_browser.actions
 
-require("telescope").setup({
+require("telescope").setup {
    defaults = {
+      prompt_prefix = "   ",
+      selection_caret = "    ",
+      multi_icon = " ",
+      entry_prefix = "     ",
       vimgrep_arguments = {
          "rg",
          "--color=never",
@@ -10,13 +14,18 @@ require("telescope").setup({
          "--line-number",
          "--column",
          "--smart-case",
-         "--trim"
+         "--trim",
       },
-      color_devicons = false,
+      file_ignore_patterns = {
+         "dist",
+         "target",
+         "node_modules",
+         "pack/plugins",
+      },
    },
    extensions = {
       ["ui-select"] = {
-         require "telescope.themes".get_cursor {}
+         require("telescope.themes").get_cursor {},
       },
       fzf = {
          override_generic_sorter = true,
@@ -27,12 +36,19 @@ require("telescope").setup({
          theme = "ivy",
          grouped = true,
          hidden = true,
-         dir_icon = "",
          mappings = {
-            ["i"] = {
+            i = {
                ["<S-CR>"] = false,
                ["<C-CR>"] = fb_actions.create_from_prompt,
             },
+         },
+      },
+      ["session-lens"] = {
+         winblend = 0,
+         prompt_title = "Switch Nvim Session",
+         mappings = {
+            i = { ["<c-d>"] = fb_actions.remove },
+            n = { ["<c-d>"] = fb_actions.remove },
          },
       },
    },
@@ -44,13 +60,12 @@ require("telescope").setup({
             n = { ["<c-d>"] = require("telescope.actions").delete_buffer },
          },
       },
-      spell_suggest = {
-         theme = "cursor",
-      }
+      spell_suggest = { theme = "cursor" },
    },
-})
+}
 
-require("telescope").load_extension("fzf")
-require("telescope").load_extension("luasnip")
-require("telescope").load_extension("file_browser")
-require("telescope").load_extension("ui-select")
+require("telescope").load_extension "fzf"
+require("telescope").load_extension "luasnip"
+require("telescope").load_extension "file_browser"
+require("telescope").load_extension "ui-select"
+require("telescope").load_extension "dap"

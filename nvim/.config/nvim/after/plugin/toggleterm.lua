@@ -1,12 +1,25 @@
-require("toggleterm").setup({
-   shading_factor = "1",
-   start_in_insert = false,
+local function get_width() return math.floor(math.min(vim.o.columns, 120) * 0.9) end
+
+require("toggleterm").setup {
+   size = function(term)
+      if term.direction == "horizontal" then
+         return 20
+      elseif term.direction == "vertical" then
+         return get_width()
+      end
+   end,
+   shade_terminals = false,
+   start_in_insert = true,
+   open_mapping = [[\\]],
+   insert_mappings = false,
+   autochdir = true,
+   direction = get_width() > math.floor(120 * 9) and "vertical" or "float",
    float_opts = {
       border = "curved",
-      width = function() return math.floor(vim.o.columns * 0.65) end,
-      height = function() return math.floor(vim.o.lines * 0.5) end,
+      width = get_width(),
+      height = function() return math.floor(vim.o.lines * 0.75) end,
    },
-})
+}
 
 local Terminal = require("toggleterm.terminal").Terminal
 
@@ -17,7 +30,7 @@ local configs = {
          cmd = "which bpython && bpython",
          direction = "float",
          dir = "git_dir",
-         on_open = function(term) vim.cmd("startinsert!") end,
+         on_open = function(_) vim.cmd "startinsert!" end,
       },
    },
    ut = {
@@ -26,7 +39,7 @@ local configs = {
          cmd = "which pytest && pytest --pdb",
          direction = "float",
          dir = "git_dir",
-         on_open = function(term) vim.cmd("startinsert!") end,
+         on_open = function(_) vim.cmd "startinsert!" end,
          close_on_exit = true,
       },
    },
@@ -58,9 +71,7 @@ end
 ---@param args array the array of strings that represent additional command line arguments
 function Repl(ft, args)
    local term = get_terminal("repl", ft, args)
-   if term ~= nil then
-      term:toggle()
-   end
+   if term ~= nil then term:toggle() end
 end
 
 --- Run unit tests for the current project.
@@ -70,10 +81,9 @@ function UnitTests(ft, args)
    local term = get_terminal("ut", ft, args)
    if term ~= nil then
       if term:is_open() then -- it means that the debugger is running, so we want to close it first
-         term:send("") -- debugger does not close immediately, so we have to check if it is closed
+         term:send "" -- debugger does not close immediately, so we have to check if it is closed
          vim.wait(5000, function() return not term:is_open() end, 10)
       end
       term:toggle()
    end
 end
-

@@ -1,5 +1,7 @@
-require "impatient"
+--require "impatient"
 
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 vim.g.mapleader = " "
 vim.g.python3_host_prog = os.getenv "XDG_DATA_HOME" .. "/venvs/nvim/bin/python3"
 
@@ -24,11 +26,11 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.path = vim.opt.path + "**"
 vim.opt.pumheight = 15
-vim.opt.shell = os.getenv "HOMEBREW_PREFIX" .. "/bin/zsh"
+vim.opt.scrolloff = 4
 vim.opt.shiftround = true
 vim.opt.shiftwidth = 2
 vim.opt.showmode = false
-vim.opt.signcolumn = "no"
+vim.opt.signcolumn = "auto"
 vim.opt.smartcase = true
 vim.opt.smartindent = true
 vim.opt.softtabstop = 2
@@ -42,11 +44,3 @@ vim.opt.undolevels = 10000
 vim.opt.updatetime = 50
 vim.opt.wrap = false
 vim.opt.sessionoptions = { "blank", "buffers", "curdir", "folds", "help", "tabpages", "winsize", "winpos", "terminal" }
-
--- terminal settings
-vim.api.nvim_create_augroup("OnTermOpen", { clear = true })
-vim.api.nvim_create_autocmd("TermOpen", {
-   group = "OnTermOpen",
-   pattern = "*",
-   command = "setlocal nonumber norelativenumber",
-})

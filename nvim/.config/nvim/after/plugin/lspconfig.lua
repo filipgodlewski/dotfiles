@@ -3,6 +3,9 @@ local lspconfig = require "lspconfig"
 local global_opts = {
    capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
    autostart = true,
+   on_attach = function(client, bufnr)
+      if client.server_capabilities.documentSymbolProvider then require("nvim-navic").attach(client, bufnr) end
+   end,
 }
 
 local setup = function(server, custom_opts)
@@ -39,10 +42,4 @@ setup("sumneko_lua", {
    },
 })
 
-vim.diagnostic.config {
-   virtual_text = true,
-   signs = true,
-   underline = true,
-   update_in_insert = true,
-   severity_sort = false,
-}
+vim.diagnostic.config { update_in_insert = true, signs = false }

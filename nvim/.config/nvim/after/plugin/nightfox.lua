@@ -1,7 +1,12 @@
-local nightfox = require("nightfox")
-local C = require("nightfox.lib.color")
-local spec = require("nightfox.spec").load("nightfox")
+local nightfox = require "nightfox"
+local C = require "nightfox.lib.color"
+local spec = require("nightfox.spec").load "nightfox"
 local pal = spec.palette
+
+local function dim(color, percentage)
+   percentage = percentage or 0.15
+   return C(pal.bg1):blend(C(pal[color].dim), percentage):to_css()
+end
 
 local groups = {
    all = {
@@ -12,7 +17,16 @@ local groups = {
       VertSplit = { fg = "palette.bg4" },
       LuaSnipChoiceAvailable = { fg = "palette.red", style = "bold" },
       LuaSnipChoiceActive = { fg = "palette.green", style = "bold" },
-   }
+      NvimTreeNormal = { fg = "palette.white", bg = "palette.bg1" },
+      TelescopePromptTitle = { fg = "palette.yellow" },
+      TelescopeResultsTitle = { fg = "palette.yellow" },
+      TelescopePreviewTitle = { fg = "palette.yellow" },
+      TelescopePromptCounter = { fg = "palette.yellow" },
+      TelescopePromptPrefix = { fg = "palette.yellow" },
+      TelescopeSelectionCaret = { fg = "palette.yellow", bg = "palette.bg3" },
+      TelescopeMultiSelection = { fg = "palette.green", style = "bold" },
+      TelescopeMultiIcon = { fg = "palette.green", style = "bold" },
+   },
 }
 
 local options = {
@@ -20,22 +34,26 @@ local options = {
       comments = "italic",
       keywords = "bold",
       types = "italic,bold",
-   }
+   },
 }
-
 
 local specs = {
    all = {
-      diff = {
-         change = C(pal.bg1):blend(C(pal.yellow.dim), 0.15):to_css(),
-      }
-   }
+      diff = { change = dim "yellow" },
+   },
 }
 
-nightfox.setup({
+local palettes = {
+   nightfox = {
+      bg1 = "#0f1117",
+   },
+}
+
+nightfox.setup {
    groups = groups,
    options = options,
    specs = specs,
-})
+   palettes = palettes,
+}
 
-vim.cmd("colorscheme nightfox")
+vim.cmd "colorscheme nightfox"

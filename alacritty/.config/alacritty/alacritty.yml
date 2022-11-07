@@ -1,8 +1,7 @@
 schemes:
-
   nightfox: &nightfox
     primary:
-      background: '0x192330'
+      background: '0x0f1117'
       foreground: '0xcdcecf'
     normal:
       black:   '0x393b44'
@@ -36,31 +35,31 @@ cursor:
 
 window:
   dimensions:
-    columns: 200
-    lines: 50
+    columns: 300
+    lines: 80
   padding:
     x: 8
-    y: 16
+    y: 8
   dynamic_padding: true
-  decorations: buttonless
+  decorations: Buttonless
 
 scrolling:
   history: 100000
 
 font:
   normal:
-    family: Rec Mono Duotone
+    family: Hack Nerd Font Mono
     style: Regular
   bold:
-    family: Rec Mono Duotone
+    family: Hack Nerd Font Mono
     style: Bold
   italic:
-    family: Rec Mono Duotone
+    family: Hack Nerd Font Mono
     style: Italic
   bold_italic:
-    family: Rec Mono Duotone
+    family: Hack Nerd Font Mono
     style: Bold Italic
-  size: 16.0
+  size: 18
   offset:
     x: 0
     y: 4
@@ -70,7 +69,7 @@ font:
 
 hints:
   enabled:
-    - regex: ((~?[/.\-\w]+)(:[\d]+){0,2})
+    - regex: (([\w]+:/{2})?~?[\w/.-]+)
       action: Copy
       mouse:
         enabled: true
@@ -157,7 +156,6 @@ key_bindings:
   - {key: Key8, mods: Alt|Shift, chars: "\x1b*"}
   - {key: Key9, mods: Alt, chars: "\x1b9"}
   - {key: Key9, mods: Alt|Shift, chars: "\x1b("}
-
 
   - {key: Backslash, mods: Alt, chars: "\x1b\\"}
   - {key: Backslash, mods: Alt|Shift, chars: "\x1b|"}

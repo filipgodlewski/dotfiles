@@ -1,76 +1,165 @@
+local gitsigns = require "gitsigns"
+local t = require "telescope"
+local b = require "telescope.builtin"
+local trouble = require "trouble"
+local dap = require "dap"
+local neotest = require "neotest"
+
 require("which-key").register({
-   H = { "<CMD>lua require('telescope.builtin').help_tags()<CR>", "Find help tags" },
-   R = { "<CMD>lua vim.lsp.buf.rename()<CR>", "Rename with LSP" },
-
-   b = { "<CMD>lua require('gitsigns').blame_line()<CR>", "Show blame for current line" },
-
-   c = {
-      name = "Compare",
-      O = { "<CMD>DiffviewOpen ", "Open diff view (insert ready)" },
-      o = { "<CMD>DiffviewOpen<CR>", "Open diff view" },
-      c = { "<CMD>DiffviewClose<CR>", "Close diff view" },
-      r = { "<CMD>DiffviewRefresh<CR>", "Refresh diff view" },
-      h = { "<CMD>DiffviewFilesHistory<CR>", "Open file history diff view" },
-      t = { "<CMD>DiffviewToggleFiles<CR>", "Toggle Files pane" },
-      f = { "<CMD>DiffviewFocusFiles<CR>", "Focus on Files pane" },
+   a = {
+      name = "Debug",
+      b = {
+         name = "Breakpoint",
+         c = { dap.clear_breakpoints, "Clear breakpoints" },
+         l = { t.extensions.dap.list_breakpoints, "List breakpoints" },
+         s = { function() dap.set_breakpoint(vim.fn.input "Breakpoint condition: ") end, "Set breakpoint" },
+         t = { dap.toggle_breakpoint, "Toggle breakpoint" },
+      },
+      c = { dap.continue, "Continue" },
+      d = { dap.down, "Frame down" },
+      f = { t.extensions.dap.frames, "Show frames" },
+      k = { dap.terminate, "Kill dap session" },
+      s = {
+         name = "Step",
+         b = { dap.step_back, "Step back" },
+         c = { dap.run_to_cursor, "Step to cursor" },
+         i = { dap.step_into, "Step into" },
+         o = { dap.step_over, "Step over" },
+         O = { dap.step_out, "Step out" },
+      },
+      u = { dap.up, "Frame up" },
    },
+   -- b
+   -- c
 
    d = {
-      name = "Def",
-      d = { "<CMD>lua require('telescope.builtin').lsp_definitions()<CR>", "Go to definition" },
-      s = { "<CMD>lua vim.lsp.buf.hover()<CR>", "Show signature" },
-      t = { "<CMD>lua require('telescope.builtin').lsp_type_definitions()<CR>", "Go to type definition" },
-      u = { "<CMD>lua require('telescope.builtin').lsp_references()<CR>", "Find Usages" },
+      name = "Diff",
+      c = { function() vim.cmd "DiffviewClose" end, "Close diff view" },
+      f = { function() vim.cmd "DiffviewFocusFiles" end, "Focus on Files pane" },
+      n = { gitsigns.next_hunk, "Next hunk" },
+      o = { function() vim.cmd "DiffviewOpen" end, "Open diff view" },
+      p = { gitsigns.prev_hunk, "Previous hunk" },
+      r = { gitsigns.reset_hunk, "Reset hunk" },
+      s = { gitsigns.stage_hunk, "Stage hunk" },
+      t = { function() vim.cmd "DiffviewToggleFiles" end, "Toggle Files pane" },
+      u = { gitsigns.undo_stage_hunk, "Undo staging hunk" },
    },
 
    e = {
       name = "Errors",
-      d = { "<CMD>TroubleToggle document_diagnostics<CR>", "Document diagnostics" },
-      n = { "<CMD>lua vim.diagnostic.goto_next()<CR>", "Go to next diagnostic" },
-      p = { "<CMD>lua vim.diagnostic.goto_prev()<CR>", "Go to previous diagnostic" },
-      w = { "<CMD>TroubleToggle workspace_diagnostics<CR>", "Workspace diagnostics" },
+      d = { function() trouble.toggle "document_diagnostics" end, "Document diagnostics" },
+      n = { vim.diagnostic.goto_next, "Go to next diagnostic" },
+      p = { vim.diagnostic.goto_prev, "Go to previous diagnostic" },
+      w = { function() trouble.toggle "workspace_diagnostics" end, "Workspace diagnostics" },
    },
 
-   f = { "<CMD>lua vim.lsp.buf.format()<CR>", "Format code" },
+   -- f
+   -- g
+   -- h
 
-   g = {
-      name = "Git",
-      b = { "<CMD>lua require('telescope.builtin').git_branches()<CR>", "Perform actions on git branches" },
-      c = { "<CMD>lua require('telescope.builtin').git_commits()<CR>", "Checkout on selected commit" },
-      s = { "<CMD>lua require('telescope.builtin').git_status()<CR>", "List git status for current directory" },
-      t = { "<CMD>lua require('telescope.builtin').git_stash()<CR>",
-         "Search through stashes with an option to apply them" },
+   i = {
+      name = "Inspect",
+      d = { b.lsp_definitions, "Go to definition" },
+      s = { vim.lsp.buf.hover, "Show signature" },
+      t = { b.lsp_type_definitions, "Go to type definition" },
+      u = { b.lsp_references, "Find Usages" },
    },
+   -- j
+   -- k
+   l = { gitsigns.blame_line, "Show blame for the current line" },
+   -- m
 
-   h = {
-      name = "Hunks",
-      D = { "<CMD>lua require('gitsigns').diffthis()<CR>", "Diff this buffer" },
-      R = { "<CMD>lua require('gitsigns').reset_buffer()<CR>", "Reset buffer" },
-      S = { "<CMD>lua require('gitsigns').stage_buffer()<CR>", "Stage buffer" },
-      d = { "<CMD>lua require('gitsigns').toggle_deleted()<CR>", "Show deleted lines" },
-      h = { "<CMD>lua require('gitsigns').preview_hunk()<CR>", "Preview hunk" },
-      l = { "<CMD>lua require('gitsigns').toggle_linehl()<CR>", "Show hunks as line highlights" },
-      n = { "<CMD>lua require('gitsigns').next_hunk()<CR>", "Next hunk" },
-      p = { "<CMD>lua require('gitsigns').prev_hunk()<CR>", "Previous hunk" },
-      r = { "<CMD>lua require('gitsigns').reset_hunk()<CR>", "Reset hunk" },
-      s = { "<CMD>lua require('gitsigns').stage_hunk()<CR>", "Stage hunk" },
-      u = { "<CMD>lua require('gitsigns').undo_stage_hunk()<CR>", "Undo staging hunk" },
+   n = { function() vim.cmd "bn" end, "Go to next buffer" },
+   o = { require("session-lens").search_session, "Open nvim session" },
+   p = { function() vim.cmd "bp" end, "Go to previous buffer" },
+   q = { function() require("close_buffers").delete { type = "this", force = true } end, "Delete this buffer" },
+   r = {
+      name = "Refactor",
+      r = { vim.lsp.buf.rename, "Rename with LSP" },
    },
-
-   n = { "<CMD>bn<CR>", "Go to next buffer" },
-   p = { "<CMD>bp<CR>", "Go to previous buffer" },
-   q = { "<CMD>lua require('close_buffers').delete({ type='this' })<CR>", "Delete this buffer" },
-   r = { "<CMD>lua require('telescope.builtin').oldfiles()<CR>", "Open recent file" },
-   t = { "<CMD>lua require('telescope.builtin').live_grep({ hidden=true })<CR>", "Find text occurrence" },
-   u = { "<CMD>silent LuaSnipUnlinkCurrent<CR>", "Unlink current snippet"},
-   w = { "<CMD>w<CR>", "Save current buffer" },
-   x = { "<CMD>xa<CR>", "Save and close all" },
-   z = { "<CMD>Telescope file_browser<CR>", "Browse files" },
-   [","] = { "<CMD>lua require('telescope.builtin').buffers()<CR>", "Find buffers" },
-   ["."] = { "<CMD>lua require('telescope.builtin').resume()<CR>", "Resume last search" },
-   ["/"] = { "<CMD>ToggleTerm<CR>", "Toggle last terminal" },
-   ["<space>"] = { "<CMD>lua require('telescope.builtin').find_files({ hidden=true })<CR>", "Find file" },
-},
-
-   { prefix = "<leader>" }
-)
+   s = { function() b.live_grep { hidden = true } end, "Search text occurrence" },
+   -- t
+   u = {
+      name = "Unit Test",
+      d = {
+         function()
+            vim.cmd "wa"
+            neotest.run.run { strategy = "dap" }
+         end,
+         "Debug nearest test",
+      },
+      f = {
+         function()
+            vim.cmd "wa"
+            neotest.run.run(vim.fn.expand "%")
+            neotest.summary.open()
+         end,
+         "Test file",
+      },
+      m = {
+         function()
+            vim.cmd "wa"
+            neotest.summary.open()
+            neotest.summary.run_marked()
+         end,
+         "Run marked tests",
+      },
+      r = {
+         function()
+            vim.cmd "wa"
+            neotest.run.run()
+         end,
+         "Run current test",
+      },
+      s = { neotest.summary.toggle, "Toggle summary" },
+      w = {
+         function()
+            local adapters = require("neotest").run.adapters()
+            if #adapters == 0 then
+               vim.notify " ﭧ Either no adapters or client didn't start yet"
+               return
+            end
+            if vim.g.test_watcher == nil then
+               vim.g.test_watcher = true
+               neotest.summary.open()
+               vim.notify " ﭧ Started test watcher"
+            else
+               vim.g.test_watcher = nil
+               neotest.summary.close()
+               vim.notify " ﭧ Stopped test watcher"
+            end
+         end,
+         "Toggle test watcher",
+      },
+   },
+   v = { b.help_tags, "Vim help tags" },
+   w = {
+      function()
+         vim.cmd "w"
+         if vim.g.test_watcher == true and require("neotest").run.adapters() ~= {} then
+            neotest.run.run(vim.fn.expand "%")
+            neotest.summary.open()
+         end
+      end,
+      "Save current buffer",
+   },
+   x = {
+      function()
+         neotest.summary.close()
+         dap.terminate()
+         vim.cmd "wa"
+         vim.cmd "qa"
+      end,
+      "Save and close all",
+   },
+   -- y
+   z = { t.extensions.file_browser.file_browser, "Browse files" },
+   [","] = { b.buffers, "Find buffers" },
+   ["."] = { b.resume, "Resume last search" },
+   ["?"] = {
+      function() vim.cmd [[15new +put\ =\ execute('messages')|set\ nornu\ nonu]] end,
+      "Open messages in a split buffer",
+   },
+   ["!"] = { function() vim.cmd "bd!" end, "Force close buffer" },
+   ["<space>"] = { function() b.find_files { hidden = true } end, "Find file" },
+}, { prefix = "<leader>" })

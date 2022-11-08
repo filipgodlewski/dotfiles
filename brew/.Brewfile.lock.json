@@ -5,22 +5,22 @@
         "revision": "a70de5c67e57a9bf22b2ccfa765c665b8a45704f"
       },
       "homebrew/bundle": {
-        "revision": "44e38faac626ac1f89543bf11467cf81ada43ae6"
+        "revision": "48c4831a4edd0b81f369f9710e470794c637d667"
       },
       "homebrew/cask": {
-        "revision": "dd5cd49d3506721f1125af15dd83e908485c95f7"
+        "revision": "2a6e3e222d5359e99c23c348a87d31d8a9e81d96"
       },
       "homebrew/cask-fonts": {
         "revision": "82d6f65d897625dff502d7127514e9ffe561d331"
       },
       "homebrew/cask-versions": {
-        "revision": "87afef1e84f3b79d8cea99b8e9312ce4072aa783"
+        "revision": "2171c09b2b2ee1f08866e36bb19764308558214f"
       },
       "homebrew/cask-drivers": {
-        "revision": "a5a77f654fc7a0e33393acf24ef475177f5c7b2a"
+        "revision": "97460d0f17e8b58f63fe0c9d8ba2a8ccbd7b2b4c"
       },
       "homebrew/core": {
-        "revision": "e11b580d45a76e799ca4956ccedcc8c4ffed5bdc"
+        "revision": "55d37a156ab4c16f5fdf78b12111b8ece4ec56b5"
       },
       "homebrew/services": {
         "revision": "b8025961f8175f852f789624624915595782b5d8"
@@ -2004,7 +2004,7 @@
         }
       },
       "zoom": {
-        "version": "5.12.3.11845",
+        "version": "5.12.6.12435",
         "options": {
           "full_name": "zoom"
         }
@@ -2156,9 +2156,9 @@
         "macOS": "12.6"
       },
       "ventura": {
-        "HOMEBREW_VERSION": "3.6.8",
+        "HOMEBREW_VERSION": "3.6.9",
         "HOMEBREW_PREFIX": "/opt/homebrew",
-        "Homebrew/homebrew-core": "e11b580d45a76e799ca4956ccedcc8c4ffed5bdc",
+        "Homebrew/homebrew-core": "55d37a156ab4c16f5fdf78b12111b8ece4ec56b5",
         "CLT": "14.1.0.0.1.1666437224",
         "Xcode": "14.1",
         "macOS": "13.0"

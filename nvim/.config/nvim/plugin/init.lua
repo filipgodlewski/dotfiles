@@ -31,19 +31,7 @@ return require("packer").startup {
       -- goodies
       use "EdenEast/nightfox.nvim"
       use "akinsho/nvim-toggleterm.lua"
-      use {
-         "rcarriga/nvim-notify",
-         config = function()
-            local notify = require "notify"
-            vim.notify = notify
-            notify.setup {
-               fps = 60,
-               render = "minimal",
-               timeout = 1000,
-               top_down = false,
-            }
-         end,
-      }
+      use "rcarriga/nvim-notify"
       use "folke/which-key.nvim"
       use "kazhala/close-buffers.nvim"
       use { "lewis6991/gitsigns.nvim", config = function() require("gitsigns").setup { signcolumn = false } end }

@@ -116,17 +116,17 @@ require("which-key").register({
          function()
             local adapters = require("neotest").run.adapters()
             if #adapters == 0 then
-               vim.notify " ﭧ Either no adapters or client didn't start yet"
+               vim.notify "ﭧ Either no adapters or client didn't start yet"
                return
             end
             if vim.g.test_watcher == nil then
                vim.g.test_watcher = true
                neotest.summary.open()
-               vim.notify " ﭧ Started test watcher"
+               vim.notify "ﭧ Started test watcher"
             else
                vim.g.test_watcher = nil
                neotest.summary.close()
-               vim.notify " ﭧ Stopped test watcher"
+               vim.notify "ﭧ Stopped test watcher"
             end
          end,
          "Toggle test watcher",

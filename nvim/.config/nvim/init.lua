@@ -44,3 +44,5 @@ vim.opt.undolevels = 10000
 vim.opt.updatetime = 50
 vim.opt.wrap = false
 vim.opt.sessionoptions = { "blank", "buffers", "curdir", "folds", "help", "tabpages", "winsize", "winpos", "terminal" }
+
+require("my.project_configs").setup()

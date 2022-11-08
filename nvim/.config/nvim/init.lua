@@ -44,5 +44,6 @@ vim.opt.undolevels = 10000
 vim.opt.updatetime = 50
 vim.opt.wrap = false
 vim.opt.sessionoptions = { "blank", "buffers", "curdir", "folds", "help", "tabpages", "winsize", "winpos", "terminal" }
+-- vim.opt.splitkeep = "screen"  -- uncomment in nvim 0.9
 
 require("my.project_configs").setup()

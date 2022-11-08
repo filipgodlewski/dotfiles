@@ -1,0 +1,51 @@
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$line_break\
+$python\
+$character"""
+
+[directory]
+style = "bold bright-purple"
+read_only_style = "bold yellow"
+fish_style_pwd_dir_length = 1
+read_only = " RO"
+
+[character]
+success_symbol = "[](white)"
+error_symbol = "[](red)"
+vimcmd_symbol = "[](green)"
+
+[git_branch]
+format = '[( $branch)]($style) '
+style = "bold bright-blue"
+
+[git_commit]
+style = "bright-green"
+only_detached = false
+
+[git_status]
+format = "[$conflicted](red)[$untracked](bright-black)[$modified](yellow)[$staged](green)[$renamed](cyan)[$deleted](red)[($ahead_behind)](purple)[($stashed)](white) "
+
+conflicted = " "
+ahead = "⇡ "
+behind = "⇣ "
+diverged = "⇕ "
+untracked = "ﰘ "
+stashed = "≡ "
+modified = "ﰗ "
+staged = "ﰛ "
+renamed = " "
+deleted = " "
+
+[git_state]
+style = "bold bright-black"
+
+[python]
+format = '[(\( $virtualenv\))]($style) '
+style = "bold bright-yellow"

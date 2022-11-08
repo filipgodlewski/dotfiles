@@ -1,6 +1,7 @@
 filipgodlewski/venv
 
-zdharma-continuum/fast-syntax-highlighting kind:defer
+jeffreytse/zsh-vi-mode
+zdharma-continuum/fast-syntax-highlighting
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-completions
 zsh-users/zsh-history-substring-search

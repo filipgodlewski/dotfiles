@@ -35,4 +35,6 @@ unset antidote_dir plugins_txt static_file
 fpath=($ZPLUGINSDIR/zsh-users.zsh-completions/src $fpath)
 rm -f $XDG_CONFIG_HOME/zsh/.zcompdump; compinit
 
+eval "$(starship init zsh)"
+
 (( $SHLVL == 1 )) && edit || :

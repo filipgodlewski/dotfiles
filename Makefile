@@ -2,7 +2,7 @@ export XDG_DATA_HOME = $(HOME)/.local/share
 
 OS := $(shell if [[ "$$(uname -s)" == "Darwin" ]]; then echo macos; fi)
 export HOMEBREW_PREFIX := $(shell if [[ "$$(uname -m)" == "arm64" ]]; then echo /opt/homebrew; else echo /usr/local; fi)/bin
-export PATH := $(HOMEBREW_PREFIX):$(PATH)
+export PATH := $(HOMEBREW_PREFIX):$(HOME)/.local/bin:$(PATH)
 
 ZSH = $(HOMEBREW_PREFIX)/zsh
 BREWFILE = $(HOME)/dotfiles/brew/.Brewfile
@@ -31,12 +31,6 @@ unbrew:
 	-brew remove --force --ignore-dependencies $(shell brew list)
 	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
 	sudo rm -rf $(HOMEBREW_PREFIX)
-	chsh -s /bin/zsh
-	cat /etc/shells | grep -v $(HOMEBREW_PREFIX) | sudo tee /etc/shells
-	if [[ ! $$(grep -q $(ZSH) /etc/shells) ]]; then \
-		echo $(ZSH) | sudo tee -a /etc/shells \
-		chsh -s $(ZSH); \
-	fi
 
 hosts:
 	cp /etc/hosts ~/.cache/hosts
@@ -49,22 +43,20 @@ npm:
 	npm install -g git-cz neovim
 
 unnpm:
-	npm ls -gp --depth=0 | awk -F/ '/node_modules/ && !/\/npm$$/ {print $$NF}' | xargs npm -g rm
+	npm uninstall -g git-cz neovim
 
 stow:
-	stow -R $$(echo */ | sd '/' '')
+	stow -R */
 
 unstow:
-	stow -D $$(echo */ | sd '/' '')
+	stow -D */
 
 pip:
-	python3 -m venv $(NVIM_VENV)
-	$(NVIM_VENV)/bin/python3 -m pip install -U pip setuptools wheel pynvim
 	pipx install virtualenvwrapper
 	pipx install auto-optional
 	pipx install pyflyby
+	mkvirtualenv -i pynvim nvim
 
 unpip:
-	python3 -m pip freeze | sed 's/==.*//' | xargs -n1 python3 -m pip -q uninstall -y
-	-deactivate &>/dev/null
-	-rm -rf $(XDG_DATA_HOME)/venvs/nvim
+	rmvirtualenv nvim
+	pipx uninstall-all

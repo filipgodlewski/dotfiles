@@ -36,7 +36,7 @@ function update() {
   brew update --quiet
 
   echo "🔥 Upgrade npm"
-  local outdated_packages=(${(f@)$(npm list -g --depth 0 -p)##*/})
+  local outdated_packages=($(npm outdated --json -g | jq 'keys' -cMr | tr -d '[]' | tr ',' ' '))
   local package
   echo "📦 Update global outdated npm packages"
   for package in $outdated_packages; do
@@ -54,6 +54,7 @@ function update() {
 
   echo "🔥 Upgrade hosts"
   sudo curl https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts -o /etc/hosts --silent
+  sudo nvim --clean --headless +/\ linkedin.com +"d | wq" /etc/hosts &> /dev/null
 
   echo "🔥 Upgrade nvim venv"
   local py=$XDG_DATA_HOME/venvs/nvim/bin/python

@@ -15,7 +15,7 @@ install: $(OS)
 uninstall: un$(OS)
 
 ## MacOS specific
-macos: brew hosts npm stow pip nvim
+macos: brew hosts npm stow pip settings
 unmacos: unhosts unnpm unpip unstow unbrew
 
 brew:
@@ -60,3 +60,6 @@ pip:
 unpip:
 	rmvirtualenv nvim
 	pipx uninstall-all
+
+settings:
+	zsh .excluded/.macos

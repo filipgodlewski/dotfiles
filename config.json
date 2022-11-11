@@ -1,9 +1,0 @@
-{
-  "hosts provider": "StevenBlack.hosts",
-  "submodules": {
-    "tmux": "~/.local/share/tmux",
-    "nvim": "~/.local/share/nvim/site/pack/add/start",
-    "sys": "~/.local/share/sys",
-    "zsh": "~/.local/share/zsh/plugins"
-  }
-}

@@ -76,7 +76,7 @@ return require("packer").startup {
             "lukas-reineke/cmp-under-comparator",
          },
       }
-      use { "L3MON4D3/LuaSnip", requires = { "filipgodlewski/luasnip-ts-snippets.nvim" } }
+      use { "L3MON4D3/LuaSnip", requires = { "filipgodlewski/luasnip-ts-snippets.nvim", branch = "py_property_snip" } }
       use {
          "nvim-telescope/telescope.nvim",
          requires = {

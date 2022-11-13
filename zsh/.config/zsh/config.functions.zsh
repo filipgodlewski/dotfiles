@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/bin/zsh
 
 
 function edit() {
@@ -54,7 +54,7 @@ function update() {
 
   echo "🔥 Upgrade hosts"
   sudo curl https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts -o /etc/hosts --silent
-  sudo nvim --clean --headless +/\ linkedin.com +"d | wq" /etc/hosts &> /dev/null
+  sudo nvim --clean --headless +"g/ \(www\.\)\?linkedin.com/d" +"wq" /etc/hosts &> /dev/null
 
   echo "🔥 Upgrade nvim venv"
   local py=$XDG_DATA_HOME/venvs/nvim/bin/python

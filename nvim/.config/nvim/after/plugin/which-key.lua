@@ -1,3 +1,4 @@
+local which_key = require "which-key"
 local gitsigns = require "gitsigns"
 local t = require "telescope"
 local b = require "telescope.builtin"
@@ -5,7 +6,7 @@ local trouble = require "trouble"
 local dap = require "dap"
 local neotest = require "neotest"
 
-require("which-key").register({
+which_key.register({
    -- a
    -- b
 
@@ -24,39 +25,20 @@ require("which-key").register({
 
    d = {
       name = "Debug",
-      b = {
-         name = "Breakpoint",
-         c = { dap.clear_breakpoints, "Clear breakpoints" },
-         l = { t.extensions.dap.list_breakpoints, "List breakpoints" },
-         t = { function() dap.set_breakpoint(vim.fn.input "Breakpoint condition: ") end, "Conditional breakpoint" },
-      },
+      ["<Left>"] = { dap.step_back, "Step back" },
+      ["<Down>"] = { dap.step_into, "Step into" },
+      ["<Right>"] = { dap.step_over, "Step over" },
+      ["<Up>"] = { dap.step_out, "Step out" },
       c = { dap.continue, "Continue" },
-      f = {
-         name = "Frame",
-         d = { dap.down, "Frame down" },
-         f = { t.extensions.dap.frames, "Show frames" },
-         u = { dap.up, "Frame up" },
-      },
+      d = { dap.clear_breakpoints, "Delete breakpoints" },
+      f = { t.extensions.dap.frames, "Show frames" },
       k = { dap.terminate, "Kill dap session" },
-      s = {
-         name = "Step",
-         b = { dap.step_back, "Step back" },
-         c = { dap.run_to_cursor, "Step to cursor" },
-         i = { dap.step_into, "Step into" },
-         o = { dap.step_over, "Step over" },
-         O = { dap.step_out, "Step out" },
-      },
-      t = { dap.toggle_breakpoint, "Toggle breakpoint" },
+      l = { t.extensions.dap.list_breakpoints, "List breakpoints" },
+      r = { dap.run_to_cursor, "Run to cursor" },
+      t = { function() dap.toggle_breakpoint(vim.fn.input "Breakpoint condition: ") end, "Toggle breakpoint" },
    },
 
-   e = {
-      name = "Errors",
-      d = { function() trouble.toggle "document_diagnostics" end, "Document diagnostics" },
-      n = { vim.diagnostic.goto_next, "Go to next diagnostic" },
-      p = { vim.diagnostic.goto_prev, "Go to previous diagnostic" },
-      w = { function() trouble.toggle "workspace_diagnostics" end, "Workspace diagnostics" },
-   },
-
+   -- e
    -- f
    -- g
    -- h
@@ -68,19 +50,25 @@ require("which-key").register({
       t = { b.lsp_type_definitions, "Go to type definition" },
       u = { b.lsp_references, "Find Usages" },
    },
+
    -- j
    -- k
-   l = { gitsigns.blame_line, "Show blame for the current line" },
+
+   l = {
+      name = "Lenses",
+      d = { function() trouble.toggle "document_diagnostics" end, "Document diagnostics" },
+      n = { vim.diagnostic.goto_next, "Go to next diagnostic" },
+      p = { vim.diagnostic.goto_prev, "Go to previous diagnostic" },
+      w = { function() trouble.toggle "workspace_diagnostics" end, "Workspace diagnostics" },
+   },
+
    -- m
 
    n = { function() vim.cmd "bn" end, "Go to next buffer" },
    o = { require("session-lens").search_session, "Open nvim session" },
    p = { function() vim.cmd "bp" end, "Go to previous buffer" },
    q = { function() require("close_buffers").delete { type = "this", force = true } end, "Delete this buffer" },
-   r = {
-      name = "Refactor",
-      r = { vim.lsp.buf.rename, "Rename with LSP" },
-   },
+   r = { vim.lsp.buf.rename, "Rename with LSP" },
    s = { function() b.live_grep { hidden = true } end, "Search text occurrence" },
    u = {
       name = "Unit Test",
@@ -166,3 +154,7 @@ require("which-key").register({
    ["!"] = { function() vim.cmd "bd!" end, "Force close buffer" },
    ["<space>"] = { function() b.find_files { hidden = true } end, "Find file" },
 }, { prefix = "<leader>" })
+
+which_key.register {
+   ["<ESC>"] = { ":noh<CR>:silent LuaSnipUnlinkCurrent<CR>", "Escape" },
+}

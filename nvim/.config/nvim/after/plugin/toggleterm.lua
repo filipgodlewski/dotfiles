@@ -10,7 +10,7 @@ require("toggleterm").setup {
    end,
    shade_terminals = false,
    start_in_insert = true,
-   open_mapping = [[\\]],
+   open_mapping = [[ t]],
    insert_mappings = false,
    autochdir = true,
    direction = get_width() > math.floor(120 * 9) and "vertical" or "float",

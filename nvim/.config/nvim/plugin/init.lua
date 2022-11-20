@@ -44,7 +44,28 @@ return require("packer").startup {
             "JoosepAlviste/nvim-ts-context-commentstring",
          },
       }
-      use { "nvim-tree/nvim-web-devicons", config = function() require("nvim-web-devicons").setup {} end }
+      use {
+         "nvim-tree/nvim-tree.lua",
+         requires = {
+            { "nvim-tree/nvim-web-devicons", config = function() require("nvim-web-devicons").setup {} end },
+         },
+         config = function()
+            require("nvim-tree").setup {
+               hijack_cursor = true,
+               sync_root_with_cwd = true,
+               sort_by = "case_sensitive",
+               view = {
+                  adaptive_size = true,
+                  centralize_selection = true,
+                  width = "25%",
+                  side = "right",
+               },
+               diagnostics = {
+                  enable = true,
+               },
+            }
+         end,
+      }
       use {
          "rmagatti/auto-session",
          config = function()

@@ -1,7 +1,7 @@
-local ls = require("luasnip")
-local types = require("luasnip.util.types")
+local ls = require "luasnip"
+local types = require "luasnip.util.types"
 
-ls.config.setup({
+ls.config.setup {
    history = true,
    update_events = "TextChanged,TextChangedI",
    delete_check_events = "TextChanged,InsertLeave",
@@ -13,8 +13,8 @@ ls.config.setup({
          },
       },
    },
-})
+}
 
-require "luasnip-ts-snippets".setup {
+require("luasnip-ts-snippets").setup {
    active_choice_highlight_group = "LuaSnipChoiceActive",
 }

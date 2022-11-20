@@ -6,34 +6,11 @@ local dap = require "dap"
 local neotest = require "neotest"
 
 require("which-key").register({
-   a = {
-      name = "Debug",
-      b = {
-         name = "Breakpoint",
-         c = { dap.clear_breakpoints, "Clear breakpoints" },
-         l = { t.extensions.dap.list_breakpoints, "List breakpoints" },
-         s = { function() dap.set_breakpoint(vim.fn.input "Breakpoint condition: ") end, "Set breakpoint" },
-         t = { dap.toggle_breakpoint, "Toggle breakpoint" },
-      },
-      c = { dap.continue, "Continue" },
-      d = { dap.down, "Frame down" },
-      f = { t.extensions.dap.frames, "Show frames" },
-      k = { dap.terminate, "Kill dap session" },
-      s = {
-         name = "Step",
-         b = { dap.step_back, "Step back" },
-         c = { dap.run_to_cursor, "Step to cursor" },
-         i = { dap.step_into, "Step into" },
-         o = { dap.step_over, "Step over" },
-         O = { dap.step_out, "Step out" },
-      },
-      u = { dap.up, "Frame up" },
-   },
+   -- a
    -- b
-   -- c
 
-   d = {
-      name = "Diff",
+   c = {
+      name = "Compare",
       c = { function() vim.cmd "DiffviewClose" end, "Close diff view" },
       f = { function() vim.cmd "DiffviewFocusFiles" end, "Focus on Files pane" },
       n = { gitsigns.next_hunk, "Next hunk" },
@@ -43,6 +20,33 @@ require("which-key").register({
       s = { gitsigns.stage_hunk, "Stage hunk" },
       t = { function() vim.cmd "DiffviewToggleFiles" end, "Toggle Files pane" },
       u = { gitsigns.undo_stage_hunk, "Undo staging hunk" },
+   },
+
+   d = {
+      name = "Debug",
+      b = {
+         name = "Breakpoint",
+         c = { dap.clear_breakpoints, "Clear breakpoints" },
+         l = { t.extensions.dap.list_breakpoints, "List breakpoints" },
+         t = { function() dap.set_breakpoint(vim.fn.input "Breakpoint condition: ") end, "Conditional breakpoint" },
+      },
+      c = { dap.continue, "Continue" },
+      f = {
+         name = "Frame",
+         d = { dap.down, "Frame down" },
+         f = { t.extensions.dap.frames, "Show frames" },
+         u = { dap.up, "Frame up" },
+      },
+      k = { dap.terminate, "Kill dap session" },
+      s = {
+         name = "Step",
+         b = { dap.step_back, "Step back" },
+         c = { dap.run_to_cursor, "Step to cursor" },
+         i = { dap.step_into, "Step into" },
+         o = { dap.step_over, "Step over" },
+         O = { dap.step_out, "Step out" },
+      },
+      t = { dap.toggle_breakpoint, "Toggle breakpoint" },
    },
 
    e = {
@@ -78,7 +82,6 @@ require("which-key").register({
       r = { vim.lsp.buf.rename, "Rename with LSP" },
    },
    s = { function() b.live_grep { hidden = true } end, "Search text occurrence" },
-   -- t
    u = {
       name = "Unit Test",
       d = {

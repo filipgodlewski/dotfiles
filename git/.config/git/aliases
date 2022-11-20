@@ -13,7 +13,7 @@ s = status --short
 sm = submodule
 st = stash
 
-acp = !git au && git c && git push
+send = !git pull && git au && git c && git push
 reset-author = commit --amend --reset-author --no-edit
 conflicts = diff --name-only --diff-filter=U
 optimize = gc --prune=now --aggressive

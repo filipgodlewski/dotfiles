@@ -1,0 +1,5 @@
+.cache/bookmarks
+dotfiles/alacritty/.config/alacritty
+dotfiles/git/.config/git
+dotfiles/nvim/.config/nvim
+dotfiles/zsh/.config/zsh

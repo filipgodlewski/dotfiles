@@ -1,4 +1,5 @@
 local fb_actions = require("telescope").extensions.file_browser.actions
+local my_helpers = require "my.helpers"
 
 require("telescope").setup {
    defaults = {
@@ -22,6 +23,9 @@ require("telescope").setup {
          "node_modules",
          "pack/plugins",
       },
+      mappings = {
+         i = { ["<C-Q>"] = { my_helpers.setup_search, type = "action" } },
+      },
    },
    extensions = {
       ["ui-select"] = {
@@ -36,19 +40,13 @@ require("telescope").setup {
          theme = "ivy",
          grouped = true,
          hidden = true,
-         mappings = {
-            i = {
-               ["<S-CR>"] = false,
-               ["<C-CR>"] = fb_actions.create_from_prompt,
-            },
-         },
       },
       ["session-lens"] = {
          winblend = 0,
          prompt_title = "Switch Nvim Session",
          mappings = {
-            i = { ["<c-d>"] = fb_actions.remove },
-            n = { ["<c-d>"] = fb_actions.remove },
+            i = { ["<C-d>"] = fb_actions.remove },
+            n = { ["<C-d>"] = fb_actions.remove },
          },
       },
    },
@@ -56,8 +54,8 @@ require("telescope").setup {
       buffers = {
          theme = "dropdown",
          mappings = {
-            i = { ["<c-d>"] = require("telescope.actions").delete_buffer },
-            n = { ["<c-d>"] = require("telescope.actions").delete_buffer },
+            i = { ["<C-d>"] = "delete_buffer" },
+            n = { ["<C-d>"] = "delete_buffer" },
          },
       },
       spell_suggest = { theme = "cursor" },

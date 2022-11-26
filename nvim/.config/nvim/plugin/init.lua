@@ -33,7 +33,10 @@ return require("packer").startup {
       use "akinsho/nvim-toggleterm.lua"
       use "rcarriga/nvim-notify"
       use "folke/which-key.nvim"
-      use "kazhala/close-buffers.nvim"
+      use {
+         "kazhala/close-buffers.nvim",
+         config = function() require("close_buffers").setup { preserve_window_layout = { "this" } } end,
+      }
       use { "lewis6991/gitsigns.nvim", config = function() require("gitsigns").setup { signcolumn = false } end }
       use "lewis6991/impatient.nvim"
       use {
@@ -43,28 +46,6 @@ return require("packer").startup {
             "nvim-treesitter/playground",
             "JoosepAlviste/nvim-ts-context-commentstring",
          },
-      }
-      use {
-         "nvim-tree/nvim-tree.lua",
-         requires = {
-            { "nvim-tree/nvim-web-devicons", config = function() require("nvim-web-devicons").setup {} end },
-         },
-         config = function()
-            require("nvim-tree").setup {
-               hijack_cursor = true,
-               sync_root_with_cwd = true,
-               sort_by = "case_sensitive",
-               view = {
-                  adaptive_size = true,
-                  centralize_selection = true,
-                  width = "25%",
-                  side = "right",
-               },
-               diagnostics = {
-                  enable = true,
-               },
-            }
-         end,
       }
       use {
          "rmagatti/auto-session",
@@ -108,13 +89,18 @@ return require("packer").startup {
             { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
             "nvim-telescope/telescope-file-browser.nvim",
             "benfowler/telescope-luasnip.nvim",
+            "nvim-telescope/telescope-live-grep-args.nvim",
          },
       }
       use { "numToStr/Comment.nvim", config = function() require("Comment").setup {} end }
       use { "sindrets/diffview.nvim", cmd = "Diffview*" }
 
       -- debugging / testing / lsp
-      use { "folke/trouble.nvim", config = function() require("trouble").setup() end }
+      use {
+         "folke/trouble.nvim",
+         requires = { "kyazdani42/nvim-web-devicons" },
+         config = function() require("trouble").setup() end,
+      }
       use {
          "nvim-neotest/neotest",
          requires = {

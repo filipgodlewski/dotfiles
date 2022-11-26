@@ -15,7 +15,7 @@ vim.opt.expandtab = true
 vim.opt.fileformat = "unix"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.grepformat = "%f:%l:%c:%m"
-vim.opt.grepprg = "rg --vimgrep --no-heading --case-sensitive --follow --word-regexp"
+vim.opt.grepprg = "rg --vimgrep --no-heading --smart-case"
 vim.opt.hidden = true
 vim.opt.ignorecase = true
 vim.opt.inccommand = "split"
@@ -48,3 +48,4 @@ vim.opt.sessionoptions = { "blank", "buffers", "curdir", "folds", "help", "tabpa
 -- vim.opt.splitkeep = "screen"  -- uncomment in nvim 0.9
 
 require("my.project_configs").setup()
+vim.cmd "packadd cfilter"

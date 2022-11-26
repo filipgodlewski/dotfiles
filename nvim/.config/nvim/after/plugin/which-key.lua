@@ -1,19 +1,35 @@
 local which_key = require "which-key"
 local gitsigns = require "gitsigns"
-local t = require "telescope"
-local b = require "telescope.builtin"
+local telescope = require "telescope"
+local builtin = require "telescope.builtin"
 local trouble = require "trouble"
-local dap = require "dap"
 local neotest = require "neotest"
+local dap = require "dap"
+local my_helpers = require "my.helpers"
+local close_buffers = require "close_buffers"
 
 which_key.register({
+   N = { function() my_helpers.put_cmd "Notifications" end, "Notifications" },
+   M = { function() my_helpers.put_cmd "messages" end, "Messages" },
    -- a
-   -- b
+   b = {
+      name = "Breakpoint",
+      d = { dap.clear_breakpoints, "Delete all" },
+      c = { function() dap.set_breakpoint(vim.fn.input "Condition: ") end, "Conditional" },
+      l = { telescope.extensions.dap.list_breakpoints, "List" },
+      t = { dap.toggle_breakpoint, "Toggle" },
+   },
+   c = { my_helpers.search, "Quickfix" },
 
-   c = {
-      name = "Compare",
-      c = { function() vim.cmd "DiffviewClose" end, "Close diff view" },
-      f = { function() vim.cmd "DiffviewFocusFiles" end, "Focus on Files pane" },
+   d = { my_helpers.setup_debugger, "Debug" },
+
+   -- e
+   -- frames
+   -- g
+
+   h = {
+      name = "Hunks",
+      c = { function() vim.cmd "DiffviewClose" end, "Close diff" },
       n = { gitsigns.next_hunk, "Next hunk" },
       o = { function() vim.cmd "DiffviewOpen" end, "Open diff view" },
       p = { gitsigns.prev_hunk, "Previous hunk" },
@@ -23,32 +39,12 @@ which_key.register({
       u = { gitsigns.undo_stage_hunk, "Undo staging hunk" },
    },
 
-   d = {
-      name = "Debug",
-      ["<Left>"] = { dap.step_back, "Step back" },
-      ["<Down>"] = { dap.step_into, "Step into" },
-      ["<Right>"] = { dap.step_over, "Step over" },
-      ["<Up>"] = { dap.step_out, "Step out" },
-      c = { dap.continue, "Continue" },
-      d = { dap.clear_breakpoints, "Delete breakpoints" },
-      f = { t.extensions.dap.frames, "Show frames" },
-      k = { dap.terminate, "Kill dap session" },
-      l = { t.extensions.dap.list_breakpoints, "List breakpoints" },
-      r = { dap.run_to_cursor, "Run to cursor" },
-      t = { function() dap.toggle_breakpoint(vim.fn.input "Breakpoint condition: ") end, "Toggle breakpoint" },
-   },
-
-   -- e
-   -- f
-   -- g
-   -- h
-
    i = {
       name = "Inspect",
-      d = { b.lsp_definitions, "Go to definition" },
+      d = { builtin.lsp_definitions, "Go to definition" },
       s = { vim.lsp.buf.hover, "Show signature" },
-      t = { b.lsp_type_definitions, "Go to type definition" },
-      u = { b.lsp_references, "Find Usages" },
+      t = { builtin.lsp_type_definitions, "Go to type definition" },
+      u = { builtin.lsp_references, "Find Usages" },
    },
 
    -- j
@@ -63,13 +59,14 @@ which_key.register({
    },
 
    -- m
+   -- n
 
-   n = { function() vim.cmd "bn" end, "Go to next buffer" },
    o = { require("session-lens").search_session, "Open nvim session" },
-   p = { function() vim.cmd "bp" end, "Go to previous buffer" },
-   q = { function() require("close_buffers").delete { type = "this", force = true } end, "Delete this buffer" },
+   -- p
+   q = { function() close_buffers.delete { type = "this", force = true } end, "Delete this buffer" },
    r = { vim.lsp.buf.rename, "Rename with LSP" },
-   s = { function() b.live_grep { hidden = true } end, "Search text occurrence" },
+   -- step
+   -- t -> terminal
    u = {
       name = "Unit Test",
       d = {
@@ -123,7 +120,6 @@ which_key.register({
          "Toggle test watcher",
       },
    },
-   v = { b.help_tags, "Vim help tags" },
    w = {
       function()
          vim.cmd "w"
@@ -137,22 +133,20 @@ which_key.register({
    x = {
       function()
          neotest.summary.close()
+         trouble.close()
          dap.terminate()
+         close_buffers.delete { type = "nameless", force = true }
          vim.cmd "wa"
          vim.cmd "qa"
       end,
       "Save and close all",
    },
    -- y
-   z = { t.extensions.file_browser.file_browser, "Browse files" },
-   [","] = { b.buffers, "Find buffers" },
-   ["."] = { b.resume, "Resume last search" },
-   ["?"] = {
-      function() vim.cmd [[15new +put\ =\ execute('messages')|set\ nornu\ nonu]] end,
-      "Open messages in a split buffer",
-   },
-   ["!"] = { function() vim.cmd "bd!" end, "Force close buffer" },
-   ["<space>"] = { function() b.find_files { hidden = true } end, "Find file" },
+   z = { telescope.extensions.file_browser.file_browser, "Browse files" },
+   [","] = { builtin.buffers, "Find buffers" },
+   ["."] = { builtin.resume, "Resume last search" },
+   ["?"] = { builtin.help_tags, "Vim help tags" },
+   ["<space>"] = { function() builtin.find_files { hidden = true } end, "Find file" },
 }, { prefix = "<leader>" })
 
 which_key.register {

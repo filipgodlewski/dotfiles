@@ -45,4 +45,4 @@ setup("sumneko_lua", {
    },
 })
 
-vim.diagnostic.config { update_in_insert = true, signs = false }
+vim.diagnostic.config { virtual_text = false, update_in_insert = false, signs = false }

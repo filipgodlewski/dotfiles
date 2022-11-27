@@ -24,7 +24,7 @@ return require("packer").startup {
          requires = {
             "WhoIsSethDaniel/mason-tool-installer.nvim",
             "williamboman/mason-lspconfig.nvim",
-            "RubixDev/mason-update-all",
+            { "RubixDev/mason-update-all", config = function() require("mason-update-all").setup() end },
          },
       }
       use "jose-elias-alvarez/null-ls.nvim"

@@ -30,8 +30,7 @@ local function trouble_qf_refresh() trouble.refresh { auto = true, provider = "q
 M.clear = function()
    vim.cmd "cexpr []"
    vim.schedule(trouble.close)
-   M.deregister({ "c", "f", "r", "s", "t", "u" }, { prefix = "<leader>c" })
-   which_key.register { ["<leader>c"] = { M.search, "Search" } }
+   M.deregister({ "c", "f", "r", "t", "u" }, { prefix = "<leader>c" })
 end
 
 M.filter = function()

@@ -54,28 +54,24 @@ vim.diagnostic.config { virtual_text = false, update_in_insert = false, signs = 
 vim.api.nvim_create_autocmd({ "BufFilePost", "BufEnter", "BufWinEnter", "LspAttach" }, {
    group = vim.api.nvim_create_augroup("LspKeymaps", { clear = true }),
    callback = function()
-      if vim.tbl_isempty(vim.lsp.get_active_clients { bufnr = 0 }) then
-         my_helpers.deregister({ "d", "s", "t", "u" }, { prefix = "<leader>i" })
-         my_helpers.deregister({ "d", "n", "p", "w" }, { prefix = "<leader>l" })
-         my_helpers.deregister({ "i", "l", "r" }, { prefix = "<leader>" })
-      else
+      if not vim.tbl_isempty(vim.lsp.get_active_clients { bufnr = 0 }) then
          which_key.register({
             i = {
                name = "Inspect",
-               d = { builtin.lsp_definitions, "Go to definition" },
-               s = { vim.lsp.buf.hover, "Show signature" },
-               t = { builtin.lsp_type_definitions, "Go to type definition" },
-               u = { builtin.lsp_references, "Find Usages" },
+               d = { builtin.lsp_definitions, "Definition" },
+               s = { vim.lsp.buf.hover, "Signature" },
+               t = { builtin.lsp_type_definitions, "Type definition" },
+               u = { builtin.lsp_references, "Usages" },
             },
             l = {
                name = "Lenses",
-               d = { function() trouble.toggle "document_diagnostics" end, "Document diagnostics" },
-               n = { vim.diagnostic.goto_next, "Go to next diagnostic" },
-               p = { vim.diagnostic.goto_prev, "Go to previous diagnostic" },
-               w = { function() trouble.toggle "workspace_diagnostics" end, "Workspace diagnostics" },
+               d = { function() trouble.toggle "document_diagnostics" end, "Document" },
+               n = { vim.diagnostic.goto_next, "Next" },
+               p = { vim.diagnostic.goto_prev, "Previous" },
+               w = { function() trouble.toggle "workspace_diagnostics" end, "Workspace" },
             },
             r = { vim.lsp.buf.rename, "Rename" },
-         }, { prefix = "<leader>" })
+         }, { prefix = "<leader>", buffer = 0 })
       end
    end,
 })

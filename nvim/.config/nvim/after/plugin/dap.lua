@@ -18,8 +18,7 @@ end
 local color = "DiffChange"
 vim.fn.sign_define("DapStopped", { text = "ﰲ", texthl = color, linehl = color, numhl = color })
 
-dap.listeners.after.event_initialized["dapui_config"] = function(session)
-   print(vim.inspect(session))
+dap.listeners.after.event_initialized["dapui_config"] = function()
    require("neotest").summary.close()
    which_key.register({
       d = {
@@ -92,13 +91,11 @@ dapui.setup {
 vim.api.nvim_create_autocmd({ "BufFilePost", "BufEnter", "BufWinEnter", "LspAttach" }, {
    group = vim.api.nvim_create_augroup("DebugKeymaps", { clear = true }),
    callback = function()
-      if dap.configurations[vim.api.nvim_buf_get_option(0, "filetype")] == nil then
-         my_helpers.deregister({ "bb", "b", "dc", "d" }, { prefix = "<leader>" })
-      else
+      if dap.configurations[vim.api.nvim_buf_get_option(0, "filetype")] ~= nil then
          which_key.register({
             b = { name = "Breakpoint", b = { my_helpers.setup_breakpoint, "Set" } },
             d = { name = "Debug", c = { dap.continue, "Continue" } },
-         }, { prefix = "<leader>" })
+         }, { prefix = "<leader>", buffer = 0 })
       end
    end,
 })

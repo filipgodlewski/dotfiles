@@ -24,6 +24,7 @@ return require("packer").startup {
          requires = {
             "WhoIsSethDaniel/mason-tool-installer.nvim",
             "williamboman/mason-lspconfig.nvim",
+            "RubixDev/mason-update-all",
          },
       }
       use "jose-elias-alvarez/null-ls.nvim"
@@ -37,7 +38,7 @@ return require("packer").startup {
          "kazhala/close-buffers.nvim",
          config = function() require("close_buffers").setup { preserve_window_layout = { "this" } } end,
       }
-      use { "lewis6991/gitsigns.nvim", config = function() require("gitsigns").setup { signcolumn = false } end }
+      use "lewis6991/gitsigns.nvim"
       use "lewis6991/impatient.nvim"
       use {
          "nvim-treesitter/nvim-treesitter",
@@ -108,14 +109,6 @@ return require("packer").startup {
             "nvim-treesitter/nvim-treesitter",
             "nvim-neotest/neotest-python",
          },
-         config = function()
-            require("neotest").setup {
-               adapters = { require "neotest-python" },
-               diagnostic = { enabled = false },
-               output = { open_on_run = false },
-               status = { virtual_text = false },
-            }
-         end,
       }
       use "neovim/nvim-lspconfig"
       use {

@@ -49,8 +49,12 @@ function update() {
   pipx upgrade-all &> /dev/null
 
   echo "🔥 Upgrade nvim"
+  echo "🚧 Updating Remote plugins..."
   nvim --headless +"UpdateRemotePlugins | q" &> /dev/null
+  echo "🚧 Updating Packer..."
   nvim --headless +"autocmd User PackerComplete quitall" +"PackerSync" &> /dev/null
+  echo "🚧 Updating Mason..."
+  nvim --headless +"autocmd User MasonUpdateAllComplete quitall" +'MasonUpdateAll' &> /dev/null
 
   echo "🔥 Upgrade hosts"
   sudo curl https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts -o /etc/hosts --silent

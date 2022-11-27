@@ -40,6 +40,7 @@ vim.opt.splitright = true
 vim.opt.swapfile = false
 vim.opt.syntax = "enable"
 vim.opt.termguicolors = true
+vim.opt.timeoutlen = 100
 vim.opt.undofile = true
 vim.opt.undolevels = 10000
 vim.opt.updatetime = 50
@@ -49,3 +50,31 @@ vim.opt.sessionoptions = { "blank", "buffers", "curdir", "folds", "help", "tabpa
 
 require("my.project_configs").setup()
 vim.cmd "packadd cfilter"
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+   group = vim.api.nvim_create_augroup("GlobalOnSave", { clear = true }),
+   callback = function()
+      local ok, neotest = pcall(require, "neotest")
+      if ok == false then return end
+      if vim.g.test_watcher == true and neotest.run.adapters() ~= {} then
+         neotest.run.run(vim.fn.expand "%")
+         neotest.summary.open()
+      end
+   end,
+})
+
+vim.api.nvim_create_autocmd("VimLeavePre", {
+   group = vim.api.nvim_create_augroup("CleanupStuff", { clear = true }),
+   callback = function()
+      pcall(require("neotest").summary.close)
+      pcall(require("trouble").close)
+      pcall(require("dap").terminate)
+      pcall(require("close_buffers").delete, { type = "nameless", force = true })
+      pcall(require("close_buffers").delete, { type = "hidden", force = true })
+   end,
+})
+
+vim.api.nvim_create_autocmd("User", {
+   pattern = "NeotestSummaryOpen",
+   callback = function() end,
+})

@@ -1,6 +1,9 @@
 local pydap = require "dap-python"
 local dap = require "dap"
 local dapui = require "dapui"
+local which_key = require "which-key"
+local my_helpers = require "my.helpers"
+local telescope = require "telescope"
 
 local dap_signs = {
    DapBreakpoint = "DiagnosticVirtualTextInfo",
@@ -15,9 +18,42 @@ end
 local color = "DiffChange"
 vim.fn.sign_define("DapStopped", { text = "ﰲ", texthl = color, linehl = color, numhl = color })
 
-dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open {} end
-dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close {} end
-dap.listeners.before.event_exited["dapui_config"] = function() dapui.close {} end
+dap.listeners.after.event_initialized["dapui_config"] = function(session)
+   print(vim.inspect(session))
+   require("neotest").summary.close()
+   which_key.register({
+      d = {
+         name = "Debug [ACTIVE]",
+         c = { dap.continue, "Continue" },
+         k = { dap.terminate, "Kill" },
+      },
+      s = {
+         name = "Step [ACTIVE]",
+         b = { dap.step_back, "Step back" },
+         d = { dap.step_into, "Step into" },
+         r = { dap.step_over, "Step over" },
+         t = { dap.run_to_cursor, "To cursor" },
+         u = { dap.step_out, "Step out" },
+      },
+      f = {
+         name = "Frames [ACTIVE]",
+         d = { dap.down, "Down" },
+         l = { telescope.extensions.dap.frames, "List" },
+         u = { dap.up, "Up" },
+      },
+   }, { prefix = "<leader>" })
+   dapui.open {}
+end
+
+local on_event_end = function()
+   my_helpers.deregister({ "k" }, { prefix = "<leader>d" })
+   my_helpers.deregister({ "b", "d", "r", "t", "u" }, { prefix = "<leader>s" })
+   my_helpers.deregister({ "d", "l", "u" }, { prefix = "<leader>f" })
+   dapui.close {}
+end
+
+dap.listeners.before.event_terminated["dapui_config"] = on_event_end
+dap.listeners.before.event_exited["dapui_config"] = on_event_end
 
 dap.configurations.python = {}
 
@@ -43,8 +79,8 @@ dapui.setup {
       },
       {
          elements = {
-            { id = "breakpoints", size = 0.2 },
-            { id = "repl", size = 0.5 },
+            "breakpoints",
+            "repl",
             "console",
          },
          size = 0.2,
@@ -52,3 +88,17 @@ dapui.setup {
       },
    },
 }
+
+vim.api.nvim_create_autocmd({ "BufFilePost", "BufEnter", "BufWinEnter", "LspAttach" }, {
+   group = vim.api.nvim_create_augroup("DebugKeymaps", { clear = true }),
+   callback = function()
+      if dap.configurations[vim.api.nvim_buf_get_option(0, "filetype")] == nil then
+         my_helpers.deregister({ "bb", "b", "dc", "d" }, { prefix = "<leader>" })
+      else
+         which_key.register({
+            b = { name = "Breakpoint", b = { my_helpers.setup_breakpoint, "Set" } },
+            d = { name = "Debug", c = { dap.continue, "Continue" } },
+         }, { prefix = "<leader>" })
+      end
+   end,
+})

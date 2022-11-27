@@ -66,43 +66,30 @@ M.setup_search = function(prompt_bufnr)
    actions.smart_send_to_qflist(prompt_bufnr)
    trouble.open "quickfix"
    trouble.refresh { auto = true, provider = "qf" }
-   M.deregister { "<leader>c" }
    which_key.register({
       name = "Search [ACTIVE]",
       c = { M.clear, "Clean" },
       f = { M.filter, "Cfilter" },
       r = { M.replace, "Replace" },
-      s = { M.search, "Search" },
       t = { function() trouble.toggle "quickfix" end, "Toggle" },
    }, { prefix = "<leader>c" })
 end
 
-M.setup_debugger = function()
-   dap.continue()
-   if dap.session() == nil then return end
-   require("neotest").summary.close()
-   M.deregister { "<leader>d" }
+M.delete_breakpoints = function()
+   dap.clear_breakpoints()
+   M.deregister({ "d", "l", "t" }, { prefix = "<leader>b" })
+end
+
+M.setup_breakpoint = function()
+   local ok, cond = pcall(vim.fn.input, "Condition: ")
+   if ok == false then return end
+   dap.set_breakpoint(cond)
    which_key.register({
-      d = {
-         name = "Debug",
-         c = { dap.continue, "Continue" },
-         k = { dap.terminate, "Kill" },
-      },
-      s = {
-         name = "Step",
-         b = { dap.step_back, "Step back" },
-         d = { dap.step_into, "Step into" },
-         r = { dap.step_over, "Step over" },
-         t = { dap.run_to_cursor, "To cursor" },
-         u = { dap.step_out, "Step out" },
-      },
-      f = {
-         name = "Frames",
-         d = { dap.down, "Down" },
-         l = { telescope.extensions.dap.frames, "List" },
-         u = { dap.up, "Up" },
-      },
-   }, { prefix = "<leader>" })
+      name = "Breakpoint [ACTIVE]",
+      d = { M.delete_breakpoints, "Deactivate" },
+      l = { telescope.extensions.dap.list_breakpoints, "List" },
+      t = { dap.toggle_breakpoint, "Toggle" },
+   }, { prefix = "<leader>b" })
 end
 
 return M

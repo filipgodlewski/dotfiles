@@ -2,14 +2,39 @@ local lspconfig = require "lspconfig"
 local which_key = require "which-key"
 local trouble = require "trouble"
 local builtin = require "telescope.builtin"
-local my_helpers = require "my.helpers"
+require("mason").setup()
+require("mason-tool-installer").setup {
+   ensure_installed = {
+      "black",
+      "codelldb",
+      "css-lsp",
+      "debugpy",
+      "dockerfile-language-server",
+      "fixjson",
+      "flake8",
+      "isort",
+      "json-lsp",
+      "lua-language-server",
+      "markdownlint",
+      "marksman",
+      "pyright",
+      "rust-analyzer",
+      "stylua",
+      "taplo",
+      "yaml-language-server",
+   },
+   auto_update = true,
+}
 
 local global_opts = {
    capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
-   autostart = true,
    on_attach = function(client, bufnr)
       if client.server_capabilities.documentSymbolProvider then require("nvim-navic").attach(client, bufnr) end
    end,
+}
+
+require("mason-lspconfig").setup_handlers {
+   function(server_name) require("lspconfig")[server_name].setup(global_opts) end,
 }
 
 local setup = function(server, custom_opts)
@@ -49,7 +74,12 @@ setup("sumneko_lua", {
    },
 })
 
-vim.diagnostic.config { virtual_text = false, update_in_insert = false, signs = false }
+vim.diagnostic.config {
+   virtual_text = false,
+   signs = false,
+   severity_sort = true,
+   float = false,
+}
 
 vim.api.nvim_create_autocmd({ "BufFilePost", "BufEnter", "BufWinEnter", "LspAttach" }, {
    group = vim.api.nvim_create_augroup("LspKeymaps", { clear = true }),

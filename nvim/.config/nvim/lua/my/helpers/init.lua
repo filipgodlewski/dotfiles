@@ -22,7 +22,7 @@ M.deregister = function(mappings, opts)
       pcall(vim.api.nvim_del_keymap, opts.mode, mapping)
       all_mappings[mapping] = "which_key_ignore"
    end
-   require("which-key").register(all_mappings)
+   which_key.register(all_mappings)
 end
 
 local function trouble_qf_refresh() trouble.refresh { auto = true, provider = "qf" } end
@@ -59,7 +59,21 @@ M.search = function()
    builtin.live_grep { glob_pattern = ft_mask }
 end
 
-M.put_cmd = function(cmd) vim.cmd(string.format([[15new +put\ =\ execute('%s')|set\ nornu\ nonu]], cmd)) end
+M.put_cmd = function(cmd)
+   local bufname = "[Information]"
+   local bufnr = vim.fn.bufnr("\\" .. bufname)
+   if bufnr > 0 then vim.cmd(string.format("bw! %s", bufnr)) end
+
+   bufnr = vim.api.nvim_create_buf(false, true)
+   vim.api.nvim_buf_set_name(bufnr, bufname)
+
+   vim.cmd "below new"
+   vim.cmd "wincmd J"
+   vim.api.nvim_win_set_height(0, 10)
+   vim.api.nvim_win_set_buf(0, bufnr)
+   vim.cmd(string.format([[put =execute('%s')]], cmd))
+   which_key.register({ q = { "<CMD>bw!<CR>", string.format("Close %s", bufname) } }, { buffer = bufnr })
+end
 
 M.setup_search = function(prompt_bufnr)
    actions.smart_send_to_qflist(prompt_bufnr)
@@ -89,6 +103,37 @@ M.setup_breakpoint = function()
       l = { telescope.extensions.dap.list_breakpoints, "List" },
       t = { dap.toggle_breakpoint, "Toggle" },
    }, { prefix = "<leader>b" })
+end
+
+M.font_sizes = {
+   macbook_pro_16 = 12,
+   mac_mini = 16,
+   big = 24,
+   gigantic = 32,
+}
+
+M.change_alacritty_font_size = function()
+   local function format_item(item)
+      local words = vim.split(item, "_")
+      local capitalized_words = {}
+      for _, word in ipairs(words) do
+         local _word = string.gsub(word, "^%l", string.upper)
+         table.insert(capitalized_words, _word)
+      end
+      return string.format("%s (%s)", table.concat(capitalized_words, " "), M.font_sizes[item])
+   end
+
+   local function on_choice(choice)
+      pcall(vim.cmd, "argdelete")
+      vim.cmd "argadd ~/.config/alacritty/alacritty.yml"
+      local cmd = [[silent argdo %%s/\v(\s+size:) \d+/\1 %s/e | update | b# | bd# ]]
+      vim.cmd(string.format(cmd, M.font_sizes[choice]))
+      vim.cmd "argdelete"
+   end
+
+   local opts = { prompt = "Select Alacritty Font Size", format_item = format_item }
+
+   vim.ui.select(vim.tbl_keys(M.font_sizes), opts, on_choice)
 end
 
 return M

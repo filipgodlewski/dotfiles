@@ -20,6 +20,7 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local on_save = function(bufnr)
    vim.lsp.buf.format {
       bufnr = bufnr,
+      timeout_ms = 2000,
       filter = function(client) return client.name == "null-ls" end,
    }
 end
@@ -35,21 +36,47 @@ local on_attach = function(client, bufnr)
    end
 end
 
-null_ls.setup {
-   debug = true,
-   sources = {
-      null_ls.builtins.diagnostics.flake8,
-      null_ls.builtins.diagnostics.markdownlint,
+null_ls.setup { on_attach = on_attach }
 
-      -- python
+null_ls.register {
+   name = "python_helpers",
+   filetypes = { "python" },
+   sources = {
       in_place_formatter({ "python" }, "tidy-imports", { "--unaligned", "--replace", "$FILENAME" }),
       in_place_formatter({ "python" }, "auto-optional", { "$FILENAME" }),
+   },
+}
+
+null_ls.register {
+   name = "python_default",
+   filetypes = { "python" },
+   sources = {
+      null_ls.builtins.diagnostics.flake8,
       null_ls.builtins.formatting.black,
       null_ls.builtins.formatting.isort,
-
-      null_ls.builtins.formatting.fixjson,
-      null_ls.builtins.formatting.stylua,
-      null_ls.builtins.formatting.taplo,
    },
-   on_attach = on_attach,
+}
+
+null_ls.register {
+   name = "markdown_default",
+   filetype = { "markdown" },
+   sources = { null_ls.builtins.diagnostics.markdownlint },
+}
+
+null_ls.register {
+   name = "json_default",
+   filetypes = { "json" },
+   sources = { null_ls.builtins.formatting.fixjson },
+}
+
+null_ls.register {
+   name = "lua_default",
+   filetypes = { "lua" },
+   sources = { null_ls.builtins.formatting.stylua },
+}
+
+null_ls.register {
+   name = "toml_default",
+   filetypes = { "toml" },
+   sources = { null_ls.builtins.formatting.taplo },
 }

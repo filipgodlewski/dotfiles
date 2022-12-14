@@ -20,7 +20,7 @@ Follow the instructions if that fits your needs.
 
 Before the script, sign in to *Mac App Store*!
 
-```sh
+```bash
 xcode-select --install
 git clone https://github.com/filipgodlewski/dotfiles.git
 cd ~/dotfiles
@@ -31,7 +31,7 @@ Finally, **restart terminal**.
 
 ### Uninstall
 
-```sh
+```bash
 # Make sure you killed your tmux session first, otherwise it will fail
 cd ~/dotfiles
 make -s uninstall
@@ -41,7 +41,7 @@ make -s uninstall
 
 #### ZSH commands
 
-```sh
+```bash
 edit
 ```
 
@@ -57,7 +57,7 @@ Jumps into, opens nvim. When nvim is closed, pops directories stack.
 
 Additionally, reads `~/.cache/bookmarks/list.txt` for additional directories.
 
-```sh
+```bash
 update
 ```
 

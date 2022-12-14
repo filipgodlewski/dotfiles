@@ -1,3 +1,4 @@
+export WORDCHARS=${WORDCHARS/\/}
 source $HOME/.cargo/env
 export PATH=$XDG_CONFIG_HOME/git/commands:$PATH
 export PATH=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$HOMEBREW_PREFIX/opt/curl/bin:$PATH
@@ -37,4 +38,6 @@ rm -f $XDG_CONFIG_HOME/zsh/.zcompdump; compinit
 
 eval "$(starship init zsh)"
 
-(( $SHLVL == 1 )) && edit || :
+if (( $SHLVL == 1 )); then
+  nvim
+fi

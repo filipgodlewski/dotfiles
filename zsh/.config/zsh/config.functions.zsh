@@ -1,34 +1,10 @@
 #!/bin/zsh
 
-
-function edit() {
-  local bookmarks=$XDG_CACHE_HOME/bookmarks
-  mkdir -p $bookmarks ~/personal ~/learning ~/projects ~/dotfiles
-  [[ -f $bookmarks/list.txt ]] || echo bookmarks > $bookmarks/list.txt
-
-  local projects=(
-    "${(@f)$(cat $bookmarks/list.txt)}"
-    "${(@f)$(fd -c never -t d -H --base-directory ~ -g \.git personal learning projects dotfiles | awk '{sub(/\/.git\//, "");print}')}"
-  )
-
-  local selected=$(echo ${(F)projects} \
-  | fzf \
-    --cycle \
-    --header-first \
-    --header 'Open project in neovim' \
-    --height 100% \
-    --border \
-    --preview 'bat --color always --wrap auto --style plain $HOME/{}/README.*' \
-    --preview-window down,80%
-  )
-
-  [[ -z $selected ]] && return 127
-  pushd $HOME/$selected
-  nvim
-  popd
-}
-
 function update() {
+  if (( $SHLVL != 1 )); then
+    echo "💔 First close nvim"
+    return 1
+  fi
   echo "🔥 Upgrade brew"
   echo "📦 Update bundle"
   brew bundle --file=~/.Brewfile --quiet
@@ -49,16 +25,14 @@ function update() {
   pipx upgrade-all &> /dev/null
 
   echo "🔥 Upgrade nvim"
-  echo "🚧 Updating Remote plugins..."
-  nvim --headless +"UpdateRemotePlugins | q" &> /dev/null
   echo "🚧 Updating Packer..."
   nvim --headless +"autocmd User PackerComplete quitall" +"PackerSync" &> /dev/null
   echo "🚧 Updating Mason..."
   nvim --headless +"autocmd User MasonUpdateAllComplete quitall" +"MasonUpdateAll" &> /dev/null
-
-  echo "🔥 Upgrade hosts"
-  sudo curl https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts -o /etc/hosts --silent
-  sudo nvim --clean --headless +"g/ \(www\.\)\?\(linkedin\|reddit\).com/d" +"wq" /etc/hosts &> /dev/null
+  echo "🚧 Updating Treesitter..."
+  nvim --headless +"TSUpdateSync | q" &> /dev/null
+  echo "🚧 Updating Remote plugins..."
+  nvim --headless +"UpdateRemotePlugins | q" &> /dev/null
 
   echo "🔥 Upgrade nvim venv"
   local py=$XDG_DATA_HOME/venvs/nvim/bin/python
@@ -66,6 +40,10 @@ function update() {
 
   echo "🔥 Upgrade antidote (zsh)"
   antidote update > /dev/null
+
+  echo "🔥 Upgrade hosts"
+  sudo curl https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts -o /etc/hosts --silent
+  sudo nvim --clean --headless +"g/ \(www\.\)\?\(linkedin\|reddit\).com/d" +"wq" /etc/hosts &> /dev/null
 
   echo "✅ Done. You might want to restart zsh with: exec zsh"
 }

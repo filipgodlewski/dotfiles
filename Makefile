@@ -6,7 +6,7 @@ export PATH := $(HOMEBREW_PREFIX):$(HOME)/.local/bin:$(PATH)
 
 ZSH = $(HOMEBREW_PREFIX)/zsh
 BREWFILE = $(HOME)/dotfiles/brew/.Brewfile
-NVIM_VENV = $(XDG_DATA_HOME)/venvs/nvim
+NVIM_VENV = $(XDG_DATA_HOME)/nvim/venv
 
 .PHONY: stow brew
 
@@ -15,16 +15,14 @@ install: $(OS)
 uninstall: un$(OS)
 
 ## MacOS specific
-macos: brew hosts npm stow pip settings
-unmacos: unhosts unnpm unpip unstow unbrew
+macos: brew npm stow pip settings
+unmacos: unnpm unpip unstow unbrew
 
 brew:
 	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	# The following will fail on mas, mas does not sign in by itself
 	-export HOMEBREW_CASK_OPTS="--no-quarantine"; brew bundle --file=$(BREWFILE)
 	cat $(BREWFILE) | grep -E '^mas' | grep -o -E '\d+$$' | xargs mas install
-	$(HOMEBREW_PREFIX)/nvim --headless +"UpdateRemotePlugins | q" &> /dev/null
-	$(HOMEBREW_PREFIX)/nvim --headless -c "autocmd User PackerComplete quitall" -c "PackerSync" &> /dev/null
 
 unbrew:
 	# mas does not uninstall, so this step has to be done manually.
@@ -34,7 +32,6 @@ unbrew:
 
 hosts:
 	cp /etc/hosts ~/.cache/hosts
-	sudo curl https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts -o /etc/hosts
 
 unhosts:
 	sudo cp ~/.cache/hosts /etc/hosts
@@ -52,13 +49,14 @@ unstow:
 	stow -D */
 
 pip:
-	pipx install virtualenvwrapper
+	pipx install virtualenv
 	pipx install auto-optional
 	pipx install pyflyby
-	mkvirtualenv -i pynvim nvim
+	$(HOME)/.local/bin/virtualenv $(NVIM_VENV)
+	$(NVIM_VENV)/bin/python -m pip install pynvim
 
 unpip:
-	rmvirtualenv nvim
+	rm -rf $(NVIM_VENV)
 	pipx uninstall-all
 
 settings:

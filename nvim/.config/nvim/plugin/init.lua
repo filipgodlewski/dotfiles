@@ -29,7 +29,17 @@ return require("packer").startup {
       }
       use "jose-elias-alvarez/null-ls.nvim"
 
+      -- startup improvers
+      use "lewis6991/impatient.nvim"
+      use "nathom/filetype.nvim"
+      use "samjwill/nvim-unception"
+
       -- goodies
+      use {
+         "folke/todo-comments.nvim",
+         requires = "nvim-lua/plenary.nvim",
+         config = function() require("todo-comments").setup {} end,
+      }
       use "EdenEast/nightfox.nvim"
       use "akinsho/nvim-toggleterm.lua"
       use "rcarriga/nvim-notify"
@@ -39,32 +49,20 @@ return require("packer").startup {
          config = function() require("close_buffers").setup { preserve_window_layout = { "this" } } end,
       }
       use "lewis6991/gitsigns.nvim"
-      use "lewis6991/impatient.nvim"
       use {
          "nvim-treesitter/nvim-treesitter",
-         run = function() require("nvim-treesitter.install").update { with_sync = true } end,
          requires = {
             "nvim-treesitter/playground",
+            "nvim-treesitter/nvim-treesitter-context",
             "JoosepAlviste/nvim-ts-context-commentstring",
          },
       }
-      use {
-         "rmagatti/auto-session",
-         config = function()
-            require("auto-session").setup {
-               auto_session_suppress_dirs = { "~/", "~/Downloads", "/" },
-            }
-         end,
-         requires = {
-            {
-               "rmagatti/session-lens",
-               config = function() require("session-lens").setup { prompt_title = "Jump to nvim session" } end,
-            },
-         },
-      }
+      use { "natecraddock/workspaces.nvim", requires = "natecraddock/sessions.nvim" }
       use { "SmiteshP/nvim-navic", requires = "neovim/nvim-lspconfig" }
 
       -- writing tools
+      use { "phaazon/hop.nvim", requires = { "mfussenegger/nvim-treehopper" } }
+      use { "mizlan/iswap.nvim", config = function() require("iswap").setup {} end }
       use {
          "hrsh7th/nvim-cmp",
          requires = {
@@ -73,6 +71,7 @@ return require("packer").startup {
             "rcarriga/cmp-dap",
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-nvim-lsp-signature-help",
+            "hrsh7th/cmp-nvim-lsp-document-symbol",
             "hrsh7th/cmp-nvim-lua",
             "hrsh7th/cmp-path",
             "saadparwaiz1/cmp_luasnip",
@@ -87,13 +86,14 @@ return require("packer").startup {
             "nvim-lua/plenary.nvim",
             "nvim-telescope/telescope-ui-select.nvim",
             "nvim-telescope/telescope-dap.nvim",
-            { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+            {
+               "nvim-telescope/telescope-fzf-native.nvim",
+               run = "make",
+            },
             "nvim-telescope/telescope-file-browser.nvim",
-            "benfowler/telescope-luasnip.nvim",
-            "nvim-telescope/telescope-live-grep-args.nvim",
          },
       }
-      use { "numToStr/Comment.nvim", config = function() require("Comment").setup {} end }
+      use "numToStr/Comment.nvim"
       use { "sindrets/diffview.nvim", cmd = "Diffview*" }
 
       -- debugging / testing / lsp

@@ -1,7 +1,37 @@
 local fb_actions = require("telescope").extensions.file_browser.actions
 local my_helpers = require "my.helpers"
+local telescope = require "telescope"
+local actions_state = require "telescope.actions.state"
 
-require("telescope").setup {
+local search_in_folders = {
+   "~/personal",
+   "~/dotfiles",
+   "~/projects",
+   "~/learning",
+   "~/.local/share/nvim/site/pack/packer/start",
+}
+
+local exclude_patterns = {
+   -- omitted folders
+   "venv",
+   "**/__*",
+   -- folders specific to `learning`
+   "*-workspace",
+   "*.playground",
+   "*-challenge",
+   -- src folders
+   "target", -- rust
+   "src", -- python
+   "lua", -- lua
+}
+
+local function add_to_workspaces()
+   local entry = actions_state.get_selected_entry()
+   if not entry then return end
+   require("workspaces").add(entry.value)
+end
+
+telescope.setup {
    defaults = {
       prompt_prefix = "   ",
       selection_caret = "    ",
@@ -28,6 +58,14 @@ require("telescope").setup {
       },
    },
    extensions = {
+      ["session-lens"] = {
+         winblend = 0,
+         prompt_title = "Switch Nvim Session",
+         mappings = {
+            i = { ["<C-d>"] = fb_actions.remove },
+            n = { ["<C-d>"] = fb_actions.remove },
+         },
+      },
       ["ui-select"] = {
          require("telescope.themes").get_cursor {},
       },
@@ -38,15 +76,13 @@ require("telescope").setup {
       },
       file_browser = {
          theme = "ivy",
+         hijack_netrw = true,
          grouped = true,
          hidden = true,
-      },
-      ["session-lens"] = {
-         winblend = 0,
-         prompt_title = "Switch Nvim Session",
+         previewer = false,
          mappings = {
-            i = { ["<C-d>"] = fb_actions.remove },
-            n = { ["<C-d>"] = fb_actions.remove },
+            i = { ["<M-w>"] = add_to_workspaces },
+            n = { ["<M-w>"] = add_to_workspaces },
          },
       },
    },
@@ -58,12 +94,74 @@ require("telescope").setup {
             n = { ["<C-d>"] = "delete_buffer" },
          },
       },
+      find_files = {
+         file_ignore_patterns = {
+            ".git",
+            "venv",
+            "**/__*",
+            "target",
+         },
+      },
       spell_suggest = { theme = "cursor" },
    },
 }
 
-require("telescope").load_extension "fzf"
-require("telescope").load_extension "luasnip"
-require("telescope").load_extension "file_browser"
-require("telescope").load_extension "ui-select"
-require("telescope").load_extension "dap"
+local extensions = {
+   "ui-select",
+   "fzf",
+   "file_browser",
+   "dap",
+   "workspaces",
+}
+
+for _, extension in ipairs(extensions) do
+   telescope.load_extension(extension)
+end
+
+local function append_excluded_patterns(args)
+   for _, exclude_pattern in ipairs(exclude_patterns) do
+      table.insert(args, { "-E", exclude_pattern })
+   end
+   return args
+end
+
+local function append_searched_in_folders(args)
+   for _, folder in ipairs(search_in_folders) do
+      table.insert(args, vim.fn.expand(folder))
+   end
+   return args
+end
+
+local function peek_folders(opts)
+   local cwd = opts.cwd_to_path and opts.path or opts.cwd
+   local async_oneshot_finder = require "telescope.finders.async_oneshot_finder"
+   local entry_maker = opts.entry_maker { cwd = cwd }
+   local args = { "-t", "d", "-a", "-g", ".git" }
+   if opts.hidden then table.insert(args, "-H") end
+   if opts.respect_gitignore == false then table.insert(args, "--no-ignore-vcs") end
+   args = append_excluded_patterns(args)
+   args = append_searched_in_folders(args)
+   table.insert(args, { "-X", "dirname" })
+   args = vim.tbl_flatten(args)
+   return async_oneshot_finder {
+      fn_command = function() return { command = "fd", args = args } end,
+      entry_maker = entry_maker,
+      results = { entry_maker(opts.cwd) },
+      cwd = opts.cwd,
+   }
+end
+
+require("which-key").register({
+   z = { telescope.extensions.file_browser.file_browser, "Browse" },
+   Z = {
+      function()
+         telescope.extensions.file_browser.file_browser {
+            cwd = "~",
+            files = false,
+            browse_folders = peek_folders,
+            prompt_title = "Peek files",
+         }
+      end,
+      "Peek",
+   },
+}, { prefix = "<leader>" })

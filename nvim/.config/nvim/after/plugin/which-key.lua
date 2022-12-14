@@ -5,9 +5,11 @@ local my_helpers = require "my.helpers"
 
 which_key.setup {
    key_labels = {
-      ["<space>"] = "SPC",
-      ["<cr>"] = "RET",
-      ["<tab>"] = "TAB",
+      ["<space>"] = "␣",
+      ["<cr>"] = "",
+      ["<tab>"] = "",
+      ["<M-Bslash>"] = [[<M-\>]],
+      ["<leader>"] = "⌘",
    },
    layout = {
       height = { min = 1, max = 25 },
@@ -21,19 +23,20 @@ which_key.setup {
 }
 
 which_key.register({
+   name = "Leader",
+   F = { my_helpers.change_alacritty_font_size, "Font" },
+   W = { telescope.extensions.workspaces.workspaces, "Work" },
+   w = { function() require("hop").hint_words { multi_windows = true } end, "Hop" },
    c = { name = "Quickfix", s = { my_helpers.search, "Search" } },
-
-   t = "Terminal",
-   z = { telescope.extensions.file_browser.file_browser, "Browse" },
+   ["<space>"] = { function() builtin.find_files { hidden = true } end, "Files" },
    [","] = { builtin.buffers, "Buffers" },
    ["."] = { builtin.resume, "Last " },
-   ["/"] = {
-      name = "WTF",
-      ["/"] = { builtin.help_tags, "Vim help tags" },
+   h = {
+      name = "Help",
+      h = { builtin.help_tags, "Vim" },
       m = { function() my_helpers.put_cmd "messages" end, "Messages" },
       n = { function() my_helpers.put_cmd "Notifications" end, "Notifications" },
    },
-   ["<space>"] = { function() builtin.find_files { hidden = true } end, "Files" },
 }, { prefix = "<leader>" })
 
 which_key.register {

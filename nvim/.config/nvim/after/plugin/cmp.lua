@@ -7,20 +7,22 @@ local matches_before_cursor = function(start, match)
    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(start or col, col):match(match) ~= nil
 end
 
-local function nvim_lsp_filter(entry, _) return require("cmp.types").lsp.CompletionItemKind[entry:get_kind()] ~= "Text" end
+local function nvim_lsp_filter(entry, _)
+   local kind = entry:get_kind()
+   local lk_types = { "Text", "Snippet" }
+   local types = require("cmp.types").lsp.CompletionItemKind
+   if vim.tbl_contains(lk_types, types[kind]) then return false end
+   return true
+end
 
-local in_import_sources = {
-   { name = "nvim_lsp", entry_filter = nvim_lsp_filter },
-   { name = "nvim_lsp_signature_help" },
-}
-
+local lsp_sources = {}
 local default_sources = {
    { name = "luasnip" },
    { name = "nvim_lsp", entry_filter = nvim_lsp_filter },
+   { name = "nvim_lsp_signature_help" },
    { name = "nvim_lua" },
    { name = "path" },
-   { name = "nvim_lsp_signature_help" },
-   { name = "buffer", keyword_length = 5 },
+   { name = "buffer" },
 }
 
 local import_matches = {
@@ -39,7 +41,7 @@ local function completer(sources) cmp.complete { config = { sources = sources } 
 local mapping = cmp.mapping.preset.insert {
    ["<C-s>"] = cmp.mapping(function(_)
       cmp.close()
-      completer(in_import_scope() and in_import_sources or default_sources)
+      completer(in_import_scope() and lsp_sources or default_sources)
    end, { "i", "s" }),
    ["<C-l>"] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Insert, select = true },
    ["<C-d>"] = cmp.mapping.scroll_docs(4),
@@ -73,29 +75,66 @@ local mapping = cmp.mapping.preset.insert {
    end, { "i", "s" }),
 }
 
+local kinds = {
+   Text = "",
+   Method = "",
+   Function = "",
+   Constructor = "",
+   Field = "ﰠ",
+   Variable = "",
+   Class = "ﴯ",
+   Interface = "",
+   Module = "",
+   Property = "ﰠ",
+   Unit = "",
+   Value = "",
+   Enum = "",
+   Keyword = "",
+   Snippet = "",
+   Color = "",
+   File = "",
+   Reference = "",
+   Folder = "",
+   EnumMember = "",
+   Constant = "",
+   Struct = "פּ",
+   Event = "",
+   Operator = "",
+   TypeParameter = "",
+}
+
 cmp.setup {
-   enabled = function() return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or require("cmp_dap").is_dap_buffer() end,
+   enabled = function()
+      return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or require("cmp_dap").is_dap_buffer()
+   end,
    snippet = {
       expand = function(args) require("luasnip").lsp_expand(args.body) end,
    },
    mapping = mapping,
    formatting = {
+      fields = { "kind", "abbr", "menu" },
+      mode = "symbol_text",
       format = function(entry, vim_item)
-         local menus = {
-            nvim_lsp = "lsp",
-            nvim_lua = "api",
-            path = "pth",
-            luasnip = "snp",
-            buffer = "buf",
-            cmdline = "cmd",
-         }
+         local item = entry:get_completion_item()
+         print(vim.inspect(item.detail))
 
-         vim_item.menu = menus[entry.source.name]
+         if vim.tbl_contains({ "path" }, entry.source.name) then
+            if item.data.type == "directory" then
+               vim_item.kind = kinds.Folder
+               return vim_item
+            end
+            local icon, hl_group = require("nvim-web-devicons").get_icon(item.label)
+            vim_item.kind = icon
+            vim_item.kind_hl_group = hl_group
+            return vim_item
+         end
+         vim_item.kind = kinds[vim_item.kind] or ""
+         vim_item.abbr = vim_item.abbr:match "[^(]+"
          return vim_item
       end,
    },
    window = {
-      completion = cmp.config.window.bordered { col_offset = 5 },
+      completion = cmp.config.window.bordered(),
       documentation = cmp.config.window.bordered(),
    },
    sources = default_sources,
@@ -114,6 +153,7 @@ cmp.setup {
 cmp.setup.cmdline({ "/", "?" }, {
    mapping = cmp.mapping.preset.cmdline(),
    sources = {
+      { name = "nvim_lsp_document_symbol" },
       { name = "buffer" },
    },
 })
@@ -122,6 +162,7 @@ cmp.setup.cmdline(":", {
    mapping = cmp.mapping.preset.cmdline(),
    sources = {
       { name = "cmdline" },
+      { name = "nvim_lsp_document_symbol" },
       { name = "path" },
    },
 })

@@ -6,15 +6,18 @@ gitsigns.setup {
    on_attach = function(bufnr)
       if vim.b.gitsigns_head ~= nil then
          which_key.register({
-            h = {
+            H = {
                name = "Hunks",
+               b = { gitsigns.toggle_current_line_blame, "Blame" },
+               d = { gitsigns.toggle_deleted, "Deleted" },
+               l = { gitsigns.toggle_linehl, "Lines" },
                n = { gitsigns.next_hunk, "Next" },
                p = { gitsigns.prev_hunk, "Previous" },
                r = { gitsigns.reset_hunk, "Reset" },
                s = { gitsigns.stage_hunk, "Stage" },
                u = { gitsigns.undo_stage_hunk, "Undo Stage" },
             },
-            x = { function() vim.cmd "DiffviewOpen" end, "Diff" },
+            D = { function() vim.cmd "DiffviewOpen" end, "Diff" },
          }, { prefix = "<leader>", buffer = bufnr })
       end
    end,
@@ -24,7 +27,7 @@ vim.api.nvim_create_autocmd("User", {
    pattern = "DiffviewViewOpened",
    callback = function()
       which_key.register(
-         { x = { function() vim.cmd "DiffviewClose" end, "Diff Close" } },
+         { D = { function() vim.cmd "DiffviewClose" end, "Diff Close" } },
          { prefix = "<leader>", buffer = 0 }
       )
    end,

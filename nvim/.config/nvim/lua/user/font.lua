@@ -1,5 +1,5 @@
 local font_sizes = {
-   macbook_pro_16 = 12,
+   macbook_pro_16 = 14,
    mac_mini = 16,
    big = 24,
    gigantic = 32,

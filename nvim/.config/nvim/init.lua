@@ -1,6 +1,7 @@
 require "impatient"
 
 vim.g.python3_host_prog = vim.fn.stdpath "data" .. "/venv/bin/python"
+vim.g.mapleader = " "
 
 vim.opt.autowriteall = true
 vim.opt.backup = false

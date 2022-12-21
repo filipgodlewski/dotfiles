@@ -77,7 +77,6 @@ telescope.setup {
       },
       file_browser = {
          theme = "ivy",
-         hijack_netrw = true,
          grouped = true,
          hidden = true,
          previewer = false,

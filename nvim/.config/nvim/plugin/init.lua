@@ -29,22 +29,14 @@ return require("packer").startup {
       }
       use "jose-elias-alvarez/null-ls.nvim"
 
-      -- management
-      use {
-         "nvim-neo-tree/neo-tree.nvim",
-         branch = "v2.x",
-         requires = {
-            "nvim-lua/plenary.nvim",
-            "nvim-tree/nvim-web-devicons",
-            "MunifTanjim/nui.nvim",
-         },
-      }
-
       -- startup improvers
       use "lewis6991/impatient.nvim"
       use "nathom/filetype.nvim"
       use "samjwill/nvim-unception"
       use { "j-hui/fidget.nvim", config = function() require("fidget").setup {} end }
+
+      -- movements
+      use "anuvyklack/hydra.nvim"
 
       -- goodies
       use {

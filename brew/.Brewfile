@@ -8,21 +8,26 @@ tap "homebrew/core"
 tap "homebrew/services"
 brew "antidote"
 brew "bat"
-brew "python@3.10"
 brew "exa"
 brew "fd"
 brew "fzf"
 brew "gh"
 brew "git"
+brew "git-delta"
+brew "gnu-sed"
 brew "jq"
 brew "kondo"
-brew "lazygit"
 brew "libfido2"
+brew "lua"
+brew "luajit"
+brew "luarocks"
 brew "mas"
 brew "neovim"
 brew "ninja"
 brew "node"
+brew "python@3.11"
 brew "pipx"
+brew "pkg-config"
 brew "ripgrep"
 brew "rm-improved"
 brew "starship"
@@ -53,6 +58,7 @@ mas "DuckDuckGo Privacy for Safari", id: 1482920575
 mas "GarageBand", id: 682658836
 mas "Ghostery – Privacy Ad Blocker", id: 1436953057
 mas "HP Smart", id: 1474276998
+mas "Hush", id: 1544743900
 mas "iMovie", id: 408981434
 mas "Keynote", id: 409183694
 mas "MacFamilyTree 10", id: 1567970985

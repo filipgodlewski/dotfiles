@@ -1,5 +1,3 @@
-local which_key = require "which-key"
-local my_helpers = require "my.helpers"
 require("nvim-treesitter.configs").setup {
    ensure_installed = {
       "comment",
@@ -45,10 +43,6 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
    group = vim.api.nvim_create_augroup("TSAttach", { clear = true }),
    callback = function()
       local ok, _ = pcall(vim.treesitter.get_parser, 0)
-      if ok then
-         which_key.register { S = { require("iswap").iswap, "Swap" } }
-      else
-         my_helpers.deregister { "S" }
-      end
+      if ok then vim.keymap.set("n", "S", require("iswap").iswap, { remap = true, buffer = true, desc = "Swap" }) end
    end,
 })

@@ -116,7 +116,6 @@ cmp.setup {
       mode = "symbol_text",
       format = function(entry, vim_item)
          local item = entry:get_completion_item()
-         print(vim.inspect(item.detail))
 
          if vim.tbl_contains({ "path" }, entry.source.name) then
             if item.data.type == "directory" then

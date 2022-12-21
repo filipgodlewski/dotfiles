@@ -14,7 +14,7 @@ local M = {}
 M.setup = function()
    ensure_private_configs()
    vim.api.nvim_create_autocmd("VimEnter", {
-      callback = require("my.project_configs").load,
+      callback = require("user.project-configs").load,
       group = vim.api.nvim_create_augroup("ProjectConfig", { clear = true }),
    })
 end

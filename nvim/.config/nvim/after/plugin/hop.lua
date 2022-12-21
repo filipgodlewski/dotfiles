@@ -22,3 +22,4 @@ set("W", hop.hint_words)
 local treehopper = require "tsht"
 treehopper.config.hint_keys = vim.split(keys, "")
 vim.keymap.set({ "x", "o" }, "m", ":<C-U>lua require'tsht'.nodes()<CR>", { remap = true, desc = "Act on TS node" })
+vim.keymap.set("n", "<leader>w", function() hop.hint_words { multi_windows = true } end, { remap = true, desc = "Hop" })

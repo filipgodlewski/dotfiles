@@ -1,6 +1,7 @@
 local fb_actions = require("telescope").extensions.file_browser.actions
-local my_helpers = require "my.helpers"
+local quickfix = require "user.quickfix"
 local telescope = require "telescope"
+local builtin = require "telescope.builtin"
 local actions_state = require "telescope.actions.state"
 
 local search_in_folders = {
@@ -54,7 +55,7 @@ telescope.setup {
          "pack/plugins",
       },
       mappings = {
-         i = { ["<C-Q>"] = { my_helpers.setup_search, type = "action" } },
+         i = { ["<C-Q>"] = { quickfix.setup_search, type = "action" } },
       },
    },
    extensions = {
@@ -152,6 +153,13 @@ local function peek_folders(opts)
 end
 
 require("which-key").register({
+   name = "Search",
+   b = { builtin.buffers, "Buffers" },
+   f = { function() builtin.find_files { hidden = true } end, "Files" },
+   g = { builtin.live_grep, "Grep" },
+   h = { builtin.help_tags, "Help" },
+   l = { builtin.resume, "Last" },
+   w = { telescope.extensions.workspaces.workspaces, "Workspaces" },
    z = { telescope.extensions.file_browser.file_browser, "Browse" },
    Z = {
       function()
@@ -164,4 +172,4 @@ require("which-key").register({
       end,
       "Peek",
    },
-}, { prefix = "<leader>" })
+}, { prefix = "<leader><space>" })

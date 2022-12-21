@@ -29,10 +29,22 @@ return require("packer").startup {
       }
       use "jose-elias-alvarez/null-ls.nvim"
 
+      -- management
+      use {
+         "nvim-neo-tree/neo-tree.nvim",
+         branch = "v2.x",
+         requires = {
+            "nvim-lua/plenary.nvim",
+            "nvim-tree/nvim-web-devicons",
+            "MunifTanjim/nui.nvim",
+         },
+      }
+
       -- startup improvers
       use "lewis6991/impatient.nvim"
       use "nathom/filetype.nvim"
       use "samjwill/nvim-unception"
+      use { "j-hui/fidget.nvim", config = function() require("fidget").setup {} end }
 
       -- goodies
       use {
@@ -64,6 +76,10 @@ return require("packer").startup {
       use { "phaazon/hop.nvim", requires = { "mfussenegger/nvim-treehopper" } }
       use { "mizlan/iswap.nvim", config = function() require("iswap").setup {} end }
       use {
+         "mbbill/undotree",
+         config = function() vim.keymap.set("n", "<leader>U", ":UndotreeToggle<cr>", { noremap = true, desc = "Undo" }) end,
+      }
+      use {
          "hrsh7th/nvim-cmp",
          requires = {
             "hrsh7th/cmp-buffer",
@@ -77,6 +93,19 @@ return require("packer").startup {
             "saadparwaiz1/cmp_luasnip",
             "lukas-reineke/cmp-under-comparator",
          },
+      }
+      use {
+         "lukas-reineke/indent-blankline.nvim",
+         config = function()
+            require("indent_blankline").setup {
+               char = "▏",
+               show_end_of_line = true,
+               space_char_blankline = " ",
+               context_char = "▏",
+               show_current_context = true,
+               show_current_context_start = true,
+            }
+         end,
       }
       use { "L3MON4D3/LuaSnip", requires = { "filipgodlewski/luasnip-ts-snippets.nvim" } }
       use {
@@ -99,7 +128,7 @@ return require("packer").startup {
       -- debugging / testing / lsp
       use {
          "folke/trouble.nvim",
-         requires = { "kyazdani42/nvim-web-devicons" },
+         requires = { "nvim-tree/nvim-web-devicons" },
          config = function() require("trouble").setup() end,
       }
       use {

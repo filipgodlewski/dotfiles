@@ -2,7 +2,7 @@ local pydap = require "dap-python"
 local dap = require "dap"
 local dapui = require "dapui"
 local which_key = require "which-key"
-local my_helpers = require "my.helpers"
+local helpers = require "user.helpers"
 local telescope = require "telescope"
 
 local dap_signs = {
@@ -45,9 +45,9 @@ dap.listeners.after.event_initialized["dapui_config"] = function()
 end
 
 local on_event_end = function()
-   my_helpers.deregister({ "k" }, { prefix = "<leader>d" })
-   my_helpers.deregister({ "b", "d", "r", "t", "u" }, { prefix = "<leader>s" })
-   my_helpers.deregister({ "d", "l", "u" }, { prefix = "<leader>f" })
+   helpers.deregister({ "k" }, { prefix = "<leader>d" })
+   helpers.deregister({ "b", "d", "r", "t", "u" }, { prefix = "<leader>s" })
+   helpers.deregister({ "d", "l", "u" }, { prefix = "<leader>f" })
    dapui.close {}
 end
 
@@ -88,12 +88,29 @@ dapui.setup {
    },
 }
 
+local delete_breakpoints = function()
+   dap.clear_breakpoints()
+   helpers.deregister({ "d", "l", "t" }, { prefix = "<leader>b" })
+end
+
+local setup_breakpoint = function()
+   local ok, cond = pcall(vim.fn.input, "Condition: ")
+   if ok == false then return end
+   dap.set_breakpoint(cond)
+   which_key.register({
+      name = "Breakpoint [ACTIVE]",
+      d = { delete_breakpoints, "Deactivate" },
+      l = { telescope.extensions.dap.list_breakpoints, "List" },
+      t = { dap.toggle_breakpoint, "Toggle" },
+   }, { prefix = "<leader>b" })
+end
+
 vim.api.nvim_create_autocmd({ "BufFilePost", "BufEnter", "BufWinEnter", "LspAttach" }, {
    group = vim.api.nvim_create_augroup("DebugKeymaps", { clear = true }),
    callback = function()
       if dap.configurations[vim.api.nvim_buf_get_option(0, "filetype")] ~= nil then
          which_key.register({
-            b = { name = "Breakpoint", b = { my_helpers.setup_breakpoint, "Set" } },
+            b = { name = "Breakpoint", b = { setup_breakpoint, "Set" } },
             d = { name = "Debug", c = { dap.continue, "Continue" } },
          }, { prefix = "<leader>", buffer = 0 })
       end

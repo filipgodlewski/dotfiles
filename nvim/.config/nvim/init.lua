@@ -21,9 +21,6 @@ vim.opt.hlsearch = false
 vim.opt.ignorecase = true
 vim.opt.inccommand = "split"
 vim.opt.laststatus = 3
-vim.opt.list = true
-vim.opt.listchars:append "space:⋅"
-vim.opt.listchars:append "eol:↴"
 vim.opt.matchpairs:append "<:>"
 vim.opt.mouse = "ar"
 vim.opt.nrformats:append "alpha"

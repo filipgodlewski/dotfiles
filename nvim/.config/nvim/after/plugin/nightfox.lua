@@ -26,11 +26,6 @@ local groups = {
       TelescopeSelectionCaret = { fg = "palette.yellow", bg = "palette.bg3" },
       TelescopeMultiSelection = { fg = "palette.green", style = "bold" },
       TelescopeMultiIcon = { fg = "palette.green", style = "bold" },
-      IndentBlanklineChar = { fg = "palette.bg2", style = "nocombine" },
-      IndentBlanklineContextChar = { fg = "palette.yellow.dim", style = "nocombine" },
-      IndentBlanklineContextStart = { sp = "palette.yellow.dim", style = "underline" },
-      IndentBlanklineSpaceChar = { fg = "palette.bg2", style = "nocombine" },
-      IndentBlanklineSpaceCharBlankline = { fg = "palette.bg2", style = "nocombine" },
    },
 }
 
@@ -61,4 +56,4 @@ nightfox.setup {
    palettes = palettes,
 }
 
-vim.cmd "colorscheme nightfox"
+-- vim.cmd "colorscheme nightfox"

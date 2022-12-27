@@ -171,4 +171,4 @@ require("which-key").register({
       end,
       "Peek",
    },
-}, { prefix = "<leader><space>" })
+}, { prefix = "<leader>t" })

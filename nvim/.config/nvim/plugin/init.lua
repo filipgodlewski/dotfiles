@@ -29,6 +29,16 @@ return require("packer").startup {
       }
       use "jose-elias-alvarez/null-ls.nvim"
 
+      use {
+         "jesseleite/nvim-noirbuddy",
+         requires = { "tjdevries/colorbuddy.nvim", branch = "dev" },
+         config = function()
+            require("noirbuddy").setup {
+               preset = "slate",
+            }
+         end,
+      }
+
       -- startup improvers
       use "lewis6991/impatient.nvim"
       use "nathom/filetype.nvim"
@@ -85,19 +95,6 @@ return require("packer").startup {
             "saadparwaiz1/cmp_luasnip",
             "lukas-reineke/cmp-under-comparator",
          },
-      }
-      use {
-         "lukas-reineke/indent-blankline.nvim",
-         config = function()
-            require("indent_blankline").setup {
-               char = "▏",
-               show_end_of_line = true,
-               space_char_blankline = " ",
-               context_char = "▏",
-               show_current_context = true,
-               show_current_context_start = true,
-            }
-         end,
       }
       use { "L3MON4D3/LuaSnip", requires = { "filipgodlewski/luasnip-ts-snippets.nvim" } }
       use {

@@ -37,10 +37,6 @@ defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
 
 
-# Energy saving
-# Enable lid wakeup
-sudo pmset -a lidwake 1
-
 # Restart automatically on power loss
 sudo pmset -a autorestart 1
 
@@ -151,9 +147,6 @@ defaults write com.apple.dock enable-spring-load-actions-on-all-items -bool true
 # Wipe all (default) app icons from the Dock
 defaults write com.apple.dock persistent-apps -array
 
-# Show only open applications in the Dock
-defaults write com.apple.dock static-only -bool true
-
 # Disable Dashboard
 defaults write com.apple.dashboard mcx-disabled -bool true
 
@@ -244,9 +237,6 @@ defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true
 # Email
 # Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>` in Mail.app
 defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
-
-# Add the keyboard shortcut ⌘ + Enter to send an email in Mail.app
-defaults write com.apple.mail NSUserKeyEquivalents -dict-add "Send" "@\U21a9"
 
 # Display emails in threaded mode, sorted by date (oldest at the top)
 defaults write com.apple.mail DraftsViewerAttributes -dict-add "DisplayInThreadedMode" -string "yes"

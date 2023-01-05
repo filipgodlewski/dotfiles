@@ -29,15 +29,7 @@ return require("packer").startup {
       }
       use "jose-elias-alvarez/null-ls.nvim"
 
-      use {
-         "jesseleite/nvim-noirbuddy",
-         requires = { "tjdevries/colorbuddy.nvim", branch = "dev" },
-         config = function()
-            require("noirbuddy").setup {
-               preset = "slate",
-            }
-         end,
-      }
+      use "~/personal/zloto.nvim"
 
       -- startup improvers
       use "lewis6991/impatient.nvim"
@@ -45,14 +37,25 @@ return require("packer").startup {
       use "samjwill/nvim-unception"
       use { "j-hui/fidget.nvim", config = function() require("fidget").setup {} end }
 
-      -- movements
-      use "anuvyklack/hydra.nvim"
-
       -- goodies
       use {
          "folke/todo-comments.nvim",
          requires = "nvim-lua/plenary.nvim",
          config = function() require("todo-comments").setup {} end,
+      }
+      use {
+         "folke/zen-mode.nvim",
+         config = function()
+            require("zen-mode").setup {
+               window = {
+                  options = {
+                     signcolumn = "no",
+                     number = false,
+                     relativenumber = false,
+                  },
+               },
+            }
+         end,
       }
       use "EdenEast/nightfox.nvim"
       use "akinsho/nvim-toggleterm.lua"

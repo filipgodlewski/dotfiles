@@ -6,7 +6,7 @@ export PATH=$HOME/.local/bin:$PATH
 
 for file in $ZDOTDIR/config.*.zsh; do source $file; done
 
-export LS_COLORS=$(vivid generate ${XDG_CONFIG_HOME}/vivid/nightfox.yml)
+# export LS_COLORS=$(vivid generate ${XDG_CONFIG_HOME}/vivid/nightfox.yml)
 
 antidote_dir=$XDG_DATA_HOME/antidote
 plugins_txt=$ZDOTDIR/zsh_plugins.txt

@@ -12,7 +12,7 @@ $character\
 """
 
 [directory]
-style = "bold bright-purple"
+style = "bold purple"
 read_only_style = "bold yellow"
 fish_style_pwd_dir_length = 1
 read_only = " RO"
@@ -24,10 +24,10 @@ vimcmd_symbol = "[](green)"
 
 [git_branch]
 format = '[( $branch)]($style) '
-style = "bold bright-blue"
+style = "bold blue"
 
 [git_commit]
-style = "bright-green"
+style = "green"
 only_detached = false
 
 [git_status]
@@ -49,4 +49,4 @@ style = "bold bright-black"
 
 [python]
 format = '[(\( $virtualenv\))]($style) '
-style = "bold bright-yellow"
+style = "bold yellow"

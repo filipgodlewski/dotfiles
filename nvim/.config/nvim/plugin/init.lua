@@ -29,7 +29,13 @@ return require("packer").startup {
       }
       use "jose-elias-alvarez/null-ls.nvim"
 
-      use "~/personal/zloto.nvim"
+      use {
+         "~/personal/zloto.nvim",
+         config = function()
+            require("zloto").setup()
+            vim.cmd "colorscheme zloto"
+         end,
+      }
 
       -- startup improvers
       use "lewis6991/impatient.nvim"

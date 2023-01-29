@@ -17,14 +17,20 @@ vim.api.nvim_create_user_command("Font", function()
    end
 
    local function on_choice(choice)
-      pcall(vim.cmd, "argdelete")
-      vim.cmd "argadd ~/.config/alacritty/alacritty.yml"
-      local cmd = [[silent argdo %%s/\v(\s+size:) \d+/\1 %s/e | update | b# | bd# ]]
-      vim.cmd(string.format(cmd, font_sizes[choice]))
-      vim.cmd "argdelete"
+      local cmd = "alacritty msg config -w %s font.size=%s"
+      local win_id = vim.fn.expand "$ALACRITTY_WINDOW_ID"
+      vim.fn.system(cmd:format(win_id, font_sizes[choice]))
+      vim.cmd "redraw"
    end
 
    local opts = { prompt = "Select Alacritty Font Size", format_item = format_item }
 
    vim.ui.select(vim.tbl_keys(font_sizes), opts, on_choice)
+end, {})
+
+vim.api.nvim_create_user_command("FontReset", function()
+   local cmd = "alacritty msg config -w %s --reset"
+   local win_id = vim.fn.expand "$ALACRITTY_WINDOW_ID"
+   vim.fn.system(cmd:format(win_id))
+   vim.cmd "redraw"
 end, {})

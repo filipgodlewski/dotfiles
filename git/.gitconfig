@@ -33,3 +33,10 @@
 [user]
   name = Filip Godlewski
   email = 54432731+filipgodlewski@users.noreply.github.com
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEJhbdVaczV+Wr8uEpD4j4Ay6S9hZDr8GwNSHNUtT80J
+[gpg]
+  format = ssh
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+[commit]
+  gpgsign = true

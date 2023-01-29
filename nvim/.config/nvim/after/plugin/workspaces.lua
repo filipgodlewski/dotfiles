@@ -19,9 +19,13 @@ local function is_suppressed(path)
 end
 
 local function clean_workspace_up()
-   require("neotest").summary.close()
-   require("trouble").close()
-   require("dap").terminate()
+   local loaded_plugins = vim.tbl_flatten(vim.tbl_map(function(v)
+      if v._.loaded then return v.name end
+   end, require("lazy").plugins()))
+   if vim.tbl_contains(loaded_plugins, "neotest") then require("neotest").summary.close() end
+   if vim.tbl_contains(loaded_plugins, "trouble.nvim") then require("trouble").close() end
+   if vim.tbl_contains(loaded_plugins, "nvim-tree.lua") then require("nvim-tree.api").tree.close() end
+   if vim.tbl_contains(loaded_plugins, "nvim-dap") then require("dap").terminate() end
    require("close_buffers").delete { type = "nameless", force = true }
    require("close_buffers").delete { type = "hidden", force = true }
 end
@@ -80,7 +84,10 @@ require("workspaces").setup {
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
    group = vim.api.nvim_create_augroup("ChooseWorkspace", { clear = true }),
    callback = function()
-      if #vim.api.nvim_get_vvar "argv" == 1 then require("telescope").extensions.workspaces.workspaces() end
+      local home = vim.fn.expand "~"
+      if #vim.api.nvim_get_vvar "argv" == 1 and vim.loop.cwd() == home then
+         require("telescope").extensions.workspaces.workspaces()
+      end
    end,
 })
 

@@ -1,6 +1,4 @@
-local ls = require "luasnip"
 local cmp = require "cmp"
-if cmp == nil then return end
 
 local matches_before_cursor = function(start, match)
    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -49,8 +47,8 @@ local mapping = cmp.mapping.preset.insert {
    ["<C-n>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
          cmp.select_next_item()
-      elseif ls.expand_or_jumpable() then
-         ls.expand_or_jump()
+      elseif require("luasnip").expand_or_jumpable() then
+         require("luasnip").expand_or_jump()
       elseif not matches_before_cursor(nil, "%s") then
          cmp.complete()
       else
@@ -60,15 +58,15 @@ local mapping = cmp.mapping.preset.insert {
    ["<C-p>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
          cmp.select_prev_item()
-      elseif ls.jumpable(-1) then
-         ls.jump(-1)
+      elseif require("luasnip").jumpable(-1) then
+         require("luasnip").jump(-1)
       else
          fallback()
       end
    end, { "i", "s" }),
    ["<C-t>"] = cmp.mapping(function(fallback)
-      if ls.choice_active() then
-         ls.change_choice(1)
+      if require("luasnip").choice_active() then
+         require("luasnip").change_choice(1)
       else
          fallback()
       end
@@ -104,9 +102,7 @@ local kinds = {
 }
 
 cmp.setup {
-   enabled = function()
-      return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or require("cmp_dap").is_dap_buffer()
-   end,
+   enabled = function() return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" end,
    snippet = {
       expand = function(args) require("luasnip").lsp_expand(args.body) end,
    },
@@ -119,31 +115,33 @@ cmp.setup {
 
          if vim.tbl_contains({ "path" }, entry.source.name) then
             if item.data.type == "directory" then
-               vim_item.kind = kinds.Folder
+               vim_item.kind = string.format("%s Dir ", kinds.Folder)
                return vim_item
             end
             local icon, hl_group = require("nvim-web-devicons").get_icon(item.label)
-            vim_item.kind = icon
+            vim_item.kind = string.format("%s %s ", icon, vim_item.kind)
             vim_item.kind_hl_group = hl_group
             return vim_item
          end
-         vim_item.kind = kinds[vim_item.kind] or ""
+         vim_item.kind = string.format("%s %s ", kinds[vim_item.kind] or "", vim_item.kind)
          vim_item.abbr = vim_item.abbr:match "[^(]+"
          return vim_item
       end,
    },
    window = {
-      completion = cmp.config.window.bordered(),
+      completion = cmp.config.window.bordered {
+         winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+      },
       documentation = cmp.config.window.bordered(),
    },
    sources = default_sources,
    sorting = {
       comparators = {
+         cmp.config.compare.locality,
+         cmp.config.compare.scopes,
          cmp.config.compare.recently_used,
          cmp.config.compare.score,
          require("cmp-under-comparator").under,
-         cmp.config.compare.scopes,
-         cmp.config.compare.locality,
          cmp.config.compare.kind,
       },
    },

@@ -38,6 +38,9 @@ rm -f $XDG_CONFIG_HOME/zsh/.zcompdump; compinit
 
 eval "$(starship init zsh)"
 
+# source 1password plugins
+source $XDG_CONFIG_HOME/op/plugins.sh
+
 if (( $SHLVL == 1 )); then
   nvim
 fi

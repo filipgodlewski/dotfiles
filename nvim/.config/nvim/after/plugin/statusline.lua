@@ -3,7 +3,7 @@ local M = {}
 M.padding = "  "
 
 M.colors = {
-   active = "%#MsgArea#",
+   active = "%#StatusLine#",
    directory = "%#Directory#",
    gray = "%#NonText#",
    add = "%#GitSignsAdd#",
@@ -23,10 +23,10 @@ function M.levels(self)
          { type = "removed", color = self.colors.delete, icon = "" },
       },
       lsp_diagnostic = {
-         { severity = vim.diagnostic.severity.ERROR, color = self.colors.diagnostic_error, icon = "" },
-         { severity = vim.diagnostic.severity.WARN, color = self.colors.diagnostic_warn, icon = "" },
-         { severity = vim.diagnostic.severity.INFO, color = self.colors.diagnostic_info, icon = "" },
-         { severity = vim.diagnostic.severity.HINT, color = self.colors.diagnostic_hint, icon = "" },
+         { severity = vim.diagnostic.severity.ERROR, color = self.colors.diagnostic_error, icon = "" },
+         { severity = vim.diagnostic.severity.WARN, color = self.colors.diagnostic_warn, icon = "" },
+         { severity = vim.diagnostic.severity.INFO, color = self.colors.diagnostic_info, icon = "" },
+         { severity = vim.diagnostic.severity.HINT, color = self.colors.diagnostic_hint, icon = "" },
       },
    }
 end
@@ -46,7 +46,9 @@ function M.get_git_status(self)
    for _, sign in ipairs(levels.git_status) do
       local number = git_signs[sign.type]
       local is_positive = number ~= nil and number > 0
-      local text = is_positive and string.format("%s%s %s  ", sign.color, sign.icon, number) or ""
+      local text = is_positive
+            and string.format("%s%s%s %s%s", sign.color, self.padding, sign.icon, number, self.padding)
+         or ""
       git_status_numbers = git_status_numbers .. text
    end
 
@@ -85,14 +87,14 @@ end
 
 function M.pad(self, text, color)
    if text == "" then return "" end
-   local text_color = color or ""
-   return self.padding .. text_color .. text .. self.padding
+   local text_color = color or self.colors.active
+   return text_color .. self.padding .. text .. self.padding
 end
 
 function M.set_active_statusline(self)
    return table.concat {
       self.colors.active,
-      self:pad(self:get_git_branch(), self.colors.diagnostic_warn),
+      self:pad(self:get_git_branch(), self.colors.gray),
       self:pad(self:get_git_status()),
       self:pad(self:get_file_info()),
       self:pad(self:get_breadcrumbs()),

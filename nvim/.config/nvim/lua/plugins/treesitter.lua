@@ -39,7 +39,7 @@ return {
          require("nvim-treesitter.install").compilers = { "gcc-12" }
          vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
       end,
-      lazy = true,
+      cmd = "TSUpdateSync",
    },
    {
       "nvim-treesitter/playground",

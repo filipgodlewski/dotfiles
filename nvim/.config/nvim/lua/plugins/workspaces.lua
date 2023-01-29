@@ -1,17 +1,10 @@
-local sessions = require "sessions"
-sessions.setup {
-   session_filepath = vim.fn.stdpath "data" .. "/sessions",
-   absolute = true,
-}
-
-local suppressed_dirs = {
-   "/",
-   "~",
-   "~/Downloads",
-   "~/.cargo",
-}
-
 local function is_suppressed(path)
+   local suppressed_dirs = {
+      "/",
+      "~",
+      "~/Downloads",
+      "~/.cargo",
+   }
    for _, dir in ipairs(suppressed_dirs) do
       if path == vim.fn.expand(dir) then return true end
    end
@@ -28,11 +21,6 @@ local function clean_workspace_up()
    if vim.tbl_contains(loaded_plugins, "nvim-dap") then require("dap").terminate() end
    require("close_buffers").delete { type = "nameless", force = true }
    require("close_buffers").delete { type = "hidden", force = true }
-end
-
-local function clear_all()
-   vim.cmd "bd%"
-   vim.cmd "clearjumps"
 end
 
 local function deactivate_virtual_env()
@@ -59,28 +47,6 @@ local function activate_virtual_env(path)
    end
 end
 
-local function setup_env(path)
-   deactivate_virtual_env()
-   activate_virtual_env(path)
-end
-
-require("workspaces").setup {
-   mru_sort = false,
-   hooks = {
-      open_pre = function(_, path)
-         clean_workspace_up()
-         if not is_suppressed(path) then sessions.save(nil, { silent = true }) end
-         clear_all()
-      end,
-      open = function(_, path)
-         local opts = { silent = true }
-         if is_suppressed(path) then opts["autosave"] = false end
-         sessions.load(nil, opts)
-         setup_env(path)
-      end,
-   },
-}
-
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
    group = vim.api.nvim_create_augroup("ChooseWorkspace", { clear = true }),
    callback = function()
@@ -95,3 +61,35 @@ vim.api.nvim_create_autocmd("VimLeavePre", {
    group = vim.api.nvim_create_augroup("CleanupStuff", { clear = true }),
    callback = clean_workspace_up,
 })
+
+return {
+   "natecraddock/workspaces.nvim",
+   dependencies = {
+      "natecraddock/sessions.nvim",
+      opts = {
+         session_filepath = vim.fn.stdpath "data" .. "/sessions",
+         absolute = true,
+      },
+   },
+   opts = function()
+      return {
+         mru_sort = false,
+         hooks = {
+            open_pre = function(_, path)
+               clean_workspace_up()
+               if not is_suppressed(path) then require("sessions").save(nil, { silent = true }) end
+               vim.cmd "bd%"
+               vim.cmd "clearjumps"
+            end,
+            open = function(_, path)
+               local opts = { silent = true }
+               if is_suppressed(path) then opts["autosave"] = false end
+               require("sessions").load(nil, opts)
+               deactivate_virtual_env()
+               activate_virtual_env(path)
+            end,
+         },
+      }
+   end,
+   lazy = true,
+}

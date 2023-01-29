@@ -17,3 +17,10 @@ json
 lua
 toml
 async
+ui
+dropdown
+popup
+quickfix
+lsp
+css
+yaml

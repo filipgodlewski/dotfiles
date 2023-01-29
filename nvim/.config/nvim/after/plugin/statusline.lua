@@ -79,12 +79,6 @@ function M.get_lsp_diagnostic(self)
    return result
 end
 
-function M.get_breadcrumbs(self)
-   local icon = require("nvim-web-devicons").get_icon_by_filetype(vim.o.ft, { default = true })
-   local crumbs = require("nvim-navic").get_location()
-   return string.format("%s%s %%f%s", self.colors.directory, icon, (#crumbs ~= 0 and " > " .. crumbs or ""))
-end
-
 function M.pad(self, text, color)
    if text == "" then return "" end
    local text_color = color or self.colors.active
@@ -97,7 +91,7 @@ function M.set_active_statusline(self)
       self:pad(self:get_git_branch(), self.colors.gray),
       self:pad(self:get_git_status()),
       self:pad(self:get_file_info()),
-      self:pad(self:get_breadcrumbs()),
+      self:pad("%f", self.colors.directory),
       self:pad(self:get_lsp_diagnostic()),
    }
 end

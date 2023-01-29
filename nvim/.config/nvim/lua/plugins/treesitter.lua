@@ -1,6 +1,7 @@
 return {
    {
       "nvim-treesitter/nvim-treesitter",
+      dependencies = {},
       opts = {
          ensure_installed = {
             "comment",
@@ -36,17 +37,26 @@ return {
       config = function(_, opts)
          require("nvim-treesitter.configs").setup(opts)
          require("nvim-treesitter.install").compilers = { "gcc-12" }
+         vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
       end,
-      dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
+      lazy = true,
    },
    {
       "nvim-treesitter/playground",
-      cmd = "TSPlaygroundToggle",
       dependencies = { "nvim-treesitter/nvim-treesitter" },
+      cmd = "TSPlaygroundToggle",
    },
    {
       "m-demare/hlargs.nvim",
       dependencies = { "nvim-treesitter/nvim-treesitter" },
       config = true,
+      event = "BufAdd",
+   },
+   {
+      "RRethy/vim-illuminate",
+      dependencies = { "nvim-treesitter/nvim-treesitter" },
+      opts = { min_count_to_highlight = 2 },
+      config = function(_, opts) require("illuminate").configure(opts) end,
+      event = "BufAdd",
    },
 }

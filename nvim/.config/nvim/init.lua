@@ -30,7 +30,6 @@ vim.opt.copyindent = true
 vim.opt.diffopt = { "filler", "vertical" }
 vim.opt.expandtab = true
 vim.opt.fileformat = "unix"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.grepformat = "%f:%l:%c:%m"
 vim.opt.grepprg = "rg --color=never --no-heading --with-filename --line-number --column"
 vim.opt.hidden = true

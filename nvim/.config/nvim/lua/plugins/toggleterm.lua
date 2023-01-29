@@ -21,4 +21,7 @@ return {
          winblend = 0,
       },
    },
+   keys = {
+      { "<M->" },
+   },
 }

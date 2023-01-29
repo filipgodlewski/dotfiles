@@ -1,0 +1,84 @@
+return {
+   "nvim-telescope/telescope.nvim",
+   dependencies = {
+      "nvim-lua/popup.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope-ui-select.nvim",
+      "nvim-telescope/telescope-dap.nvim",
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+      "nvim-telescope/telescope-file-browser.nvim",
+   },
+   opts = function()
+      return {
+         defaults = {
+            prompt_prefix = "   ",
+            selection_caret = "    ",
+            multi_icon = " ",
+            entry_prefix = "     ",
+            vimgrep_arguments = {
+               "rg",
+               "--color=never",
+               "--no-heading",
+               "--with-filename",
+               "--line-number",
+               "--column",
+               "--smart-case",
+               "--trim",
+            },
+            file_ignore_patterns = {
+               "dist",
+               "target",
+               "node_modules",
+               "pack/plugins",
+            },
+            mappings = {
+               i = { ["<C-Q>"] = { require("user.quickfix").setup_search, type = "action" } },
+            },
+         },
+         extensions = {
+            ["ui-select"] = {
+               require("telescope.themes").get_cursor {},
+            },
+            fzf = {
+               override_generic_sorter = true,
+               override_file_sorter = true,
+               case_mode = "smart_case",
+            },
+         },
+         pickers = {
+            buffers = {
+               theme = "dropdown",
+               mappings = {
+                  i = { ["<C-d>"] = "delete_buffer" },
+                  n = { ["<C-d>"] = "delete_buffer" },
+               },
+            },
+            find_files = {
+               file_ignore_patterns = {
+                  ".git",
+                  "venv",
+                  "**/__*",
+                  "target",
+               },
+            },
+            spell_suggest = { theme = "cursor" },
+         },
+      }
+   end,
+   config = function(_, opts)
+      local telescope = require "telescope"
+      telescope.setup(opts)
+      telescope.load_extension "ui-select"
+      telescope.load_extension "fzf"
+      telescope.load_extension "dap"
+      telescope.load_extension "workspaces"
+   end,
+   keys = {
+      { "<leader>tb", function() require("telescope.builtin").buffers() end, desc = "Buffers" },
+      { "<leader>tf", function() require("telescope.builtin").find_files { hidden = true } end, desc = "Files" },
+      { "<leader>tg", function() require("telescope.builtin").live_grep() end, desc = "Grep" },
+      { "<leader>th", function() require("telescope.builtin").help_tags() end, desc = "Help" },
+      { "<leader>tw", function() require("telescope").extensions.workspaces.workspaces() end, desc = "Workspaces" },
+      { "<leader><space>", function() require("telescope.builtin").find_files { hidden = true } end, desc = "Files" },
+   },
+}

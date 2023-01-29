@@ -6,6 +6,7 @@ return {
          attach_to_untracked = false,
          on_attach = function(bufnr)
             if vim.b.gitsigns_head then
+               vim.keymap.set("n", "<leader>h", "", { desc = "Hunks" })
                vim.keymap.set("n", "<leader>hb", gitsigns.toggle_current_line_blame, { buffer = bufnr, desc = "Blame" })
                vim.keymap.set("n", "<leader>hd", gitsigns.toggle_deleted, { buffer = bufnr, desc = "Deleted" })
                vim.keymap.set("n", "<leader>hl", gitsigns.toggle_linehl, { buffer = bufnr, desc = "Lines" })
@@ -19,4 +20,5 @@ return {
          end,
       }
    end,
+   event = "BufAdd",
 }

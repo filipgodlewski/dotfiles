@@ -18,5 +18,17 @@ return {
          group = " ",
       },
    },
-   keys = { { "<esc>", ":silent LuaSnipUnlinkCurrent<cr>", remap = true, desc = "Escape" } },
+   config = function(_, opts)
+      local which_key = require "which-key"
+      which_key.setup(opts)
+      which_key.register {
+         ["<esc>"] = { "<cmd>silent LuaSnipUnlinkCurrent<cr>", "Escape", remap = true },
+         ["<leader>"] = {
+            name = "Leader",
+            h = { name = "Hunk" },
+            n = { name = "Tree" },
+            t = { name = "Search" },
+         },
+      }
+   end,
 }

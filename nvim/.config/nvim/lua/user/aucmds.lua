@@ -1,11 +1,3 @@
-vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-   group = vim.api.nvim_create_augroup("TSAttach", { clear = true }),
-   callback = function()
-      local ok, _ = pcall(vim.treesitter.get_parser, 0)
-      if ok then vim.keymap.set("n", "S", require("iswap").iswap, { remap = true, buffer = true, desc = "Swap" }) end
-   end,
-})
-
 vim.api.nvim_create_autocmd({ "BufFilePost", "BufEnter", "BufWinEnter", "LspAttach" }, {
    group = vim.api.nvim_create_augroup("LspKeymaps", { clear = true }),
    callback = function()
@@ -27,6 +19,7 @@ vim.api.nvim_create_autocmd({ "BufFilePost", "BufEnter", "BufWinEnter", "LspAtta
                w = { function() require("trouble").toggle "workspace_diagnostics" end, "Workspace" },
             },
             r = { vim.lsp.buf.rename, "Rename" },
+            S = { function() require("iswap").iswap_with() end, "Swap" },
          }, { prefix = "<leader>", buffer = 0 })
       end
    end,
@@ -45,8 +38,8 @@ local setup_breakpoint = function()
    require("which-key").register({
       name = "Breakpoint [ACTIVE]",
       d = { delete_breakpoints, "Deactivate" },
-      l = { require("telescope").extensions.dap.list_breakpoints, "List" },
-      t = { require("dap").toggle_breakpoint, "Toggle" },
+      l = { function() require("telescope").extensions.dap.list_breakpoints() end, "List" },
+      t = { function() require("dap").toggle_breakpoint() end, "Toggle" },
    }, { prefix = "<leader>b" })
 end
 
@@ -57,8 +50,13 @@ vim.api.nvim_create_autocmd({ "BufFilePost", "BufEnter", "BufWinEnter", "LspAtta
       if vim.tbl_contains(configs, vim.api.nvim_buf_get_option(0, "filetype")) then
          require("which-key").register({
             b = { name = "Breakpoint", b = { setup_breakpoint, "Set" } },
-            d = { name = "Debug", c = { require("dap").continue, "Continue" } },
+            d = { name = "Debug", c = { function() require("dap").continue() end, "Continue" } },
          }, { prefix = "<leader>", buffer = 0 })
       end
    end,
+})
+
+vim.api.nvim_create_autocmd("BufAdd", {
+   group = vim.api.nvim_create_augroup("BufOpts", { clear = true }),
+   callback = function() vim.opt.cursorline = true end,
 })

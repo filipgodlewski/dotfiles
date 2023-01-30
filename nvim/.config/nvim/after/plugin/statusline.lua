@@ -1,6 +1,7 @@
 local M = {}
 
 M.padding = "  "
+M.separator = "%="
 
 M.colors = {
    active = "%#StatusLine#",
@@ -86,14 +87,21 @@ function M.pad(self, text, color)
 end
 
 function M.set_active_statusline(self)
-   return table.concat {
-      self.colors.active,
-      self:pad(self:get_git_branch(), self.colors.gray),
-      self:pad(self:get_git_status()),
-      self:pad(self:get_file_info()),
-      self:pad("%f", self.colors.directory),
-      self:pad(self:get_lsp_diagnostic()),
-   }
+   if vim.bo.filetype == "TelescopePrompt" then
+      return ""
+   else
+      return table.concat {
+         self.colors.active,
+         self:pad(self:get_git_branch(), self.colors.gray),
+         self:pad(self:get_git_status()),
+         self.separator,
+         self:pad(self:get_file_info()),
+         self:pad("%f", self.colors.directory),
+         self.separator,
+         self:pad(self:get_lsp_diagnostic()),
+         self:pad("ﰲ %-03.v", self.colors.gray),
+      }
+   end
 end
 
 Statusline = setmetatable(M, { __call = function(statusline) return statusline:set_active_statusline() end })

@@ -44,7 +44,6 @@ vim.opt.number = true
 vim.opt.path:append "**"
 vim.opt.pumheight = 15
 vim.opt.relativenumber = true
-vim.opt.scrolloff = 4
 vim.opt.shiftround = true
 vim.opt.shiftwidth = 2
 vim.opt.showmode = false
@@ -74,6 +73,5 @@ vim.diagnostic.config {
 }
 
 require "user.font"
-require "user.scratch"
 require("user.project-configs").setup()
 require "user.aucmds"

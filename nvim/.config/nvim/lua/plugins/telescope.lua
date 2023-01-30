@@ -6,7 +6,6 @@ return {
       "nvim-telescope/telescope-ui-select.nvim",
       "nvim-telescope/telescope-dap.nvim",
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-      "nvim-telescope/telescope-file-browser.nvim",
    },
    opts = function()
       return {
@@ -55,10 +54,10 @@ return {
             },
             find_files = {
                file_ignore_patterns = {
-                  ".git",
-                  "venv",
+                  ".git/",
+                  "venv/",
                   "**/__*",
-                  "target",
+                  "target/",
                },
             },
             spell_suggest = { theme = "cursor" },

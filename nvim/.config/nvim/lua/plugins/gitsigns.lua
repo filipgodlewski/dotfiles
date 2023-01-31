@@ -20,5 +20,5 @@ return {
          end,
       }
    end,
-   event = "BufAdd",
+   event = "BufEnter",
 }

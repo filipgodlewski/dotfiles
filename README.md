@@ -10,11 +10,10 @@ after watching [ThePrimeagen's stow tutorial](https://www.youtube.com/watch?v=tk
 
 ## About
 
-First of all, instructions below are prepared for MacOS,
-as this is my daily work machine.
+Instructions below are prepared for macOS, as this is my daily work machine.
 Follow the instructions if that fits your needs.
 
-### install
+### Install
 
 **!!IMPORTANT!!**
 
@@ -45,14 +44,13 @@ make -s uninstall
 edit
 ```
 
-Fuzzy search in folders:
+Fuzzy search in folders for git repositories:
 
 - ~/personal
 - ~/projects
 - ~/learning
 - ~/dotfiles
 
-for git repositories.
 Jumps into, opens nvim. When nvim is closed, pops directories stack.
 
 Additionally, reads `~/.cache/bookmarks/list.txt` for additional directories.

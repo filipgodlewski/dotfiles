@@ -50,13 +50,13 @@ return {
       "m-demare/hlargs.nvim",
       dependencies = { "nvim-treesitter/nvim-treesitter" },
       config = true,
-      event = "BufAdd",
+      event = "BufEnter",
    },
    {
       "RRethy/vim-illuminate",
       dependencies = { "nvim-treesitter/nvim-treesitter" },
       opts = { min_count_to_highlight = 2 },
       config = function(_, opts) require("illuminate").configure(opts) end,
-      event = "BufAdd",
+      event = "BufEnter",
    },
 }

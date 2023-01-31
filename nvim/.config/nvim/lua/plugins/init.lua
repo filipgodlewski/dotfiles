@@ -1,6 +1,6 @@
 return {
    "nathom/filetype.nvim", -- load ft faster
-   { "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" }, config = true, event = "BufAdd" },
+   { "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" }, config = true, event = "BufEnter" },
    { "folke/trouble.nvim", dependencies = { "nvim-tree/nvim-web-devicons" }, config = true, lazy = true },
    { "j-hui/fidget.nvim", config = true }, -- cool spinner for loaders
    { "kazhala/close-buffers.nvim", opts = { preserve_window_layout = { "this" } }, lazy = true },

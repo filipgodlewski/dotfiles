@@ -195,6 +195,6 @@ return {
             },
          })
       end,
-      event = { "BufAdd", "CmdlineEnter" },
+      event = { "BufEnter", "CmdlineEnter" },
    },
 }

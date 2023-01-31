@@ -56,7 +56,7 @@ vim.api.nvim_create_autocmd({ "BufFilePost", "BufEnter", "BufWinEnter", "LspAtta
    end,
 })
 
-vim.api.nvim_create_autocmd("BufAdd", {
+vim.api.nvim_create_autocmd("BufEnter", {
    group = vim.api.nvim_create_augroup("BufOpts", { clear = true }),
    callback = function() vim.opt.cursorline = true end,
 })

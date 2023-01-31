@@ -19,8 +19,10 @@ local function clean_workspace_up()
    if vim.tbl_contains(loaded_plugins, "trouble.nvim") then require("trouble").close() end
    if vim.tbl_contains(loaded_plugins, "nvim-tree.lua") then require("nvim-tree.api").tree.close() end
    if vim.tbl_contains(loaded_plugins, "nvim-dap") then require("dap").terminate() end
-   require("close_buffers").delete { type = "nameless", force = true }
-   require("close_buffers").delete { type = "hidden", force = true }
+   local buf = require "close_buffers"
+   buf.delete { type = "nameless", force = true }
+   buf.delete { type = "hidden", force = true }
+   buf.delete { regex = "^term://.*", force = true }
 end
 
 local function deactivate_virtual_env()

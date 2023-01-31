@@ -27,6 +27,7 @@ vim.opt.cmdheight = 0
 vim.opt.conceallevel = 1
 vim.opt.confirm = true
 vim.opt.copyindent = true
+vim.opt.cursorline = true
 vim.opt.diffopt = { "filler", "vertical" }
 vim.opt.expandtab = true
 vim.opt.fileformat = "unix"

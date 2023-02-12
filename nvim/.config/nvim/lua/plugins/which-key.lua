@@ -31,4 +31,5 @@ return {
          },
       }
    end,
+   lazy = true,
 }

@@ -3,7 +3,6 @@ return {
    dependencies = {
       "nvim-lua/popup.nvim",
       "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope-ui-select.nvim",
       "nvim-telescope/telescope-dap.nvim",
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
    },
@@ -35,9 +34,6 @@ return {
             },
          },
          extensions = {
-            ["ui-select"] = {
-               require("telescope.themes").get_cursor {},
-            },
             fzf = {
                override_generic_sorter = true,
                override_file_sorter = true,
@@ -67,7 +63,6 @@ return {
    config = function(_, opts)
       local telescope = require "telescope"
       telescope.setup(opts)
-      telescope.load_extension "ui-select"
       telescope.load_extension "fzf"
       telescope.load_extension "dap"
       telescope.load_extension "workspaces"

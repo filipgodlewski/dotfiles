@@ -17,6 +17,7 @@ vim.api.nvim_create_user_command("Font", function()
    end
 
    local function on_choice(choice)
+      if not choice then return end
       local cmd = "alacritty msg config -w %s font.size=%s"
       local win_id = vim.fn.expand "$ALACRITTY_WINDOW_ID"
       vim.fn.system(cmd:format(win_id, font_sizes[choice]))

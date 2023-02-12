@@ -5,6 +5,21 @@ function update() {
     echo "💔 First close nvim"
     return 1
   fi
+  echo "🔥 Upgrade hosts"
+  sudo curl https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts -o /etc/hosts --silent
+  local whitelisted_pages=(\
+    "linkedin.com" \
+    "www.linkedin.com" \
+    "media.licdn.com" \
+    "static.licdn.com" \
+    "reddit.com" \
+    "www.reddit.com" \
+  )
+  local page
+  for page in $whitelisted_pages; do
+    sudo nvim --clean --headless +"g/ $page/d" +"wq" /etc/hosts &> /dev/null
+  done
+
   echo "🔥 Upgrade brew"
   echo "📦 Update bundle"
   brew bundle --file=~/.Brewfile --quiet
@@ -40,21 +55,6 @@ function update() {
 
   echo "🔥 Upgrade antidote (zsh)"
   antidote update > /dev/null
-
-  echo "🔥 Upgrade hosts"
-  sudo curl https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts -o /etc/hosts --silent
-  local whitelisted_pages=(\
-    "linkedin.com" \
-    "www.linkedin.com" \
-    "media.licdn.com" \
-    "static.licdn.com" \
-    "reddit.com" \
-    "www.reddit.com" \
-  )
-  local page
-  for page in $whitelisted_pages; do
-    sudo nvim --clean --headless +"g/ $page/d" +"wq" /etc/hosts &> /dev/null
-  done
 
   echo "✅ Done. You might want to restart zsh with: exec zsh"
 }

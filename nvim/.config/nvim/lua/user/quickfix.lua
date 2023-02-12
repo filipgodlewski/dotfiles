@@ -1,7 +1,3 @@
-local actions = require "telescope.actions"
-local builtin = require "telescope.builtin"
-local which_key = require "which-key"
-
 local M = {}
 
 local function trouble_qf_refresh() require("trouble").refresh { auto = true, provider = "qf" } end
@@ -25,7 +21,7 @@ M.replace = function()
    local new = vim.fn.input("New: ", old)
    if old == "" and new == "" then return end
    vim.cmd(string.format("cdo s/%s/%s/ | update", old, new))
-   which_key.register { ["<leader>cu"] = { M.undo, "Undo" } }
+   require("which-key").register { ["<leader>cu"] = { M.undo, "Undo" } }
 end
 
 M.undo = function()
@@ -36,14 +32,14 @@ end
 M.search = function()
    local ft_mask = vim.fn.input "File mask: "
    ft_mask = ft_mask == "" and {} or ft_mask
-   builtin.live_grep { glob_pattern = ft_mask }
+   require("telescope.builtin").live_grep { glob_pattern = ft_mask }
 end
 
 M.setup_search = function(prompt_bufnr)
-   actions.smart_send_to_qflist(prompt_bufnr)
+   require("telescope.actions").smart_send_to_qflist(prompt_bufnr)
    require("trouble").open "quickfix"
    require("trouble").refresh { auto = true, provider = "qf" }
-   which_key.register({
+   require("which-key").register({
       name = "Search [ACTIVE]",
       c = { M.clear, "Clean" },
       f = { M.filter, "Cfilter" },
@@ -52,6 +48,6 @@ M.setup_search = function(prompt_bufnr)
    }, { prefix = "<leader>c" })
 end
 
-which_key.register({ c = { name = "Quickfix", s = { M.search, "Search" } } }, { prefix = "<leader>" })
+require("which-key").register({ c = { name = "Quickfix", s = { M.search, "Search" } } }, { prefix = "<leader>" })
 
 return M

@@ -1,5 +1,3 @@
-local which_key = require "which-key"
-
 local M = {}
 
 M.default_opts = {
@@ -17,7 +15,7 @@ M.deregister = function(mappings, opts)
       pcall(vim.api.nvim_del_keymap, opts.mode, mapping)
       all_mappings[mapping] = "which_key_ignore"
    end
-   which_key.register(all_mappings)
+   require("which-key").register(all_mappings)
 end
 
 return M

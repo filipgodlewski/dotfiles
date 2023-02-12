@@ -18,7 +18,7 @@ local configs = {
 
    jsonls = { init_options = { provideFormatter = false } },
 
-   sumneko_lua = {
+   lua_ls = {
       settings = {
          Lua = {
             runtime = { version = "luaJIT" },
@@ -61,7 +61,7 @@ return {
             function(server_name) require("lspconfig")[server_name].setup(global_opts) end,
             pyright = function() setup_override "pyright" end,
             jsonls = function() setup_override "jsonls" end,
-            sumneko_lua = function() setup_override "sumneko_lua" end,
+            lua_ls = function() setup_override "lua_ls" end,
          }
       end,
       event = "BufEnter",

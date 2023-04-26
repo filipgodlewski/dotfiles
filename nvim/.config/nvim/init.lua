@@ -64,7 +64,7 @@ vim.opt.undolevels = 10000
 vim.opt.updatetime = 50
 vim.opt.wrap = true
 vim.opt.sessionoptions = { "blank", "buffers", "curdir", "folds", "help", "tabpages", "winsize", "winpos", "terminal" }
--- vim.opt.splitkeep = "screen"  -- uncomment in nvim 0.9
+vim.opt.splitkeep = "screen"
 
 vim.diagnostic.config {
    virtual_text = true,

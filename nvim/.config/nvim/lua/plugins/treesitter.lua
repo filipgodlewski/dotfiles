@@ -41,22 +41,4 @@ return {
       end,
       cmd = "TSUpdateSync",
    },
-   {
-      "nvim-treesitter/playground",
-      dependencies = { "nvim-treesitter/nvim-treesitter" },
-      cmd = "TSPlaygroundToggle",
-   },
-   {
-      "m-demare/hlargs.nvim",
-      dependencies = { "nvim-treesitter/nvim-treesitter" },
-      config = true,
-      event = "BufEnter",
-   },
-   {
-      "RRethy/vim-illuminate",
-      dependencies = { "nvim-treesitter/nvim-treesitter" },
-      opts = { min_count_to_highlight = 2 },
-      config = function(_, opts) require("illuminate").configure(opts) end,
-      event = "BufEnter",
-   },
 }

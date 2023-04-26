@@ -5,7 +5,7 @@ local function trouble_qf_refresh() require("trouble").refresh { auto = true, pr
 M.clear = function()
    vim.cmd "cexpr []"
    vim.schedule(require("trouble").close)
-   M.deregister({ "c", "f", "r", "t", "u" }, { prefix = "<leader>c" })
+   require("user.helpers").deregister({ "c", "f", "r", "t", "u" }, { prefix = "<leader>c" })
 end
 
 M.filter = function()
@@ -26,7 +26,7 @@ end
 
 M.undo = function()
    vim.cmd "cfdo normal u | update"
-   M.deregister { "<leader>cu" }
+   require("user.helpers").deregister { "<leader>cu" }
 end
 
 M.search = function()

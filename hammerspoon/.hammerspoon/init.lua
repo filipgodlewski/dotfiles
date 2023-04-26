@@ -34,17 +34,7 @@ local function gBind(i_mods, i_key, o_mods, o_key, disabled_apps)
    return bind(true, i_mods, i_key, o_mods, o_key, disabled_apps)
 end
 
--- System keys
-gBind({ "ctrl" }, "m", nil, "return", { "Alacritty" }) -- ctrl + M, return
-gBind({ "ctrl" }, "[", nil, "escape", { "Alacritty" }) -- ctrl + [, escape
-gBind({ "ctrl" }, "h", nil, "delete") -- ctrl + H, backspace
-gBind({ "ctrl" }, "d", nil, "forwarddelete", { "Alacritty" }) -- ctrl + D, forward delete
-lBind({ "ctrl", "shift" }, "/", nil, "forwarddelete", { "Alacritty" }) -- ctrl + shift + /, forward delete, but only in Alacritty (terminal)
-gBind({ "ctrl" }, "i", nil, "tab") -- ctrl + I, tab
-
 -- Text editing
-gBind({ "ctrl" }, "a", { "cmd" }, "left", { "Alacritty", "Citrix Viewer" }) -- ctrl + A, go to the beginning of line
-gBind({ "ctrl" }, "e", { "cmd" }, "right", { "Alacritty" }) -- ctrl + E, go to the end of line
 gBind({ "ctrl" }, "b", { "alt" }, "left", { "Alacritty" }) -- ctrl + B, go to the beginning of the provious word
 gBind({ "ctrl" }, "f", { "alt" }, "right", { "Alacritty", "Citrix Viewer" }) -- ctrl + F, go to the beginning of the next word
 gBind({ "ctrl" }, "u", { "cmd" }, "delete", { "Alacritty" }) -- ctrl + U, delete the whole line to the left

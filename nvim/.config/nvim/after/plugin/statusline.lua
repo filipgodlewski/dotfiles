@@ -1,60 +1,24 @@
 local M = {}
 
 M.padding = "  "
-M.separator = "%="
 
 M.colors = {
    active = "%#StatusLine#",
    directory = "%#Directory#",
    gray = "%#NonText#",
-   add = "%#GitSignsAdd#",
-   change = "%#GitSignsChange#",
-   delete = "%#GitSignsDelete#",
    diagnostic_error = "%#DiagnosticError#",
    diagnostic_warn = "%#DiagnosticWarn#",
    diagnostic_info = "%#DiagnosticInfo#",
    diagnostic_hint = "%#DiagnosticHint#",
 }
 
-function M.levels(self)
+function M.diagnostic_levels(self)
    return {
-      git_status = {
-         { type = "added", color = self.colors.add, icon = "" },
-         { type = "changed", color = self.colors.change, icon = "" },
-         { type = "removed", color = self.colors.delete, icon = "" },
-      },
-      lsp_diagnostic = {
-         { severity = vim.diagnostic.severity.ERROR, color = self.colors.diagnostic_error, icon = "" },
-         { severity = vim.diagnostic.severity.WARN, color = self.colors.diagnostic_warn, icon = "" },
-         { severity = vim.diagnostic.severity.INFO, color = self.colors.diagnostic_info, icon = "" },
-         { severity = vim.diagnostic.severity.HINT, color = self.colors.diagnostic_hint, icon = "" },
-      },
+      { severity = vim.diagnostic.severity.ERROR, color = self.colors.diagnostic_error, icon = "" },
+      { severity = vim.diagnostic.severity.WARN, color = self.colors.diagnostic_warn, icon = "" },
+      { severity = vim.diagnostic.severity.INFO, color = self.colors.diagnostic_info, icon = "" },
+      { severity = vim.diagnostic.severity.HINT, color = self.colors.diagnostic_hint, icon = "" },
    }
-end
-
-function M.get_git_branch()
-   local head = vim.b.gitsigns_head
-   return head ~= nil and " " .. head or ""
-end
-
-function M.get_git_status(self)
-   local git_signs = vim.b.gitsigns_status_dict
-   local levels = self:levels()
-
-   if git_signs == nil then return "" end
-
-   local git_status_numbers = ""
-   for _, sign in ipairs(levels.git_status) do
-      local number = git_signs[sign.type]
-      local is_positive = number ~= nil and number > 0
-      local text = is_positive
-            and string.format("%s%s%s %s%s", sign.color, self.padding, sign.icon, number, self.padding)
-         or ""
-      git_status_numbers = git_status_numbers .. text
-   end
-
-   local is_git_status_empty = git_status_numbers:len() == 0
-   return not is_git_status_empty and git_status_numbers:sub(1, #git_status_numbers - 2) or ""
 end
 
 function M.get_file_info(self)
@@ -67,9 +31,8 @@ end
 
 function M.get_lsp_diagnostic(self)
    local result = ""
-   local levels = self:levels()
 
-   for _, diagnostic in ipairs(levels.lsp_diagnostic) do
+   for _, diagnostic in ipairs(self:diagnostic_levels()) do
       local diagnostics = vim.diagnostic.get(0, { severity = diagnostic.severity })
       local exists = #diagnostics ~= 0
       local text = exists and string.format("%s%s %s  ", diagnostic.color, diagnostic.icon, #diagnostics) or ""
@@ -92,12 +55,8 @@ function M.set_active_statusline(self)
    else
       return table.concat {
          self.colors.active,
-         self:pad(self:get_git_branch(), self.colors.gray),
-         self:pad(self:get_git_status()),
-         self.separator,
          self:pad(self:get_file_info()),
          self:pad("%f", self.colors.directory),
-         self.separator,
          self:pad(self:get_lsp_diagnostic()),
          self:pad("ﰲ %-03.v", self.colors.gray),
       }

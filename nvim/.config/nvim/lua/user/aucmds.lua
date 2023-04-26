@@ -18,8 +18,11 @@ vim.api.nvim_create_autocmd({ "BufFilePost", "BufEnter", "BufWinEnter", "LspAtta
                p = { vim.diagnostic.goto_prev, "Previous" },
                w = { function() require("trouble").toggle "workspace_diagnostics" end, "Workspace" },
             },
-            r = { vim.lsp.buf.rename, "Rename" },
-            S = { function() require("iswap").iswap_with() end, "Swap" },
+            r = {
+               name = "Replace",
+               r = { vim.lsp.buf.rename, "Rename" },
+               s = { require("ssr").open, "Structural" },
+            },
          }, { prefix = "<leader>", buffer = 0 })
       end
    end,
@@ -51,6 +54,7 @@ vim.api.nvim_create_autocmd({ "BufFilePost", "BufEnter", "BufWinEnter", "LspAtta
          require("which-key").register({
             b = { name = "Breakpoint", b = { setup_breakpoint, "Set" } },
             d = { name = "Debug", c = { function() require("dap").continue() end, "Continue" } },
+            u = { require("neotest").summary.toggle, buffer = true, desc = "Neotest" },
          }, { prefix = "<leader>", buffer = 0 })
       end
    end,

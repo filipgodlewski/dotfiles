@@ -12,6 +12,7 @@ export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_BAT=1
 export HOMEBREW_AUTOREMOVE=1
 export HOMEBREW_CASK_OPTS="--no-quarantine"
+export HOMEBREW_BUNDLE_FILE="$HOME/.Brewfile"
 
 export ZPLUGINSDIR=$XDG_DATA_HOME/zsh/plugins
 export RIPGREP_CONFIG_PATH=$XDG_CONFIG_HOME/ripgrep/.ripgreprc

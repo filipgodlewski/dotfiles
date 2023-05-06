@@ -36,7 +36,7 @@ return {
       },
       config = function(_, opts)
          require("nvim-treesitter.configs").setup(opts)
-         require("nvim-treesitter.install").compilers = { "gcc-12" }
+         require("nvim-treesitter.install").compilers = { "gcc" }
          vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
       end,
       cmd = "TSUpdateSync",

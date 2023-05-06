@@ -21,13 +21,15 @@ function update() {
   done
 
   echo "🔥 Upgrade brew"
-  echo "📦 Update bundle"
-  brew bundle --file=~/.Brewfile --quiet
   echo "🍺 Update brew itself"
   brew update --quiet
+  echo "📦 Update bundle"
+  brew bundle --file=~/.Brewfile --quiet
+  echo "📦 Update the rest of brew packages"
+  brew upgrade --quiet
 
   echo "🔥 Upgrade npm"
-  local outdated_packages=($(npm outdated --json -g | jq 'keys' -cMr | tr -d '[]' | tr ',' ' '))
+  local outdated_packages=($(npm outdated --json -g | jq 'keys' -cMr | tr -d '[]' | tr -d '"' | tr ',' ' '))
   local package
   echo "📦 Update global outdated npm packages"
   for package in $outdated_packages; do
@@ -37,7 +39,7 @@ function update() {
   npm cache clean --force --silent
 
   echo "🔥 Upgrade pipx"
-  pipx upgrade-all &> /dev/null
+  pipx upgrade-all
 
   echo "🔥 Upgrade nvim"
   echo "🚧 Updating Lazy..."
@@ -49,12 +51,12 @@ function update() {
   echo "🚧 Updating Remote plugins..."
   nvim --headless +"UpdateRemotePlugins | q" &> /dev/null
 
-  echo "🔥 Upgrade nvim venv"
+  echo "\n🔥 Upgrade nvim venv"
   local py=$XDG_DATA_HOME/venvs/nvim/bin/python
   $py -m pip list --format freeze --no-index | sed 's/==.*//' | xargs -n1 $py -m pip install --upgrade --quiet
 
   echo "🔥 Upgrade antidote (zsh)"
-  antidote update > /dev/null
+  antidote update &> /dev/null
 
   echo "✅ Done. You might want to restart zsh with: exec zsh"
 }

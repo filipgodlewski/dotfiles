@@ -12,7 +12,7 @@ $character\
 """
 
 [directory]
-style = "bold purple"
+style = "bold bright-purple"
 read_only_style = "bold yellow"
 fish_style_pwd_dir_length = 1
 read_only = " RO"
@@ -37,10 +37,10 @@ conflicted = " "
 ahead = "⇡ "
 behind = "⇣ "
 diverged = "⇕ "
-untracked = "ﰘ "
+untracked = "󰜛 "
 stashed = "≡ "
-modified = "ﰗ "
-staged = "ﰛ "
+modified = "󰜝 "
+staged = "󰜙 "
 renamed = " "
 deleted = " "
 
@@ -48,5 +48,5 @@ deleted = " "
 style = "bold bright-black"
 
 [python]
-format = '[(\( $virtualenv\))]($style) '
-style = "bold yellow"
+format = '[(\(󰌠 $virtualenv\))]($style) '
+style = "bold bright-yellow"

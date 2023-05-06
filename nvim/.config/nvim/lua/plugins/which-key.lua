@@ -3,10 +3,10 @@ return {
    opts = {
       key_labels = {
          ["<space>"] = "␣",
-         ["<cr>"] = "",
-         ["<tab>"] = "",
-         ["<M-Bslash>"] = [[<M-\>]],
-         ["<leader>"] = "⌘",
+         ["<cr>"] = "󰌑",
+         ["<tab>"] = "󰌒",
+         ["<M-Bslash>"] = [[󰘵 + \]],
+         ["<leader>"] = "󰘳",
       },
       layout = {
          height = { min = 1, max = 25 },
@@ -14,8 +14,8 @@ return {
          align = "center",
       },
       icons = {
-         separator = "ﰲ",
-         group = " ",
+         separator = "",
+         group = " ",
       },
    },
    config = function(_, opts)

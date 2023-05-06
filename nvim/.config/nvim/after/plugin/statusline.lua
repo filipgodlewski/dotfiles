@@ -14,15 +14,15 @@ M.colors = {
 
 function M.diagnostic_levels(self)
    return {
-      { severity = vim.diagnostic.severity.ERROR, color = self.colors.diagnostic_error, icon = "" },
-      { severity = vim.diagnostic.severity.WARN, color = self.colors.diagnostic_warn, icon = "" },
-      { severity = vim.diagnostic.severity.INFO, color = self.colors.diagnostic_info, icon = "" },
-      { severity = vim.diagnostic.severity.HINT, color = self.colors.diagnostic_hint, icon = "" },
+      { severity = vim.diagnostic.severity.ERROR, color = self.colors.diagnostic_error },
+      { severity = vim.diagnostic.severity.WARN, color = self.colors.diagnostic_warn },
+      { severity = vim.diagnostic.severity.INFO, color = self.colors.diagnostic_info },
+      { severity = vim.diagnostic.severity.HINT, color = self.colors.diagnostic_hint },
    }
 end
 
 function M.get_file_info(self)
-   local modified = vim.bo.modified and (self.colors.diagnostic_error .. " SAVE  ") or ""
+   local modified = vim.bo.modified and (self.colors.diagnostic_error .. "󰆓 SAVE  ") or ""
    local readonly = (not vim.bo.modifiable or vim.bo.readonly) and (self.colors.diagnostic_warn .. "  ") or ""
    local additional_info = modified .. readonly
    local has_additional_info = modified:len() ~= 0 or readonly:len() ~= 0
@@ -35,7 +35,7 @@ function M.get_lsp_diagnostic(self)
    for _, diagnostic in ipairs(self:diagnostic_levels()) do
       local diagnostics = vim.diagnostic.get(0, { severity = diagnostic.severity })
       local exists = #diagnostics ~= 0
-      local text = exists and string.format("%s%s %s  ", diagnostic.color, diagnostic.icon, #diagnostics) or ""
+      local text = exists and string.format("%s %s  ", diagnostic.color, #diagnostics) or ""
       result = result .. text
    end
    if result:len() ~= 0 then result:sub(1, #result - 2) end
@@ -58,7 +58,7 @@ function M.set_active_statusline(self)
          self:pad(self:get_file_info()),
          self:pad("%f", self.colors.directory),
          self:pad(self:get_lsp_diagnostic()),
-         self:pad("ﰲ %-03.v", self.colors.gray),
+         self:pad("󰦺 %-03.v", self.colors.gray),
       }
    end
 end

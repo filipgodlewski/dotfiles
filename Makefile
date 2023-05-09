@@ -30,17 +30,11 @@ unbrew:
 	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
 	sudo rm -rf $(HOMEBREW_PREFIX)
 
-hosts:
-	cp /etc/hosts ~/.cache/hosts
-
-unhosts:
-	sudo cp ~/.cache/hosts /etc/hosts
-
 npm:
-	npm install -g git-cz neovim
+	npm install -g git-cz
 
 unnpm:
-	npm uninstall -g git-cz neovim
+	npm uninstall -g git-cz
 
 stow:
 	stow -R */
@@ -50,8 +44,7 @@ unstow:
 
 pip:
 	pipx install virtualenv
-	pipx install auto-optional
-	pipx install pyflyby
+	pipx install python-lsp-ruff --include-deps
 	$(HOME)/.local/bin/virtualenv $(NVIM_VENV)
 	$(NVIM_VENV)/bin/python -m pip install pynvim
 

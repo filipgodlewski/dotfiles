@@ -31,10 +31,10 @@ unbrew:
 	sudo rm -rf $(HOMEBREW_PREFIX)
 
 npm:
-	npm install -g git-cz
+	npm install -g opencommit
 
 unnpm:
-	npm uninstall -g git-cz
+	npm uninstall -g opencommit
 
 stow:
 	stow -R */

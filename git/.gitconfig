@@ -1,11 +1,5 @@
 [core]
-  pager = delta
-  editor = nvim
-[delta]
-  navigate = true    # use n and N to move between diff sections
-  light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
-[diff]
-  colorMoved = default
+  editor = hx
 [help]
   autocorrect = 1
 [init]
@@ -13,19 +7,6 @@
   defaultBranch = main
 [include]
   path = ~/.config/git/aliases
-[interactive]
-  diffFilter = delta --color-only
-[add.interactive]
-  useBuiltin = false # required for git 2.37.0
-[merge]
-  tool = vim_mergetool
-  conflictStyle = diff3
-[mergetool]
-  keepBackup = false
-  prompt = false
-[mergetool "vim_mergetool"]
-  cmd = nvim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
-  trustExitCode = true
 [push]
   autoSetupRemote = true
 [pull]

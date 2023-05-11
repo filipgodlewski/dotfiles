@@ -36,18 +36,10 @@ return {
    ft = { "python" },
    config = function()
       local dap = require "dap"
-      local dap_signs = {
-         DapBreakpoint = "DiagnosticVirtualTextInfo",
-         DapLogPoint = "DiagnosticVirtualTextHint",
-         DapBreakpointRejected = "DiagnosticVirtualTextError",
-         DapBreakpointCondition = "DiagnosticVirtualTextWarn",
-      }
-
-      for key, color in pairs(dap_signs) do
-         vim.fn.sign_define(key, { text = "", texthl = color, linehl = color, numhl = color })
-      end
-      local color = "DiffChange"
-      vim.fn.sign_define("DapStopped", { text = "ﰲ", texthl = color, linehl = color, numhl = color })
+      local sign = vim.fn.sign_define
+      sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" })
+      sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" })
+      sign("DapLogPoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" })
 
       dap.listeners.after.event_initialized["dapui_config"] = function()
          require("neotest").summary.close()

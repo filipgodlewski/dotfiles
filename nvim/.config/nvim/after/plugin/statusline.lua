@@ -3,7 +3,7 @@ local M = {}
 M.padding = "  "
 
 M.colors = {
-   active = "%#StatusLine#",
+   active = "%#Normal#",
    directory = "%#Directory#",
    gray = "%#NonText#",
    diagnostic_error = "%#DiagnosticError#",

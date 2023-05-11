@@ -1,5 +1,5 @@
 [core]
-  editor = hx
+  editor = nvim
 [help]
   autocorrect = 1
 [init]
@@ -7,6 +7,15 @@
   defaultBranch = main
 [include]
   path = ~/.config/git/aliases
+[merge]
+  tool = vim_mergetool
+  conflictStyle = diff3
+[mergetool]
+  keepBackup = false
+  prompt = false
+[mergetool "vim_mergetool"]
+  cmd = nvim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
+  trustExitCode = true
 [push]
   autoSetupRemote = true
 [pull]

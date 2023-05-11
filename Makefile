@@ -31,10 +31,10 @@ unbrew:
 	sudo rm -rf $(HOMEBREW_PREFIX)
 
 npm:
-	npm install -g opencommit
+	npm install -g git-cz neovim opencommit
 
 unnpm:
-	npm uninstall -g opencommit
+	npm uninstall -g git-cz neovim opencommit
 
 stow:
 	stow -R */
@@ -44,7 +44,8 @@ unstow:
 
 pip:
 	pipx install virtualenv
-	pipx install python-lsp-ruff --include-deps
+	pipx install auto-optional
+	pipx install pyflyby
 	$(HOME)/.local/bin/virtualenv $(NVIM_VENV)
 	$(NVIM_VENV)/bin/python -m pip install pynvim
 

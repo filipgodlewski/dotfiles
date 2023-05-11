@@ -5,7 +5,7 @@ if not vim.loop.fs_stat(lazypath) then
       "clone",
       "--filter=blob:none",
       "https://github.com/folke/lazy.nvim.git",
-      "--branch=stable", -- latest stable release
+      "--branch=stable",
       lazypath,
    }
 end
@@ -15,9 +15,6 @@ vim.g.python3_host_prog = vim.fn.stdpath "data" .. "/venv/bin/python"
 vim.g.mapleader = " "
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-
-require("lazy").setup "plugins"
-vim.notify = require "notify"
 
 vim.opt.autowriteall = true
 vim.opt.backup = false
@@ -72,6 +69,9 @@ vim.diagnostic.config {
    severity_sort = true,
    float = false,
 }
+
+require("lazy").setup "plugins"
+vim.notify = require "notify"
 
 require "user.font"
 require("user.project-configs").setup()

@@ -3,8 +3,9 @@ vim.api.nvim_create_autocmd({ "BufFilePost", "BufEnter", "BufWinEnter", "LspAtta
    callback = function()
       if not vim.tbl_isempty(vim.lsp.get_active_clients { bufnr = 0 }) then
          local builtin = require "telescope.builtin"
+         local which_key = require "which-key"
 
-         require("which-key").register({
+         which_key.register({
             d = {
                function() require("definition_or_references").definition_or_references() end,
                "Definition or usages (LSP)",
@@ -13,12 +14,14 @@ vim.api.nvim_create_autocmd({ "BufFilePost", "BufEnter", "BufWinEnter", "LspAtta
             y = { builtin.lsp_type_definitions, "Type definition (LSP)" },
          }, { prefix = "g", buffer = 0 })
 
-         require("which-key").register({
+         which_key.register({
             d = { function() require("trouble").toggle "document_diagnostics" end, "Open document diagnostics" },
             D = { function() require("trouble").toggle "workspace_diagnostics" end, "Open workspace diagnostics" },
             r = { vim.lsp.buf.rename, "Rename symbol (LSP)" },
-            R = { require("ssr").open, "Structural rename (LSP)" },
          }, { prefix = "<leader>", buffer = 0 })
+         which_key.register({
+            R = { require("ssr").open, "Structural rename (LSP)" },
+         }, { prefix = "<leader>", buffer = 0, mode = { "n", "v" } })
       end
    end,
 })

@@ -66,15 +66,23 @@ return {
       telescope.load_extension "fzf"
       telescope.load_extension "dap"
       telescope.load_extension "workspaces"
+      vim.keymap.set(
+         "n",
+         "<leader>'",
+         require("telescope.builtin").resume,
+         { silent = true, desc = "Open last used picker" }
+      )
    end,
    keys = {
-      { "<leader>b", function() require("telescope.builtin").buffers() end, desc = "Open buffer picker" },
       {
          "<leader><space>",
          function() require("telescope.builtin").find_files { hidden = true } end,
          desc = "Open file picker",
       },
       { "<leader>/", function() require("telescope.builtin").live_grep() end, desc = "Global search" },
+      { "<leader>?", function() require("telescope.builtin").keymaps() end, desc = "Open keymaps picker" },
+      { "<leader>b", function() require("telescope.builtin").buffers() end, desc = "Open buffer picker" },
+      { "<leader>j", function() require("telescope.builtin").jumplist() end, desc = "Open jumplist picker" },
       { "<leader>H", function() require("telescope.builtin").help_tags() end, desc = "Open Neovim help picker" },
       {
          "<leader>W",

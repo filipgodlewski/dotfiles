@@ -68,11 +68,18 @@ return {
       telescope.load_extension "workspaces"
    end,
    keys = {
-      { "<leader>tb", function() require("telescope.builtin").buffers() end, desc = "Buffers" },
-      { "<leader>tf", function() require("telescope.builtin").find_files { hidden = true } end, desc = "Files" },
-      { "<leader>tg", function() require("telescope.builtin").live_grep() end, desc = "Grep" },
-      { "<leader>th", function() require("telescope.builtin").help_tags() end, desc = "Help" },
-      { "<leader>tw", function() require("telescope").extensions.workspaces.workspaces() end, desc = "Workspaces" },
-      { "<leader><space>", function() require("telescope.builtin").find_files { hidden = true } end, desc = "Files" },
+      { "<leader>b", function() require("telescope.builtin").buffers() end, desc = "Open buffer picker" },
+      {
+         "<leader><space>",
+         function() require("telescope.builtin").find_files { hidden = true } end,
+         desc = "Open file picker",
+      },
+      { "<leader>/", function() require("telescope.builtin").live_grep() end, desc = "Global search" },
+      { "<leader>H", function() require("telescope.builtin").help_tags() end, desc = "Open Neovim help picker" },
+      {
+         "<leader>W",
+         function() require("telescope").extensions.workspaces.workspaces() end,
+         desc = "Open workspace picker",
+      },
    },
 }

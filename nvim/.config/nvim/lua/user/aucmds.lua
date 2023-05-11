@@ -3,26 +3,21 @@ vim.api.nvim_create_autocmd({ "BufFilePost", "BufEnter", "BufWinEnter", "LspAtta
    callback = function()
       if not vim.tbl_isempty(vim.lsp.get_active_clients { bufnr = 0 }) then
          local builtin = require "telescope.builtin"
+
          require("which-key").register({
-            i = {
-               name = "Inspect",
-               d = { builtin.lsp_definitions, "Definition" },
-               s = { vim.lsp.buf.hover, "Signature" },
-               t = { builtin.lsp_type_definitions, "Type definition" },
-               u = { builtin.lsp_references, "Usages" },
+            d = {
+               function() require("definition_or_references").definition_or_references() end,
+               "Definition or usages (LSP)",
             },
-            l = {
-               name = "Lenses",
-               d = { function() require("trouble").toggle "document_diagnostics" end, "Document" },
-               n = { vim.diagnostic.goto_next, "Next" },
-               p = { vim.diagnostic.goto_prev, "Previous" },
-               w = { function() require("trouble").toggle "workspace_diagnostics" end, "Workspace" },
-            },
-            r = {
-               name = "Replace",
-               r = { vim.lsp.buf.rename, "Rename" },
-               s = { require("ssr").open, "Structural" },
-            },
+            s = { vim.lsp.buf.hover, "Show signature (LSP)" },
+            y = { builtin.lsp_type_definitions, "Type definition (LSP)" },
+         }, { prefix = "g", buffer = 0 })
+
+         require("which-key").register({
+            d = { function() require("trouble").toggle "document_diagnostics" end, "Open document diagnostics" },
+            D = { function() require("trouble").toggle "workspace_diagnostics" end, "Open workspace diagnostics" },
+            r = { vim.lsp.buf.rename, "Rename symbol (LSP)" },
+            R = { require("ssr").open, "Structural rename (LSP)" },
          }, { prefix = "<leader>", buffer = 0 })
       end
    end,
@@ -34,16 +29,15 @@ local setup_breakpoint = function()
 
    local delete_breakpoints = function()
       require("dap").clear_breakpoints()
-      require("user.helpers").deregister({ "d", "l", "t" }, { prefix = "<leader>b" })
+      require("user.helpers").deregister({ "d", "l", "t" }, { prefix = "<leader>g" })
    end
 
    require("dap").set_breakpoint(cond)
    require("which-key").register({
-      name = "Breakpoint [ACTIVE]",
-      d = { delete_breakpoints, "Deactivate" },
-      l = { function() require("telescope").extensions.dap.list_breakpoints() end, "List" },
-      t = { function() require("dap").toggle_breakpoint() end, "Toggle" },
-   }, { prefix = "<leader>b" })
+      d = { delete_breakpoints, "Delete breakpoints" },
+      l = { function() require("telescope").extensions.dap.list_breakpoints() end, "List breakpoints" },
+      t = { function() require("dap").toggle_breakpoint() end, "Toggle breakpoint" },
+   }, { prefix = "<leader>g" })
 end
 
 vim.api.nvim_create_autocmd({ "BufFilePost", "BufEnter", "BufWinEnter", "LspAttach" }, {
@@ -52,9 +46,12 @@ vim.api.nvim_create_autocmd({ "BufFilePost", "BufEnter", "BufWinEnter", "LspAtta
       local configs = { "python" }
       if vim.tbl_contains(configs, vim.api.nvim_buf_get_option(0, "filetype")) then
          require("which-key").register({
-            b = { name = "Breakpoint", b = { setup_breakpoint, "Set" } },
-            d = { name = "Debug", c = { function() require("dap").continue() end, "Continue" } },
-            u = { require("neotest").summary.toggle, buffer = true, desc = "Neotest" },
+            g = {
+               name = "Debug",
+               b = { setup_breakpoint, "Put a breakpoint" },
+               c = { function() require("dap").continue() end, "Start/Continue debugger" },
+            },
+            u = { require("neotest").summary.toggle, "Toggle Neotest" },
          }, { prefix = "<leader>", buffer = 0 })
       end
    end,

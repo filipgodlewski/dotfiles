@@ -14,7 +14,5 @@ return {
          winblend = 0,
       },
    },
-   keys = {
-      { "<M-t>" },
-   },
+   keys = "<M-t>",
 }

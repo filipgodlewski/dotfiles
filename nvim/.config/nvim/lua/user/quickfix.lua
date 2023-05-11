@@ -30,7 +30,7 @@ M.undo = function()
 end
 
 M.search = function()
-   local ft_mask = vim.fn.input "File mask: "
+   local ft_mask = vim.fn.input("File mask: ", "**/*")
    ft_mask = ft_mask == "" and {} or ft_mask
    require("telescope.builtin").live_grep { glob_pattern = ft_mask }
 end
@@ -41,13 +41,16 @@ M.setup_search = function(prompt_bufnr)
    require("trouble").refresh { auto = true, provider = "qf" }
    require("which-key").register({
       name = "Search [ACTIVE]",
-      c = { M.clear, "Clean" },
-      f = { M.filter, "Cfilter" },
-      r = { M.replace, "Replace" },
-      t = { function() require("trouble").toggle "quickfix" end, "Toggle" },
+      c = { M.clear, "Clean up Quickfix list" },
+      f = { M.filter, "Filter results" },
+      r = { M.replace, "Replace in-place" },
+      t = { function() require("trouble").toggle "quickfix" end, "Toggle Quickfix list" },
    }, { prefix = "<leader>c" })
 end
 
-require("which-key").register({ c = { name = "Quickfix", s = { M.search, "Search" } } }, { prefix = "<leader>" })
+require("which-key").register({
+   name = "Quickfix search",
+   s = { M.search, "Search for issues" },
+}, { prefix = "<leader>c" })
 
 return M

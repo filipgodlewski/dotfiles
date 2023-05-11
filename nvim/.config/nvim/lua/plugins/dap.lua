@@ -2,6 +2,7 @@ return {
    "mfussenegger/nvim-dap",
    dependencies = {
       "mfussenegger/nvim-dap-python",
+      { "LiadOz/nvim-dap-repl-highlights", config = true, lazy = true },
       {
          "rcarriga/nvim-dap-ui",
          opts = {
@@ -44,34 +45,30 @@ return {
       dap.listeners.after.event_initialized["dapui_config"] = function()
          require("neotest").summary.close()
          require("which-key").register({
-            d = {
-               name = "Debug [ACTIVE]",
-               c = { dap.continue, "Continue" },
-               k = { dap.terminate, "Kill" },
-            },
+            k = { dap.terminate, "Kill debugger" },
             s = {
-               name = "Step [ACTIVE]",
+               name = "Step",
                b = { dap.step_back, "Step back" },
                d = { dap.step_into, "Step into" },
                r = { dap.step_over, "Step over" },
-               t = { dap.run_to_cursor, "To cursor" },
+               t = { dap.run_to_cursor, "Continue to cursor" },
                u = { dap.step_out, "Step out" },
             },
             f = {
-               name = "Frames [ACTIVE]",
-               d = { dap.down, "Down" },
-               l = { require("telescope").extensions.dap.frames, "List" },
-               u = { dap.up, "Up" },
+               name = "Frames",
+               d = { dap.down, "Go frame down" },
+               l = { require("telescope").extensions.dap.frames, "List all frames" },
+               u = { dap.up, "Go frame up" },
             },
-         }, { prefix = "<leader>" })
+         }, { prefix = "<leader>g" })
          require("dapui").open {}
       end
 
       local on_event_end = function()
          local helpers = require "user.helpers"
-         helpers.deregister({ "k" }, { prefix = "<leader>d" })
-         helpers.deregister({ "b", "d", "r", "t", "u" }, { prefix = "<leader>s" })
-         helpers.deregister({ "d", "l", "u" }, { prefix = "<leader>f" })
+         helpers.deregister({ "k" }, { prefix = "<leader>g" })
+         helpers.deregister({ "b", "d", "r", "t", "u" }, { prefix = "<leader>gs" })
+         helpers.deregister({ "d", "l", "u" }, { prefix = "<leader>gf" })
          require("dapui").close {}
       end
 

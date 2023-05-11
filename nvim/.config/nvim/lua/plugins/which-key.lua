@@ -23,10 +23,7 @@ return {
       which_key.setup(opts)
       which_key.register {
          ["<esc>"] = { "<cmd>silent! LuaSnipUnlinkCurrent<cr>", "Escape", remap = true },
-         ["<leader>"] = {
-            name = "Leader",
-            t = { name = "Search" },
-         },
+         ["<leader>"] = { name = "Leader" },
       }
    end,
 }

@@ -6,6 +6,7 @@ return {
          ensure_installed = {
             "comment",
             "css",
+            "dap_repl",
             "gitcommit",
             "gitignore",
             "html",

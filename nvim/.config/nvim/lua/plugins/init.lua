@@ -15,4 +15,5 @@ return {
       config = true,
       lazy = true,
    },
+   { "KostkaBrukowa/definition-or-references.nvim", keys = "gd" },
 }

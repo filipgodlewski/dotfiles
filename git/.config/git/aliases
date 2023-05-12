@@ -16,10 +16,13 @@ r = reset
 s = status --short
 st = stash
 
-send = !git pu && git au && git c && git p
-reset-author = c --amend --reset-author --no-edit
-conflicts = d --name-only --diff-filter=U
+main = !git branch -rl "*/HEAD" | rev | cut -d/ -f1 | rev
+gone = !git main && git remote prune origin && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -r git branch -D
 optimize = gc --prune=now --aggressive
 rc = config --local --unset credential.helper
+reset-author = c --amend --reset-author --no-edit
 root = rev-parse --show-toplevel
+send = !git pu && git au && git c && git p
+newest = !git st && git co `git main` && git pu && git co - && git st pop
 tear = !git r --hard && git clean -f
+war = d --name-only --diff-filter=U

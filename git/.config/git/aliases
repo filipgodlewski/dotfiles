@@ -1,22 +1,25 @@
 [alias]
+F = fetch --prune --all
 a = add
 b = branch
+cl = clone
 co = checkout
+cp = cherry-pick
 d = diff
-f = fetch --prune --all
+f = fuzzy
 ls = ls-files
 lsi = ls-files --others --ignored --exclude-standard
 m = merge
-pl = pull --prune --all
-ps = push
+p = push
+pu = pull --prune --all
+r = reset
 s = status --short
-sm = submodule
 st = stash
 
-send = !git pull && git au && git c && git push
-reset-author = commit --amend --reset-author --no-edit
-conflicts = diff --name-only --diff-filter=U
+send = !git pu && git au && git c && git p
+reset-author = c --amend --reset-author --no-edit
+conflicts = d --name-only --diff-filter=U
 optimize = gc --prune=now --aggressive
 rc = config --local --unset credential.helper
 root = rev-parse --show-toplevel
-tear = !git reset --hard && git clean -f
+tear = !git r --hard && git clean -f

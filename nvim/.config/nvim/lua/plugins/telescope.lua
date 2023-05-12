@@ -3,7 +3,6 @@ return {
    dependencies = {
       "nvim-lua/popup.nvim",
       "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope-dap.nvim",
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
    },
    opts = function()
@@ -64,8 +63,6 @@ return {
       local telescope = require "telescope"
       telescope.setup(opts)
       telescope.load_extension "fzf"
-      telescope.load_extension "dap"
-      telescope.load_extension "workspaces"
       vim.keymap.set(
          "n",
          "<leader>'",
@@ -86,7 +83,10 @@ return {
       { "<leader>H", function() require("telescope.builtin").help_tags() end, desc = "Open Neovim help picker" },
       {
          "<leader>W",
-         function() require("telescope").extensions.workspaces.workspaces() end,
+         function()
+            require("telescope").load_extension "workspaces"
+            require("telescope").extensions.workspaces.workspaces()
+         end,
          desc = "Open workspace picker",
       },
    },

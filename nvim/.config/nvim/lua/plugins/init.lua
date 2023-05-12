@@ -1,19 +1,51 @@
 return {
-   "nathom/filetype.nvim", -- load ft faster
-   { "tpope/vim-abolish", cmd = "S" }, -- better Search & Replace
-   "tpope/vim-eunuch", -- UNIX commands
-   { "tpope/vim-fugitive", cmd = "G" }, -- Git Integration
-   { "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" }, config = true, event = "BufEnter" },
-   { "folke/trouble.nvim", dependencies = { "nvim-tree/nvim-web-devicons" }, config = true, lazy = true },
-   { "j-hui/fidget.nvim", config = true }, -- cool spinner for loaders
+   -- SECTION A: EXPERIENCE IMPROVEMENT
+
+   -- Close buffers without destroying the layout
    { "kazhala/close-buffers.nvim", opts = { preserve_window_layout = { "this" } }, lazy = true },
+
+   -- Super cool Undo history
    { "mbbill/undotree", cmd = "UndotreeToggle" },
-   { "simrat39/rust-tools.nvim", ft = "rust", config = true },
+
+   -- load ft faster
+   "nathom/filetype.nvim",
+
+   -- cool spinner for loaders
+   { "j-hui/fidget.nvim", config = true },
+
+   -- SECTION B: REFACTORING & CODE ANALYSIS
+
+   -- better Search & Replace
+   { "tpope/vim-abolish", cmd = "S" },
+
+   -- Structural Search and Replace
    {
       "cshuaimin/ssr.nvim",
       dependencies = { "nvim-treesitter/nvim-treesitter" },
       config = true,
       lazy = true,
    },
+
+   -- Super cool Quickfix layout
+   { "folke/trouble.nvim", dependencies = { "nvim-tree/nvim-web-devicons" }, config = true, lazy = true },
+
+   -- Colorize `TODO` and other comments
+   { "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" }, config = true, event = "BufRead" },
+
+   -- Rust related LSP and other tools
+   { "simrat39/rust-tools.nvim", ft = "rust", config = true },
+
+   -- Either jump to definition or reference, using one shortcut
    { "KostkaBrukowa/definition-or-references.nvim", keys = "gd" },
+
+   -- SECTION C: INTEGRATIONS
+
+   -- UNIX commands
+   { "tpope/vim-eunuch", cmd = { "Remove", "Delete", "Move", "Chmod", "Mkdir", "SudoWrite", "SudoEdit" } },
+
+   -- Git Integration
+   { "tpope/vim-fugitive", cmd = "G" },
+
+   -- Git gutter and more
+   { "lewis6991/gitsigns.nvim", config = true, event = "BufRead" },
 }

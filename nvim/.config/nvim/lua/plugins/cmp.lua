@@ -195,6 +195,6 @@ return {
             },
          })
       end,
-      event = { "BufEnter", "CmdlineEnter" },
+      event = { "InsertCharPre", "CmdlineEnter" },
    },
 }

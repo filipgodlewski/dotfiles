@@ -2,6 +2,8 @@ return {
    "mfussenegger/nvim-dap",
    dependencies = {
       "mfussenegger/nvim-dap-python",
+      "nvim-telescope/telescope.nvim",
+      "nvim-telescope/telescope-dap.nvim",
       { "LiadOz/nvim-dap-repl-highlights", config = true, lazy = true },
       {
          "rcarriga/nvim-dap-ui",
@@ -44,6 +46,7 @@ return {
 
       dap.listeners.after.event_initialized["dapui_config"] = function()
          require("neotest").summary.close()
+         require("telescope").load_extension "dap"
          require("which-key").register({
             k = { dap.terminate, "Kill debugger" },
             s = {

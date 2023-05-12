@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd({ "BufFilePost", "BufEnter", "BufWinEnter", "LspAtta
             r = { vim.lsp.buf.rename, "Rename symbol (LSP)" },
          }, { prefix = "<leader>", buffer = 0 })
          which_key.register({
-            R = { require("ssr").open, "Structural rename (LSP)" },
+            R = { function() require("ssr").open() end, "Structural rename (LSP)" },
          }, { prefix = "<leader>", buffer = 0, mode = { "n", "v" } })
       end
    end,
@@ -58,4 +58,9 @@ vim.api.nvim_create_autocmd({ "BufFilePost", "BufEnter", "BufWinEnter", "LspAtta
          }, { prefix = "<leader>", buffer = 0 })
       end
    end,
+})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+   group = vim.api.nvim_create_augroup("Laaaazy", { clear = true }),
+   callback = function() vim.keymap.set("n", "<leader>L", "<cmd>Lazy<cr>", { silent = true, desc = "Lazy" }) end,
 })

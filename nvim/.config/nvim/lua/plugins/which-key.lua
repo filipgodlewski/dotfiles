@@ -7,6 +7,7 @@ return {
          ["<tab>"] = "󰌒",
          ["<M-Bslash>"] = [[󰘵 + \]],
          ["<leader>"] = "󰘳",
+         ["<localLeader>"] = "󰜞",
       },
       layout = {
          height = { min = 1, max = 25 },
@@ -24,6 +25,7 @@ return {
       which_key.register {
          ["<esc>"] = { "<cmd>silent! LuaSnipUnlinkCurrent<cr>", "Escape", remap = true },
          ["<leader>"] = { name = "Leader" },
+         ["<localLeader>"] = { name = "Local Leader" },
       }
    end,
 }

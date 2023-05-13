@@ -8,7 +8,7 @@ return {
    { "mbbill/undotree", cmd = "UndotreeToggle" },
 
    -- load ft faster
-   "nathom/filetype.nvim",
+   -- "nathom/filetype.nvim",
 
    -- cool spinner for loaders
    { "j-hui/fidget.nvim", config = true },
@@ -41,11 +41,19 @@ return {
    -- SECTION C: INTEGRATIONS
 
    -- UNIX commands
-   { "tpope/vim-eunuch", cmd = { "Remove", "Delete", "Move", "Chmod", "Mkdir", "SudoWrite", "SudoEdit" } },
-
-   -- Git Integration
-   { "tpope/vim-fugitive", cmd = "G" },
+   {
+      "tpope/vim-eunuch",
+      cmd = { "Delete", "Rename", "Copy", "Duplicate", "Move", "Chmod", "Mkdir", "SudoWrite", "SudoEdit" },
+   },
 
    -- Git gutter and more
    { "lewis6991/gitsigns.nvim", config = true, event = "BufRead" },
+
+   -- Git conflict helper
+   {
+      "akinsho/git-conflict.nvim",
+      opts = { default_mappings = false },
+      config = true,
+      event = "BufReadPre",
+   },
 }

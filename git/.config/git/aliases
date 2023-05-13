@@ -1,5 +1,4 @@
 [alias]
-F = fetch --prune --all
 a = add
 b = branch
 cl = clone
@@ -7,22 +6,24 @@ co = checkout
 cp = cherry-pick
 d = diff
 f = fuzzy
+fp = fetch --prune --all
 ls = ls-files
 lsi = ls-files --others --ignored --exclude-standard
 m = merge
 p = push
+ps = !git pu && git au && git c && git p
 pu = pull --prune --all
 r = reset
 s = status --short
 st = stash
 
-main = !git branch -rl "*/HEAD" | rev | cut -d/ -f1 | rev
 gone = !git main && git remote prune origin && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -r git branch -D
+main = !git branch -rl "*/HEAD" | rev | cut -d/ -f1 | rev
+news = !git st && git co `git main` && git pu && git co - && git st pop
 optimize = gc --prune=now --aggressive
-rc = config --local --unset credential.helper
 reset-author = c --amend --reset-author --no-edit
+reset-credentials = config --local --unset credential.helper
 root = rev-parse --show-toplevel
-send = !git pu && git au && git c && git p
-newest = !git st && git co `git main` && git pu && git co - && git st pop
 tear = !git r --hard && git clean -f
 war = d --name-only --diff-filter=U
+fix = !cd `git root` && git war | xargs nvim -p; cd -

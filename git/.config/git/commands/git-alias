@@ -1,4 +1,4 @@
 git config --get-regexp '^alias\.' | sd '^alias\.(\w+) (.*)' '$1 = $2'
-exa -1 --color=never ~/.config/git/commands | sd '^git-' ''
+ls -1 --color=never ~/.config/git/commands | sd '^git-' ''
 
 # vim:ft=zsh

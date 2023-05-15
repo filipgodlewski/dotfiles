@@ -39,3 +39,7 @@ M.open = function()
 end
 
 return M
+-- TODO: Create a default, boilerplate config that always gets imported no matter what
+--       It must be in this file though
+-- TODO: return config table so that it's accessible for other lazy loaded programs
+-- TODO: Add instructions inside the default file

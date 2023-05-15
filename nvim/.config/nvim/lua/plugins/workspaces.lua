@@ -82,6 +82,7 @@ return {
                if not is_suppressed(path) then require("sessions").save(nil, { silent = true }) end
                vim.cmd "bd%"
                vim.cmd "clearjumps"
+               pcall(vim.cmd, "LspStop")
             end,
             open = function(_, path)
                local opts = { silent = true }
@@ -89,6 +90,7 @@ return {
                require("sessions").load(nil, opts)
                deactivate_virtual_env()
                activate_virtual_env(path)
+               pcall(vim.cmd, "LspStart")
             end,
          },
       }

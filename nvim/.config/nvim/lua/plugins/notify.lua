@@ -3,7 +3,7 @@ return {
    opts = {
       fps = 60,
       render = "minimal",
-      timeout = 1000,
-      top_down = false,
+      timeout = 500,
+      top_down = true,
    },
 }

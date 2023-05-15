@@ -1,7 +1,6 @@
 return {
    {
       "nvim-treesitter/nvim-treesitter",
-      dependencies = {},
       opts = {
          ensure_installed = {
             "comment",
@@ -34,12 +33,35 @@ return {
             use_virtual_text = true,
             lint_events = { "BufWrite", "CursorHold" },
          },
+         rainbow = { enable = true },
       },
       config = function(_, opts)
          require("nvim-treesitter.configs").setup(opts)
          require("nvim-treesitter.install").compilers = { "gcc" }
          vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+
+         -- HACK: to disable in TelescopePrompt
+         require("pears").setup(function(conf) conf.disabled_filetypes { "" } end)
+
+         local treesj = require "treesj"
+         treesj.setup { use_default_keymaps = false }
+         require("which-key").register({
+            S = { treesj.split, "Split node (TS)" },
+            J = { treesj.join, "Join node (TS)" },
+            T = { function() treesj.toggle { split = { recursive = true } } end, "Toggle node recursively (TS)" },
+         }, { prefix = "<leader>" })
       end,
       cmd = "TSUpdateSync",
+      event = "BufRead",
+   },
+   {
+      "steelsojka/pears.nvim",
+      dependencies = { "nvim-treesitter/nvim-treesitter" },
+      lazy = true,
+   },
+   {
+      "Wansmer/treesj",
+      dependencies = { "nvim-treesitter/nvim-treesitter" },
+      lazy = true,
    },
 }

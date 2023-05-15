@@ -8,11 +8,6 @@ return {
       {
          "rcarriga/nvim-dap-ui",
          opts = {
-            icons = {
-               expanded = "",
-               collapsed = "",
-               current_frame = "",
-            },
             layouts = {
                {
                   elements = {
@@ -63,15 +58,15 @@ return {
                l = { require("telescope").extensions.dap.frames, "List all frames" },
                u = { dap.up, "Go frame up" },
             },
-         }, { prefix = "<leader>g" })
+         }, { prefix = "<localLeader>" })
          require("dapui").open {}
       end
 
       local on_event_end = function()
          local helpers = require "user.helpers"
-         helpers.deregister({ "k" }, { prefix = "<leader>g" })
-         helpers.deregister({ "b", "d", "r", "t", "u" }, { prefix = "<leader>gs" })
-         helpers.deregister({ "d", "l", "u" }, { prefix = "<leader>gf" })
+         helpers.deregister({ "b", "d", "r", "t", "u" }, { prefix = "<localLeader>s" })
+         helpers.deregister({ "d", "l", "u" }, { prefix = "<localLeader>f" })
+         helpers.deregister({ "k", "s", "f" }, { prefix = "<localLeader>" })
          require("dapui").close {}
       end
 

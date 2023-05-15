@@ -76,3 +76,4 @@ vim.notify = require "notify"
 require "user.font"
 require("user.project-configs").setup()
 require "user.aucmds"
+vim.cmd.colorscheme "catppuccin"

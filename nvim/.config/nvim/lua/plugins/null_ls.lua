@@ -62,7 +62,5 @@ return {
       }
    end,
    ft = { "python", "lua", "toml", "md", "rust" },
-   dependencies = {
-      "nvim-lua/plenary.nvim",
-   },
+   dependencies = { "nvim-lua/plenary.nvim" },
 }

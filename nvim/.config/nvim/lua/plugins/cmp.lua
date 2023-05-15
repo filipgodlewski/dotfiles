@@ -72,6 +72,7 @@ return {
          "hrsh7th/cmp-nvim-lsp-document-symbol",
          "hrsh7th/cmp-nvim-lua",
          "hrsh7th/cmp-path",
+         "rcarriga/cmp-dap",
          "saadparwaiz1/cmp_luasnip",
          "lukas-reineke/cmp-under-comparator",
       },
@@ -116,7 +117,9 @@ return {
          }
 
          return {
-            enabled = function() return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" end,
+            enabled = function()
+               return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or require("cmp_dap").is_dap_buffer()
+            end,
             snippet = {
                expand = function(args) require("luasnip").lsp_expand(args.body) end,
             },
@@ -192,6 +195,12 @@ return {
             sources = {
                { name = "nvim_lsp" },
                { name = "buffer" },
+            },
+         })
+
+         cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+            sources = {
+               { name = "dap" },
             },
          })
       end,

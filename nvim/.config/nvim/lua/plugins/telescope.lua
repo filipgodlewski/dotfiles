@@ -77,10 +77,14 @@ return {
          desc = "Open file picker",
       },
       { "<leader>/", function() require("telescope.builtin").live_grep() end, desc = "Global search" },
-      { "<leader>?", function() require("telescope.builtin").keymaps() end, desc = "Open keymaps picker" },
+      {
+         "<leader>/",
+         function() require("telescope.builtin").grep_string() end,
+         desc = "Selection global search",
+         mode = "v",
+      },
+      { "<leader>?", function() require("telescope.builtin").help_tags() end, desc = "Open Neovim help picker" },
       { "<leader>b", function() require("telescope.builtin").buffers() end, desc = "Open buffer picker" },
-      { "<leader>j", function() require("telescope.builtin").jumplist() end, desc = "Open jumplist picker" },
-      { "<leader>H", function() require("telescope.builtin").help_tags() end, desc = "Open Neovim help picker" },
       {
          "<leader>W",
          function()

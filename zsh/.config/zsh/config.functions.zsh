@@ -35,8 +35,8 @@ function update() {
   echo "🔥 Upgrade nvim"
   nvim --headless +"Lazy! sync" +qa &> /dev/null
   nvim --headless +"autocmd User MasonUpdateAllComplete quitall" +"MasonUpdateAll" &> /dev/null
-  nvim --headless +"TSUpdateSync | q" &> /dev/null
-  nvim --headless +"UpdateRemotePlugins | q" &> /dev/null
+  nvim --headless +"TSUpdateSync" +q &> /dev/null
+  nvim --headless +"UpdateRemotePlugins" +q &> /dev/null
 
   echo "🔥 Upgrade nvim venv"
   local py=$XDG_DATA_HOME/venvs/nvim/bin/python

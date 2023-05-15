@@ -13,9 +13,9 @@ M.deregister = function(mappings, opts)
    for _, lhs in ipairs(mappings) do
       local mapping = opts.prefix .. lhs
       pcall(vim.api.nvim_del_keymap, opts.mode, mapping)
-      all_mappings[mapping] = "which_key_ignore"
+      all_mappings[lhs] = "which_key_ignore"
    end
-   require("which-key").register(all_mappings)
+   require("which-key").register(all_mappings, opts)
 end
 
 return M

@@ -1,3 +1,6 @@
+local cmd = function(c) return string.format("<cmd>%s<cr>", c) end
+local nox = { "n", "o", "x" }
+
 return {
    -- SECTION A: EXPERIENCE IMPROVEMENT
 
@@ -7,15 +10,35 @@ return {
    -- Super cool Undo history
    { "mbbill/undotree", cmd = "UndotreeToggle" },
 
-   -- load ft faster
-   -- "nathom/filetype.nvim",
-
-   -- cool spinner for loaders
+   -- Cool spinner for loaders
    { "j-hui/fidget.nvim", config = true },
+
+   -- Object pairs and surrounding
+   {
+      "kylechui/nvim-surround",
+      dependencies = {
+         "nvim-treesitter/nvim-treesitter",
+         "nvim-treesitter/nvim-treesitter-textobjects",
+      },
+      config = true,
+      event = "BufRead",
+   },
+
+   -- Crawling through word like everyWordEvenClashedTogether
+   --                            ^    ^   ^   ^      ^
+   {
+      "chrisgrieser/nvim-spider",
+      keys = {
+         { "w", cmd "lua require('spider').motion 'w'", mode = nox, desc = "Next word (SPIDER)" },
+         { "e", cmd "lua require('spider').motion 'e'", mode = nox, desc = "Next end of word (SPIDER)" },
+         { "b", cmd "lua require('spider').motion 'b'", mode = nox, desc = "Previous word (SPIDER)" },
+         { "ge", cmd "lua require('spider').motion 'ge'", mode = nox, desc = "Previous end of word (SPIDER)" },
+      },
+   },
 
    -- SECTION B: REFACTORING & CODE ANALYSIS
 
-   -- better Search & Replace
+   -- Better Search & Replace
    { "tpope/vim-abolish", cmd = "S" },
 
    -- Structural Search and Replace
@@ -30,13 +53,19 @@ return {
    { "folke/trouble.nvim", dependencies = { "nvim-tree/nvim-web-devicons" }, config = true, lazy = true },
 
    -- Colorize `TODO` and other comments
-   { "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" }, config = true, event = "BufRead" },
+   {
+      "folke/todo-comments.nvim",
+      dependencies = {
+         "nvim-lua/plenary.nvim",
+         "folke/trouble.nvim",
+      },
+      config = true,
+      event = "BufRead",
+      keys = { { "gT", cmd "TodoTrouble", desc = "Check TODO items" } },
+   },
 
    -- Rust related LSP and other tools
    { "simrat39/rust-tools.nvim", ft = "rust", config = true },
-
-   -- Either jump to definition or reference, using one shortcut
-   { "KostkaBrukowa/definition-or-references.nvim", keys = "gd" },
 
    -- SECTION C: INTEGRATIONS
 

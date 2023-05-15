@@ -95,6 +95,6 @@ return {
             lua_ls = function() setup_override "lua_ls" end,
          }
       end,
-      event = "LspAttach",
+      event = "BufRead",
    },
 }

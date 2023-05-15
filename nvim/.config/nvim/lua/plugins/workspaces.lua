@@ -37,6 +37,7 @@ local function deactivate_virtual_env()
 end
 
 local function activate_virtual_env(path)
+   if path[#path] ~= "/" then path = path .. "/" end
    local virtual_env = path .. "venv"
    local bin = virtual_env .. "/bin"
    if vim.fn.isdirectory(bin) == 0 then return end
@@ -53,9 +54,14 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
    group = vim.api.nvim_create_augroup("ChooseWorkspace", { clear = true }),
    callback = function()
       local home = vim.fn.expand "~"
-      if #vim.api.nvim_get_vvar "argv" == 1 and vim.loop.cwd() == home then
+      local args = vim.api.nvim_get_vvar "argv"
+      local cwd = vim.loop.cwd()
+      if #args == 2 and cwd == home and vim.tbl_contains(args, "--embed") then
          require("telescope").extensions.workspaces.workspaces()
+         return
       end
+      deactivate_virtual_env()
+      activate_virtual_env(cwd)
    end,
 })
 

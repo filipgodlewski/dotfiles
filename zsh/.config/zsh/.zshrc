@@ -21,6 +21,8 @@ if [[ ! $static_file -nt $plugins_txt ]]; then
   )
 fi
 
+source $ZDOTDIR/catppuccin_macchiato-zsh-syntax-highlighting.zsh
+
 # Uncomment this if you want antidote commands like `antidote update` available
 # in your interactive shell session:
 autoload -Uz $antidote_dir/functions/antidote

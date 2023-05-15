@@ -11,27 +11,29 @@ $python\
 $character\
 """
 
+palette = "catppuccin_macchiato"
+
 [directory]
-style = "bold bright-purple"
+style = "bold lavender"
 read_only_style = "bold yellow"
 fish_style_pwd_dir_length = 1
 read_only = " RO"
 
 [character]
-success_symbol = "[](white)"
-error_symbol = "[](red)"
-vimcmd_symbol = "[](green)"
+success_symbol = "[](green)"
+error_symbol = "[](maroon)"
+vimcmd_symbol = "[](mauve)"
 
 [git_branch]
 format = '[( $branch)]($style) '
-style = "bold blue"
+style = "bold peach"
 
 [git_commit]
-style = "green"
+style = "sapphire"
 only_detached = false
 
 [git_status]
-format = "[$conflicted](red)[$untracked](bright-black)[$modified](yellow)[$staged](green)[$renamed](cyan)[$deleted](red)[($ahead_behind)](purple)[($stashed)](white) "
+format = "[$conflicted](red)[$untracked](bright-teal)[$modified](yellow)[$staged](green)[$renamed](lavender)[$deleted](maroon)[($ahead_behind)](flamingo)[($stashed)](mantle) "
 
 conflicted = " "
 ahead = "⇡ "
@@ -45,8 +47,36 @@ renamed = " "
 deleted = " "
 
 [git_state]
-style = "bold bright-black"
+style = "bold mantle"
 
 [python]
 format = '[(\(󰌠 $virtualenv\))]($style) '
-style = "bold bright-yellow"
+style = "bold blue"
+
+[palettes.catppuccin_macchiato]
+rosewater = "#f4dbd6"
+flamingo = "#f0c6c6"
+pink = "#f5bde6"
+mauve = "#c6a0f6"
+red = "#ed8796"
+maroon = "#ee99a0"
+peach = "#f5a97f"
+yellow = "#eed49f"
+green = "#a6da95"
+teal = "#8bd5ca"
+sky = "#91d7e3"
+sapphire = "#7dc4e4"
+blue = "#8aadf4"
+lavender = "#b7bdf8"
+text = "#cad3f5"
+subtext1 = "#b8c0e0"
+subtext0 = "#a5adcb"
+overlay2 = "#939ab7"
+overlay1 = "#8087a2"
+overlay0 = "#6e738d"
+surface2 = "#5b6078"
+surface1 = "#494d64"
+surface0 = "#363a4f"
+base = "#24273a"
+mantle = "#1e2030"
+crust = "#181926"

@@ -8,7 +8,11 @@ return {
    { "kazhala/close-buffers.nvim", opts = { preserve_window_layout = { "this" } }, lazy = true },
 
    -- Super cool Undo history
-   { "mbbill/undotree", cmd = "UndotreeToggle" },
+   {
+      "mbbill/undotree",
+      cmd = "UndotreeToggle",
+      keys = { { "<leader>U", cmd "UndotreeToggle", desc = "Toggle undo tree" } },
+   },
 
    -- Cool spinner for loaders
    { "j-hui/fidget.nvim", config = true },

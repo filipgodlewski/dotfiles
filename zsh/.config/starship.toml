@@ -22,14 +22,14 @@ read_only = " RO"
 [character]
 success_symbol = "[](green)"
 error_symbol = "[](maroon)"
-vimcmd_symbol = "[](mauve)"
+vimcmd_symbol = "[](peach)"
 
 [git_branch]
 format = '[( $branch)]($style) '
-style = "bold peach"
+style = "bold pink"
 
 [git_commit]
-style = "sapphire"
+style = "rosewater"
 only_detached = false
 
 [git_status]

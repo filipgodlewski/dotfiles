@@ -2,6 +2,7 @@
 .zsh_history
 .zsh_sessions
 .zcompdump
+*.zwc
 zsh_plugins.zsh
 terminfo
 

@@ -21,8 +21,8 @@ read_only = " RO"
 
 [character]
 success_symbol = "[](green)"
-error_symbol = "[](maroon)"
-vimcmd_symbol = "[](peach)"
+error_symbol = "[](red)"
+vimcmd_symbol = "[](mauve)"
 
 [git_branch]
 format = '[( $branch)]($style) '

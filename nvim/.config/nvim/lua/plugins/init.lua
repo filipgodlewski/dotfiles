@@ -40,6 +40,12 @@ return {
       },
    },
 
+   {
+      "norcalli/nvim-colorizer.lua",
+      config = true,
+      event = "BufRead",
+   },
+
    -- SECTION B: REFACTORING & CODE ANALYSIS
 
    -- Better Search & Replace

@@ -1,5 +1,6 @@
+bigH/git-fuzzy path:bin kind:path
+jeffreytse/zsh-vi-mode
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-completions
 zsh-users/zsh-history-substring-search
-zsh-users/zsh-syntax-highlighting
-bigH/git-fuzzy path:bin kind:path
+zdharma-continuum/fast-syntax-highlighting

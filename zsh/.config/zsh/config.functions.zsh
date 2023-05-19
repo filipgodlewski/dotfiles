@@ -5,8 +5,18 @@ function update() {
     echo "💔 First close nvim"
     return 1
   fi
-  echo "🔥 Upgrade hosts"
-  sudo curl https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts -o /etc/hosts --silent
+
+  [[ -d $XDG_CACHE_HOME/local_update ]] || mkdir -p $XDG_CACHE_HOME/local_update
+  local LOG_FILE=$XDG_CACHE_HOME/local_update/update_$(date +"%Y-%m-%d_%T").log
+
+  touch $LOG_FILE
+
+  function log_info() {
+    echo "$1" | tee -a $LOG_FILE
+  }
+
+  log_info "🔥 Upgrade hosts"
+  sudo curl https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts -o /etc/hosts &>> $LOG_FILE
   local whitelisted_pages=(\
     "linkedin.com" \
     "www.linkedin.com" \
@@ -17,33 +27,34 @@ function update() {
   )
   local page
   for page in $whitelisted_pages; do
-    sudo nvim --clean --headless +"g/ $page/d" +"wq" /etc/hosts &> /dev/null
+    sudo nvim --clean --headless +"g/ $page/d" +"wq" /etc/hosts &>> $LOG_FILE
   done
 
-  echo "🔥 Upgrade brew packages"
-  brew update --quiet
-  brew bundle --file=~/.Brewfile &> /dev/null
-  brew upgrade --quiet
+  log_info "🔥 Upgrade brew packages"
+  brew update &>> $LOG_FILE
+  brew bundle --file=~/.Brewfile &>> $LOG_FILE
+  brew upgrade &>> $LOG_FILE
 
-  echo "🔥 Upgrade npm packages"
-  npm update --global --silent
-  npm cache clean --force --silent
 
-  echo "🔥 Upgrade pipx packages"
-  pipx upgrade-all &> /dev/null
+  log_info "🔥 Upgrade npm packages"
+  npm update --global &>> $LOG_FILE
+  npm cache clean --force &>> $LOG_FILE
 
-  echo "🔥 Upgrade nvim"
-  nvim --headless +"Lazy! sync" +qa &> /dev/null
-  nvim --headless +"autocmd User MasonUpdateAllComplete quitall" +"MasonUpdateAll" &> /dev/null
-  nvim --headless +"TSUpdateSync" +q &> /dev/null
-  nvim --headless +"UpdateRemotePlugins" +q &> /dev/null
+  log_info "🔥 Upgrade pipx packages"
+  pipx upgrade-all &>> $LOG_FILE
 
-  echo "🔥 Upgrade nvim venv"
+  log_info "🔥 Upgrade nvim"
+  nvim --headless +"Lazy! sync" +qa &>> $LOG_FILE
+  nvim --headless +"autocmd User MasonUpdateAllComplete quitall" +"MasonUpdateAll" &>> $LOG_FILE
+  nvim --headless +"TSUpdateSync" +q &>> $LOG_FILE
+  nvim --headless +"UpdateRemotePlugins" +q &>> $LOG_FILE
+
+  log_info "🔥 Upgrade nvim venv"
   local py=$XDG_DATA_HOME/venvs/nvim/bin/python
-  $py -m pip list --format freeze --no-index | sed 's/==.*//' | xargs -n1 $py -m pip install --upgrade --quiet
+  $py -m pip list --format freeze --no-index | sed 's/==.*//' | xargs -n1 $py -m pip install --upgrade &>> $LOG_FILE
 
-  echo "🔥 Upgrade zsh packages"
-  antidote update &> /dev/null
+  log_info "🔥 Upgrade zsh packages"
+  antidote update &>> $LOG_FILE
 
   exec zsh
 }
@@ -56,6 +67,8 @@ bindkey . rationalise-dot
 
 bindkey "^[[A" up-line-or-search
 bindkey "^[[B" down-line-or-search
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
 
 local LFCD="$XDG_CONFIG_HOME/lf/lfcd.sh"
 if [[ -f "$LFCD" ]]; then

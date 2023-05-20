@@ -1,7 +1,7 @@
 export WORDCHARS=${WORDCHARS/\/}
 source $HOME/.cargo/env
 export PATH=$XDG_CONFIG_HOME/git/commands:$PATH
-export PATH=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$HOMEBREW_PREFIX/opt/curl/bin:$PATH
+export PATH=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$HOMEBREW_PREFIX/opt/curl/bin:$HOMEBREW_PREFIX/opt/fzf/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 
 for file in $ZDOTDIR/config.*.zsh; do source $file; done
@@ -20,3 +20,9 @@ eval "$(starship init zsh)"
 
 # source 1password plugins
 source $XDG_CONFIG_HOME/op/plugins.sh
+
+function _fzf_zvm_init() {
+  [[ $- == *i* ]] && source "$(brew --prefix)/opt/fzf/shell/completion.zsh" 2> /dev/null
+  source "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
+}
+zvm_after_init_commands+=(_fzf_zvm_init)

@@ -23,7 +23,11 @@ return {
             "toml",
             "yaml",
          },
-         highlight = { enable = true },
+         highlight = {
+            enable = true,
+            use_languagetree = true,
+         },
+         indent = { enable = true },
          context_commentstring = {
             enable = true,
             enable_autocmd = false,
@@ -51,7 +55,8 @@ return {
             T = { function() treesj.toggle { split = { recursive = true } } end, "Toggle node recursively (TS)" },
          }, { prefix = "<leader>" })
       end,
-      cmd = "TSUpdateSync",
+      cmd = { "TSUpdateSync", "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
+      build = ":TSUpdate",
       event = "BufRead",
    },
    {

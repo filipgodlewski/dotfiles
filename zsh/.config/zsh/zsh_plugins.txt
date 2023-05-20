@@ -2,5 +2,6 @@ bigH/git-fuzzy path:bin kind:path
 jeffreytse/zsh-vi-mode
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-completions
-zsh-users/zsh-history-substring-search
+hlissner/zsh-autopair
+momo-lab/zsh-replace-multiple-dots
 zdharma-continuum/fast-syntax-highlighting

@@ -56,7 +56,6 @@ return {
       "cshuaimin/ssr.nvim",
       dependencies = { "nvim-treesitter/nvim-treesitter" },
       config = true,
-      lazy = true,
    },
 
    -- Super cool Quickfix layout
@@ -86,7 +85,24 @@ return {
    },
 
    -- Git gutter and more
-   { "lewis6991/gitsigns.nvim", config = true, event = "BufRead" },
+   {
+      "lewis6991/gitsigns.nvim",
+      ft = { "gitcommit", "diff" },
+      init = function()
+         -- taken from NvChad
+         vim.api.nvim_create_autocmd("BufRead", {
+            group = vim.api.nvim_create_augroup("GitSignsLazyLoad", { clear = true }),
+            callback = function()
+               vim.fn.system { "git", "-C", string.format("%q", vim.fn.expand "%:p:h"), "rev-parse" }
+               if vim.v.shell_error == 0 then
+                  vim.api.nvim_del_augroup_by_name "GitSignsLazyLoad"
+                  vim.schedule(function() require("lazy").load { plugins = { "gitsigns.nvim" } } end)
+               end
+            end,
+         })
+      end,
+      config = true,
+   },
 
    -- Git conflict helper
    {
@@ -94,5 +110,10 @@ return {
       opts = { default_mappings = false },
       config = true,
       event = "BufReadPre",
+   },
+
+   {
+      "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+      config = true,
    },
 }

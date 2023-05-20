@@ -1,13 +1,7 @@
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-   vim.fn.system {
-      "git",
-      "clone",
-      "--filter=blob:none",
-      "https://github.com/folke/lazy.nvim.git",
-      "--branch=stable",
-      lazypath,
-   }
+   local repo = "https://github.com/folke/lazy.nvim"
+   vim.fn.system { "git", "clone", "--filter=blob:none", "-b", "stable", repo, lazypath }
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -38,12 +32,13 @@ vim.opt.laststatus = 3
 vim.opt.matchpairs:append "<:>"
 vim.opt.mouse = "ar"
 vim.opt.nrformats:append "alpha"
-vim.opt.number = true
+vim.opt.number = false
 vim.opt.path:append "**"
 vim.opt.pumheight = 15
-vim.opt.relativenumber = true
+vim.opt.relativenumber = false
 vim.opt.shiftround = true
 vim.opt.shiftwidth = 2
+vim.opt.shortmess:append "sI"
 vim.opt.showmode = false
 vim.opt.signcolumn = "yes"
 vim.opt.smartcase = true
@@ -63,14 +58,44 @@ vim.opt.wrap = true
 vim.opt.sessionoptions = { "blank", "buffers", "curdir", "folds", "help", "tabpages", "winsize", "winpos", "terminal" }
 vim.opt.splitkeep = "screen"
 
-vim.diagnostic.config {
-   virtual_text = true,
-   signs = false,
-   severity_sort = true,
-   float = false,
+local default_config = {
+   defaults = { lazy = true },
+   install = { colorscheme = { "catppuccin-macchiato" } },
+   rtp = {
+      disabled_plugins = {
+         "2html_plugin",
+         "tohtml",
+         "getscript",
+         "getscriptPlugin",
+         "gzip",
+         "logipat",
+         "netrw",
+         "netrwPlugin",
+         "netrwSettings",
+         "netrwFileHandlers",
+         "matchit",
+         "tar",
+         "tarPlugin",
+         "rrhelper",
+         "spellfile_plugin",
+         "vimball",
+         "vimballPlugin",
+         "zip",
+         "zipPlugin",
+         "tutor",
+         "rplugin",
+         "syntax",
+         "synmenu",
+         "optwin",
+         "compiler",
+         "bugreport",
+         "ftplugin",
+      },
+   },
 }
 
-require("lazy").setup "plugins"
+require("lazy").setup("plugins", default_config)
+
 vim.notify = require "notify"
 
 require "user.font"

@@ -201,6 +201,9 @@ return {
          cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
             sources = {
                { name = "dap" },
+               { name = "nvim_lsp", entry_filter = nvim_lsp_filter },
+               { name = "nvim_lsp_signature_help" },
+               { name = "buffer" },
             },
          })
       end,

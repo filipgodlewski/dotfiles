@@ -1,7 +1,12 @@
 local helpers = require "user.helpers"
 
+vim.api.nvim_create_autocmd("FileType", {
+   pattern = "qf",
+   callback = function() vim.opt_local.buflisted = false end,
+})
+
 vim.api.nvim_create_autocmd({ "BufFilePost", "BufEnter", "BufWinEnter", "LspAttach" }, {
-   group = vim.api.nvim_create_augroup("LspKeymaps", { clear = true }),
+   group = vim.api.nvim_create_augroup("LspLoad", { clear = true }),
    callback = function()
       if not vim.tbl_isempty(vim.lsp.get_active_clients { bufnr = 0 }) then
          local builtin = require "telescope.builtin"
@@ -14,12 +19,13 @@ vim.api.nvim_create_autocmd({ "BufFilePost", "BufEnter", "BufWinEnter", "LspAtta
          }, { prefix = "g", buffer = 0 })
 
          which_key.register({
-            d = { function() require("trouble").toggle "document_diagnostics" end, "Open document diagnostics" },
-            D = { function() require("trouble").toggle "workspace_diagnostics" end, "Open workspace diagnostics" },
+            d = { function() require("trouble").toggle "document_diagnostics" end, "Open document diagnostics (LSP)" },
+            D = { function() require("trouble").toggle "workspace_diagnostics" end, "Open workspace diagnostics (LSP)" },
             r = { vim.lsp.buf.rename, "Rename symbol (LSP)" },
          }, { prefix = "<leader>", buffer = 0 })
 
          which_key.register({
+            I = { function() require("lsp_lines").toggle() end, "Toggle Diagnostic Lines (LSP)" },
             R = { function() require("ssr").open() end, "Structural rename (LSP)" },
          }, { prefix = "<leader>", buffer = 0, mode = { "n", "v" } })
       end

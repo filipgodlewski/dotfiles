@@ -34,7 +34,12 @@ local configs = {
 }
 
 return {
-   { "williamboman/mason.nvim", config = true, event = "BufRead" },
+   {
+      "williamboman/mason.nvim",
+      cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
+      config = true,
+      event = "BufRead",
+   },
    {
       "WhoIsSethDaniel/mason-tool-installer.nvim",
       dependencies = { "williamboman/mason.nvim" },
@@ -93,6 +98,14 @@ return {
             pyright = function() setup_override "pyright" end,
             jsonls = function() setup_override "jsonls" end,
             lua_ls = function() setup_override "lua_ls" end,
+         }
+
+         vim.diagnostic.config {
+            virtual_text = false,
+            virtual_lines = false,
+            signs = false,
+            severity_sort = true,
+            float = false,
          }
       end,
       event = "BufRead",

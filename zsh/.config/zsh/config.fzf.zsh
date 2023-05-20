@@ -38,9 +38,3 @@ _gen_fzf_default_opts() {
 _gen_fzf_default_opts
 
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
-
-[[ $- == *i* ]] && {
-    source "$(brew --prefix)/opt/fzf/shell/completion.zsh"
-    source "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
-}
-	

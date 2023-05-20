@@ -23,9 +23,20 @@ return {
       local which_key = require "which-key"
       which_key.setup(opts)
       which_key.register {
+         Z = {
+            name = "Writing and Quitting",
+            Z = {
+               function()
+                  vim.cmd "wa!"
+                  vim.cmd "qa!"
+               end,
+               "Save all and quit",
+            },
+         },
          ["<esc>"] = { "<cmd>silent! LuaSnipUnlinkCurrent<cr>", "Escape", remap = true },
          ["<leader>"] = { name = "Leader" },
          ["<localLeader>"] = { name = "Local Leader" },
       }
    end,
+   keys = { "<leader>", "<localLeader>", '"', "'", "`", "c", "v", "g", "Z" },
 }

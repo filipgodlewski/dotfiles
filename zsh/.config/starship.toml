@@ -12,6 +12,7 @@ $character\
 """
 
 palette = "catppuccin_macchiato"
+continuation_prompt = "[󰇘](rosewater) "
 
 [directory]
 style = "bold lavender"
@@ -22,7 +23,6 @@ read_only = " RO"
 [character]
 success_symbol = "[](green)"
 error_symbol = "[](red)"
-vimcmd_symbol = "[](mauve)"
 
 [git_branch]
 format = '[( $branch)]($style) '

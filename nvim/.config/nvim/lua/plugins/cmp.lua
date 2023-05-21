@@ -12,7 +12,6 @@ local function nvim_lsp_filter(entry, _)
 end
 
 local default_sources = {
-   { name = "luasnip" },
    { name = "nvim_lsp", entry_filter = nvim_lsp_filter },
    { name = "nvim_lsp_signature_help" },
    { name = "nvim_lua" },

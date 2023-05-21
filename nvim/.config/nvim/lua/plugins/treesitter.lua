@@ -42,10 +42,7 @@ return {
       config = function(_, opts)
          require("nvim-treesitter.configs").setup(opts)
          require("nvim-treesitter.install").compilers = { "gcc" }
-         vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-
-         -- HACK: to disable in TelescopePrompt
-         require("pears").setup(function(conf) conf.disabled_filetypes { "" } end)
+         require("pears").setup(function(conf) conf.disabled_filetypes { "" } end) -- HACK: disable in TelescopePrompt
 
          local treesj = require "treesj"
          treesj.setup { use_default_keymaps = false }
@@ -62,11 +59,9 @@ return {
    {
       "steelsojka/pears.nvim",
       dependencies = { "nvim-treesitter/nvim-treesitter" },
-      lazy = true,
    },
    {
       "Wansmer/treesj",
       dependencies = { "nvim-treesitter/nvim-treesitter" },
-      lazy = true,
    },
 }

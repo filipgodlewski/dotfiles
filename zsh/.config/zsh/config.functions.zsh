@@ -6,8 +6,6 @@ function update() {
     return 1
   fi
 
-  ssudo true || return $?
-
   [[ -d $XDG_CACHE_HOME/local_update ]] || mkdir -p $XDG_CACHE_HOME/local_update
   local log_file=$XDG_CACHE_HOME/local_update/update_$(date +"%Y-%m-%d_%T").log
 
@@ -20,6 +18,7 @@ function update() {
 
   function log_find() {
     local LAST_SIG=$?
+    echo
     echo "View the log file using:"
     echo "$EDITOR $log_file"
     return $?
@@ -34,7 +33,7 @@ function update() {
 
   log_info "🔥 Upgrade hosts"
   local hosts_url="https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts"
-  sudo -S curl $hosts_url -o /etc/hosts &>> $log_file
+  ssudo -S curl $hosts_url -o /etc/hosts &>> $log_file
   local whitelisted_pages=(\
     "linkedin.com" \
     "www.linkedin.com" \
@@ -64,7 +63,6 @@ function update() {
   nvim --headless -c "Lazy! sync" -c "qa" &>> $log_file
   nvim --headless -c "autocmd User MasonUpdateAllComplete quitall" -c "MasonUpdateAll" &>> $log_file
   nvim --headless -c "TSUpdateSync" -c "q" &>> $log_file
-  nvim --headless -c "UpdateRemotePlugins" -c "q" &>> $log_file
 
   log_info "🔥 Upgrade nvim venv"
   local py=$XDG_DATA_HOME/venvs/nvim/bin/python
@@ -76,4 +74,9 @@ function update() {
   log_find
 
   exec zsh
+}
+
+function aic() {
+  export OPENAI_KEY=$(op read 'op://Dev/OpenAI API Key/key')
+  aicommits $@
 }

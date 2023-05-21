@@ -40,10 +40,11 @@ return {
       },
    },
 
+   -- Colorize RGB and other color names
    {
       "norcalli/nvim-colorizer.lua",
       config = true,
-      event = "BufRead",
+      cmd = { "ColorizerToggle", "ColorizerAttachToBuffer" },
    },
 
    -- SECTION B: REFACTORING & CODE ANALYSIS
@@ -89,11 +90,11 @@ return {
       "lewis6991/gitsigns.nvim",
       ft = { "gitcommit", "diff" },
       init = function()
-         -- taken from NvChad
+         -- taken from NvChad, changed to fit my needs - I have an alias for `git root` that does it better
          vim.api.nvim_create_autocmd("BufRead", {
             group = vim.api.nvim_create_augroup("GitSignsLazyLoad", { clear = true }),
             callback = function()
-               vim.fn.system { "git", "-C", string.format("%q", vim.fn.expand "%:p:h"), "rev-parse" }
+               vim.fn.system { "git", "root" }
                if vim.v.shell_error == 0 then
                   vim.api.nvim_del_augroup_by_name "GitSignsLazyLoad"
                   vim.schedule(function() require("lazy").load { plugins = { "gitsigns.nvim" } } end)

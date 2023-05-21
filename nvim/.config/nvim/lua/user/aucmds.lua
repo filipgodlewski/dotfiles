@@ -5,6 +5,14 @@ vim.api.nvim_create_autocmd("FileType", {
    callback = function() vim.opt_local.buflisted = false end,
 })
 
+-- vim.api.nvim_create_autocmd({ "BufRead", "FileReadPost" }, {
+--    group = vim.api.nvim_create_augroup("RefreshFolds", { clear = true }),
+--    callback = function()
+--       vim.cmd "normal zx"
+--       vim.cmd "normal zR"
+--    end,
+-- })
+
 vim.api.nvim_create_autocmd({ "BufFilePost", "BufEnter", "BufWinEnter", "LspAttach" }, {
    group = vim.api.nvim_create_augroup("LspLoad", { clear = true }),
    callback = function()

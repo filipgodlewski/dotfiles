@@ -13,8 +13,8 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.autowriteall = true
 vim.opt.backup = false
 vim.opt.breakindent = true
-vim.opt.complete:append "kspell"
 vim.opt.cmdheight = 0
+vim.opt.complete:append "kspell"
 vim.opt.conceallevel = 1
 vim.opt.confirm = true
 vim.opt.copyindent = true
@@ -36,6 +36,7 @@ vim.opt.number = false
 vim.opt.path:append "**"
 vim.opt.pumheight = 15
 vim.opt.relativenumber = false
+vim.opt.sessionoptions = { "blank", "buffers", "curdir", "folds", "help", "tabpages", "winsize", "winpos", "terminal" }
 vim.opt.shiftround = true
 vim.opt.shiftwidth = 2
 vim.opt.shortmess:append "sI"
@@ -46,6 +47,7 @@ vim.opt.smartindent = true
 vim.opt.softtabstop = 2
 vim.opt.spell = true
 vim.opt.splitbelow = true
+vim.opt.splitkeep = "screen"
 vim.opt.splitright = true
 vim.opt.swapfile = false
 vim.opt.syntax = "enable"
@@ -55,8 +57,6 @@ vim.opt.undofile = true
 vim.opt.undolevels = 10000
 vim.opt.updatetime = 50
 vim.opt.wrap = true
-vim.opt.sessionoptions = { "blank", "buffers", "curdir", "folds", "help", "tabpages", "winsize", "winpos", "terminal" }
-vim.opt.splitkeep = "screen"
 
 local default_config = {
    defaults = { lazy = true },

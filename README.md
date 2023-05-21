@@ -41,21 +41,6 @@ make -s uninstall
 #### ZSH commands
 
 ```bash
-edit
-```
-
-Fuzzy search in folders for git repositories:
-
-- ~/personal
-- ~/projects
-- ~/learning
-- ~/dotfiles
-
-Jumps into, opens nvim. When nvim is closed, pops directories stack.
-
-Additionally, reads `~/.cache/bookmarks/list.txt` for additional directories.
-
-```bash
 update
 ```
 
@@ -65,7 +50,7 @@ Updates:
 - npm (global)
 - [pipx](https://github.com/pypa/pipx)
 - [nvim](https://github.com/neovim/neovim) (
-  [packer.nvim](https://github.com/wbthomason/packer.nvim),
+  [lazy.nvim](https://github.com/folke/lazy.nvim),
   [mason](https://github.com/williamboman/mason.nvim),
   [null-ls](https://github.com/jose-elias-alvarez/null-ls.nvim))
 - [hosts](https://github.com/StevenBlack/hosts) (custom files)

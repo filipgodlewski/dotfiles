@@ -31,10 +31,10 @@ unbrew:
 	sudo rm -rf $(HOMEBREW_PREFIX)
 
 npm:
-	npm install -g git-cz neovim opencommit
+	npm install -g git-cz neovim aicommits
 
 unnpm:
-	npm uninstall -g git-cz neovim opencommit
+	npm uninstall -g git-cz neovim aicommits
 
 stow:
 	stow -R */

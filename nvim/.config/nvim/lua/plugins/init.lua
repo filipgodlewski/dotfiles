@@ -47,6 +47,17 @@ return {
       cmd = { "ColorizerToggle", "ColorizerAttachToBuffer" },
    },
 
+   -- Very interesting Multiple Replace UI
+   {
+      "AckslD/muren.nvim",
+      config = true,
+      cmd = { "MurenToggle", "MurenUnique", "MurenFresh" },
+      keys = {
+         { "<leader>M", function() require("muren.api").toggle_ui {} end, desc = "Toggle Multiple Replace (Muren)" },
+         { "<leader>Q", function() require("muren.api").open_unique_ui {} end, desc = "Toggle Unique Replace (Muren)" },
+      },
+   },
+
    -- SECTION B: REFACTORING & CODE ANALYSIS
 
    -- Better Search & Replace

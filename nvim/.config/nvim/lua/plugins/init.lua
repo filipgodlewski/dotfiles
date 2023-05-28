@@ -65,7 +65,6 @@ return {
    { "folke/trouble.nvim", dependencies = { "nvim-tree/nvim-web-devicons" }, config = true },
 
    -- Colorize `TODO` and other comments
-   -- FIXME: Does not work properly for zsh :/ (not a bug, my config is wrong SOMEWHERE)
    {
       "folke/todo-comments.nvim",
       dependencies = {
@@ -79,6 +78,7 @@ return {
       },
       config = true,
       keys = { { "gT", cmd "TodoTrouble", desc = "Check TODO items" } },
+      event = "BufRead",
    },
 
    -- Rust related LSP and other tools

@@ -11,12 +11,12 @@ function update() {
 
   touch $log_file
 
-  function log_info() {
+  local function log_info() {
     echo "$1"
     echo "\n\n$1" >> $log_file
   }
 
-  function log_find() {
+  local function log_find() {
     local LAST_SIG=$?
     echo
     echo "View the log file using:"
@@ -24,7 +24,7 @@ function update() {
     return $?
   }
 
-  function abort() {
+  local function abort() {
     echo "\nAborted." | tee -a $log_file
     log_find
   }
@@ -34,17 +34,10 @@ function update() {
   log_info "🔥 Upgrade hosts"
   local hosts_url="https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts"
   ssudo -S curl $hosts_url -o /etc/hosts &>> $log_file
-  local whitelisted_pages=(\
-    "linkedin.com" \
-    "www.linkedin.com" \
-    "media.licdn.com" \
-    "static.licdn.com" \
-    "reddit.com" \
-    "www.reddit.com" \
-  )
-  local page
-  for page in $whitelisted_pages; do
-    sudo nvim --clean --headless +"g/ $page/d" +"wq" /etc/hosts &>> $log_file
+
+  local line
+  for line in $(<$ZDOTDIR/whitelist_pages); do
+    sudo nvim --clean --headless +"g/ $line$/d" +"wq" /etc/hosts &>> $log_file
   done
 
   log_info "🔥 Upgrade brew packages"
@@ -72,8 +65,6 @@ function update() {
   antidote update &>> $log_file
 
   log_find
-
-  exec zsh
 }
 
 function aic() {

@@ -22,6 +22,7 @@ return {
             "sql",
             "toml",
             "yaml",
+            "nu",
          },
          highlight = {
             enable = true,
@@ -40,6 +41,16 @@ return {
          rainbow = { enable = true },
       },
       config = function(_, opts)
+         local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+         parser_config.nu = {
+            install_info = {
+               url = "https://github.com/nushell/tree-sitter-nu",
+               files = { "src/parser.c" },
+               branch = "main",
+            },
+            filetype = "nu",
+         }
+         require("nvim-dap-repl-highlights").setup()
          require("nvim-treesitter.configs").setup(opts)
          require("nvim-treesitter.install").compilers = { "gcc" }
          require("pears").setup(function(conf) conf.disabled_filetypes { "" } end) -- HACK: disable in TelescopePrompt
@@ -56,6 +67,7 @@ return {
       build = ":TSUpdate",
       event = "BufRead",
    },
+   { "LiadOz/nvim-dap-repl-highlights", dependencies = { "nvim-treesitter/nvim-treesitter" } },
    {
       "steelsojka/pears.nvim",
       dependencies = { "nvim-treesitter/nvim-treesitter" },

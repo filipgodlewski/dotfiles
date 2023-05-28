@@ -4,6 +4,8 @@ export PATH=$XDG_CONFIG_HOME/git/commands:$PATH
 export PATH=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$HOMEBREW_PREFIX/opt/curl/bin:$HOMEBREW_PREFIX/opt/fzf/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 
+export LS_COLORS="$(vivid generate catppuccin-macchiato)"
+
 for file in $ZDOTDIR/config.*.zsh; do source $file; done
 
 ANTIDOTE_DIR=$XDG_DATA_HOME/antidote

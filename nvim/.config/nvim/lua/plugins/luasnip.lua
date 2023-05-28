@@ -23,7 +23,6 @@ return {
             },
          }
       end,
-      lazy = true,
    },
    {
       "benfowler/telescope-luasnip.nvim",

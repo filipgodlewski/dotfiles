@@ -7,14 +7,14 @@ local function trouble_qf_refresh() require("trouble").refresh { auto = true, pr
 M.clear = function()
    vim.cmd "cexpr []"
    vim.schedule(require("trouble").close)
-   helpers.deregister({ "c", "f", "r", "t", "u" }, { prefix = "<leader>c" })
+   helpers.deregister({ "Q", "f", "F", "r", "t", "u" }, { prefix = "<localLeader>" })
 end
 
-M.filter = function()
-   local filter = vim.fn.input "Filter by: "
+M.filter = function(mode)
+   local filter = vim.fn.input "Filter by (vim regex): "
    if filter == "" then return end
    vim.cmd "packadd cfilter"
-   vim.cmd(string.format("Cfilter %s", filter))
+   vim.cmd(string.format("Cfilter%s %s", mode, filter))
    trouble_qf_refresh()
 end
 
@@ -23,18 +23,18 @@ M.replace = function()
    local new = vim.fn.input("New: ", old)
    if old == "" and new == "" then return end
    vim.cmd(string.format("cdo s/%s/%s/ | update", old, new))
-   require("which-key").register { ["<leader>cu"] = { M.undo, "Undo" } }
+   require("which-key").register { ["<localLeader>u"] = { M.undo, "Undo" } }
 end
 
 M.undo = function()
    vim.cmd "cfdo normal u | update"
-   helpers.deregister { "<leader>cu" }
+   helpers.deregister { "<localLeader>u" }
 end
 
-M.search = function()
+M.search = function(search_fn)
    local ft_mask = vim.fn.input("File mask: ", "**/*")
    ft_mask = ft_mask == "" and {} or ft_mask
-   require("telescope.builtin").live_grep { glob_pattern = ft_mask }
+   require("telescope.builtin")[search_fn] { glob_pattern = ft_mask }
 end
 
 M.setup_search = function(prompt_bufnr)
@@ -42,17 +42,13 @@ M.setup_search = function(prompt_bufnr)
    require("trouble").open "quickfix"
    require("trouble").refresh { auto = true, provider = "qf" }
    require("which-key").register({
-      name = "Search [ACTIVE]",
-      c = { M.clear, "Clean up Quickfix list" },
-      f = { M.filter, "Filter results" },
+      name = "Search and replace",
+      Q = { M.clear, "Clean up Quickfix list" },
+      f = { function() M.filter "" end, "Filter by matching" },
+      F = { function() M.filter "!" end, "Filter by not matching" },
       r = { M.replace, "Replace in-place" },
       t = { function() require("trouble").toggle "quickfix" end, "Toggle Quickfix list" },
-   }, { prefix = "<leader>c" })
+   }, { prefix = "<localLeader>" })
 end
-
-require("which-key").register({
-   name = "Quickfix search",
-   s = { M.search, "Search for issues" },
-}, { prefix = "<leader>c" })
 
 return M

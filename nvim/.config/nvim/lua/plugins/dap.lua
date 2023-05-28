@@ -4,7 +4,6 @@ return {
       "mfussenegger/nvim-dap-python",
       "nvim-telescope/telescope.nvim",
       "nvim-telescope/telescope-dap.nvim",
-      { "LiadOz/nvim-dap-repl-highlights", config = true, lazy = true },
       {
          "rcarriga/nvim-dap-ui",
          opts = {

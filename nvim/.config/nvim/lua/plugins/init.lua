@@ -4,8 +4,10 @@ local nox = { "n", "o", "x" }
 return {
    -- SECTION A: EXPERIENCE IMPROVEMENT
 
+   { "nathom/filetype.nvim", lazy = false },
+
    -- Close buffers without destroying the layout
-   { "kazhala/close-buffers.nvim", opts = { preserve_window_layout = { "this" } }, lazy = true },
+   { "kazhala/close-buffers.nvim", opts = { preserve_window_layout = { "this" } } },
 
    -- Super cool Undo history
    {
@@ -47,17 +49,6 @@ return {
       cmd = { "ColorizerToggle", "ColorizerAttachToBuffer" },
    },
 
-   -- Very interesting Multiple Replace UI
-   {
-      "AckslD/muren.nvim",
-      config = true,
-      cmd = { "MurenToggle", "MurenUnique", "MurenFresh" },
-      keys = {
-         { "<leader>M", function() require("muren.api").toggle_ui {} end, desc = "Toggle Multiple Replace (Muren)" },
-         { "<leader>Q", function() require("muren.api").open_unique_ui {} end, desc = "Toggle Unique Replace (Muren)" },
-      },
-   },
-
    -- SECTION B: REFACTORING & CODE ANALYSIS
 
    -- Better Search & Replace
@@ -71,17 +62,22 @@ return {
    },
 
    -- Super cool Quickfix layout
-   { "folke/trouble.nvim", dependencies = { "nvim-tree/nvim-web-devicons" }, config = true, lazy = true },
+   { "folke/trouble.nvim", dependencies = { "nvim-tree/nvim-web-devicons" }, config = true },
 
    -- Colorize `TODO` and other comments
+   -- FIXME: Does not work properly for zsh :/ (not a bug, my config is wrong SOMEWHERE)
    {
       "folke/todo-comments.nvim",
       dependencies = {
          "nvim-lua/plenary.nvim",
          "folke/trouble.nvim",
       },
+      opts = {
+         search = {
+            args = { "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--hidden" },
+         },
+      },
       config = true,
-      event = "BufRead",
       keys = { { "gT", cmd "TodoTrouble", desc = "Check TODO items" } },
    },
 
@@ -124,6 +120,7 @@ return {
       event = "BufReadPre",
    },
 
+   -- Display LSP insights as virtual lines, much cleaner than the original
    {
       "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
       config = true,

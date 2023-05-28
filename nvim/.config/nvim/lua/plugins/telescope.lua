@@ -1,3 +1,5 @@
+local user_qf = require "user.quickfix"
+
 return {
    "nvim-telescope/telescope.nvim",
    dependencies = {
@@ -28,9 +30,7 @@ return {
                "node_modules",
                "pack/plugins",
             },
-            mappings = {
-               i = { ["<C-Q>"] = { require("user.quickfix").setup_search, type = "action" } },
-            },
+            mappings = { i = { ["<C-q>"] = { user_qf.setup_search, type = "action" } } },
          },
          extensions = {
             fzf = {
@@ -76,13 +76,8 @@ return {
          function() require("telescope.builtin").find_files { hidden = true } end,
          desc = "Open file picker",
       },
-      { "<leader>/", function() require("telescope.builtin").live_grep() end, desc = "Global search" },
-      {
-         "<leader>/",
-         function() require("telescope.builtin").grep_string() end,
-         desc = "Selection global search",
-         mode = "v",
-      },
+      { "<leader>/", function() user_qf.search "live_grep" end, desc = "Search globally" },
+      { "<leader>/", function() user_qf.search "grep_string" end, desc = "Search globally", mode = "v" },
       { "<leader>?", function() require("telescope.builtin").help_tags() end, desc = "Open Neovim help picker" },
       { "<leader>b", function() require("telescope.builtin").buffers() end, desc = "Open buffer picker" },
       {

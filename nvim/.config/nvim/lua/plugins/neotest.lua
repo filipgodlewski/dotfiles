@@ -3,7 +3,7 @@ return {
    dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
-      { "nvim-neotest/neotest-python", lazy = true },
+      "nvim-neotest/neotest-python",
    },
    opts = function()
       return {
@@ -14,5 +14,4 @@ return {
          status = { virtual_text = false },
       }
    end,
-   lazy = true,
 }

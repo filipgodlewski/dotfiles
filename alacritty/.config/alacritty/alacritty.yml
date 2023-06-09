@@ -12,10 +12,10 @@ window:
     columns: 251
     lines: 55
   padding:
-    x: 16
-    y: 32
+    x: 8
+    y: 8
   dynamic_padding: true
-  decorations: transparent
+  decorations: buttonless
   option_as_alt: OnlyRight
 
 scrolling:

@@ -39,6 +39,7 @@ return {
                },
             },
             null_ls.builtins.formatting.black,
+            null_ls.builtins.formatting.clang_format,
             null_ls.builtins.formatting.ruff.with {
                extra_args = function(_) return { "--select", "I001" } end,
             },
@@ -61,6 +62,10 @@ return {
          },
       }
    end,
-   ft = { "python", "lua", "toml", "md", "rust" },
-   dependencies = { "nvim-lua/plenary.nvim" },
+   ft = { "python", "lua", "toml", "md", "rust", "c" },
+   cmd = { "LspRestart", "LspStart", "LspStop", "LspLog", "LspInstall", "LspUninstall" },
+   dependencies = {
+      "nvim-lua/plenary.nvim",
+      "williamboman/mason-lspconfig.nvim",
+   },
 }

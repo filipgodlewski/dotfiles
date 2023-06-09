@@ -34,23 +34,31 @@ local function deactivate_virtual_env()
       vim.env.PYTHONHOME = vim.env._OLD_VIRTUAL_PYTHONHOME
       vim.env._OLD_VIRTUAL_PYTHONHOME = nil
    end
+   vim.env.VIRTUAL_ENV = nil
+end
+
+local function get_virtual_env_path(path)
+   if path[#path] ~= "/" then path = path .. "/" end
+   return path .. "venv"
 end
 
 local function activate_virtual_env(path)
-   if path[#path] ~= "/" then path = path .. "/" end
-   local virtual_env = path .. "venv"
-   local bin = virtual_env .. "/bin"
-   if vim.fn.isdirectory(bin) == 0 then return end
+   deactivate_virtual_env()
+
+   local virtual_env = get_virtual_env_path(path)
+   if vim.fn.isdirectory(virtual_env) == 0 then return end
    vim.env.VIRTUAL_ENV = virtual_env
+
    vim.env._OLD_VIRTUAL_PATH = vim.env.PATH
-   vim.env.PATH = string.format("%s:%s", bin, vim.env.PATH)
+   vim.env.PATH = virtual_env .. "/bin:" .. vim.env.PATH
+
    if vim.env.PYTHONHOME then
       vim.env._OLD_VIRTUAL_PYTHONHOME = vim.env.PYTHONHOME
       vim.env.PYTHONHOME = nil
    end
 end
 
-vim.api.nvim_create_autocmd({ "VimEnter" }, {
+vim.api.nvim_create_autocmd("VimEnter", {
    group = vim.api.nvim_create_augroup("ChooseWorkspace", { clear = true }),
    callback = function()
       local home = vim.fn.expand "~"
@@ -60,7 +68,6 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
          require("telescope").extensions.workspaces.workspaces()
          return
       end
-      deactivate_virtual_env()
       activate_virtual_env(cwd)
    end,
 })
@@ -88,15 +95,14 @@ return {
                if not is_suppressed(path) then require("sessions").save(nil, { silent = true }) end
                vim.cmd "bd%"
                vim.cmd "clearjumps"
-               pcall(vim.cmd, "LspStop")
+               vim.cmd "LspStop"
             end,
             open = function(_, path)
-               local opts = { silent = true }
+               local opts = { silent = true, autosave = true }
                if is_suppressed(path) then opts["autosave"] = false end
                require("sessions").load(nil, opts)
-               deactivate_virtual_env()
                activate_virtual_env(path)
-               pcall(vim.cmd, "LspStart")
+               vim.cmd "LspStart"
             end,
          },
       }

@@ -11,7 +11,7 @@ return {
       },
       layout = {
          height = { min = 1, max = 25 },
-         width = { min = 5, max = 50 },
+         width = { min = 1, max = 50 },
          align = "center",
       },
       icons = {

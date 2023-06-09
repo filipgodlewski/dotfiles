@@ -1,3 +1,7 @@
+local get_total_height = function() return vim.o.lines - vim.o.cmdheight end
+local get_total_width = function() return vim.o.columns end
+local get_min_size = function(multiplicand, alternative) return math.floor((math.min(0.5 * multiplicand, alternative))) end
+
 return {
    "akinsho/nvim-toggleterm.lua",
    opts = {
@@ -9,8 +13,8 @@ return {
       autochdir = true,
       direction = "float",
       float_opts = {
-         height = function() return math.floor(vim.api.nvim_win_get_height(0) * 0.8) end,
-         width = function() return math.min(math.floor(vim.o.columns * 0.9), 120) end,
+         height = function() return get_min_size(get_total_height(), 40) end,
+         width = function() return get_min_size(get_total_width(), 150) end,
          winblend = 0,
       },
    },

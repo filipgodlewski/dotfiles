@@ -54,7 +54,7 @@ function update() {
 
   log_info "🔥 Upgrade nvim"
   nvim --headless -c "Lazy! sync" -c "qa" &>> $log_file
-  nvim --headless -c "autocmd User MasonUpdateAllComplete quitall" -c "MasonUpdateAll" &>> $log_file
+  nvim --headless -c "autocmd User MasonToolsUpdateCompleted quitall" -c "MasonToolsUpdate" &>> $log_file
   nvim --headless -c "TSUpdateSync" -c "q" &>> $log_file
 
   log_info "🔥 Upgrade nvim venv"

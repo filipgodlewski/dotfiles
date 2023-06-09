@@ -4,34 +4,49 @@ local matches_before_cursor = function(start, match)
 end
 
 local function nvim_lsp_filter(entry, _)
-   local kind = entry:get_kind()
-   local lk_types = { "Text", "Snippet" }
-   local types = require("cmp.types").lsp.CompletionItemKind
-   if vim.tbl_contains(lk_types, types[kind]) then return false end
-   return true
+   local kind = require("cmp.types").lsp.CompletionItemKind[entry:get_kind()]
+   return not vim.tbl_contains({ "Text", "Snippet" }, kind)
 end
 
-local default_sources = {
+local minimal_sources = {
    { name = "nvim_lsp", entry_filter = nvim_lsp_filter },
    { name = "nvim_lsp_signature_help" },
+}
+
+local extended_sources = {
    { name = "nvim_lua" },
    { name = "path" },
    { name = "buffer" },
 }
 
-local import_matches = {
-   python = { "import%s*$", "^%s*from%s*$" },
+local combined_sources = vim.deepcopy(minimal_sources)
+vim.list_extend(combined_sources, extended_sources)
+
+local context_matches = {
+   python = {
+      treesitter = { "import_from_statement", "import_statement" },
+      regex = { "^%s*from%s*$" },
+   },
 }
 
-local function in_import_scope()
-   for _, value in ipairs(import_matches[vim.bo.filetype]) do
-      if matches_before_cursor(1, value) then return true end
+local function get_context_sources()
+   local ctx = context_matches[vim.bo.filetype]
+   if not ctx then return combined_sources end
+
+   local node_type = vim.treesitter.get_node():type()
+   if vim.tbl_contains(ctx.treesitter, node_type) then return minimal_sources end
+
+   for _, value in ipairs(ctx.regex) do
+      if matches_before_cursor(1, value) then return minimal_sources end
    end
-   return false
+
+   return combined_sources
 end
 
-local function completer(sources) require("cmp").complete { config = { sources = sources } } end
-
+local cmdline_mappings = {
+   ["<Tab>"] = { c = function() end },
+   ["<S-Tab>"] = { c = function() end },
+}
 local kinds = {
    Text = "",
    Method = "󰆧",
@@ -79,36 +94,33 @@ return {
          local cmp = require "cmp"
 
          local mapping = cmp.mapping.preset.insert {
-            ["<C-s>"] = cmp.mapping(function(_)
-               cmp.close()
-               completer(in_import_scope() and default_sources)
-            end, { "i", "s" }),
             ["<C-l>"] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Insert, select = true },
             ["<C-d>"] = cmp.mapping.scroll_docs(4),
             ["<C-u>"] = cmp.mapping.scroll_docs(-4),
-            ["<C-n>"] = cmp.mapping(function(fallback)
+            ["<C-n>"] = cmp.mapping(function()
+               local luasnip = require "luasnip"
                if cmp.visible() then
                   cmp.select_next_item()
-               elseif require("luasnip").expand_or_jumpable() then
-                  require("luasnip").expand_or_jump()
-               elseif not matches_before_cursor(nil, "%s") then
-                  cmp.complete()
+               elseif luasnip.expand_or_jumpable() then
+                  luasnip.expand_or_jump()
+               elseif matches_before_cursor(nil, "%s") then
+                  cmp.complete { config = { sources = get_context_sources() } }
                else
-                  fallback()
+                  cmp.complete()
                end
             end, { "i", "s" }),
-            ["<C-p>"] = cmp.mapping(function(fallback)
+            ["<C-p>"] = cmp.mapping(function()
+               local luasnip = require "luasnip"
                if cmp.visible() then
                   cmp.select_prev_item()
-               elseif require("luasnip").jumpable(-1) then
-                  require("luasnip").jump(-1)
-               else
-                  fallback()
+               elseif luasnip.jumpable(-1) then
+                  luasnip.jump(-1)
                end
             end, { "i", "s" }),
             ["<C-t>"] = cmp.mapping(function(fallback)
-               if require("luasnip").choice_active() then
-                  require("luasnip").change_choice(1)
+               local luasnip = require "luasnip"
+               if luasnip.choice_active() then
+                  luasnip.change_choice(1)
                else
                   fallback()
                end
@@ -141,6 +153,7 @@ return {
                   end
                   vim_item.kind = string.format("%s %s ", kinds[vim_item.kind] or "", vim_item.kind)
                   vim_item.abbr = vim_item.abbr:match "[^(]+"
+                  vim_item.menu = string.format(" [%s]", entry.source.name)
                   return vim_item
                end,
             },
@@ -150,7 +163,7 @@ return {
                },
                documentation = cmp.config.window.bordered(),
             },
-            sources = default_sources,
+            sources = combined_sources,
             sorting = {
                comparators = {
                   cmp.config.compare.locality,
@@ -168,7 +181,7 @@ return {
          cmp.setup(opts)
 
          cmp.setup.cmdline({ "/", "?" }, {
-            mapping = cmp.mapping.preset.cmdline(),
+            mapping = cmp.mapping.preset.cmdline(cmdline_mappings),
             sources = {
                { name = "nvim_lsp_document_symbol" },
                { name = "buffer" },
@@ -176,7 +189,7 @@ return {
          })
 
          cmp.setup.cmdline(":", {
-            mapping = cmp.mapping.preset.cmdline(),
+            mapping = cmp.mapping.preset.cmdline(cmdline_mappings),
             sources = {
                { name = "cmdline" },
                { name = "nvim_lsp_document_symbol" },

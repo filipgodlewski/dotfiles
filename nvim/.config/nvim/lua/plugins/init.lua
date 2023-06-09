@@ -4,7 +4,12 @@ local nox = { "n", "o", "x" }
 return {
    -- SECTION A: EXPERIENCE IMPROVEMENT
 
-   { "nathom/filetype.nvim", lazy = false },
+   -- UI enhancements (vim.ui.select etc.)
+   {
+      "stevearc/dressing.nvim",
+      config = true,
+      lazy = false,
+   },
 
    -- Close buffers without destroying the layout
    { "kazhala/close-buffers.nvim", opts = { preserve_window_layout = { "this" } } },
@@ -47,6 +52,18 @@ return {
       "norcalli/nvim-colorizer.lua",
       config = true,
       cmd = { "ColorizerToggle", "ColorizerAttachToBuffer" },
+   },
+
+   -- icon (emoji, nerd, etc.) picker
+   {
+      "ziontee113/icon-picker.nvim",
+      opts = {
+         disable_legacy_commands = true,
+      },
+      cmd = { "IconPickerNormal", "IconPickerYank" },
+      keys = {
+         { "<M-i>", cmd "IconPickerInsert", mode = "i", desc = "Open icon picker" },
+      },
    },
 
    -- SECTION B: REFACTORING & CODE ANALYSIS

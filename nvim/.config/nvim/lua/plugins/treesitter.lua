@@ -3,6 +3,7 @@ return {
       "nvim-treesitter/nvim-treesitter",
       opts = {
          ensure_installed = {
+            "c",
             "comment",
             "css",
             "dap_repl",

@@ -11,6 +11,14 @@ local configs = {
                useLibraryCodeForTypes = true,
                disableOrganizeImports = true,
                typeCheckingMode = "strict",
+               executionEnvironments = {
+                  { root = "code" },
+               },
+            },
+            workspace = {
+               didChangeWatchedFiles = {
+                  dynamicRegistration = true,
+               },
             },
          },
       },
@@ -38,7 +46,7 @@ return {
       "williamboman/mason.nvim",
       cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
       config = true,
-      event = "BufRead",
+      lazy = false,
    },
    {
       "WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -46,6 +54,8 @@ return {
       opts = {
          ensure_installed = {
             "black",
+            "clang-format",
+            "clangd",
             "codelldb",
             "css-lsp",
             "debugpy",
@@ -63,13 +73,7 @@ return {
          },
          run_on_start = false,
       },
-      lazy = true,
-   },
-   {
-      "RubixDev/mason-update-all",
-      dependencies = { "williamboman/mason.nvim" },
-      config = true,
-      cmd = "MasonUpdateAll",
+      cmd = { "MasonToolsInstall", "MasonToolsUpdate" },
    },
    {
       "williamboman/mason-lspconfig.nvim",
@@ -80,8 +84,16 @@ return {
       },
       config = function()
          require("mason-lspconfig").setup()
+
+         local capabilities = vim.tbl_deep_extend(
+            "force",
+            {},
+            vim.lsp.protocol.make_client_capabilities(),
+            require("cmp_nvim_lsp").default_capabilities() or {}
+         )
+         capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
          local global_opts = {
-            capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
+            capabilities = capabilities,
             on_attach = function(_, bufnr)
                vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
                vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
@@ -108,6 +120,5 @@ return {
             float = false,
          }
       end,
-      event = "BufRead",
    },
 }

@@ -101,4 +101,6 @@ vim.notify = require "notify"
 require "user.font"
 require("user.project-configs").setup()
 require "user.aucmds"
+require "user.misc"
+require "user.pip"
 vim.cmd.colorscheme "catppuccin"

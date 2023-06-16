@@ -18,13 +18,12 @@ vim.api.nvim_create_autocmd({ "BufFilePost", "BufEnter", "BufWinEnter", "LspAtta
    group = vim.api.nvim_create_augroup("LspLoad", { clear = true }),
    callback = function()
       if not vim.tbl_isempty(vim.lsp.get_active_clients { bufnr = 0 }) then
-         local builtin = require "telescope.builtin"
          local which_key = require "which-key"
 
          which_key.register({
-            d = { builtin.lsp_references, "Definition or usages (LSP)" },
+            d = { function() require("trouble").toggle "lsp_references" end, "Definition or usages (LSP)" },
             s = { vim.lsp.buf.hover, "Show signature (LSP)" },
-            y = { builtin.lsp_type_definitions, "Type definition (LSP)" },
+            y = { function() require("trouble").toggle "lsp_type_definitions" end, "Type definition (LSP)" },
          }, { prefix = "g", buffer = 0 })
 
          which_key.register({

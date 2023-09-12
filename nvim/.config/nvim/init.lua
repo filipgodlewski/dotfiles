@@ -15,6 +15,7 @@ vim.opt.backup = false
 vim.opt.breakindent = true
 vim.opt.cmdheight = 0
 vim.opt.complete:append "kspell"
+vim.opt.completeopt = { "menu", "menuone", "noinsert" }
 vim.opt.conceallevel = 1
 vim.opt.confirm = true
 vim.opt.copyindent = true

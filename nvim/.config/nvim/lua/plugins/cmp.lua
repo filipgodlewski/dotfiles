@@ -92,6 +92,7 @@ return {
       },
       opts = function()
          local cmp = require "cmp"
+         local types = require "cmp.types"
 
          local mapping = cmp.mapping.preset.insert {
             ["<C-l>"] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Insert, select = true },
@@ -100,7 +101,7 @@ return {
             ["<C-n>"] = cmp.mapping(function()
                local luasnip = require "luasnip"
                if cmp.visible() then
-                  cmp.select_next_item()
+                  cmp.select_next_item { behavior = types.cmp.SelectBehavior.Insert }
                elseif luasnip.expand_or_jumpable() then
                   luasnip.expand_or_jump()
                elseif matches_before_cursor(nil, "%s") then
@@ -108,15 +109,17 @@ return {
                else
                   cmp.complete()
                end
-            end, { "i", "s" }),
+            end, { "i" }),
             ["<C-p>"] = cmp.mapping(function()
                local luasnip = require "luasnip"
                if cmp.visible() then
-                  cmp.select_prev_item()
+                  cmp.select_prev_item { behavior = types.cmp.SelectBehavior.Insert }
                elseif luasnip.jumpable(-1) then
                   luasnip.jump(-1)
+               else
+                  cmp.complete()
                end
-            end, { "i", "s" }),
+            end, { "i" }),
             ["<C-t>"] = cmp.mapping(function(fallback)
                local luasnip = require "luasnip"
                if luasnip.choice_active() then
@@ -161,6 +164,7 @@ return {
                completion = cmp.config.window.bordered {
                   winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
                },
+               completeopt = "menu,menuone,noinsert",
                documentation = cmp.config.window.bordered(),
             },
             sources = combined_sources,

@@ -51,6 +51,7 @@ function update() {
 
   log_info "🔥 Upgrade pipx packages"
   pipx upgrade-all &>> $log_file
+  [[ $? == 0 ]] || pipx reinstall-all &>> $log_file
 
   log_info "🔥 Upgrade nvim"
   nvim --headless -c "Lazy! sync" -c "qa" &>> $log_file

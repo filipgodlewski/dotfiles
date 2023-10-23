@@ -59,10 +59,20 @@ return {
                   return { "--edition=2021" }
                end,
             },
+            null_ls.builtins.formatting.gofumpt,
+            null_ls.builtins.formatting.goimports_reviser,
          },
       }
    end,
-   ft = { "python", "lua", "toml", "md", "rust", "c" },
+   ft = {
+      "c",
+      "go",
+      "lua",
+      "md",
+      "python",
+      "rust",
+      "toml",
+   },
    cmd = { "LspRestart", "LspStart", "LspStop", "LspLog", "LspInstall", "LspUninstall" },
    dependencies = {
       "nvim-lua/plenary.nvim",

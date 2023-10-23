@@ -1,6 +1,9 @@
 import:
   - ~/.config/alacritty/catppuccin-macchiato.yml
 
+shell:
+  program: /opt/homebrew/opt/zellij/bin/zellij
+
 draw_bold_text_with_bright_colors: true
 live_config_reload: true
 

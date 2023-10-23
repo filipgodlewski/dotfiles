@@ -59,7 +59,7 @@
   mncnf = merge --no-commit --no-ff
 
   o = checkout
-  ob = checkout --branch
+  ob = checkout -b
 
   p = pull
   pf = pull --ff-only

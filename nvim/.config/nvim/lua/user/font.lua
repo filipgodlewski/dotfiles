@@ -1,11 +1,23 @@
-local font_sizes = {
-   macbook_pro_16 = 14,
-   mac_mini = 16,
-   big = 24,
-   gigantic = 32,
-}
+local Path = require "plenary.path"
+
+local font_sizes = {}
 
 local get_alacritty_win_id = function() return vim.fn.expand "$ALACRITTY_WINDOW_ID" end
+
+local get_term_font_sizes = function()
+   local f = vim.fn.expand "$ZDOTDIR/term_font_sizes"
+
+   if vim.fn.filereadable(f) == 1 then
+      local fonts_file = Path:new(f)
+      local lines = fonts_file:readlines()
+      for _, line in ipairs(lines) do
+         if line == "" then goto continue end
+         local name, value = string.match(line, "^(.+) %((%d+) pts%)")
+         font_sizes[name] = value
+         ::continue::
+      end
+   end
+end
 
 local set_alacritty = function(size)
    local cmd = "alacritty msg config -w %s font.size=%s"
@@ -38,6 +50,8 @@ vim.api.nvim_create_user_command("Font", function(params)
       return
    end
 
+   font_sizes = {}
+   get_term_font_sizes()
    local opts = { prompt = "Select Alacritty Font Size", format_item = format_item }
    vim.ui.select(vim.tbl_keys(font_sizes), opts, on_choice)
 end, { nargs = "*" })

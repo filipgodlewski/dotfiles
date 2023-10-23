@@ -14,8 +14,8 @@ done 2> /dev/null &
 defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 3
 defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
 
-# Hide Desktop icons
-defaults write com.apple.finder "CreateDesktop" -bool "false"
+# Show Desktop icons
+defaults write com.apple.finder "CreateDesktop" -bool "true"
 
 # Expand save panel by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
@@ -259,6 +259,7 @@ defaults write com.apple.Terminal ShowLineMarks -int 0
 
 # Use plain text mode for new TextEdit documents
 defaults write com.apple.TextEdit RichText -int 0
+
 # Open and save files as UTF-8 in TextEdit
 defaults write com.apple.TextEdit PlainTextEncoding -int 4
 defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4

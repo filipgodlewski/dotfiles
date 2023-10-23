@@ -17,7 +17,9 @@ local function clean_workspace_up()
    end, require("lazy").plugins()))
    if vim.tbl_contains(loaded_plugins, "neotest") then require("neotest").summary.close() end
    if vim.tbl_contains(loaded_plugins, "trouble.nvim") then require("trouble").close() end
-   if vim.tbl_contains(loaded_plugins, "nvim-tree.lua") then require("nvim-tree.api").tree.close() end
+   if vim.tbl_contains(loaded_plugins, "neo-tree.nvim") then
+      require("neo-tree.command").execute { action = "close" }
+   end
    if vim.tbl_contains(loaded_plugins, "nvim-dap") then require("dap").terminate() end
    local buf = require "close_buffers"
    buf.delete { type = "nameless", force = true }

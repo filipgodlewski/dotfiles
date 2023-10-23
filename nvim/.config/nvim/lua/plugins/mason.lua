@@ -39,6 +39,18 @@ local configs = {
          },
       },
    },
+
+   gopls = {
+      settings = {
+         gpls = {
+            completeUnimported = true,
+            usePlaceholders = true,
+            analyses = {
+               unusedparams = true,
+            },
+         },
+      },
+   },
 }
 
 return {
@@ -59,8 +71,11 @@ return {
             "codelldb",
             "css-lsp",
             "debugpy",
+            "delve",
             "dockerfile-language-server",
             "fixjson",
+            "gopls",
+            "gofumpt",
             "json-lsp",
             "lua-language-server",
             "markdownlint",
@@ -110,6 +125,7 @@ return {
             pyright = function() setup_override "pyright" end,
             jsonls = function() setup_override "jsonls" end,
             lua_ls = function() setup_override "lua_ls" end,
+            gopls = function() setup_override "gopls" end,
          }
 
          vim.diagnostic.config {

@@ -44,7 +44,6 @@ return {
          require("nvim-dap-repl-highlights").setup()
          require("nvim-treesitter.configs").setup(opts)
          require("nvim-treesitter.install").compilers = { "gcc" }
-         require("pears").setup(function(conf) conf.disabled_filetypes { "" } end) -- HACK: disable in TelescopePrompt
 
          local treesj = require "treesj"
          treesj.setup { use_default_keymaps = false }
@@ -59,12 +58,5 @@ return {
       event = "BufRead",
    },
    { "LiadOz/nvim-dap-repl-highlights", dependencies = { "nvim-treesitter/nvim-treesitter" } },
-   {
-      "steelsojka/pears.nvim",
-      dependencies = { "nvim-treesitter/nvim-treesitter" },
-   },
-   {
-      "Wansmer/treesj",
-      dependencies = { "nvim-treesitter/nvim-treesitter" },
-   },
+   { "Wansmer/treesj", dependencies = { "nvim-treesitter/nvim-treesitter" } },
 }

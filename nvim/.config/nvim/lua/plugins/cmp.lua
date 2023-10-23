@@ -95,10 +95,20 @@ return {
          local types = require "cmp.types"
 
          local mapping = cmp.mapping.preset.insert {
+            ["<CR>"] = cmp.mapping {
+               i = function(fallback)
+                  if cmp.visible() and cmp.get_active_entry() then
+                     cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
+                  else
+                     fallback()
+                  end
+               end,
+               s = cmp.mapping.confirm { select = true },
+            },
             ["<C-l>"] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Insert, select = true },
             ["<C-d>"] = cmp.mapping.scroll_docs(4),
             ["<C-u>"] = cmp.mapping.scroll_docs(-4),
-            ["<C-n>"] = cmp.mapping(function()
+            ["<C-n>"] = cmp.mapping(function(fallback)
                local luasnip = require "luasnip"
                if cmp.visible() then
                   cmp.select_next_item { behavior = types.cmp.SelectBehavior.Insert }
@@ -107,17 +117,17 @@ return {
                elseif matches_before_cursor(nil, "%s") then
                   cmp.complete { config = { sources = get_context_sources() } }
                else
-                  cmp.complete()
+                  fallback()
                end
             end, { "i" }),
-            ["<C-p>"] = cmp.mapping(function()
+            ["<C-p>"] = cmp.mapping(function(fallback)
                local luasnip = require "luasnip"
                if cmp.visible() then
                   cmp.select_prev_item { behavior = types.cmp.SelectBehavior.Insert }
                elseif luasnip.jumpable(-1) then
                   luasnip.jump(-1)
                else
-                  cmp.complete()
+                  fallback()
                end
             end, { "i" }),
             ["<C-t>"] = cmp.mapping(function(fallback)

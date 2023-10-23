@@ -33,7 +33,7 @@ return {
                "Save all and quit",
             },
          },
-         ["<esc>"] = { "<cmd>silent! LuaSnipUnlinkCurrent<cr>", "Escape", remap = true },
+         ["<esc>"] = { "<cmd>silent! LuaSnipUnlinkCurrent<cr><cmd>noh<cr>", "Escape", remap = true },
          ["<leader>"] = { name = "Leader" },
          ["<localLeader>"] = { name = "Local Leader" },
       }

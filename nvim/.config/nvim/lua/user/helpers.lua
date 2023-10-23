@@ -18,4 +18,8 @@ M.deregister = function(mappings, opts)
    require("which-key").register(all_mappings, opts)
 end
 
+M.first_to_upper = function(s) return s:gsub("^%l", string.upper) end
+
+M.cmd = function(c) return string.format("<cmd>%s<cr>", c) end
+
 return M

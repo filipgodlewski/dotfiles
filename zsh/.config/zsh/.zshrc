@@ -12,6 +12,7 @@ to_path "$HOMEBREW_PREFIX/bin"
 to_path "$HOMEBREW_PREFIX/sbin"
 to_path "$HOMEBREW_PREFIX/opt/curl/bin"
 to_path "$HOMEBREW_PREFIX/opt/fzf/bin"
+to_path "$HOME/.local/bin"
 to_path "$GOPATH/bin"
 
 export LS_COLORS="$(vivid generate catppuccin-macchiato)"

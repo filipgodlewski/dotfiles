@@ -1,5 +1,9 @@
 return {
    "folke/which-key.nvim",
+   init = function()
+      vim.opt.termguicolors = true
+      vim.opt.timeoutlen = 100
+   end,
    opts = {
       key_labels = {
          ["<space>"] = "␣",

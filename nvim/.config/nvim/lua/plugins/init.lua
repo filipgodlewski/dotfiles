@@ -106,5 +106,10 @@ return {
       event = "BufReadPre",
    },
 
+   {
+      "tpope/vim-fugitive",
+      cmd = { "G", "Git" },
+   },
+
    -- TODO: Install and configure, then learn nvim-neorg/neorg
 }

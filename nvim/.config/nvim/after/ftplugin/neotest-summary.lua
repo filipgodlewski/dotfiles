@@ -1,0 +1,23 @@
+require("which-key").register({
+   ["g?"] = {
+      name = "Neotest summary mappings",
+      a = "Attach",
+      M = "Clear marked",
+      T = "Clear target",
+      d = "Debug",
+      D = "Debug marked",
+      ["<CR>"] = "Expand",
+      e = "Expand all",
+      i = "Jump to",
+      m = "Mark",
+      J = "Next failed",
+      o = "Output",
+      K = "Previous failed",
+      r = "Run",
+      R = "Run marked",
+      O = "Short output",
+      u = "Stop",
+      t = "Target",
+      w = "Watch",
+   },
+}, { buffer = 0 })

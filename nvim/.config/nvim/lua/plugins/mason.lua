@@ -85,6 +85,7 @@ return {
             "stylua",
             "taplo",
             "yaml-language-server",
+            "yamlfix",
          },
          run_on_start = false,
       },

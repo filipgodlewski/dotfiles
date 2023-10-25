@@ -12,6 +12,8 @@ local simple_compiler = function()
 end
 
 require("which-key").register({
-   name = "Exclusive to C",
-   r = { simple_compiler, "Compile and Run (Simple)" },
-}, { prefix = "<localLeader><localLeader>", buffer = 0 })
+   c = {
+      name = "Compile",
+      c = { simple_compiler, "Compile and Run (Simple)" },
+   },
+}, { prefix = "<localLeader>", buffer = 0 })

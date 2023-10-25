@@ -49,4 +49,19 @@ M.setup_dap_entrypoint = {
    c = { function() require("dap").continue() end, "Start/Continue" },
 }
 
+M.setup_neotest_mappings = {
+   name = "Neotest",
+   f = { function() require("neotest").run.run { vim.fn.expand "%" } end, "Run file" },
+   F = { function() require("neotest").run.run { vim.fn.expand "%", strategy = "dap" } end, "Run file (debug)" },
+   t = { function() require("neotest").summary.toggle() end, "Toggle summary" },
+   l = { function() require("neotest").run.run_last() end, "Run last" },
+   L = { function() require("neotest").run.run_last { strategy = "dap" } end, "Run last (debug)" },
+   k = { function() require("neotest").run.stop() end, "Kill run" },
+   o = { function() require("neotest").output_panel.toggle() end, "Toggle output" },
+   O = { function() require("neotest").output_panel.toggle() end, "Clear output" },
+   r = { function() require("neotest").run.run() end, "Run" },
+   R = { function() require("neotest").run.run { strategy = "dap" } end, "Run (debug)" },
+   w = { function() require("neotest").watch.toggle() end, "Toggle watcher" },
+}
+
 return M

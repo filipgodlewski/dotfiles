@@ -12,8 +12,6 @@ vim.opt.laststatus = 3
 vim.opt.mouse = "ar"
 vim.opt.shortmess:append "sI"
 vim.opt.signcolumn = "yes"
-vim.opt.termguicolors = true
-vim.opt.timeoutlen = 100
 
 -- line & sign column
 vim.opt.nrformats:append "alpha"

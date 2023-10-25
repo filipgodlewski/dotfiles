@@ -1,4 +1,0 @@
--- vim.api.nvim_clear_autocmds({ "BufFilePost", "BufEnter", "BufWinEnter", "LspAttach" }, {
---    group = vim.api.nvim_create_augroup("GoLoad", { clear = true }),
---    callback = function() end,
--- })

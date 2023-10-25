@@ -1,4 +1,4 @@
-local user_qf = require "user.quickfix"
+local user_qf = require "user.helpers.quickfix"
 
 return {
    "nvim-telescope/telescope.nvim",

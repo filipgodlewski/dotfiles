@@ -1,3 +1,4 @@
+local dap_prefix = "<localLeader>d"
 return {
    {
       "mfussenegger/nvim-dap-python",
@@ -17,37 +18,37 @@ return {
       config = true,
    },
    {
+      "rcarriga/nvim-dap-ui",
+      dependencies = "mfussenegger/nvim-dap",
+      opts = {
+         layouts = {
+            {
+               elements = {
+                  { id = "scopes", size = 0.4 },
+                  { id = "stacks", size = 0.4 },
+                  { id = "watches", size = 0.2 },
+               },
+               size = 50,
+               position = "right",
+            },
+            {
+               elements = {
+                  "breakpoints",
+                  "repl",
+                  "console",
+               },
+               size = 0.2,
+               position = "bottom",
+            },
+         },
+      },
+   },
+   {
       "mfussenegger/nvim-dap",
       dependencies = {
          "nvim-telescope/telescope.nvim",
          "nvim-telescope/telescope-dap.nvim",
-         {
-            "rcarriga/nvim-dap-ui",
-            opts = {
-               layouts = {
-                  {
-                     elements = {
-                        { id = "scopes", size = 0.4 },
-                        { id = "stacks", size = 0.4 },
-                        { id = "watches", size = 0.2 },
-                     },
-                     size = 50,
-                     position = "right",
-                  },
-                  {
-                     elements = {
-                        "breakpoints",
-                        "repl",
-                        "console",
-                     },
-                     size = 0.2,
-                     position = "bottom",
-                  },
-               },
-            },
-         },
       },
-      ft = { "python", "go" },
       init = function()
          local dap = require "dap"
          local sign = vim.fn.sign_define
@@ -59,31 +60,36 @@ return {
             require("neotest").summary.close()
             require("telescope").load_extension "dap"
             require("which-key").register({
-               k = { dap.terminate, "Kill debugger" },
+               k = { dap.terminate, "Kill session" },
                s = {
                   name = "Step",
-                  b = { dap.step_back, "Step back" },
-                  d = { dap.step_into, "Step into" },
-                  r = { dap.step_over, "Step over" },
+                  b = { dap.step_back, "Back" },
+                  d = { dap.step_into, "Into" },
+                  r = { dap.step_over, "Over" },
                   t = { dap.run_to_cursor, "Continue to cursor" },
-                  u = { dap.step_out, "Step out" },
+                  u = { dap.step_out, "Out" },
                },
                f = {
-                  name = "Frames",
-                  d = { dap.down, "Go frame down" },
-                  l = { require("telescope").extensions.dap.frames, "List all frames" },
-                  u = { dap.up, "Go frame up" },
+                  name = "Frame",
+                  d = { dap.down, "Down" },
+                  l = { require("telescope").extensions.dap.frames, "List all" },
+                  u = { dap.up, "Up" },
                },
-            }, { prefix = "<localLeader>" })
+            }, { prefix = dap_prefix })
             require("dapui").open {}
          end
 
          local on_event_end = function()
             local helpers = require "user.helpers"
-            helpers.deregister({ "d", "l", "u" }, { prefix = "<localLeader>f" })
-            helpers.deregister({ "l", "t" }, { prefix = "<localLeader>r" })
-            helpers.deregister({ "b", "d", "r", "t", "u" }, { prefix = "<localLeader>s" })
-            helpers.deregister({ "k", "s", "f", "r" }, { prefix = "<localLeader>" })
+            -- NOTE: restricted letters for dap_prefix:
+            -- "b" - breakpoint
+            -- "c" - continue
+            -- "k" - kill
+            -- "s" - step
+            -- "f" - frame
+            helpers.deregister({ "d", "l", "u" }, { prefix = dap_prefix .. "f" })
+            helpers.deregister({ "b", "d", "r", "t", "u" }, { prefix = dap_prefix .. "s" })
+            helpers.deregister({ "k", "s", "f" }, { prefix = dap_prefix })
             require("dapui").close {}
          end
 

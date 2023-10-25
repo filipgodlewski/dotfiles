@@ -11,11 +11,7 @@ local simple_compiler = function()
    new_term:toggle()
 end
 
-vim.api.nvim_create_autocmd("FileType", {
-   pattern = "c",
-   callback = function()
-      require("which-key").register({
-         C = { simple_compiler, "Simple C Compile and Run" },
-      }, { prefix = "<leader>", buffer = 0 })
-   end,
-})
+require("which-key").register({
+   name = "Exclusive to C",
+   r = { simple_compiler, "Compile and Run (Simple)" },
+}, { prefix = "<localLeader><localLeader>", buffer = 0 })

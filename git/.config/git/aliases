@@ -62,6 +62,7 @@
   ob = checkout -b
 
   p = pull
+  ps = push
   pf = pull --ff-only
   ppa = pull --prune --all
 

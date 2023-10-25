@@ -15,8 +15,16 @@ local manage_tags = function(behavior)
 end
 
 require("which-key").register({
-   name = "Exclusive to Go",
-   a = { function() manage_tags "add" end, "Add tags" },
-   e = { helpers.cmd "GoIfErr", "Add IfErr block" },
-   r = { function() manage_tags "rm" end, "Remove tags" },
-}, { prefix = "<localLeader><localLeader>", buffer = 0 })
+   d = helpers.setup_dap_entrypoint,
+   s = {
+      name = "Snippet",
+      a = { function() manage_tags "add" end, "Add tags" },
+      e = { helpers.cmd "GoIfErr", "Add IfErr block" },
+      r = { function() manage_tags "rm" end, "Remove tags" },
+   },
+   t = {
+      name = "Tests",
+      l = { function() require("dap-go").debug_last() end, "Last" },
+      s = { function() require("dap-go").debug_test() end, "Selected" },
+   },
+}, { prefix = "<localLeader>", buffer = 0 })

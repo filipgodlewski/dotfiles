@@ -1,4 +1,5 @@
 local helpers = require "user.helpers"
+local qf_prefix = "<localLeader>C"
 
 local M = {}
 
@@ -7,7 +8,8 @@ local function trouble_qf_refresh() require("trouble").refresh { auto = true, pr
 M.clear = function()
    vim.cmd "cexpr []"
    vim.schedule(require("trouble").close)
-   helpers.deregister({ "Q", "f", "F", "r", "t", "u" }, { prefix = "<localLeader>" })
+   helpers.deregister({ "Q", "f", "F", "r", "t", "u" }, { prefix = qf_prefix })
+   helpers.deregister { qf_prefix }
 end
 
 M.filter = function(mode)
@@ -23,12 +25,12 @@ M.replace = function()
    local new = vim.fn.input("New: ", old)
    if old == "" and new == "" then return end
    vim.cmd(string.format("cdo s/%s/%s/ | update", old, new))
-   require("which-key").register { ["<localLeader>u"] = { M.undo, "Undo" } }
+   require("which-key").register { [qf_prefix .. "u"] = { M.undo, "Undo" } }
 end
 
 M.undo = function()
    vim.cmd "cfdo normal u | update"
-   helpers.deregister { "<localLeader>u" }
+   helpers.deregister { qf_prefix .. "u" }
 end
 
 M.search = function(search_fn)
@@ -48,7 +50,7 @@ M.setup_search = function(prompt_bufnr)
       F = { function() M.filter "!" end, "Filter by not matching" },
       r = { M.replace, "Replace in-place" },
       t = { function() require("trouble").toggle "quickfix" end, "Toggle Quickfix list" },
-   }, { prefix = "<localLeader>" })
+   }, { prefix = qf_prefix })
 end
 
 return M

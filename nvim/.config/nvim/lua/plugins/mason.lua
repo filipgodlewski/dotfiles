@@ -65,25 +65,36 @@ return {
       dependencies = { "williamboman/mason.nvim" },
       opts = {
          ensure_installed = {
-            "black",
+            -- c
             "clang-format",
             "clangd",
-            "codelldb",
+            -- css
             "css-lsp",
-            "debugpy",
-            "delve",
+            -- docker
             "dockerfile-language-server",
-            "fixjson",
-            "gopls",
+            -- go
+            "delve",
             "gofumpt",
+            "gopls",
+            -- json
+            "fixjson",
             "json-lsp",
+            -- lua
             "lua-language-server",
+            "stylua",
+            -- markdown
             "markdownlint",
             "marksman",
+            -- python
+            "black",
+            "debugpy",
             "pyright",
             "ruff",
-            "stylua",
+            -- rust
+            "codelldb",
+            -- toml
             "taplo",
+            -- yaml
             "yaml-language-server",
             "yamlfix",
          },
@@ -93,6 +104,19 @@ return {
    },
    {
       "williamboman/mason-lspconfig.nvim",
+      ft = {
+         "c",
+         "css",
+         "docker",
+         "go",
+         "json",
+         "lua",
+         "markdown",
+         "python",
+         "rust",
+         "toml",
+         "yaml",
+      },
       dependencies = {
          "williamboman/mason.nvim",
          "neovim/nvim-lspconfig",

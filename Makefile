@@ -15,8 +15,11 @@ install: $(OS)
 uninstall: un$(OS)
 
 ## MacOS specific
-macos: brew npm stow pip settings
+macos: base brew npm stow pip settings
 unmacos: unnpm unpip unstow unbrew
+
+base:
+	echo 'export ZDOTDIR="$HOME"/.config/zsh' | sudo tee /etc/zshenv
 
 brew:
 	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"

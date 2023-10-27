@@ -11,13 +11,17 @@ local function is_suppressed(path)
    return false
 end
 
-local function clean_workspace_up()
+local did_load_lazy_plugin = function(name)
    local loaded_plugins = vim.tbl_flatten(vim.tbl_map(function(v)
       if v._.loaded then return v.name end
    end, require("lazy").plugins()))
-   if vim.tbl_contains(loaded_plugins, "neotest") then require("neotest").summary.close() end
-   if vim.tbl_contains(loaded_plugins, "trouble.nvim") then require("trouble").close() end
-   if vim.tbl_contains(loaded_plugins, "nvim-dap") then require("dap").terminate() end
+   return vim.tbl_contains(loaded_plugins, name)
+end
+
+local function clean_workspace_up()
+   if did_load_lazy_plugin "neotest" then require("neotest").summary.close() end
+   if did_load_lazy_plugin "trouble.nvim" then require("trouble").close() end
+   if did_load_lazy_plugin "nvim-dap" then require("dap").terminate() end
    local buf = require "close_buffers"
    buf.delete { type = "nameless", force = true }
    buf.delete { type = "hidden", force = true }
@@ -94,14 +98,14 @@ return {
                if not is_suppressed(path) then require("sessions").save(nil, { silent = true }) end
                vim.cmd "bd%"
                vim.cmd "clearjumps"
-               vim.cmd "LspStop"
+               if did_load_lazy_plugin "nvim-lspconfig" then vim.cmd "LspStop" end
             end,
             open = function(_, path)
                local opts = { silent = true, autosave = true }
                if is_suppressed(path) then opts["autosave"] = false end
                require("sessions").load(nil, opts)
                activate_virtual_env(path)
-               vim.cmd "LspStart"
+               if did_load_lazy_plugin "nvim-lspconfig" then vim.cmd "LspStart" end
             end,
          },
       }

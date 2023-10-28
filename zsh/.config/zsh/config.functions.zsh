@@ -67,28 +67,3 @@ function update() {
 
   log_find
 }
-
-function aic() {
-  export OPENAI_KEY=$(op read 'op://msmtazhnbxxwac3zvak3suuyxa/temyiqutlmtvqqu34tv6wia4ba/key')
-  aicommits $@
-}
-
-function font() {
-  local opt_reset
-  zparseopts -D -E -K -- {r,-reset}=opt_reset
-
-  (($#opt_reset)) && {alacritty msg config -w $ALACRITTY_WINDOW_ID --reset; return 0}
-  local fsize
-
-  if (($# == 0)); then
-    fsize=$(cat $ZDOTDIR/term_font_sizes | fzf | sd '.+ \((\d+) pts\)' '$1')
-    echo "chosen size: $fsize"
-  else
-    fsize=$1
-  fi
-  
-  if ! [[ $fsize =~ '^[0-9]+$' ]] ; then
-    echo "error: Not a number" >&2; return 1
-  fi
-  alacritty msg config -w $ALACRITTY_WINDOW_ID font.size=$fsize
-}

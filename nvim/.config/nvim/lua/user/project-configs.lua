@@ -21,7 +21,7 @@ end
 
 M._get = function()
    local git_dir = vim.cmd "silent !git rev-parse --show-toplevel"
-   local dir = git_dir ~= "" and git_dir or vim.loop.cwd()
+   local dir = git_dir ~= "" and git_dir or vim.fn.getcwd()
    return project_dir .. vim.fs.basename(dir) .. ".lua"
 end
 

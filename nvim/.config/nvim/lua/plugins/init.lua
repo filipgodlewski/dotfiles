@@ -77,32 +77,8 @@ return {
       cmd = { "Delete", "Rename", "Copy", "Duplicate", "Move", "Chmod", "Mkdir", "SudoWrite", "SudoEdit" },
    },
 
-   -- Git gutter and more
    {
-      "lewis6991/gitsigns.nvim",
-      ft = { "gitcommit", "diff" },
-      init = function()
-         -- taken from NvChad, changed to fit my needs - I have an alias for `git root` that does it better
-         vim.api.nvim_create_autocmd("BufRead", {
-            group = vim.api.nvim_create_augroup("GitSignsLazyLoad", { clear = true }),
-            callback = function()
-               vim.fn.system { "git", "root" }
-               if vim.v.shell_error == 0 then
-                  vim.api.nvim_del_augroup_by_name "GitSignsLazyLoad"
-                  vim.schedule(function() require("lazy").load { plugins = { "gitsigns.nvim" } } end)
-                  -- TODO: add keymap for previewing and working on hunks
-               end
-            end,
-         })
-      end,
-      config = true,
-   },
-
-   -- Git conflict helper
-   {
-      "akinsho/git-conflict.nvim",
-      opts = { default_mappings = false },
-      config = true,
-      event = "BufReadPre",
+      "sindrets/diffview.nvim",
+      cmd = { "DiffviewOpen", "DiffviewFileHistory" },
    },
 }

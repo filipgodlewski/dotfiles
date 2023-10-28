@@ -66,7 +66,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
    callback = function()
       local home = vim.fn.expand "~"
       local args = vim.api.nvim_get_vvar "argv"
-      local cwd = vim.loop.cwd()
+      local cwd = vim.fn.getcwd()
       if #args == 2 and cwd == home and vim.tbl_contains(args, "--embed") then
          require("telescope").extensions.workspaces.workspaces()
          return
@@ -81,33 +81,49 @@ vim.api.nvim_create_autocmd("VimLeavePre", {
 })
 
 return {
-   "natecraddock/workspaces.nvim",
-   dependencies = {
+   {
       "natecraddock/sessions.nvim",
       opts = {
+         events = { "VimLeavePre" },
          session_filepath = vim.fn.stdpath "data" .. "/sessions",
          absolute = true,
       },
+      cmd = { "SessionsLoad", "SessionsSave", "SessionsStop" },
    },
-   opts = function()
-      return {
-         mru_sort = false,
-         hooks = {
-            open_pre = function(_, path)
-               clean_workspace_up()
-               if not is_suppressed(path) then require("sessions").save(nil, { silent = true }) end
-               vim.cmd "bd%"
-               vim.cmd "clearjumps"
-               if did_load_lazy_plugin "nvim-lspconfig" then vim.cmd "LspStop" end
-            end,
-            open = function(_, path)
-               local opts = { silent = true, autosave = true }
-               if is_suppressed(path) then opts["autosave"] = false end
-               require("sessions").load(nil, opts)
-               activate_virtual_env(path)
-               if did_load_lazy_plugin "nvim-lspconfig" then vim.cmd "LspStart" end
-            end,
-         },
-      }
-   end,
+   {
+      "natecraddock/workspaces.nvim",
+      dependencies = { "natecraddock/sessions.nvim" },
+      opts = function()
+         return {
+            mru_sort = false,
+            hooks = {
+               open_pre = function(_, path)
+                  clean_workspace_up()
+                  if not is_suppressed(path) then require("sessions").save(nil, { silent = true }) end
+                  vim.cmd "bd%"
+                  vim.cmd "clearjumps"
+                  if did_load_lazy_plugin "nvim-lspconfig" then vim.cmd "LspStop" end
+               end,
+               open = function(_, path)
+                  local opts = { silent = true, autosave = true }
+                  if is_suppressed(path) then opts["autosave"] = false end
+                  require("sessions").load(nil, opts)
+                  activate_virtual_env(path)
+                  if did_load_lazy_plugin "nvim-lspconfig" then vim.cmd "LspStart" end
+               end,
+            },
+         }
+      end,
+      cmd = {
+         "WorkspacesAdd",
+         "WorkspacesAddDir",
+         "WorkspacesRemove",
+         "WorkspacesRemoveDir",
+         "WorkspacesRename",
+         "WorkspacesOpen",
+         "WorkspacesList",
+         "WorkspacesListDirs",
+         "WorkspacesSyncDirs",
+      },
+   },
 }

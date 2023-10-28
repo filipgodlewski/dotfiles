@@ -1,7 +1,7 @@
 -- Backend files
 vim.opt.autowriteall = true
 vim.opt.confirm = true
-vim.opt.path:append "**"
+vim.opt.path = { ".", "**", "/usr/include", "" }
 vim.opt.swapfile = false
 vim.opt.undofile = true
 

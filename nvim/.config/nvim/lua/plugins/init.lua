@@ -80,5 +80,26 @@ return {
    {
       "sindrets/diffview.nvim",
       cmd = { "DiffviewOpen", "DiffviewFileHistory" },
+      opts = function()
+         local diffview = require "diffview"
+         return {
+            keymaps = {
+               view = { { "n", "q", diffview.close, { desc = "Close diff view" } } },
+               file_panel = { { "n", "q", diffview.close, { desc = "Close diff view" } } },
+               file_history_panel = { { "n", "q", diffview.close, { desc = "Close diff view" } } },
+            },
+         }
+      end,
+   },
+
+   {
+      "NeogitOrg/neogit",
+      dependencies = {
+         "nvim-lua/plenary.nvim",
+         "nvim-telescope/telescope.nvim",
+         "sindrets/diffview.nvim",
+      },
+      config = true,
+      cmd = { "Neogit" },
    },
 }

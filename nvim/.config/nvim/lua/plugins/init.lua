@@ -31,6 +31,11 @@ return {
       end,
    },
 
+   {
+      "stevearc/overseer.nvim",
+      config = true,
+   },
+
    -- SECTION B: REFACTORING & CODE ANALYSIS
 
    -- Better Search & Replace
@@ -54,9 +59,6 @@ return {
    -- Super cool Quickfix layout
    { "folke/trouble.nvim", dependencies = { "nvim-tree/nvim-web-devicons" }, config = true },
 
-   -- Rust related LSP and other tools
-   { "simrat39/rust-tools.nvim", ft = "rust", config = true },
-
    -- Go related tools
    {
       "olexsmir/gopher.nvim",
@@ -66,7 +68,19 @@ return {
       },
       ft = "go",
       config = true,
-      build = function() vim.cmd [[silent! GoInstallDeps]] end,
+      build = function() vim.cmd "silent! GoInstallDeps" end,
+   },
+
+   -- Rust related tools
+   {
+      "saecki/crates.nvim",
+      event = { "BufRead Cargo.toml" },
+      dependencies = { "nvim-lua/plenary.nvim" },
+      opts = {
+         src = {
+            cmp = { enabled = true },
+         },
+      },
    },
 
    -- SECTION C: INTEGRATIONS

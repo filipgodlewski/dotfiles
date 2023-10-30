@@ -54,11 +54,11 @@ local configs = {
 }
 
 return {
+   { "lvimuser/lsp-inlayhints.nvim", config = true },
    {
       "williamboman/mason.nvim",
       cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
       config = true,
-      lazy = false,
    },
    {
       "WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -91,6 +91,7 @@ return {
             "pyright",
             "ruff",
             -- rust
+            "rust_analyzer",
             "codelldb",
             -- toml
             "taplo",
@@ -133,8 +134,10 @@ return {
          )
          capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
          local global_opts = {
+            -- inlay_hints = { enabled = true },
             capabilities = capabilities,
-            on_attach = function(_, bufnr)
+            on_attach = function(client, bufnr)
+               require("lsp-inlayhints").on_attach(client, bufnr, true)
                vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
                vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
                vim.api.nvim_buf_set_option(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")

@@ -1,7 +1,7 @@
 -- I stole a part of it from https://github.com/windwp/nvim-projectconfig
 -- I just didn't need the whole plugin for it.
 
-local project_dir = vim.fn.expand "~/.local/share/nvim/project-configs/"
+local project_dir = vim.fn.expand(vim.fn.stdpath "data" .. "/project-configs/")
 
 local ensure_private_configs = function()
    if vim.fn.empty(vim.fn.glob(project_dir)) == 1 then

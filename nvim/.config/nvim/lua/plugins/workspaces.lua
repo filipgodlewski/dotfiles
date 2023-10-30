@@ -18,6 +18,15 @@ local did_load_lazy_plugin = function(name)
    return vim.tbl_contains(loaded_plugins, name)
 end
 
+local kill_lsp = function()
+   local active_clients = vim.lsp.get_active_clients()
+   if active_clients then
+      for _, client in ipairs(active_clients) do
+         vim.cmd(string.format("LspStop %s", client.id))
+      end
+   end
+end
+
 local function clean_workspace_up()
    if did_load_lazy_plugin "neotest" then require("neotest").summary.close() end
    if did_load_lazy_plugin "trouble.nvim" then require("trouble").close() end
@@ -102,14 +111,13 @@ return {
                   if not is_suppressed(path) then require("sessions").save(nil, { silent = true }) end
                   vim.cmd "bd%"
                   vim.cmd "clearjumps"
-                  if did_load_lazy_plugin "nvim-lspconfig" then vim.cmd "LspStop" end
+                  kill_lsp()
                end,
                open = function(_, path)
                   local opts = { silent = true, autosave = true }
                   if is_suppressed(path) then opts["autosave"] = false end
                   require("sessions").load(nil, opts)
                   activate_virtual_env(path)
-                  if did_load_lazy_plugin "nvim-lspconfig" then vim.cmd "LspStart" end
                end,
             },
          }

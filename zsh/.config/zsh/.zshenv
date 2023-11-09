@@ -14,21 +14,27 @@ function to_path() {
 to_path "$XDG_CONFIG_HOME/git/commands"
 
 # homebrew
-[[ "$(uname -m)" == "arm64" ]] && tmp_path=/opt/homebrew || tmp_path=/usr/local
-export HOMEBREW_PREFIX=$tmp_path
-export HOMEBREW_CELLAR=$tmp_path/Cellar
-export HOMEBREW_REPOSITORY=$tmp_path
-unset tmp_path
-export HOMEBREW_NO_ANALYTICS=1
-export HOMEBREW_BAT=1
-export HOMEBREW_AUTOREMOVE=1
-export HOMEBREW_CASK_OPTS="--no-quarantine"
-export HOMEBREW_BUNDLE_FILE="$HOME"/.Brewfile
+if [[ "$(uname)" == "Darwin" ]]; then
+  if [[ "$(uname -m)" == "arm64" ]]; then
+    tmp_path="/opt/homebrew"
+  else
+    tmp_path="/usr/local"
+  fi
+  export HOMEBREW_PREFIX=$tmp_path
+  export HOMEBREW_CELLAR=$tmp_path/Cellar
+  export HOMEBREW_REPOSITORY=$tmp_path
+  unset tmp_path
+  export HOMEBREW_NO_ANALYTICS=1
+  export HOMEBREW_BAT=1
+  export HOMEBREW_AUTOREMOVE=1
+  export HOMEBREW_CASK_OPTS="--no-quarantine"
+  export HOMEBREW_BUNDLE_FILE="$HOME"/.Brewfile
 
-to_path "$HOMEBREW_PREFIX/bin"
-to_path "$HOMEBREW_PREFIX/sbin"
-to_path "$HOMEBREW_PREFIX/opt/curl/bin"
-to_path "$HOMEBREW_PREFIX/opt/fzf/bin"
+  to_path "$HOMEBREW_PREFIX/bin"
+  to_path "$HOMEBREW_PREFIX/sbin"
+  to_path "$HOMEBREW_PREFIX/opt/curl/bin"
+  to_path "$HOMEBREW_PREFIX/opt/fzf/bin"
+fi
 
 # docker
 export DOCKER_CONFIG=$XDG_CONFIG_HOME/docker
@@ -49,7 +55,9 @@ export NPM_CONFIG_CACHE=$XDG_CACHE_HOME/npm
 export NPM_CONFIG_TMP=$XDG_RUNTIME_DIR/npm
 
 # rip
-export GRAVEYARD=$HOME/.Trash
+if [[ "$(uname)" == "Darwin" ]]; then
+  export GRAVEYARD=$HOME/.Trash
+fi
 
 # system-wide
 export EDITOR=nvim
@@ -70,3 +78,4 @@ to_path "$CARGO_HOME/bin"
 # go
 export GOPATH="$HOME/dev/go"
 to_path "$GOPATH/bin"
+

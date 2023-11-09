@@ -65,7 +65,7 @@ to_path "$HOME/.local/bin"
 export CARGO_HOME=$XDG_CONFIG_HOME/rust/cargo
 export RUSTUP_HOME=$XDG_CONFIG_HOME/rust/rustup
 to_path "$CARGO_HOME/bin"
-source "$CARGO_HOME/env"
+[[ -f "$CARGO_HOME/env" ]] && source "$CARGO_HOME/env"
 
 # go
 export GOPATH="$HOME/dev/go"

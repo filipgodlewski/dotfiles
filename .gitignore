@@ -10,3 +10,5 @@ nvim/.local
 nvim/.config/nvim/plugin/packer_compiled.lua
 nvim/.config/nvim/lazy-lock.json
 rplugin.vim
+
+zsh/.cache

@@ -18,7 +18,7 @@ unset ANTIDOTE_DIR ANTIDOTE_PLUGINS ANTIDOTE_STATIC_FILE
 eval "$(starship init zsh)"
 
 # source 1password plugins
-source $XDG_CONFIG_HOME/op/plugins.sh
+[[ -f "$XDG_CONFIG_HOME/op/plugins.sh" ]] && source $XDG_CONFIG_HOME/op/plugins.sh
 
 function _fzf_zvm_init() {
   [[ $- == *i* ]] && source "$(brew --prefix)/opt/fzf/shell/completion.zsh" 2> /dev/null

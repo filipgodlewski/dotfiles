@@ -19,7 +19,7 @@ macos: base brew npm stow pip settings
 unmacos: unnpm unpip unstow unbrew
 
 base:
-	echo 'export ZDOTDIR="$HOME"/.config/zsh' | sudo tee /etc/zshenv
+	echo 'export ZDOTDIR="$$HOME"/.config/zsh' | sudo tee /etc/zshenv
 
 brew:
 	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -34,10 +34,10 @@ unbrew:
 	sudo rm -rf $(HOMEBREW_PREFIX)
 
 npm:
-	npm install -g git-cz neovim aicommits
+	npm install -g neovim
 
 unnpm:
-	npm uninstall -g git-cz neovim aicommits
+	npm uninstall -g neovim
 
 stow:
 	stow -R */

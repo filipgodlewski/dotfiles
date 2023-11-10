@@ -1,0 +1,10 @@
+set -e
+
+root=$(git rev-parse --show-toplevel)
+if [[ $(git rev-parse --is-bare-repository) == "true" ]]; then
+  echo $(realpath "$root/..")
+else
+  echo $root
+fi
+
+# vim:ft=zsh

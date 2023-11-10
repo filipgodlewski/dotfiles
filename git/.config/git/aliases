@@ -2,7 +2,7 @@
   a = add
   aa = add --all
   ap = add --patch
-  au = add --update # only tracked
+  # au
 
   b = branch
   ba = branch --all
@@ -67,6 +67,7 @@
   ppa = pull --prune --all
 
   r = reset
+  rc = reset HEAD~
   rs = reset --soft
   rh = reset --hard
   reset-totally = !git reset --hard && git clean -f
@@ -91,14 +92,22 @@
   stl = stash list
   stp = stash pop
 
-  w = whatchanged
+  w = worktree
+  # wa
+  wrm = worktree remove
+  wl = worktree list
 
+  wc = whatchanged
+
+  # alias
   fix = !cd `git rev-parse --show-toplevel` && git diff --name-only --diff-filter=U | xargs nvim -p; cd -
   gone = !git config init.defaultBranch && git remote prune origin && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -r git branch -D
+  # new
   news = !git stash && git checkout `git main` && git pull --prune --all && git checkout - && git stash pop
   optimize = gc --prune=now --aggressive
-  root = rev-parse --show-toplevel
+  # post-init
+  # publish
+  # root
   send = !git pull --prune --all && git add --update && git cz && git push
-
 
 # vim:ft=gitconfig

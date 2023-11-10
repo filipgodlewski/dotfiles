@@ -56,6 +56,12 @@ return {
       },
    },
 
+   {
+      "junegunn/vim-easy-align",
+      cmd = {"EasyAlign"},
+      ft = "markdown",
+   },
+
    -- Super cool Quickfix layout
    { "folke/trouble.nvim", dependencies = { "nvim-tree/nvim-web-devicons" }, config = true },
 

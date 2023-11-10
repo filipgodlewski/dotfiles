@@ -1,0 +1,28 @@
+set -e
+
+branch_dir="worktree-branches"
+
+if [[ $(git rev-parse --is-bare-repository) == "true" ]]; then
+  dev_dir="`git rev-parse --git-dir`/$branch_dir" 
+  if [[ ! -d "$dev_dir" ]]; then
+    echo "Creating /$branch_dir in which all worktree branches will be stored!"
+  fi
+
+  if (( $(git worktree list | wc -l) == 1)); then
+    git worktree add "$branch_dir/$1"
+    cd "$branch_dir/$1"
+  else
+    >&2 echo "Not in '$dev_dir/**'. Watch out!"
+  fi
+else
+  top=$(git rev-parse --show-toplevel)
+  if [[ $(basename $(dirname $top)) == "$branch_dir" ]]; then
+    cd $top
+    git worktree add "../$1"
+    sleep .2
+  else
+    git worktree add "$1"
+  fi
+fi
+
+# vim:ft=zsh

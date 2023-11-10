@@ -76,6 +76,7 @@ to_path "$CARGO_HOME/bin"
 [[ -f "$CARGO_HOME/env" ]] && source "$CARGO_HOME/env"
 
 # go
-export GOPATH="$HOME/dev/go"
+export GOPATH="$HOME/go"
 to_path "$GOPATH/bin"
+mkdir -p $GOPATH/{bin,src,pkg}
 

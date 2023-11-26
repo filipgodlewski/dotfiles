@@ -12,12 +12,12 @@ NVIM_VENV = $(XDG_DATA_HOME)/nvim/venv
 .PHONY: stow brew npm
 
 # Installing
-install: $(OS)
-uninstall: un$(OS)
+install: $(OS) finish
+uninstall: un$(OS) finish
 
 ## MacOS specific
-macos: base brew npm stow pip settings misc finish
-unmacos: unnpm unpip unstow unbrew cleanup finish
+macos: base brew npm stow pip settings misc
+unmacos: unnpm unpip unstow unbrew cleanup
 
 base:
 	echo 'export ZDOTDIR="$$HOME"/.config/zsh' | sudo tee /etc/zshenv
@@ -66,9 +66,8 @@ misc:
 
 cleanup:
 	rm -rf $(HOME)/.config $(HOME)/.local $(HOME)/.npm
-	-rm $(HOME)/.viminfo $(HOME)/.zsh_history $(HOME)/.zsh_sessions
 
 finish:
 	sudo killall Finder
-	rm -rf $(HOME)/.zsh_history $(HOME)/.zsh_sessions
-	killall Terminal
+	rm -rf $(HOME)/.viminfo $(HOME)/.zsh_history $(HOME)/.zsh_sessions
+	-killall Terminal

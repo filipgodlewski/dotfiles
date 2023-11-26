@@ -32,7 +32,10 @@ Then, finally:
 fast-theme XDG:catppuccin-macchiato
 ```
 
-... And patch app icons from `.excluded/`
+### Patch icons
+
+Refer to:
+- [kitty-icon](https://github.com/DinkDonk/kitty-icon)
 
 ### Uninstall
 

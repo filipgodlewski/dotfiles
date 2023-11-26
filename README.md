@@ -21,7 +21,7 @@ Before the script, sign in to *Mac App Store*!
 
 ```bash
 xcode-select --install
-git clone https://github.com/filipgodlewski/dotfiles.git
+git clone --depth 1 https://github.com/filipgodlewski/dotfiles.git
 cd ~/dotfiles
 make -s install  # `-s` will suppress all commands from being echoed
 ```
@@ -31,6 +31,8 @@ Then, finally:
 ```bash
 fast-theme XDG:catppuccin-macchiato
 ```
+
+... And patch app icons from `.excluded/`
 
 ### Uninstall
 

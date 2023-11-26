@@ -25,6 +25,7 @@ base:
 
 brew:
 	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	-$(HOMEBREW_PREFIX)/brew tap homebrew/cask-fonts
 	-export HOMEBREW_CASK_OPTS="--no-quarantine"; cat $(BASE_BREW) | xargs $(HOMEBREW_PREFIX)/brew install
 	-export HOMEBREW_CASK_OPTS="--no-quarantine"; cat $(BASE_CASKS) | xargs $(HOMEBREW_PREFIX)/brew install --cask
 	cat $(BASE_MAS) | xargs $(HOMEBREW_PREFIX)/mas install

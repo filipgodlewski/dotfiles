@@ -65,11 +65,10 @@ misc:
 	$(HOMEBREW_PREFIX)/bat cache --build
 
 cleanup:
-	rm -rf $(HOME)/.config
-	rm -rf $(HOME)/.local
-	rm .npm .viminfo .zsh_history .zsh_sessions
+	rm -rf $(HOME)/.config $(HOME)/.local $(HOME)/.npm
+	-rm $(HOME)/.viminfo $(HOME)/.zsh_history $(HOME)/.zsh_sessions
 
 finish:
 	sudo killall Finder
-	rm .zsh_history .zsh_sessions
+	rm -rf $(HOME)/.zsh_history $(HOME)/.zsh_sessions
 	killall Terminal

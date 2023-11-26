@@ -17,7 +17,7 @@ uninstall: un$(OS)
 
 ## MacOS specific
 macos: base brew npm stow pip settings misc finish
-unmacos: unnpm unpip unstow unbrew finish
+unmacos: unnpm unpip unstow unbrew cleanup finish
 
 base:
 	echo 'export ZDOTDIR="$$HOME"/.config/zsh' | sudo tee /etc/zshenv
@@ -64,6 +64,12 @@ settings:
 misc:
 	$(HOMEBREW_PREFIX)/bat cache --build
 
+cleanup:
+	rm -rf $(HOME)/.config
+	rm -rf $(HOME)/.local
+	rm .npm .viminfo .zsh_history .zsh_sessions
+
 finish:
 	sudo killall Finder
+	rm .zsh_history .zsh_sessions
 	killall Terminal

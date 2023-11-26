@@ -1,7 +1,12 @@
 antidote
 bat
+coreutils
 eza
 fzf
+gh
+git
+gnu-sed
+gum
 jq
 mas
 neovim
@@ -11,3 +16,4 @@ ripgrep
 starship
 stow
 vivid
+zoxide

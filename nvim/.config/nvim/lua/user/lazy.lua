@@ -48,11 +48,3 @@ require("lazy").setup {
    },
 }
 
-vim.api.nvim_create_autocmd("User", {
-   pattern = "LazyCheckPre",
-   callback = function() print "Fired Check Pre" end,
-})
-vim.api.nvim_create_autocmd("User", {
-   pattern = "LazyReload",
-   callback = function() print "Fired Reload" end,
-})

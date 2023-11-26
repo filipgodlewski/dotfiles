@@ -26,7 +26,11 @@ cd ~/dotfiles
 make -s install  # `-s` will suppress all commands from being echoed
 ```
 
-Finally, **restart terminal**.
+Then, finally:
+
+```bash
+fast-theme XDG:catppuccin-macchiato
+```
 
 ### Uninstall
 
@@ -49,12 +53,9 @@ Updates:
 - brew (bundle + other)
 - npm (global)
 - [pipx](https://github.com/pypa/pipx)
-- [nvim](https://github.com/neovim/neovim) (
-  [lazy.nvim](https://github.com/folke/lazy.nvim),
-  [mason](https://github.com/williamboman/mason.nvim),
-  [null-ls](https://github.com/jose-elias-alvarez/null-ls.nvim))
-- [hosts](https://github.com/StevenBlack/hosts) (custom files)
+- [nvim](https://github.com/neovim/neovim)
 - nvim venv
+- [hosts](https://github.com/StevenBlack/hosts) (custom files)
 - [antidote](https://github.com/mattmc3/antidote) (zsh)
 
 ## License

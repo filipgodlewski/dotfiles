@@ -61,7 +61,7 @@ unpip:
 	$(HOMEBREW_PREFIX)/pipx uninstall-all
 
 settings:
-	$(HOMEBREW_PREFIX)/zsh .excluded/.macos
+	/bin/zsh .excluded/.macos
 
 misc:
 	$(HOMEBREW_PREFIX)/bat cache --build

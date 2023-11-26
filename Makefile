@@ -8,7 +8,6 @@ BASE_BREW = $(HOME)/dotfiles/.excluded/base
 BASE_CASKS = $(HOME)/dotfiles/.excluded/base_casks
 BASE_MAS = $(HOME)/dotfiles/.excluded/base_mas
 NVIM_VENV = $(XDG_DATA_HOME)/nvim/venv
-KITTY_ICON = https://github.com/DinkDonk/kitty-icon/raw/main/kitty-dark.icns
 
 .PHONY: stow brew npm
 
@@ -29,7 +28,6 @@ brew:
 	-export HOMEBREW_CASK_OPTS="--no-quarantine"; cat $(BASE_BREW) | xargs $(HOMEBREW_PREFIX)/brew install
 	-export HOMEBREW_CASK_OPTS="--no-quarantine"; cat $(BASE_CASKS) | xargs $(HOMEBREW_PREFIX)/brew install --cask
 	cat $(BASE_MAS) | grep -o '^[0-9]*' | xargs $(HOMEBREW_PREFIX)/mas install
-	curl $(KITTY_ICON) > /Applications/kitty.app/Contents/Resources/kitty.icns
 
 unbrew:
 	# mas does not uninstall, so this step has to be done manually.

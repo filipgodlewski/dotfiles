@@ -64,4 +64,15 @@ M.setup_neotest_mappings = {
    w = { function() require("neotest").watch.toggle() end, "Toggle watcher" },
 }
 
+M.get_loaded_lazy_plugins = function()
+   return vim.tbl_flatten(vim.tbl_map(function(v)
+      if v._.loaded then return v.name end
+   end, require("lazy").plugins()))
+end
+
+M.did_load_lazy_plugin = function(name)
+   local loaded_plugins = M.get_loaded_lazy_plugins()
+   return vim.tbl_contains(loaded_plugins, name)
+end
+
 return M

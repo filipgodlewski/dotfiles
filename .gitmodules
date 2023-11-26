@@ -1,0 +1,6 @@
+[submodule "nvim/.config/nvim/lua/private"]
+	path = nvim/.config/nvim/lua/private
+	url = git@github.com:filipgodlewski/project-configs.git
+[submodule ".excluded/path_helper"]
+	path = .excluded/path_helper
+	url = https://github.com/yb66/path_helper.git

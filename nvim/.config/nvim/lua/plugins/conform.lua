@@ -1,5 +1,7 @@
 return {
    "stevearc/conform.nvim",
+   event = { "BufWritePre" },
+   cmd = { "ConformInfo" },
    ft = {
       "c",
       "go",
@@ -12,33 +14,27 @@ return {
       "yaml",
    },
    opts = {
+
       formatters_by_ft = {
          c = { "clang_format" },
          go = { "gofumpt", "goimports_reviser" },
          json = { "fixjson" },
          lua = { "stylua" },
          markdown = { "markdownlint" },
-         python = { "auto_optional", "black", "ruff_fix" },
+         python = { "black", "ruff_fix" },
          rust = { "rustfmt" },
          toml = { "taplo" },
          yaml = { "yamlfix" },
       },
-      format_on_save = {
-         lsp_fallback = true,
-         async = false,
-         timeout_ms = 1000,
-      },
+
+      format_on_save = { timeout_ms = 100, lsp_fallback = true },
+
       formatters = {
-         auto_optional = {
-            command = "auto-optional",
-            args = { "$FILENAME" },
-            stdin = false,
-         },
+
          rustfmt = {
             args = function()
                local Path = require "plenary.path"
                local cargo_toml = Path:new(vim.fn.getcwd() .. "/Cargo.toml")
-
                local edition = "--edition=2021"
                if cargo_toml:exists() and cargo_toml:is_file() then
                   for _, line in ipairs(cargo_toml:readlines()) do

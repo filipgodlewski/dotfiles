@@ -5,11 +5,16 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("plugins", {
+require("lazy").setup {
    defaults = { lazy = true },
+   spec = {
+      { import = "plugins" },
+      { import = "private" },
+   },
+   dev = { path = "~/projects" },
    install = { colorscheme = { "catppuccin-macchiato" } },
    checker = { enabled = true, notify = false },
-   change_detection = { notify = false },
+   change_detection = { notify = true },
    rtp = {
       disabled_plugins = {
          "2html_plugin",
@@ -41,4 +46,13 @@ require("lazy").setup("plugins", {
          "ftplugin",
       },
    },
+}
+
+vim.api.nvim_create_autocmd("User", {
+   pattern = "LazyCheckPre",
+   callback = function() print "Fired Check Pre" end,
+})
+vim.api.nvim_create_autocmd("User", {
+   pattern = "LazyReload",
+   callback = function() print "Fired Reload" end,
 })

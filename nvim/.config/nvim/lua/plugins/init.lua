@@ -4,6 +4,19 @@ local nox = { "n", "o", "x" }
 return {
    -- SECTION A: EXPERIENCE IMPROVEMENT
 
+   --[[ {
+      "filipgodlewski/konfig.nvim",
+      dev = true,
+      opts = {
+         configs = {
+            repo = true,
+         },
+         log = {
+            debug = true,
+         },
+      },
+   }, ]]
+
    -- Close buffers without destroying the layout
    { "kazhala/close-buffers.nvim", opts = { preserve_window_layout = { "this" } } },
 
@@ -22,6 +35,7 @@ return {
       },
    },
 
+   -- Just automatically put bracket pairs
    {
       "windwp/nvim-autopairs",
       event = "InsertEnter",
@@ -31,9 +45,31 @@ return {
       end,
    },
 
+   -- Task runner
    {
       "stevearc/overseer.nvim",
       config = true,
+   },
+
+   -- Edit files within directories like buffers
+   {
+      "stevearc/oil.nvim",
+      dependencies = { "nvim-tree/nvim-web-devicons" },
+      opts = {
+         columns = { "icon", "permissions" },
+         delete_to_trash = true,
+         skip_confirm_for_simple_edits = true,
+         keymaps = {
+            ["<C-s>"] = false,
+            ["<C-h>"] = false,
+            ["<C-v>"] = "actions.select_vsplit",
+            ["<C-x>"] = "actions.select_split",
+         },
+      },
+      cmd = { "Oil" },
+      keys = {
+         { "-", "<CMD>Oil<CR>", desc = "Edit directory (Oil)" },
+      },
    },
 
    -- SECTION B: REFACTORING & CODE ANALYSIS
@@ -58,7 +94,7 @@ return {
 
    {
       "junegunn/vim-easy-align",
-      cmd = {"EasyAlign"},
+      cmd = { "EasyAlign" },
       ft = "markdown",
    },
 
@@ -110,16 +146,5 @@ return {
             },
          }
       end,
-   },
-
-   {
-      "NeogitOrg/neogit",
-      dependencies = {
-         "nvim-lua/plenary.nvim",
-         "nvim-telescope/telescope.nvim",
-         "sindrets/diffview.nvim",
-      },
-      config = true,
-      cmd = { "Neogit" },
    },
 }

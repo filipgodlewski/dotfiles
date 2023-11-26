@@ -2,23 +2,6 @@
 
 autoload -Uz compinit; compinit
 
-
-setopt ALWAYS_TO_END
-setopt AUTO_CD
-setopt AUTO_PUSHD
-setopt AUTO_REMOVE_SLASH
-setopt COMPLETE_IN_WORD
-setopt EXTENDED_GLOB
-setopt FLOW_CONTROL
-setopt INTERACTIVE_COMMENTS
-setopt MENU_COMPLETE
-setopt NO_CASE_GLOB
-setopt PATH_DIRS
-setopt PROMPT_SUBST
-setopt PUSHDMINUS
-setopt PUSHD_IGNORE_DUPS
-setopt PUSHD_SILENT
-
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path "$XDG_CACHE_HOME/.zcompcache"
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'

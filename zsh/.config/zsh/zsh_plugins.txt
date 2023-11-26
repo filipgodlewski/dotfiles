@@ -1,4 +1,3 @@
-bigH/git-fuzzy path:bin kind:path
 jeffreytse/zsh-vi-mode
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-completions

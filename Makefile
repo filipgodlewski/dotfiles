@@ -6,7 +6,11 @@ export PATH := $(HOMEBREW_PREFIX):$(HOME)/.local/bin:$(PATH)
 
 ZSH = $(HOMEBREW_PREFIX)/zsh
 BREWFILE = $(HOME)/dotfiles/brew/.Brewfile
+BASE_BREW = $(HOME)/dotfiles/.excluded/base
+BASE_CASKS = $(HOME)/dotfiles/.excluded/base_casks
+BASE_MAS = $(HOME)/dotfiles/.excluded/base_mas
 NVIM_VENV = $(XDG_DATA_HOME)/nvim/venv
+KITTY_ICON = https://github.com/DinkDonk/kitty-icon/raw/main/kitty-dark.icns
 
 .PHONY: stow brew
 
@@ -15,17 +19,18 @@ install: $(OS)
 uninstall: un$(OS)
 
 ## MacOS specific
-macos: base brew npm stow pip settings
-unmacos: unnpm unpip unstow unbrew
+macos: base brew npm stow pip settings misc finish
+unmacos: unnpm unpip unstow unbrew finish
 
 base:
 	echo 'export ZDOTDIR="$$HOME"/.config/zsh' | sudo tee /etc/zshenv
 
 brew:
 	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	# The following will fail on mas, mas does not sign in by itself
-	-export HOMEBREW_CASK_OPTS="--no-quarantine"; brew bundle --file=$(BREWFILE)
-	cat $(BREWFILE) | grep -E '^mas' | grep -o -E '\d+$$' | xargs mas install
+	-export HOMEBREW_CASK_OPTS="--no-quarantine"; cat $(BASE_BREW) | xargs brew install
+	-export HOMEBREW_CASK_OPTS="--no-quarantine"; cat $(BASE_CASKS) | xargs brew --cask install
+	cat $(BASE_MAS) | xargs mas install
+	curl $(KITTY_ICON) > /Applications/kitty.app/Contents/Resources/kitty.icns
 
 unbrew:
 	# mas does not uninstall, so this step has to be done manually.
@@ -58,3 +63,10 @@ unpip:
 
 settings:
 	zsh .excluded/.macos
+
+misc:
+	fast-theme XDG:catppuccin-macchiato
+	bat cache --build
+
+finish:
+	sudo kilall Finder

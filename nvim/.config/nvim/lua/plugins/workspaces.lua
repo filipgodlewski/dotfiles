@@ -1,3 +1,4 @@
+local helpers = require "user.helpers"
 local function is_suppressed(path)
    local suppressed_dirs = {
       "/",
@@ -11,13 +12,6 @@ local function is_suppressed(path)
    return false
 end
 
-local did_load_lazy_plugin = function(name)
-   local loaded_plugins = vim.tbl_flatten(vim.tbl_map(function(v)
-      if v._.loaded then return v.name end
-   end, require("lazy").plugins()))
-   return vim.tbl_contains(loaded_plugins, name)
-end
-
 local kill_lsp = function()
    local active_clients = vim.lsp.get_active_clients()
    if active_clients then
@@ -28,9 +22,9 @@ local kill_lsp = function()
 end
 
 local function clean_workspace_up()
-   if did_load_lazy_plugin "neotest" then require("neotest").summary.close() end
-   if did_load_lazy_plugin "trouble.nvim" then require("trouble").close() end
-   if did_load_lazy_plugin "nvim-dap" then require("dap").terminate() end
+   if helpers.did_load_lazy_plugin "neotest" then require("neotest").summary.close() end
+   if helpers.did_load_lazy_plugin "trouble.nvim" then require("trouble").close() end
+   if helpers.did_load_lazy_plugin "nvim-dap" then require("dap").terminate() end
    local buf = require "close_buffers"
    buf.delete { type = "nameless", force = true }
    buf.delete { type = "hidden", force = true }
@@ -107,6 +101,9 @@ return {
             mru_sort = false,
             hooks = {
                open_pre = function(_, path)
+                  --[[ local err = require("konfig").reload { will_open = path }
+                  if err then return false end ]]
+
                   clean_workspace_up()
                   if not is_suppressed(path) then require("sessions").save(nil, { silent = true }) end
                   vim.cmd "bd%"

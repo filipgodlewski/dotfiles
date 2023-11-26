@@ -28,7 +28,7 @@ brew:
 	-$(HOMEBREW_PREFIX)/brew tap homebrew/cask-fonts
 	-export HOMEBREW_CASK_OPTS="--no-quarantine"; cat $(BASE_BREW) | xargs $(HOMEBREW_PREFIX)/brew install
 	-export HOMEBREW_CASK_OPTS="--no-quarantine"; cat $(BASE_CASKS) | xargs $(HOMEBREW_PREFIX)/brew install --cask
-	cat $(BASE_MAS) | xargs $(HOMEBREW_PREFIX)/mas install
+	cat $(BASE_MAS) | grep -o '^[0-9]*' | xargs $(HOMEBREW_PREFIX)/mas install
 	curl $(KITTY_ICON) > /Applications/kitty.app/Contents/Resources/kitty.icns
 
 unbrew:

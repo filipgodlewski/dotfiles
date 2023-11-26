@@ -68,6 +68,6 @@ cleanup:
 	rm -rf $(HOME)/.config $(HOME)/.local $(HOME)/.npm
 
 finish:
-	sudo killall Finder
+	sudo killall Finder Dock
 	rm -rf $(HOME)/.viminfo $(HOME)/.zsh_history $(HOME)/.zsh_sessions
 	-killall Terminal

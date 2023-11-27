@@ -1,0 +1,36 @@
+#! /usr/bin/env zsh
+
+set -e
+TYPE=$(\
+  gum choose \
+    "feat      # new feature" \
+    "fix       # bug fix" \
+    "refactor  # neutral change" \
+    "test      # add/fix tests" \
+    "docs      # documentation only" \
+    "style     # formatting" \
+    "chore     # no src, nor test related" \
+    "perf      # improves performance" \
+    "build     # build system or external deps" \
+    "ci        # ci configs or scripts" \
+    "revert    # previous commit" \
+    | grep -o '^\w*'
+)
+
+SCOPE=$(gum input --placeholder "scope")
+
+# Since the scope is optional, wrap it in parentheses if it has a value.
+test -n "$SCOPE" && SCOPE="($SCOPE)"
+
+if $(gum confirm "Is it a breaking change?"); then
+  EXCLAMATION="!"
+else
+  EXCLAMATION=""
+fi
+
+# Pre-populate the input with the type(scope): so that the user may change it
+SUMMARY=$(gum input --value "$TYPE$SCOPE$EXCLAMATION: " --header "Summary of this change" --char-limit=100)
+
+gum confirm "Commit changes?" && git commit -m "$SUMMARY" || echo "Typed message:\n$SUMMARY"
+
+# vim:ft=zsh

@@ -1,6 +1,5 @@
 [alias]
-  a = add
-  aa = add --all
+  # a
   ap = add --patch
   # au
 
@@ -107,6 +106,6 @@
   # post-init
   # publish
   # root
-  send = !git pull --prune --all && git add --update && git cz && git push
+  send = !git pull --prune --all && git add --update . && git commit && git push
 
 # vim:ft=gitconfig

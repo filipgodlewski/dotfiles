@@ -63,7 +63,7 @@ export CARGO_HOME="$XDG_CONFIG_HOME/rust/cargo"
 export RUSTUP_HOME="$XDG_CONFIG_HOME/rust/rustup"
 
 # go
-export GOPATH="$XDG_DATA_HOME/go"
+export GOPATH="$HOME/dev/go"
 mkdir -p $GOPATH/{bin,src,pkg}
 
 # 1password

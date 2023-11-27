@@ -63,13 +63,11 @@ defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int
 
 # Restart automatically on power loss
 sudo pmset -a autorestart 1
-
-# Sleep the display after 15 minutes
-sudo pmset -a displaysleep 15
+sudo pmset -a lowpowermode 0
+sudo pmset -a displaysleep 30
 
 # Display screenshot thumbnail
 defaults write com.apple.screencapture "show-thumbnail" -bool "false"
-
 
 # Screen
 # Require password immediately after sleep or screen saver begins
@@ -165,9 +163,10 @@ defaults write com.apple.finder DesktopViewSettings -dict-add \
 defaults write com.apple.dock "orientation" -string "left"
 
 # Set the icon size of Dock items to 40-70 pixels, magnify on hover
+defaults write com.apple.dock autohide -int 1
 defaults write com.apple.dock tilesize -int 40
-defaults write com.apple.dock largesize -int 70
-defaults write com.apple.dock magnification -bool true
+defaults write com.apple.dock largesize -int 80
+defaults write com.apple.dock magnification -int 1
 
 # Change minimize/maximize window effect
 defaults write com.apple.dock mineffect -string "scale"
@@ -330,5 +329,6 @@ defaults write com.apple.TextInputMenu visible -int 1
 defaults write com.apple.WindowManager HasDisplayedShowDesktopEducation -int 1
 
 killall Finder
+killall Dock
 
 echo "Done. Note that some of these changes require a logout/restart to take effect."

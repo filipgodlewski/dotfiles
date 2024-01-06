@@ -1,3 +1,0 @@
-[submodule "nvim/.config/nvim/lua/private"]
-	path = nvim/.config/nvim/lua/private
-	url = git@github.com:filipgodlewski/project-configs.git

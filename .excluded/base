@@ -15,5 +15,6 @@ pipx
 ripgrep
 starship
 stow
+virtualenv
 vivid
 zoxide

@@ -5,52 +5,40 @@ $directory\
 $git_branch\
 $git_commit\
 $git_state\
-$git_status\
-$line_break\
 $python\
+$line_break\
 $character\
 """
 
 palette = "catppuccin_macchiato"
-continuation_prompt = "[󰇘](rosewater) "
+continuation_prompt = "[_](rosewater) "
 
 [directory]
 style = "bold lavender"
 read_only_style = "bold yellow"
 fish_style_pwd_dir_length = 1
-read_only = " RO"
+read_only = " [RO]"
 
 [character]
-success_symbol = "[](green)"
-error_symbol = "[](red)"
+success_symbol = "[\\$](bold green)"
+error_symbol = "[x](bold red)"
+vimcmd_symbol = "[<](yellow)"
 
 [git_branch]
-format = '[( $branch)]($style) '
-style = "bold pink"
+format = '[($branch )]($style)'
+style = "bold surface2"
 
 [git_commit]
 style = "rosewater"
-only_detached = false
-
-[git_status]
-format = "[$conflicted](red)[$untracked](bright-teal)[$modified](yellow)[$staged](green)[$renamed](lavender)[$deleted](maroon)[($ahead_behind)](flamingo)[($stashed)](mantle) "
-
-conflicted = " "
-ahead = "⇡ "
-behind = "⇣ "
-diverged = "⇕ "
-untracked = "󰜛 "
-stashed = "≡ "
-modified = "󰜝 "
-staged = "󰜙 "
-renamed = " "
-deleted = " "
+only_detached = true
 
 [git_state]
-style = "bold mantle"
+format = '[>> $state( \($progress_current/$progress_total\)) <<]($style) '
+style = "bold peach"
+cherry_pick = 'PICKING'
 
 [python]
-format = '[(\(󰌠 $virtualenv\))]($style) '
+format = '[(\[$virtualenv\])]($style) '
 style = "bold blue"
 
 [palettes.catppuccin_macchiato]

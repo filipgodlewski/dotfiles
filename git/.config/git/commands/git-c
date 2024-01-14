@@ -1,8 +1,6 @@
-#! /usr/bin/env zsh
+#! /usr/bin/env fish
 
-set -e
-TYPE=$(\
-  gum choose \
+set -l choices \
     "feat      # new feature" \
     "fix       # bug fix" \
     "refactor  # neutral change" \
@@ -13,24 +11,23 @@ TYPE=$(\
     "perf      # improves performance" \
     "build     # build system or external deps" \
     "ci        # ci configs or scripts" \
-    "revert    # previous commit" \
-    | grep -o '^\w*'
-)
+    "revert    # previous commit"
+set -l choice (gum choose $choices)
 
-SCOPE=$(gum input --placeholder "scope")
+if test -z $choice
+    echo "Nothing selected"
+    return 130
+end
+set -l msg (echo $choice | string match --regex '^\w*')
 
-# Since the scope is optional, wrap it in parentheses if it has a value.
-test -n "$SCOPE" && SCOPE="($SCOPE)"
+set -l scope (gum input --placeholder "scope for `$msg`?")
+if test -n $scope
+    set msg "$msg($scope)"
+end
 
-if $(gum confirm "Is it a breaking change?"); then
-  EXCLAMATION="!"
-else
-  EXCLAMATION=""
-fi
+test (gum confirm "Is `$msg` a breaking change?")
+and set msg "$msg!"
 
-# Pre-populate the input with the type(scope): so that the user may change it
-SUMMARY=$(gum input --value "$TYPE$SCOPE$EXCLAMATION: " --header "Summary of this change" --char-limit=100)
+set -l summary (gum input --value "$msg: " --header "Summary of this change" --char-limit=100)
 
-gum confirm "Commit changes?" && git commit -m "$SUMMARY" || echo "Typed message:\n$SUMMARY"
-
-# vim:ft=zsh
+gum confirm "Commit changes?" && git commit -m "$summary" || echo "Typed message:\n$summary"

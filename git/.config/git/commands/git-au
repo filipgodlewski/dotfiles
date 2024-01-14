@@ -1,4 +1,0 @@
-root=$(git rev-parse --show-toplevel)
-git add -u ${root}
-
-# vim:ft=zsh

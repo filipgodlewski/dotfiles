@@ -1,4 +1,0 @@
-name=$(git branch --show-current)
-git push --set-upstream origin ${name}
-
-# vim:ft=zsh

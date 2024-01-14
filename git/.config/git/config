@@ -5,8 +5,6 @@
 [init]
   templatedir = ~/.config/git/template
   defaultBranch = main
-[include]
-  path = ~/.config/git/aliases
 [push]
   autoSetupRemote = true
 [pull]
@@ -21,3 +19,8 @@
   program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 [commit]
   gpgsign = true
+[alias]
+  applyignore = !git ls-files -ci --exclude-standard -z | xargs -0 git rm --cached
+  def = !basename `git symbolic-ref refs/remotes/origin/HEAD`
+  gone = !git config init.defaultBranch && git remote prune origin && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -r git branch -D
+  optimise = gc --prune=now --aggressive

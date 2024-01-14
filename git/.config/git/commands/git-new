@@ -1,8 +1,0 @@
-set -e
-
-gh auth status
-gh repo create
-cd "$(command ls -dt */ | head -n1)"
-git post-init
-
-# vim:ft=zsh

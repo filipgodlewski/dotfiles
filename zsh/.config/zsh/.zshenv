@@ -7,9 +7,9 @@ export XDG_RUNTIME_DIR
 
 # homebrew
 if [[ "$(uname -m)" == "arm64" ]]; then
-  export HOMEBREW_PREFIX="/opt/homebrew"
+    export HOMEBREW_PREFIX="/opt/homebrew"
 else
-  export HOMEBREW_PREFIX="/usr/local"
+    export HOMEBREW_PREFIX="/usr/local"
 fi
 export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
 export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX"
@@ -24,6 +24,7 @@ export HOMEBREW_BUNDLE_FILE="$HOME/.Brewfile"
 export HISTFILE="$XDG_STATE_HOME/zsh/history"
 export ZPLUGINSDIR="$XDG_DATA_HOME/zsh/plugins"
 export EDITOR=nvim
+export MANPAGER="nvim +Man!"
 export LC_ALL=en_US.UTF-8
 export WORDCHARS=${WORDCHARS/\/}
 export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
@@ -52,11 +53,8 @@ export NPM_CONFIG_TMP="$XDG_RUNTIME_DIR/npm"
 
 # rip
 if [[ "$(uname -s)" == "Darwin" ]]; then
-  export GRAVEYARD="$HOME/.Trash"
+    export GRAVEYARD="$HOME/.Trash"
 fi
-
-# python
-export PYFLYBY_PATH="$XDG_CONFIG_HOME/pyflyby:/etc/pyflyby:$HOME/.pyflyby:.../.pyflyby"
 
 # rust
 export CARGO_HOME="$XDG_CONFIG_HOME/rust/cargo"
@@ -72,8 +70,8 @@ op_plugins="$XDG_CONFIG_HOME/op/plugins.sh"
 
 # fzf
 function _fzf_zvm_init() {
-  [[ $- == *i* ]] && source "$HOMEBREW_PREFIX/opt/fzf/shell/completion.zsh" 2> /dev/null
-  source "$HOMEBREW_PREFIX/opt/fzf/shell/key-bindings.zsh"
+    [[ $- == *i* ]] && source "$HOMEBREW_PREFIX/opt/fzf/shell/completion.zsh" 2> /dev/null
+    source "$HOMEBREW_PREFIX/opt/fzf/shell/key-bindings.zsh"
 }
 zvm_after_init_commands+=(_fzf_zvm_init)
 

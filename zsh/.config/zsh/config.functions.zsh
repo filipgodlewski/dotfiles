@@ -1,69 +1,88 @@
 #!/usr/bin/env zsh
 
+export _SYS_UPDATE_OPTIONS=("hosts" "brew" "npm" "pipx" "zsh")
+
+function strong() {
+    gum style --foreground $1 --italic --bold $2
+}
+
+function err() {
+    gum log -l error "Failed to $1."
+}
+
 function update() {
-  if (( $SHLVL != 1 )); then
-    echo "💔 First close nvim"
-    return 1
-  fi
+    function updating() {
+        local name=$1; shift;
+        gum spin --title "Updating $(strong $YELLOW $name)..." --timeout 5m -- $@
+    }
 
-  [[ -d $XDG_CACHE_HOME/local_update ]] || mkdir -p $XDG_CACHE_HOME/local_update
-  local log_file=$XDG_CACHE_HOME/local_update/update_$(date +"%Y-%m-%d_%T").log
+    (( $# )) || {gum log -l error "Required exactly 1 positional argument."; return}
+    (( $_SYS_UPDATE_OPTIONS[(Ie)$1] )) || {gum log -l error "Wrong value. Possible values: $(strong $GREEN ${(f)_SYS_UPDATE_OPTIONS})"; return}
 
-  touch $log_file
+    case "$1" in
+        neovim)
+            updating "lazy" nvim --headless -c "Lazy! sync" -c "qa"
+            updating "mason" nvim --headless -c "autocmd User MasonToolsUpdateCompleted quitall" -c "MasonToolsUpdate"
+            updating "treesitter" nvim --headless -c "TSUpdateSync" -c "q"
+            ;;
+        brew)
+            updating $1 brew update
+            updating "brew apps" brew upgrade
+            ;;
+        pipx)
+            updating $1 pipx upgrade-all
+            if (( $? )); then
+                err "upgrade pipx. Attempting to reinstall all"
+                updating $1 pipx reinstall-all
+            fi
+            ;;
+        npm)
+            updating $1 npm update --global
+            gum spin --title "Cleaning up $(strong $YELLOW npm)..." -- npm cache clean --force
+            ;;
+        zsh)
+            updating $1 zsh $XDG_DATA_HOME/antidote/functions/antidote-update
+            ;;
+        hosts)
+            local hosts_url="https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts"
+            updating $1 sudo curl $hosts_url -o /etc/hosts
+            local line
+            for line in $(<$ZDOTDIR/whitelist_pages); do
+                updating "$1 whitelist: '$line'" sudo sed -i -e "/ $line/d" /etc/hosts
+            done
+            ;;
+    esac
+}
 
-  local function log_info() {
-    echo "$1"
-    echo "\n\n$1" >> $log_file
-  }
+function u() {
+    local choices=($(gum filter --no-limit all ${(@)_SYS_UPDATE_OPTIONS}))
+    if [[ $(grep "all" <<< $choices) ]]; then
+        choices=($_SYS_UPDATE_OPTIONS)
+    fi
 
-  local function log_find() {
-    local LAST_SIG=$?
-    echo
-    echo "View the log file using:"
-    echo "$EDITOR $log_file"
-    return $?
-  }
+    local omit_hosts
+    if (( ${choices[(Ie)hosts]} )); then
+        gum log -l info "$(strong $CYAN hosts) on the update list, it is required to unlock sudo."
+        local s=$(strong $RED sudo)
+        sudo true 2> /dev/null
+        if (( $? )); then
+            err "access $s"
+            gum format -t emoji ":watermelon: hosts can't be updated."
+            omit_hosts=true
+        else
+            gum format -t emoji -- ":strawberry: $s accessed."
+        fi
+    fi
 
-  local function abort() {
-    echo "\nAborted." | tee -a $log_file
-    log_find
-  }
-
-  trap "abort; return 1" INT
-
-  log_info "🔥 Upgrade hosts"
-  local hosts_url="https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts"
-  ssudo -S curl $hosts_url -o /etc/hosts &>> $log_file
-
-  local line
-  for line in $(<$ZDOTDIR/whitelist_pages); do
-    sudo nvim --clean --headless +"g/ $line$/d" +"wq" /etc/hosts &>> $log_file
-  done
-
-  log_info "🔥 Upgrade brew packages"
-  brew update &>> $log_file
-  brew bundle --file=~/.Brewfile &>> $log_file
-  brew upgrade &>> $log_file
-
-  log_info "🔥 Upgrade npm packages"
-  npm update --global &>> $log_file
-  npm cache clean --force &>> $log_file
-
-  log_info "🔥 Upgrade pipx packages"
-  pipx upgrade-all &>> $log_file
-  [[ $? == 0 ]] || pipx reinstall-all &>> $log_file
-
-  log_info "🔥 Upgrade nvim"
-  nvim --headless -c "Lazy! sync" -c "qa" &>> $log_file
-  nvim --headless -c "autocmd User MasonToolsUpdateCompleted quitall" -c "MasonToolsUpdate" &>> $log_file
-  nvim --headless -c "TSUpdateSync" -c "q" &>> $log_file
-
-  log_info "🔥 Upgrade nvim venv"
-  local py=$XDG_DATA_HOME/venvs/nvim/bin/python
-  $py -m pip list --format freeze --no-index | sed 's/==.*//' | xargs -n1 $py -m pip install --upgrade &>> $log_file
-
-  log_info "🔥 Upgrade zsh packages"
-  antidote update &>> $log_file
-
-  log_find
+    local choice
+    for choice in ${(@)choices}; do
+        [[ $omit_hosts == true ]] && continue
+        update $choice
+        if (( $? )); then
+            err "update $choice"
+        else
+            gum format -t emoji -- ":banana: Successfully updated $(strong $GREEN $choice)"
+        fi
+    done
+    gum format -t emoji -- ":hot_pepper: Ready for $(strong $RED 'ACTION! ')"
 }

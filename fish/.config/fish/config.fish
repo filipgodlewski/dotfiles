@@ -6,17 +6,14 @@ end
 
 # fish settings
 fish_config theme choose "Catppuccin Macchiato"
+fish_vi_key_bindings
+set fish_cursor_default block blink
+set fish_cursor_insert line blink
 set -U fish_greeting
 set -U hydro_fetch true
 set -U hydro_multiline true
 set -U hydro_color_pwd green
 set -U hydro_color_git magenta
-
-if status --is-interactive
-    fish_vi_key_bindings
-    set fish_cursor_default block blink
-    set fish_cursor_insert line blink
-end
 
 # globals
 set -gx XDG_CACHE_HOME "$HOME/.cache"
@@ -25,51 +22,73 @@ set -gx XDG_DATA_HOME "$HOME/.local/share"
 set -gx XDG_STATE_HOME "$HOME/.local/state"
 set -gx XDG_RUNTIME_DIR (test -w "/run/user/$UID"; and echo "/run/user/$UID"; or echo "/tmp")
 
-set -gx EDITOR nvim
-set -gx MANPAGER "nvim +Man!"
-set -gx PAGER nvim
 set -gx LESSHISTFILE -
 set -gx LANG "en_US.UTF-8"
 
-set -gx HOMEBREW_PREFIX (test (uname -m) = "arm64"; and echo "/opt/homebrew"; or echo "/usr/local")
-set -gx HOMEBREW_NO_ANALYTICS 1
-set -gx HOMEBREW_AUTOREMOVE 1
-set -gx HOMEBREW_CASK_OPTS --no-quarantine
-
-set -gx VIRTUAL_ENV_DISABLE_PROMPT true
-
-set -gx DOCKER_CONFIG "$XDG_CONFIG_HOME/docker"
-
-set -gx NPM_CONFIG_USERCONFIG "$XDG_CONFIG_HOME/npm/config"
-set -gx NPM_CONFIG_CACHE "$XDG_CACHE_HOME/npm"
-set -gx NPM_CONFIG_TMP "$XDG_RUNTIME_DIR/npm"
-
-set -gx CARGO_HOME "$XDG_CONFIG_HOME/rust/cargo"
-set -gx RUSTUP_HOME "$XDG_CONFIG_HOME/rust/rustup"
-
-set -gx GOPATH "$HOME/dev/go"
-mkdir -p $GOPATH/{bin,src,pkg}
-
-set -gx GRAVEYARD "$HOME/.Trash"
-
-# path
-fish_add_path $HOMEBREW_PREFIX/sbin
-fish_add_path $HOMEBREW_PREFIX/bin
-fish_add_path $HOMEBREW_PREFIX/opt/curl/bin
-fish_add_path $HOMEBREW_PREFIX/opt/fzf/bin
-fish_add_path $XDG_CONFIG_HOME/git/commands
-fish_add_path $HOME/.local/bin
-fish_add_path $CARGO_HOME/bin
-fish_add_path $GOPATH/bin
-
-# aliases
 alias md "mkdir -p"
-alias python3 python3.12
-alias python python3
 alias paths "echo $PATH | string split ':'"
-app_alias g git
+
+if type -sq brew
+    set -gx HOMEBREW_PREFIX (test (uname -m) = "arm64"; and echo "/opt/homebrew"; or echo "/usr/local")
+    set -gx HOMEBREW_NO_ANALYTICS 1
+    set -gx HOMEBREW_AUTOREMOVE 1
+    set -gx HOMEBREW_CASK_OPTS --no-quarantine
+    fish_add_path $HOMEBREW_PREFIX/sbin
+    fish_add_path $HOMEBREW_PREFIX/bin
+    fish_add_path $HOMEBREW_PREFIX/opt/curl/bin
+    fish_add_path $HOMEBREW_PREFIX/opt/fzf/bin
+end
+
+if type -sq git
+    fish_add_path $XDG_CONFIG_HOME/git/commands
+    alias g git
+end
+
 app_alias gg lazygit
-app_alias n nvim
+
+if type -sq docker
+    set -gx DOCKER_CONFIG "$XDG_CONFIG_HOME/docker"
+end
+
+if type -sq npm
+    set -gx NPM_CONFIG_USERCONFIG "$XDG_CONFIG_HOME/npm/config"
+    set -gx NPM_CONFIG_CACHE "$XDG_CACHE_HOME/npm"
+    set -gx NPM_CONFIG_TMP "$XDG_RUNTIME_DIR/npm"
+end
+
+if type -sq python3
+    alias python3 python3.12
+    alias python python3
+    set -gx VIRTUAL_ENV_DISABLE_PROMPT true
+end
+
+if type -sq nvim
+    set -gx EDITOR nvim
+    set -gx MANPAGER "nvim +Man!"
+    set -gx PAGER nvim
+    alias n nvim
+end
+
+if type -sq pipx
+    fish_add_path $HOME/.local/bin
+end
+
+if type -sq rustup
+    set -gx RUSTUP_HOME "$XDG_CONFIG_HOME/rust/rustup"
+    set -gx CARGO_HOME "$XDG_CONFIG_HOME/rust/cargo"
+    fish_add_path $CARGO_HOME/bin
+end
+
+if type -sq go
+    set -gx GOPATH "$HOME/dev/go"
+    mkdir -p $GOPATH/{bin,src,pkg}
+    fish_add_path $GOPATH/bin
+end
+
+if type -sq rip
+    alias rm rip
+    set -gx GRAVEYARD "$HOME/.Trash"
+end
 
 if type -sq op
     alias sudo "op read 'op://msmtazhnbxxwac3zvak3suuyxa/mini/password' | command sudo -S --prompt=''"

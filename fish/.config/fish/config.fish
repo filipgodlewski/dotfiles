@@ -39,22 +39,8 @@ if type -sq brew
     fish_add_path $HOMEBREW_PREFIX/opt/fzf/bin
 end
 
-if type -sq git
-    fish_add_path $XDG_CONFIG_HOME/git/commands
-    alias g git
-end
-
+app_alias g git
 app_alias gg lazygit
-
-if type -sq docker
-    set -gx DOCKER_CONFIG "$XDG_CONFIG_HOME/docker"
-end
-
-if type -sq npm
-    set -gx NPM_CONFIG_USERCONFIG "$XDG_CONFIG_HOME/npm/config"
-    set -gx NPM_CONFIG_CACHE "$XDG_CACHE_HOME/npm"
-    set -gx NPM_CONFIG_TMP "$XDG_RUNTIME_DIR/npm"
-end
 
 if type -sq python3
     alias python3 python3.12
@@ -67,16 +53,6 @@ if type -sq nvim
     set -gx MANPAGER "nvim +Man!"
     set -gx PAGER nvim
     alias n nvim
-end
-
-if type -sq pipx
-    fish_add_path $HOME/.local/bin
-end
-
-if type -sq rustup
-    set -gx RUSTUP_HOME "$XDG_CONFIG_HOME/rust/rustup"
-    set -gx CARGO_HOME "$XDG_CONFIG_HOME/rust/cargo"
-    fish_add_path $CARGO_HOME/bin
 end
 
 if type -sq go

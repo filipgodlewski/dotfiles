@@ -1,25 +1,20 @@
+local lazyvim = require("lazyvim.util")
+
+---@module 'lazy'
 ---@type LazySpec
 return {
-
   { "nvim-neotest/neotest-plenary" },
 
   {
     "nvim-neotest/neotest",
     optional = true,
-    ---@type neotest.Config
-    opts = {
-      adapters = {
-        ["neotest-plenary"] = {},
-      },
-    },
+    opts = { adapters = { "neotest-plenary" } },
   },
 
   {
     "williamboman/mason.nvim",
     optional = true,
-    opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, { "selene" })
-    end,
+    opts = { ensure_installed = { "selene" } },
   },
 
   {
@@ -31,8 +26,21 @@ return {
       },
       linters = {
         selene = {
-          condition = function(ctx)
-            return vim.fs.find({ "selene.toml" }, { path = ctx.filename, upward = true })[1]
+          condition = function()
+            local root = lazyvim.root.get({ normalize = true })
+            if root ~= vim.uv.cwd() then
+              return false
+            end
+            return vim.fs.find({ "selene.toml" }, { path = root, upward = true })[1]
+          end,
+        },
+        luacheck = {
+          condition = function()
+            local root = lazyvim.root.get({ normalize = true })
+            if root ~= vim.uv.cwd() then
+              return false
+            end
+            return vim.fs.find({ ".luacheckrc" }, { path = root, upward = true })[1]
           end,
         },
       },

@@ -1,11 +1,10 @@
 antidote
-bat
-coreutils
 eza
+fd
+fish
 fzf
 gh
 git
-gnu-sed
 gum
 jq
 mas
@@ -13,8 +12,9 @@ neovim
 node
 pipx
 ripgrep
+rm-improved
+sd
 starship
 stow
 virtualenv
-vivid
 zoxide

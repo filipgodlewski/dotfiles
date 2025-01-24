@@ -27,7 +27,7 @@ return {
     optional = true,
     opts = {
       linters_by_ft = {
-        lua = { "selene" },
+        lua = { "selene", "luacheck" },
       },
       linters = {
         selene = {

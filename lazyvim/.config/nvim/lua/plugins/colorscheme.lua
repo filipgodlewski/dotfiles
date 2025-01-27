@@ -1,5 +1,5 @@
 ---@module 'lazy'
 ---@type LazySpec
 return {
-  { "LazyVim/LazyVim", opts = { colorscheme = "catppuccin" } },
+  { "LazyVim/LazyVim", opts = { colorscheme = "catppuccin-macchiato" } },
 }

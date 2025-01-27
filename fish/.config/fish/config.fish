@@ -43,8 +43,8 @@ app_alias g git
 app_alias gg lazygit
 
 if type -sq python3
-    alias python3 python3.12
     alias python python3
+    alias pip pip3
     set -gx VIRTUAL_ENV_DISABLE_PROMPT true
 end
 
@@ -72,13 +72,13 @@ end
 
 if type -sq eza
     alias ls "eza --git --icons --group-directories-first"
-    alias tree "ls --tree"
-    alias ll "ls -Fahl"
+    alias tree "ls --tree --level=1"
+    alias ll "ls -lah"
     alias lt "tree --level=2"
-    alias llt "tree --level=2 -Fahl"
+    alias llt "tree --level=2 -lah"
 end
-alias l1 "ls -1F"
-alias l "ls -Fl"
+alias l1 "ls -1"
+alias l "ls -l"
 
 if type -sq fzf
     set -l interface "--cycle --layout=reverse --keep-right"

@@ -39,20 +39,16 @@ if type -sq brew
     fish_add_path $HOMEBREW_PREFIX/opt/fzf/bin
 end
 
-app_alias g git
-app_alias gg lazygit
-
 if type -sq python3
     alias python python3
     alias pip pip3
-    set -gx VIRTUAL_ENV_DISABLE_PROMPT true
+    # set -gx VIRTUAL_ENV_DISABLE_PROMPT true
 end
 
 if type -sq nvim
     set -gx EDITOR nvim
     set -gx MANPAGER "nvim +Man!"
     set -gx PAGER nvim
-    alias n nvim
 end
 
 if type -sq go
@@ -72,13 +68,11 @@ end
 
 if type -sq eza
     alias ls "eza --git --icons --group-directories-first"
-    alias tree "ls --tree --level=1"
-    alias ll "ls -lah"
-    alias lt "tree --level=2"
-    alias llt "tree --level=2 -lah"
+    alias lt "ls --tree --level=1"
 end
 alias l1 "ls -1"
-alias l "ls -l"
+alias ll "ls -l"
+alias lh "ls -lah"
 
 if type -sq fzf
     set -l interface "--cycle --layout=reverse --keep-right"
@@ -100,19 +94,4 @@ if type -sq fzf
 
     set -gx FZF_DEFAULT_OPTS (echo -n $interface $layout (echo $display | string trim | string join -n " "))
     set -gx FZF_DEFAULT_COMMAND "rg --files --hidden --follow --glob '!.git'"
-end
-
-if type -sq zoxide
-    set -gx _ZO_DATA_DIR $XDG_DATA_HOME
-    set -gx _ZO_RESOLVE_SYMLINKS 1
-    if type -sq fzf
-        set -l search "--exact --no-sort"
-        set -l interface "--bind=ctrl-z:ignore,btab:up,tab:down"
-        set -l display "--tabstop=1"
-        set -l scripting "--exit-0 --select-1"
-        set -l preview "--preview='eza -1 --color always --icons always --all --group-directories-first --git-ignore {2..}'"
-        set -gx _ZO_FZF_OPTS (echo -n $FZF_DEFAULT_OPTS $search $interface $display $scripting $preview)
-    end
-    zoxide init --cmd j fish | source
-    alias s "ji && nvim"
 end

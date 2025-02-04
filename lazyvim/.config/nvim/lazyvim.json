@@ -17,6 +17,7 @@
     "lazyvim.plugins.extras.test.core",
     "lazyvim.plugins.extras.util.dot",
     "lazyvim.plugins.extras.util.mini-hipatterns",
+    "plugins.extras.lang.fish",
     "plugins.extras.lang.lua"
   ],
   "news": {

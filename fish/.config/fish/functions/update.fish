@@ -11,43 +11,38 @@ set HOSTS_FILE /etc/hosts
 set HOSTS_URL "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts"
 
 
-function not_implemented_yet -a emoji what
-    display_message warn "$emoji 🤫 $(as_bold $YELLOW $what) update not implemented yet..."
-end
-
-
-function as_bold -a fg text
+function _update_b_i_c -a fg text -d 'make text bold, italic, and coloured'
     gum style --foreground $fg --italic --bold $text
 end
 
 
-function display_message -a level msg
-    gum log -l $level $msg
+function _update_log -a level message -d 'log a message on a specific level'
+    gum log -l $level $message
 end
 
 
-function wait_until_command_finishes -a what
-    gum spin --title "Updating $(as_bold $YELLOW $what)..." --timeout 5m -- $argv[2..]
+function _update_sync_cmd -a what
+    gum spin --title "Updating $(_update_b_i_c $YELLOW $what)..." --timeout 5m -- $argv[2..]
 end
 
 
-function wait_until_subshell_finishes -a what
-    wait_until_command_finishes $what fish -c "$argv[2..]"
+function _update_sync_child_cmd -a what
+    _update_sync_cmd $what fish -c "$argv[2..]"
 end
 
 
-function display_status -a emoji what
+function _update_status -a emoji what
     if test $status != 0
-        display_message warn "$emoji 😵 $(as_bold $RED Failed) to update $(as_bold $RED $what)"
+        _update_log warn "$emoji 😵 $(_update_b_i_c $RED Failed) to update $(_update_b_i_c $RED $what)"
     else
-        display_message info "$emoji 🥳 $(as_bold $GREEN $what) updated successfully"
+        _update_log info "$emoji 🥳 $(_update_b_i_c $GREEN $what) updated successfully"
     end
 end
 
 
-function try_update_for_each -a elements emoji what
+function _update_run_for_each -a elements emoji what
     if not set -q elements[1]; or test -z "$elements"
-        display_message info "$emoji 😎 $(as_bold $WHITE $what) has nothing to update"
+        _update_log info "$emoji 😎 $(_update_b_i_c $WHITE $what) has nothing to update"
         return
     end
     set new_elements (echo $elements | string replace -r '[ \n]' ' ' | string split ' ')
@@ -63,130 +58,26 @@ function try_update_for_each -a elements emoji what
                 set cmd_args $cmd_args $arg
             end
         end
-        wait_until_command_finishes $element $cmd_args
-        display_status $emoji $element
+        _update_sync_cmd $element $cmd_args
+        _update_status $emoji $element
     end
 end
 
 
-function download_hosts
-    display_message warn "🏡 🥶 $(as_bold $YELLOW hosts) on the list, it is required to unlock $(as_bold $RED sudo)"
+function _update_hosts_download
+    _update_log warn "🏡 🥶 $(_update_b_i_c $YELLOW hosts) on the list, it is required to unlock $(_update_b_i_c $RED sudo)"
     if test -z "$(sudo echo true 2>/dev/null)"
-        display_message error "🏡 😵 $(as_bold $RED Failed) to access sudo -- $(as_bold $RED hosts) can't be written"
+        _update_log error "🏡 😵 $(_update_b_i_c $RED Failed) to access sudo -- $(_update_b_i_c $RED hosts) can't be written"
         return 126
     end
-    wait_until_command_finishes hosts sudo curl $HOSTS_URL -o $HOSTS_FILE
+    _update_sync_cmd hosts sudo curl $HOSTS_URL -o $HOSTS_FILE
     while read -la line
-        wait_until_command_finishes "hosts whitelist: '$line'" sudo nvim --clean --headless "+g/$line/d" +x $HOSTS_FILE
+        _update_sync_cmd "hosts whitelist: '$line'" sudo nvim --clean --headless "+g/$line/d" +x $HOSTS_FILE
     end <~/dotfiles/.excluded/whitelist_hosts
 end
 
 
-function update_hosts
-    set pattern '# Date: (\d{2} \w+ \d{4})'
-    if not test -e $HOSTS_FILE; or not test -s $HOSTS_FILE
-        download_hosts
-        if test $status != 0
-            display_message info "🏡 🥳 $(as_bold $GREEN hosts) downloaded successfully"
-        end
-        return
-    end
-
-    set local_file_date (head -n 6 $HOSTS_FILE | string match -rg $pattern; or echo "")
-    set remote_file_date (curl --silent $HOSTS_URL | head -n 6 | string match -rg $pattern; or echo "")
-    if string match -iq $remote_file_date $local_file_date
-        display_message info "🏡 😎 $(as_bold $WHITE hosts) has nothing to update"
-        return
-    end
-
-    download_hosts
-    display_status 🏡 hosts
-end
-
-
-function update_homebrew
-    wait_until_command_finishes brew brew update
-    try_update_for_each "$(brew outdated --quiet)" 🍺 brew brew upgrade %s
-end
-
-
-function update_fish
-    # TODO: check updates first
-    wait_until_subshell_finishes fish "fisher update"
-    display_status 🐠 fish
-end
-
-
-function update_lazyvim
-    # Quite a long pipe, but here's what happens:
-    # - Await until async action is finished
-    # - Delete colors
-    # - Match pkg names that have a git commit hash
-    # - Return only unique values
-    set outdated_apps (wait_until_command_finishes lazyvim nvim --headless "+Lazy! check" +qa \
-        | string collect \
-        | string replace -ra '\x1B\[[0-9;]*m' '' \
-        | string match -rag '\[(.+?)\]\s+log \| [0-9a-f]{7}' \
-        | sort -u)
-    try_update_for_each "$outdated_apps" 💤 lazyvim nvim --headless "+Lazy! update %s" +qa
-end
-
-
-function update_mason
-    set lua_cmd "lua \
-    for _, pkg in ipairs(require'mason-registry'.get_installed_packages()) do \
-      pkg:check_new_version(function(is_new) \
-        if is_new then vim.print(pkg.name) end \
-      end) \
-    end"
-    set mason_news_cmd "$(echo $lua_cmd | string replace -ra '\s+' ' ')"
-    set outdated_apps (wait_until_command_finishes mason nvim --headless "+$mason_news_cmd" +qa)
-    try_update_for_each "$outdated_apps" 🛠️ mason nvim --headless "+MasonUpdate %s" +qa
-
-end
-
-
-function update_treesitter
-    # TODO: check updates first
-    wait_until_command_finishes treesitter nvim --headless +TSUpdateSync +qa
-    display_status 🌳 treesitter
-end
-
-
-function update_nvim
-    update_lazyvim
-    update_mason
-    update_treesitter
-end
-
-
-function update_pipx
-    # TODO: Doesn't work currently
-    wait_until_command_finishes pipx pipx upgrade-all
-    if test $status != 0
-        display_message warn "Upgrade unsuccessful. Attempt to reinstall all"
-        wait_until_command_finishes pipx pipx reinstall-all
-    end
-end
-
-
-function update_npm
-    # TODO: Doesn't work currently
-    wait_until_command_finishes npm npm update --global
-    gum spin --title "Cleaning up $(as_bold $YELLOW npm)..." -- npm cache clean --force
-end
-
-
-function update_macos
-    # TODO: mas outdated
-    # TODO: mas upgrade <name>
-    # softwareupdate --list; parse
-    # softwareupdate --install <id> --stdinpass <1password>; ...?
-    # TODO: ask to restart afterwards if needed
-end
-
-
-function update -d "Update system apps"
+function update -d "Update all sorts of apps, their contents, and system"
     set opts hosts brew fish nvim pipx npm macos
     set choices (gum filter --no-limit all $opts)
 
@@ -197,21 +88,75 @@ function update -d "Update system apps"
     for choice in $choices
         switch $choice
             case hosts
-                update_hosts
+                set pattern '# Date: (\d{2} \w+ \d{4})'
+                if not test -e $HOSTS_FILE; or not test -s $HOSTS_FILE
+                    _update_hosts_download
+                    if test $status != 0
+                        _update_log info "🏡 🥳 $(_update_b_i_c $GREEN hosts) downloaded successfully"
+                    end
+                    return
+                end
+
+                set local_file_date (head -n 6 $HOSTS_FILE | string match -rg $pattern; or echo "")
+                set remote_file_date (curl --silent $HOSTS_URL | head -n 6 | string match -rg $pattern; or echo "")
+                if string match -iq $remote_file_date $local_file_date
+                    _update_log info "🏡 😎 $(_update_b_i_c $WHITE hosts) has nothing to update"
+                    return
+                end
+
+                _update_hosts_download
+                _update_status 🏡 hosts
             case brew
-                update_homebrew
+                _update_sync_cmd brew brew update
+                _update_run_for_each "$(brew outdated --quiet)" 🍺 brew brew upgrade %s
             case fish
-                update_fish
+                # TODO: check updates first
+                _update_sync_child_cmd fish "fisher update"
+                _update_status 🐠 fish
             case nvim
-                update_nvim
+                set outdated_apps (_update_sync_cmd lazyvim nvim --headless "+Lazy! check" +qa \
+                | string collect \
+                | string replace -ra '\x1B\[[0-9;]*m' '' \
+                | string match -rag '\[(.+?)\]\s+log \| [0-9a-f]{7}' \
+                | sort -u)
+                _update_run_for_each "$outdated_apps" 💤 lazyvim nvim --headless "+Lazy! update %s" +qa
+
+                set lua_cmd "lua \
+                for _, pkg in ipairs(require'mason-registry'.get_installed_packages()) do \
+                  pkg:check_new_version(function(is_new) \
+                    if is_new then vim.print(pkg.name) end \
+                  end) \
+                end"
+                set mason_news_cmd "$(echo $lua_cmd | string replace -ra '\s+' ' ')"
+                set outdated_apps (_update_sync_cmd mason nvim --headless "+$mason_news_cmd" +qa)
+                _update_run_for_each "$outdated_apps" 🛠️ mason nvim --headless "+MasonUpdate %s" +qa
+
+                # TODO: check updates first
+                _update_sync_cmd treesitter nvim --headless +TSUpdateSync +qa
+                _update_status 🌳 treesitter
             case pipx
-                not_implemented_yet 🐍 pipx
+                _update_log warn "🐍 🤫 $(_update_b_i_c $YELLOW pipx) update not implemented yet..."
+                continue
+                _update_sync_cmd pipx pipx upgrade-all
+                if test $status != 0
+                    _update_log warn "Upgrade unsuccessful. Attempt to reinstall all"
+                    _update_sync_cmd pipx pipx reinstall-all
+                end
             case npm
-                not_implemented_yet 👾 npm
+                _update_log warn "👾 🤫 $(_update_b_i_c $YELLOW npm) update not implemented yet..."
+                continue
+                _update_sync_cmd npm npm update --global
+                gum spin --title "Cleaning up $(_update_b_i_c $YELLOW npm)..." -- npm cache clean --force
             case macos
-                not_implemented_yet 💻 macos
+                _update_log warn "💻 🤫 $(_update_b_i_c $YELLOW macos) update not implemented yet..."
+                continue
+                # TODO: mas outdated
+                # TODO: mas upgrade <name>
+                # softwareupdate --list; parse
+                # softwareupdate --install <id> --stdinpass <1password>; ...?
+                # TODO: ask to restart afterwards if needed
             case '*'
-                display_message error "Can't update $choice. No instructions to follow."
+                _update_log error "Can't update $choice. No instructions to follow."
         end
     end
 end

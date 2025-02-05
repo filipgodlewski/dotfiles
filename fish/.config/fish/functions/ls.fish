@@ -1,4 +1,4 @@
-function ls --wraps=eza
+function ls --wraps=eza --description 'alias ls eza --git --icons --group-directories-first'
     if type -sq eza
         eza --git --icons --group-directories-first $argv
     else

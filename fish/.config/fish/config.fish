@@ -4,7 +4,8 @@ if not status is-interactive
     exit
 end
 
-# fish settings
+# FISH SETTINGS
+
 fish_config theme choose "Catppuccin Macchiato"
 fish_vi_key_bindings
 set fish_cursor_default block blink
@@ -15,7 +16,8 @@ set -gx hydro_multiline true
 set -gx hydro_color_pwd green
 set -gx hydro_color_git magenta
 
-# globals
+# GLOBALS
+
 set -gx XDG_CACHE_HOME "$HOME/.cache"
 set -gx XDG_CONFIG_HOME "$HOME/.config"
 set -gx XDG_DATA_HOME "$HOME/.local/share"
@@ -24,6 +26,15 @@ set -gx XDG_RUNTIME_DIR (test -w "/run/user/$UID"; and echo "/run/user/$UID"; or
 
 set -gx LESSHISTFILE -
 set -gx LANG "en_US.UTF-8"
+
+# SYSTEM ABBREVIATIONS
+
+abbr -a -- md 'mkdir -p'
+abbr -a -- l1 'ls -1'
+abbr -a -- ll 'ls -l'
+abbr -a -- lh 'ls -lah'
+
+# APP CONFIGS, ALPHABETICALLY
 
 if command -sq brew
     set -gx HOMEBREW_PREFIX (test (uname -m) = "arm64"; and echo "/opt/homebrew"; or echo "/usr/local")
@@ -36,26 +47,8 @@ if command -sq brew
     fish_add_path $HOMEBREW_PREFIX/opt/fzf/bin
 end
 
-app_alias python python3
-app_alias pip pip3
-
-if command -sq nvim
-    set -gx EDITOR nvim
-    set -gx MANPAGER "nvim +Man!"
-    set -gx PAGER nvim
-end
-app_alias n nvim
-
-
-if command -sq go
-    set -gx GOPATH "$HOME/dev/go"
-    md $GOPATH/{bin,src,pkg}
-    fish_add_path $GOPATH/bin
-end
-
-if command -sq rip
-    app_alias rm rip
-    set -gx GRAVEYARD "$HOME/.Trash"
+if command -sq eza
+    abbr -a -- lt 'ls --tree --level=1'
 end
 
 if command -sq fzf
@@ -80,6 +73,38 @@ if command -sq fzf
     set -gx FZF_DEFAULT_COMMAND "rg --files --hidden --follow --glob '!.git'"
 end
 
+if command -sq git
+    abbr -a -- g git
+end
+
+if command -sq go
+    set -gx GOPATH "$HOME/dev/go"
+    mkdir -p $GOPATH/{bin,src,pkg}
+    fish_add_path $GOPATH/bin
+end
+
+if command -sq lazygit
+    abbr -a -- gg lazygit
+end
+
+if command -sq nvim
+    set -gx EDITOR nvim
+    set -gx MANPAGER "nvim +Man!"
+    set -gx PAGER nvim
+    abbr -a -- n nvim
+end
+
+if command -sq python3
+    app_alias python python3
+    app_alias pip pip3
+    abbr -a -- py python
+end
+
+if command -sq rip
+    app_alias rm rip
+    set -gx GRAVEYARD "$HOME/.Trash"
+end
+
 if command -sq zoxide
     set -gx _ZO_DATA_DIR $XDG_DATA_HOME
     set -gx _ZO_RESOLVE_SYMLINKS 1
@@ -92,4 +117,11 @@ if command -sq zoxide
         set -gx _ZO_FZF_OPTS (echo -n $FZF_DEFAULT_OPTS $search $interface $display $scripting $preview)
     end
     zoxide init --cmd j fish | source
+
+    if command -sq nvim
+        function session --description 'session selector'
+            ji && nvim
+        end
+        abbr -a -- s session
+    end
 end

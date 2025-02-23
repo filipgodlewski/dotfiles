@@ -1,8 +1,6 @@
 #!/usr/bin/env fish
 
-if not status is-interactive
-    exit
-end
+status is-interactive || exit
 
 # FISH SETTINGS
 
@@ -17,6 +15,11 @@ set -gx hydro_color_pwd green
 set -gx hydro_color_git magenta
 
 # GLOBALS
+
+set -gx RED 1
+set -gx GREEN 2
+set -gx YELLOW 3
+set -gx WHITE 7
 
 set -gx XDG_CACHE_HOME "$HOME/.cache"
 set -gx XDG_CONFIG_HOME "$HOME/.config"

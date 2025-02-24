@@ -4,11 +4,7 @@ set -g HOSTS_URL "https://raw.githubusercontent.com/StevenBlack/hosts/master/alt
 
 function _update_hosts_download
     # Get sudo access, without it the script will fail...
-    _update_log warn "$emoji 🥶 $(_update_b_i_c $YELLOW hosts) on the list, it is required to unlock $(_update_b_i_c $RED sudo)"
-    if test -z "$(sudo echo true 2>/dev/null)"
-        _update_log error "$emoji 😵 $(_update_b_i_c $RED Failed) to access sudo -- $(_update_b_i_c $RED hosts) can't be written"
-        return 126
-    end
+    _update_assert_sudo hosts
 
     # Replace the old file with a new one...
     set -l message (_update_std_message "$emoji 🫨 Replacing %s file..." "hosts")

@@ -1,3 +1,5 @@
+set -g SUDO_DEPENDENT santa
+
 function _update_brew
     set -l emoji 🍺
 
@@ -12,9 +14,16 @@ function _update_brew
         return
     end
 
+    # Get sudo access, without it the script will fail...
+    for req in $SUDO_DEPENDENT
+        if contains -- $req $outdated_apps
+            _update_assert_sudo
+            break
+        end
+    end
+
     # Then for each outdated app, upgrade it...
     for app in $outdated_apps
-        # TODO: If santa, get sudo
         set -l message (_update_std_message "$emoji 🫨 Updating %s..." "$app")
         gum spin --title "$message" --timeout 5m --show-error -- brew upgrade $app
         _update_status "$emoji" "$app" upgraded

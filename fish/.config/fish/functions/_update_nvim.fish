@@ -7,6 +7,7 @@ function _update_lazyvim
     | string replace -ra '\x1B\[[0-9;]*m' '' \
     | string match -rag '\[(.+?)\]\s+log \| [0-9a-f]{7}' \
     | sort -u)
+    _update_status "$emoji" "lazyvim packages" checked
 
     # Check if there's anything to update...
     if test -z "$outdated_apps"
@@ -28,6 +29,7 @@ function _update_mason
     # Get outdated apps...
     set -l message (_update_std_message "$emoji 🧐 Looking for outdated %s packages..." "mason")
     set outdated_apps (gum spin --title "$message" --timeout 5m --show-error -- nvim --headless "+lua require('utils').print_outdated_mason_packages()" +qa)
+    _update_status "$emoji" "mason packages" checked
 
     # Check if there's anything to update...
     if test -z "$outdated_apps"

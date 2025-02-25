@@ -5,9 +5,10 @@ set POSSIBILITIES hosts brew fish nvim pipx npm mas
 function _update_get_choices
     set opts
     for possibility in $POSSIBILITIES
-        if command -sq $possibility
-            set opts $opts "$possibility"
+        if test "$possibility" != hosts && not command -sq $possibility
+            continue
         end
+        set opts $opts "$possibility"
     end
     set choices (gum filter --no-limit all $opts)
 

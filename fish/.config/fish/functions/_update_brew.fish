@@ -6,6 +6,7 @@ function _update_brew
     # First update brew itself...
     set -l message (_update_std_message "$emoji 🧐 Updating %s itself..." "brew")
     gum spin --title "$message" --timeout 5m --show-error -- brew update
+    _update_status "$emoji" "homebrew itself" updated
 
     # Check if there's anything to update...
     set outdated_apps (brew outdated --quiet)

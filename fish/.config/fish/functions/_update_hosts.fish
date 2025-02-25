@@ -38,5 +38,5 @@ function _update_hosts
 
     # Finally, download fresh file...
     _update_hosts_download
-    _update_status "$emoji" hosts downloaded
+    _update_status "$emoji" hosts updated
 end

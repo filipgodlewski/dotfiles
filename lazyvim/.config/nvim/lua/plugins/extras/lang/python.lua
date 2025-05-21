@@ -3,11 +3,7 @@ return {
     "mfussenegger/nvim-dap-python",
     optional = true,
     config = function()
-      if vim.fn.has("win32") == 1 then
-        require("dap-python").setup(LazyVim.get_pkg_path("debugpy", "/venv/Scripts/pythonw.exe"))
-      else
-        require("dap-python").setup(LazyVim.get_pkg_path("debugpy", "/venv/bin/python"))
-      end
+      require("dap-python").setup("debugpy-adapter")
       table.insert(require("dap").configurations.python, 1, {
         type = "python",
         request = "launch",
@@ -16,5 +12,10 @@ return {
         cwd = "${workspaceFolder}",
       })
     end,
+  },
+  {
+    "linux-cultist/venv-selector.nvim",
+    optional = true,
+    enabled = true,
   },
 }

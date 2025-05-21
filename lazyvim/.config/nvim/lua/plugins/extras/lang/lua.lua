@@ -1,5 +1,3 @@
-local lazyvim = require("lazyvim.util")
-
 ---@module 'lazy'
 ---@type LazySpec
 return {
@@ -27,7 +25,7 @@ return {
       linters = {
         selene = {
           condition = function()
-            local root = lazyvim.root.get({ normalize = true })
+            local root = LazyVim.root.get({ normalize = true })
             if root ~= vim.uv.cwd() then
               return false
             end
@@ -36,7 +34,7 @@ return {
         },
         luacheck = {
           condition = function()
-            local root = lazyvim.root.get({ normalize = true })
+            local root = LazyVim.root.get({ normalize = true })
             if root ~= vim.uv.cwd() then
               return false
             end

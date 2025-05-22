@@ -18,4 +18,24 @@ return {
     optional = true,
     enabled = true,
   },
+  {
+    "stevearc/conform.nvim",
+    optional = true,
+    opts = {
+      formatters = {
+        pyupgrade = {
+          command = "pyupgrade",
+          args = {
+            "--exit-zero-even-if-changed",
+            "$FILENAME",
+          },
+          stdin = false,
+          cwd = require("conform.util").root_file({
+            "pyproject.toml",
+            "requirements.txt",
+          }),
+        },
+      },
+    },
+  },
 }

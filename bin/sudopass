@@ -1,0 +1,12 @@
+#!/usr/bin/env fish
+
+if not command -sq op
+    command sudo $argv
+    exit $status
+end
+
+if not op whoami >/dev/null 2>&1
+    op signin || exit 1
+end
+
+op read 'op://msmtazhnbxxwac3zvak3suuyxa/mini/password' | command sudo -S --prompt='' $argv

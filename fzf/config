@@ -1,0 +1,28 @@
+--cycle
+--layout=reverse
+--keep-right
+--padding=2,5
+--info=inline
+--prompt=' '
+--pointer=' '
+--marker=' '
+
+--color=bg+:#283457
+--color=bg:#16161e
+--color=border:#27a1b9
+--color=fg+:#c0caf5
+--color=fg:#c0caf5
+--color=gutter:#16161e
+--color=header:#ff9e64
+--color=hl+:#2ac3de
+--color=hl:#2ac3de
+--color=info:#545c7e
+--color=label:#c0caf5
+--color=marker:#ff007c
+--color=pointer:#ff007c
+--color=prompt:#2ac3de
+--color=query:#c0caf5:italic
+--color=scrollbar:#27a1b9
+--color=selected-bg:#ff9e64
+--color=separator:#ff9e64
+--color=spinner:#ff007c

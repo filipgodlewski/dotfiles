@@ -1,0 +1,26 @@
+#!/usr/bin/env fish
+
+set url "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-social/hosts"
+
+echo -e "\n🍺 upgrading brew bundle (formulae, casks, mas)"
+brew bundle upgrade --global --quiet
+
+echo -e "\n📦 upgrading npm's global packages"
+npm update --global
+
+echo -e "\n💤 upgrading LazyVim packages"
+nvim --headless '+Lazy! check' +qa | tee | rg -e '\[([\w\-\.]+)\] checkout \| HEAD.*' --replace '  🎉 Updated $1'
+
+# echo -e "\n🛠️ upgrading Mason packages"
+# nvim --headless '+autocmd User MasonUpdateAllComplete quitall' +MasonUpdateAll
+
+echo -e "\n🛜 downloading new hosts file"
+sudopass curl $url --output /etc/hosts --silent
+
+echo -e "\n🤞 attempting to whitelist:"
+cat $HOME/dotfiles/.hosts_patterns | while read line
+    echo -e "  ⭐️ $(string replace ".*\\s" "" -- $line)"
+end
+touch /tmp/hosts
+rg -vox -f $HOME/dotfiles/.hosts_patterns /etc/hosts | tee /tmp/hosts >/dev/null
+sudo mv /tmp/hosts /etc/hosts

@@ -1,0 +1,7 @@
+--target=~/.config
+--verbose=1
+--ignore=.stowrc
+--ignore=DS_Store
+--ignore=README.md
+--ignore=Makefile
+--ignore=hosts_patterns

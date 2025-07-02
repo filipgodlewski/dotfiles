@@ -1,5 +1,7 @@
 # dotfiles
 
+![Neovim showcased](./media/2025-07-02_nvim.png)
+
 ## Install
 
 1. Sign in to the **Mac App Store**

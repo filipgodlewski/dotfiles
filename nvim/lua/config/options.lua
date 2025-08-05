@@ -8,4 +8,3 @@ vim.g.lazyvim_picker = "snacks"
 vim.opt.shortmess:append({ s = true })
 vim.opt.nrformats:append("alpha")
 vim.opt.matchpairs:append("<:>")
-vim.opt.spelllang:append("pl")

@@ -1,0 +1,7 @@
+customCommands:
+  - key: "G"
+    command: |
+      git gone
+    context: "localBranches"
+    description: "Prune local branches no longer on its remote; (G)one."
+    loadingText: "Pruning gone..."

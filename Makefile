@@ -1,7 +1,7 @@
 install:
 	# Apps
 	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	-export HOMEBREW_CASK_OPTS="--no-quarantine"; brew bundle install --file $(CURDIR)/brew/.config/brew/Brewfile
+	-export HOMEBREW_CASK_OPTS="--no-quarantine"; brew bundle install --file $(CURDIR)/homebrew/Brewfile
 	gh extension install dlvhdr/gh-dash
 	# .configs
 	touch ~/.hushlogin

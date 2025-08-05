@@ -30,7 +30,7 @@ style = "bold purple"
 format = "[$symbol$branch(:$remote_branch)]($style) "
 
 [git_status]
-format = """[(status:  \
+format = """[( \
 [($conflicted)](purple)\
 [($untracked)](white)\
 [($modified)](yellow)\

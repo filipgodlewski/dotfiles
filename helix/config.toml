@@ -1,0 +1,24 @@
+theme = "tokyonight"
+
+[editor]
+line-number = "relative"
+trim-trailing-whitespace = true
+popup-border = "all"
+color-modes = true
+true-color = true
+bufferline = "multiple"
+
+[editor.lsp]
+display-progress-messages = true
+display-inlay-hints = true
+
+[keys.normal.space.q]
+q = ":xa"
+d = ":qa!"
+
+[keys.normal.space.u]
+h = ":toggle lsp.display-inlay-hints"
+
+[keys.normal.ret]
+s = [":write-all", ":insert-output scooter", ":redraw", ":reload-all"]
+g = [":write-all", ":insert-output lazygit", ":redraw", ":reload-all"]

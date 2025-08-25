@@ -1,5 +1,4 @@
---target=~/.config
---verbose=1
+--target ~/.config
 --ignore=.stowrc
 --ignore=DS_Store
 --ignore=README.md
@@ -7,3 +6,4 @@
 --ignore=hosts_patterns
 --ignore=install.sh
 --ignore=media
+--ignore=dependencies

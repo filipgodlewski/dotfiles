@@ -5,14 +5,14 @@ set url "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/f
 echo -e "🍺 upgrading brew bundle (formulae, casks, mas)\n\n"
 brew bundle upgrade --file ~/dotfiles/homebrew/Brewfile
 
-echo -e "\n\n📦 upgrading npm's global packages\n\n"
-npm update --global
+echo -e "\n\n🐍 upgrading uv tools\n\n"
+uv tool upgrade --all
 
-echo -e "\n\n💤 upgrading LazyVim packages\n\n"
-nvim --headless '+Lazy! update' +qa
+echo -e "\n\n📦 upgrading bun's global packages\n\n"
+bun update --global
 
-# echo -e "\n🛠️ upgrading Mason packages"
-# nvim --headless '+autocmd User MasonUpdateAllComplete quitall' +MasonUpdateAll
+echo -e "\n\n📡 upgrading gh extensions\n\n"
+gh extension upgrade --all
 
 echo -e "\n\n🛜 downloading new hosts file"
 sudopass curl $url --output /etc/hosts --silent

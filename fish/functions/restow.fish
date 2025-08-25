@@ -1,3 +1,3 @@
 function restow --description 're-stow dotfiles'
-    make --dir=~/dotfiles restow
+    make --dir ~/dotfiles restow
 end

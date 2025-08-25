@@ -1,15 +1,18 @@
-install:
-	# Apps
+homebrew:
 	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	-export HOMEBREW_CASK_OPTS="--no-quarantine"; brew bundle install --file $(CURDIR)/homebrew/Brewfile
-	gh extension install dlvhdr/gh-dash
-	# .configs
-	touch ~/.hushlogin
-	ln -s $(CURDIR)/.stowrc ~/.stowrc
-	/opt/homebrew/bin/stow .
+
+tools:
+	[ -s "$(CURDIR)/dependencies/gh-deps" ] && gh extension install $(shell cat $(CURDIR)/dependencies/gh-deps)
+	[ -s "$(CURDIR)/dependencies/uv-deps" ] && uv tool install $(shell cat $(CURDIR)/dependencies/uv-deps)
+	[ -s "$(CURDIR)/dependencies/bun-deps" ] && bun install --global $(shell cat $(CURDIR)/dependencies/bun-deps)
 
 restow:
 	/opt/homebrew/bin/stow --restow .
+
+install: homebrew tools restow
+	touch ~/.hushlogin
+	ln -s $(CURDIR)/.stowrc ~/.stowrc
 
 uninstall:
 	# Delete .configs

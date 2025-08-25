@@ -1,6 +1,14 @@
 ---@module 'lazy'
 ---@type LazySpec
 return {
+
+  {
+    "mfussenegger/nvim-dap-python",
+    config = function()
+      require("dap-python").setup("uv")
+    end,
+  },
+
   {
     "linux-cultist/venv-selector.nvim",
     optional = true,

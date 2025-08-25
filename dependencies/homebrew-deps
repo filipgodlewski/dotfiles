@@ -1,0 +1,63 @@
+tap "alienator88/cask"
+
+# essential tools
+# brew "neovim"
+brew "helix"
+brew "stow"
+
+# package managers
+brew "mas"
+brew "oven-sh/bun/bun"
+brew "uv"
+
+# lsp, etc.
+brew "marksman"
+brew "shfmt"
+brew "taplo"
+brew "yamlfmt"
+
+# search & query tools
+brew "ast-grep"
+brew "eza"
+brew "fd"
+brew "fzf"
+brew "jq"
+brew "ripgrep"
+brew "sd"  # NOTE: Probably not needed
+brew "zoxide"
+
+# shell goodies
+brew "fish"
+brew "starship"  # NOTE: Probably not needed
+cask "font-maple-mono-nf"
+cask "ghostty"
+
+# git & his friends
+brew "git"
+brew "gh"
+brew "lazygit"
+
+# cloud storage providers
+cask "dropbox"
+cask "onedrive"
+
+# security
+cask "lulu"
+
+# desktop goodies
+cask "aldente"  # NOTE: Probably not needed
+cask "pearcleaner"
+mas "NordVPN", id: 905953485
+
+# other
+brew "rm-improved"  # NOTE: Probably not needed
+cask "1password"
+cask "1password-cli"
+cask "docker-desktop"
+
+# macos office essentials
+mas "Keynote", id: 409183694
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
+
+# vim: filetype=ruby
